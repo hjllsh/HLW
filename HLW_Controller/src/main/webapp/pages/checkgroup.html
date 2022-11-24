@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns="http://www.w3.org/1999/html">
     <head>
         <!-- 页面meta -->
         <meta charset="utf-8">
@@ -39,11 +39,123 @@
                 position: relative;
                 text-align: left;
             }
+             .el-carousel__item h3 {
+                 color: #475669;
+                 font-size: 14px;
+                 opacity: 0.75;
+                 line-height: 150px;
+                 margin: 0;
+             }
+             .demonstration{
+                 font-size: 24px;
+             }
+            .el-carousel__item:nth-child(2n) {
+                background-color: #99a9bf;
+            }
+
+            .el-carousel__item:nth-child(2n+1) {
+                background-color: #d3dce6;
+            }
         </style>
     </head>
     <body class="hold-transition">
-        <div id="app">
+        <div id="app" >
+            <el-row>
+                <el-col :offset="8" :span="6">
+                    <div class="grid-content bg-purple">
+                        <div class="block">
+                            <el-carousel height="150px">
+                                <el-carousel-item v-for="item in 4" :key="item">
+                                    <h3 class="small">{{ item }}</h3>
+                                </el-carousel-item>
+                            </el-carousel>
+                        </div>
+                    </div>
+                </el-col>
+            </el-row>
+            <el-collapse v-model="activeNames" @change="handleChange">
+                <el-collapse-item title="一致性 Consistency" name="1">
+                    <div>与现实生活一致：与现实生活的流程、逻辑保持一致，遵循用户习惯的语言和概念；</div>
+                    <div>在界面中一致：所有的元素和结构需保持一致，比如：设计样式、图标和文本、元素的位置等。</div>
+                </el-collapse-item>
+                <el-collapse-item title="反馈 Feedback" name="2">
+                    <div>控制反馈：通过界面样式和交互动效让用户可以清晰的感知自己的操作；</div>
+                    <div>页面反馈：操作后，通过页面元素的变化清晰地展现当前状态。</div>
+                </el-collapse-item>
+                <el-collapse-item title="效率 Efficiency" name="3">
+                    <div>简化流程：设计简洁直观的操作流程；</div>
+                    <div>清晰明确：语言表达清晰且表意明确，让用户快速理解进而作出决策；</div>
+                    <div>帮助用户识别：界面简单直白，让用户快速识别而非回忆，减少用户记忆负担。</div>
+                </el-collapse-item>
+                <el-collapse-item title="可控 Controllability" name="4">
+                    <div>用户决策：根据场景可给予用户操作建议或安全提示，但不能代替用户进行决策；</div>
+                    <div>结果可控：用户可以自由的进行操作，包括撤销、回退和终止当前操作等。</div>
+                </el-collapse-item>
+            </el-collapse>
+<!--            <el-row>
+                <el-col :offset="6" :span="12">
+                    <span class="demonstration">商品名</span>
+                    <div>
+                        <div class="clearfix" data-spm-anchor-id="gcmall.pcgooddetailpage.0.i4">
+                            <div class="slider goods-photo">
+                                <div class="slider-section slider-section-top">
+                                    <i class="icon icon-trigle-alert"></i>如有联系方式均为骗子，请勿上当
+                                </div>
+                                <div class="slider-nav">
+                                    <a href="javascript:" class="slider-prev" style="display: none;"><i></i></a>
+                                    <a href="javascript:" class="slider-next" style="display: block;"><i></i></a>
+                                </div>
+                            </div>
+                            <div class="goods-properties" data-spm-anchor-id="gcmall.pcgooddetailpage.0.i3">
+                                <p class="row" data-spm-anchor-id="gcmall.pcgooddetailpage.0.i0">
+                                    <span class="title">操作系统：</span>
+                                    Android - 安卓系统
+                                    <i class="icon-android"></i>
+                                </p>
+                                <p class="row">
+                                    <span class="title">所属游戏：</span>
+                                    <a href="https://www.jiaoyimao.com/jg1009609/">原神</a>&gt;
+                                    <a href="https://www.jiaoyimao.com/jg1009609/c1-c1600047282383754/">米哈游官方</a>&gt;
+                                    <a href="https://www.jiaoyimao.com/jg1009609/s%E9%80%9A%E7%94%A8%E6%9C%8D%E5%8A%A1%E5%99%A8/">通用服务器</a>&gt;
+                                    <a href="https://www.jiaoyimao.com/jg1009609/c1-c1600047282383754/" title="原神米哈游帐号">米哈游帐号</a>
+                                </p>
 
+
+                                <p class="row"><span class="title">冒险等阶：</span>50
+                                </p>
+
+                                <p class="row"><span class="title">五星角色：</span>纳西妲,妮露,雷电将军,神里绫华,胡桃,甘雨,七七</p>
+
+                                <p class="row" data-spm-anchor-id="gcmall.pcgooddetailpage.0.i2"><span class="title">五星武器：</span>阿莫斯之弓,和璞鸢,风鹰剑</p>
+
+                                <p class="row" data-spm-anchor-id="gcmall.pcgooddetailpage.0.i5"><span class="title">帐号绑定：</span>无绑定</p>
+
+                                <p class="row"><span class="title" data-spm-anchor-id="gcmall.pcgooddetailpage.0.i7">商家在线：</span>全天在线
+                                </p>
+
+                                <p class="row" data-spm-anchor-id="gcmall.pcgooddetailpage.0.i1"><span class="title">描述：</span>原神七金号，甘雨+专武阿莫斯，妮露有西福斯，1命七七，风鹰剑，和璞鸢。点香班练度还行，圣遗物一般，武器较齐全，30个树脂。可以做做任务抽个草神组水草绽放队。up已垫20抽
+
+                                    冒险等级50，大世界6级探索低，宝箱只收集了部分，风岩神瞳满，雷神瞳草神瞳未收集，雪山未完成，渊下宫未开，主线做到须弥“林中遇变”。沙漠须弥地图都开了
+
+                                    游戏已***，邮箱已注销。可改绑手机，提供身份证。
+
+                                    借词草神纳西妲雷神
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </el-col>
+            </el-row>-->
+            <el-row>
+                <el-col offset="10" :span="3">
+                    <p>
+                        价格
+                    </p>
+                    <el-row>
+                        <el-button>默认按钮</el-button>
+                    </el-row>
+                </el-col>
+            </el-row>
         </div>
     </body>
 
@@ -51,130 +163,8 @@
         var vue = new Vue({
             el: '#app',
             data:{
-                activeName:'first',//添加/编辑窗口Tab标签名称
-                pagination: {//分页相关属性
-                    currentPage: 1,
-                    pageSize:10,
-                    total:100,
-                    queryString:null,
-                },
-                dataList: [],//列表数据
-                formData: {},//表单数据
-                tableData:[],//新增和编辑表单中对应的检查项列表数据
-                checkitemIds:[],//新增和编辑表单中检查项对应的复选框，基于双向绑定可以进行回显和数据提交
-                dialogFormVisible: false,//控制添加窗口显示/隐藏
-                dialogFormVisible4Edit:false//控制编辑窗口显示/隐藏
-            },
-            created() {//钩子函数
-                this.findPage();
-            },
-            methods: {
-                //编辑
-                handleEdit() {
-                    axios.post("/checkgroup/edit.do?checkitemIds="+this.checkitemIds,this.formData).then((res)=>{
-                        this.dialogFormVisible4Edit = false;
-                        if (res.data.flag){
-                            this.$message.success(res.data.message);
-                        } else {
-                            this.$message.error(res.data.message);
-                        }
-                    }).finally(()=>{
-                        this.activeName='first';
-                       this.findPage();
-                    });
 
-                },
-                //添加
-                handleAdd () {
-                    axios.post("/checkgroup/add.do?checkitemIds="+this.checkitemIds,this.formData).then((response)=>{
-                        this.dialogFormVisible = false;
-                       if (response.data.flag){
-                           this.$message.success(response.data.message);
-                       } else {
-                           this.$message({
-                              type : 'error',
-                               message : response.data.message
-                           });
-                       }
-                    }).finally(()=>{
-                       this.findPage();
-                    });
-                },
-                //分页查询
-                findPage() {
-                    var param = {
-                        currentPage : this.pagination.currentPage,
-                        pageSize : this.pagination.pageSize,
-                        queryString : this.pagination.queryString
-                    };
-                    axios.post("/checkgroup/findPage.do",param).then((res)=>{
-                        this.dataList = res.data.rows;
-                        this.pagination.total = res.data.total;
-                    });
-                },
-                // 重置表单
-                resetForm() {
-                    this.formData={}
-                },
-                // 弹出添加窗口
-                handleCreate() {
-                    this.dialogFormVisible = true;
-                    this.resetForm();
-                    this.checkitemIds = []
-                    axios.get("/checkitem/findAll.do").then((res)=>{
-                       if (res.data.flag){
-                           this.tableData = res.data.data;
-                       } else {
-                           this.$message.error(res.data.message);
-                       }
-                    });
-                },
-                // 弹出编辑窗口   数据回显
-                handleUpdate(row) {
-                    axios.get("/checkgroup/findById.do?id=" + row.id).then((res)=>{
-                       if (res.data.flag){
-                           this.dialogFormVisible4Edit = true;
-                           this.activeName = 'first';
-                           this.formData = res.data.data;
-                           axios.get("/checkitem/findAll.do").then((res)=>{
-                              if (res.data.flag){
-                                  this.tableData = res.data.data;
-                                  axios.get("/checkgroup/findCheckItemIdsByCheckGroupId.do?id="+row.id).then((res)=>{
-                                     if (res.data.flag){
-                                         this.checkitemIds = res.data.data;
-                                     } else {
-                                         this.$message.error(res.data.message);
-                                     }
-                                  });
-                              } else {
-                                  this.$message.error(res.data.message);
-                              }
-                           });
-                       } else {
-                           this.$message.error(res.data.message);
-                       }
-                    });
-                },
-                //切换页码
-                handleCurrentChange(currentPage) {
-                    this.pagination.currentPage = currentPage;
-                    this.findPage();
-                },
-                // 删除
-                handleDelete(row) {
-                    this.$confirm("确认要撒谎你吃吗","提示",{type: 'warning'}).then(()=>{
-                       axios.get("/checkgroup/delete.do?checkgroupId="+row.id).then((res)=>{
-                           if (res.data.flag){
-                               this.$message.success(res.data.message);
-                           } else {
-                               this.$message.error(res.data.message);
-                           }
-                       }).finally(()=>{
-                          this.findPage();
-                       });
-                    });
-                }
-            }
-        })
+            },
+        });
     </script>
 </html>
