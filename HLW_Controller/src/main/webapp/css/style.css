@@ -1,6 +1,7 @@
 html,body {
 	/* overflow-y: scroll; */
 	margin: 0;
+	/*height: 700px;*/
 }
 a {
 	color: #3c8dbc;
