@@ -48,7 +48,7 @@
                       </div>
                      </span>
                     <el-dropdown-menu slot="dropdown">
-                        <el-dropdown-item><a style="text-decoration:none;color:#000;" href="personCenter.html"  target="right">个人中心</a></el-dropdown-item>
+                        <el-dropdown-item><a style="text-decoration:none;color:#000;" href="mytrade.html"  target="right">个人中心</a></el-dropdown-item>
                         <el-dropdown-item  @click.native="dialogFormVisible = true">修改密码</el-dropdown-item>
                         <el-dropdown-item icon="el-icon-circle-plus>" divided @click.native="exit">退出</el-dropdown-item>
                     </el-dropdown-menu>
@@ -95,7 +95,7 @@
                             <el-submenu  index="1" >
                                 <template slot="title" style="font-size: 20px">
 <!--                                    <i  class=" "></i>-->
-                                    <a style="text-decoration:none;color:#000;" href="maininfo.html" target="right"><span>首页</span></a>
+                                    <a style="text-decoration:none;color:#000;" href="hlw_show.html" target="right"><span>首页</span></a>
                                 </template>
                             </el-submenu>
                             <el-submenu v-for="menu in menuList" :index="menu.path" >
@@ -114,7 +114,7 @@
                 </el-row>
             </el-aside>
             <el-container>
-                <iframe name="right" class="el-main" src="maininfo.html" width="100%" height="908.5px"></iframe>
+                <iframe name="right" class="el-main" src="hlw_show.html" width="100%" height="908.5px"></iframe>
             </el-container>
         </el-container>
     </el-container>
