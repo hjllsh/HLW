@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>商品展示</title>
+    <!-- 引入样式 -->
+    <link rel="stylesheet" href="../plugins/elementui/index.css">
+    <link rel="stylesheet" href="../plugins/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <!-- 引入组件库 -->
+    <script type="text/javascript" src="../js/jquery.min.js"></script>
+    <script src="../js/vue.js"></script>
+    <script src="../plugins/elementui/index.js"></script>
+    <script src="../js/axios-0.18.0.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</head>
+<body>
+<div id = "app">
+    <template>
+        <el-table
+                :data="info"
+                style="width: 100%">
+            <el-table-column
+                    prop="img"
+                    label=""
+                    width="200">
+                <template slot-scope="scope">
+                    <img :src="scope.row.cover" width="160" height="130" />
+                </template>
+            </el-table-column>
+            <el-table-column
+                    prop="titleAll.title"
+                    prop="titleAll.type"
+                    label="商品名"
+                    width="380">
+                <template slot-scope="scope">
+                    <div slot="reference" class="name-wrapper" v-for="(item,index) in scope.row.listAlarmGroups" :key="index">
+                        <el-tag>{{ item }}</el-tag>
+                    </div>
+                </template>
+            </el-table-column>
+            <el-table-column
+                    prop="cost"
+                    label="价格"
+                    width="280">
+            </el-table-column>
+            <el-table-column
+                    prop="inventory"
+                    label="库存"
+                    width="280">
+            </el-table-column>
+            <el-table-column
+                    prop=""
+                    label="是否购买">
+            </el-table-column>
+        </el-table>
+    </template>
+</div>
+<div class="block">
+    <span class="demonstration">直接前往</span>
+    <el-pagination
+            @size-change="handleSizeChange"
+            @current-change="handleCurrentChange"
+            :current-page.sync="currentPage3"
+            :page-size="100"
+            layout="prev, pager, next, jumper"
+            :total="1000">
+    </el-pagination>
+</div>
+
+<script type="text/javascript">
+    var vue = new Vue({
+        el: '#app',
+        data(){
+            return{
+                info: [{
+                    titleAll: {
+                        title : null,
+                        type : null,
+                    },
+                    cost: null,
+                    inventory: null
+                }]
+            }
+        },
+        mounted(){
+            axios.get('data.json').then(response=>(this.info = response.data))
+        }
+    });
+    var vue2 = new Vue({
+        el : '.block',
+        methods: {
+            handleSizeChange(val) {
+                console.log(`每页 ${val} 条`);
+            },
+            handleCurrentChange(val) {
+                console.log(`当前页: ${val}`);
+            }
+        },
+        data() {
+            return {
+                currentPage1: 5,
+                currentPage2: 5,
+                currentPage3: 5,
+                currentPage4: 5
+            };
+        }
+    })
+</script>
+</body>
+</html>
