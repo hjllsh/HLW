@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <!-- 页面meta -->
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>传智健康</title>
+        <meta name="description" content="传智健康">
+        <meta name="keywords" content="传智健康">
+        <meta content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" name="viewport">
+        <!-- 引入样式 -->
+        <link rel="stylesheet" href="../plugins/elementui/index.css">
+        <link rel="stylesheet" href="../plugins/font-awesome/css/font-awesome.min.css">
+        <link rel="stylesheet" href="../css/style.css">
+        <!-- 引入组件库 -->
+        <script type="text/javascript" src="../js/jquery.min.js"></script>
+        <script src="../js/vue.js"></script>
+        <script src="../plugins/elementui/index.js"></script>
+        <script src="../js/axios-0.18.0.js"></script>
+    </head>
+    <body class="hold-transition">
+        <div id="app" >
+            <el-col :span="20" :offset="2" >
+                <el-col :span="24" align="center" style="font-size: 30px; height: 60px;line-height: 60px">
+                    <div>商品信息</div>
+                </el-col>
+                <el-col>
+                <template>
+                    <el-carousel :interval="4000" type="card" height="300px" >
+                        <el-carousel-item  v-for="picture in infoData.pictures" >
+                            <img :src="picture">
+                        </el-carousel-item>
+                    </el-carousel>
+                </template>
+            <el-collapse v-model="activeNames" @change="handleChange">
+                <el-collapse-item title="商品名称" name="1">
+                    <div>{{infoData.name}}</div>
+                </el-collapse-item>
+                <el-collapse-item title="商品类型" name="2">
+                    <div>{{infoData.type}}</div>
+                </el-collapse-item>
+                <el-collapse-item title="商品详细信息" name="3">
+                    <div>{{infoData.description}}</div>
+                </el-collapse-item>
+                <el-collapse-item title="发货地址" name="4">
+                    <div>{{infoData.location}}</div>
+                </el-collapse-item>
+<!--                <el-collapse-item title="商品描述" name="4">-->
+<!--                    <div>用户决策：根据场景可给予用户操作建议或安全提示，但不能代替用户进行决策；</div>-->
+<!--                    <div>结果可控：用户可以自由的进行操作，包括撤销、回退和终止当前操作等。</div>-->
+<!--                </el-collapse-item>-->
+            </el-collapse>
+
+            <el-row >
+                <el-col offset="9" :span="4" style="height: 60px; font-size: 30px; line-height: 60px; text-align: center">
+                    价格:<span >{{infoData.price}}</span><span>￥</span>
+                </el-col>
+                <el-col offset="10" :span="4" >
+                    <el-row>
+                        <el-button class="btn-primary" round  style="height: 60px; width: 120px; font-size: 25px;margin-bottom: 20px">购买</el-button>
+                    </el-row>
+                </el-col>
+            </el-row>
+                </el-col>
+                <el-col  :span="2" offset="3" style="margin-top: 10px">
+                    <div style="text-align: right">免责声明：</div>
+                </el-col>
+                <el-col :span="18" class="border">
+                    <div>1.所展示的商品供求信息由买卖双方自行提供，其真实性、准确性和合法性由信息发布人负责。</div>
+                    <div>2.买家付款后可与客服联系查看账号最新截图,商品信息真实性由卖家负责。因网易游戏和微信游戏特殊性，商品信息由卖家实时截图提供。</div>
+                    <div>3.国家法律规定，未成年人不能参与虚拟物品交易。</div>
+                    <div>4.本平台提供的数字化商品根据商品性质不支持七天无理由退货及三包服务。</div>
+                </el-col>
+            </el-col>
+
+<!--            购买弹窗-->
+<!--            <div class="update-password" >-->
+<!--                <el-dialog   title="修改密码" :visible.sync="dialogFormVisible" width="26%" class="el-dialog&#45;&#45;center">-->
+<!--                    <el-card class="box-card">-->
+<!--                        <div slot="header" class="clearfix">-->
+<!--                            <span>卡片名称</span>-->
+<!--                            <el-button style="float: right; padding: 3px 0" type="text">操作按钮</el-button>-->
+<!--                        </div>-->
+<!--                        <div v-for="o in 4" :key="o" class="text item">-->
+<!--                            {{'列表内容 ' + o }}-->
+<!--                        </div>-->
+<!--                    </el-card>-->
+<!--                    <style>-->
+<!--                        .text {-->
+<!--                            font-size: 14px;-->
+<!--                        }-->
+
+<!--                        .item {-->
+<!--                            margin-bottom: 18px;-->
+<!--                        }-->
+
+<!--                        .clearfix:before,-->
+<!--                        .clearfix:after {-->
+<!--                            display: table;-->
+<!--                            content: "";-->
+<!--                        }-->
+<!--                        .clearfix:after {-->
+<!--                            clear: both-->
+<!--                        }-->
+
+<!--                        .box-card {-->
+<!--                            width: 200px;-->
+<!--                        }-->
+<!--                    </style>-->
+<!--                </el-dialog>-->
+            </div>
+        </div>
+    </body>
+
+    <script>
+        var vue = new Vue({
+            el: '#app',
+            data:{
+                infoData:{
+                    "name":"迷你电脑",
+                    "type":"电脑",
+                    "pictures":["../img/photo1.png","../img/photo2.png","../img/photo3.jpg","../img/photo4.jpg"],
+                    "price":"2000",
+                    "location":"广西壮族自治区贵港市港北区",
+                    "description":"据场景可给予用户操作建议或安全提示，但不能代替用户进行决策,用户可以自由的进行操作，包括撤销、回退和终止当前操作等"
+                },
+            },
+        });
+    </script>
+</html>

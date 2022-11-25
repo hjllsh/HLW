@@ -33,28 +33,51 @@
 <div id="app">
     <el-container>
         <el-header style="height: 60px;">
+<!--            logo-->
             <el-col :span="3"><div style="line-height: 60px;"  class="grid-content bg-purple">
                 <el-page-header  content="详情页面">详情页面
                 </el-page-header>
             </div>
             </el-col>
-            <el-col :span="2" :offset="18">
-                <div style="line-height: 60px;  height: 60px; "  class="grid-content bg-purple "><img style=" height: 50px;width: 50px; border-radius: 25px; vertical-align: middle" src="../img/bg.jpg">
-                <span>kong</span>
-            </div>
-<!--                <el-dropdown>-->
-<!--      <span class="el-dropdown-link">-->
-<!--        下拉菜单<i class="el-icon-arrow-down el-icon&#45;&#45;right"></i>-->
-<!--      </span>-->
-<!--                    <el-dropdown-menu slot="dropdown">-->
-<!--                        <el-dropdown-item icon="el-icon-plus">黄金糕</el-dropdown-item>-->
-<!--                        <el-dropdown-item icon="el-icon-circle-plus">狮子头</el-dropdown-item>-->
-<!--                        <el-dropdown-item icon="el-icon-circle-plus-outline">螺蛳粉</el-dropdown-item>-->
-<!--                        <el-dropdown-item icon="el-icon-check">双皮奶</el-dropdown-item>-->
-<!--                        <el-dropdown-item icon="el-icon-circle-check">蚵仔煎</el-dropdown-item>-->
-<!--                    </el-dropdown-menu>-->
-<!--                </el-dropdown>-->
+<!--            user-->
+            <el-col :span="2" :offset="19">
+                <el-dropdown>
+                        <span class="el-dropdown-link">
+                          <div style="line-height: 60px;  height: 60px; "  class="grid-content bg-purple "><img style=" height: 50px;width: 50px; border-radius: 25px; vertical-align: middle" src="../img/bg.jpg">
+                          <span>kong</span>
+                      </div>
+                     </span>
+                    <el-dropdown-menu slot="dropdown">
+                        <el-dropdown-item><a style="text-decoration:none;color:#000;" href="personCenter.html"  target="right">个人中心</a></el-dropdown-item>
+                        <el-dropdown-item  @click.native="dialogFormVisible = true">修改密码</el-dropdown-item>
+                        <el-dropdown-item icon="el-icon-circle-plus>" divided @click.native="exit">退出</el-dropdown-item>
+                    </el-dropdown-menu>
+                </el-dropdown>
             </el-col>
+<!-- 修改密码-->
+            <div class="update-password" >
+                <el-dialog   title="修改密码" :visible.sync="dialogFormVisible" width="26%" class="el-dialog--center">
+                    <el-form :model="ruleForm" status-icon :rules="rules" ref="ruleForm" label-width="100px"  class="demo-ruleForm">
+                        <el-form-item label="账号" prop="username">
+                            <el-input type="text" v-model="ruleForm.username" ></el-input>
+                        </el-form-item>
+                        <el-form-item label="当前密码" prop="pass">
+                            <el-input type="password" v-model="ruleForm.pass" ></el-input>
+                        </el-form-item>
+                        <el-form-item label="新密码" prop="newPass">
+                            <el-input type="password" v-model="ruleForm.newPass" ></el-input>
+                        </el-form-item>
+                        <el-form-item label="确认密码" prop="confirmPass">
+                            <el-input type="password" v-model="ruleForm.confirmPass"></el-input>
+                        </el-form-item>
+                        <el-form-item>
+                            <el-button type="primary" @click="submitForm('ruleForm')">提交</el-button>
+                            <el-button @click="dialogFormVisible = false">取消</el-button>
+                        </el-form-item>
+                    </el-form>
+                </el-dialog>
+            </div>
+
 
         </el-header>
         <el-container>
@@ -69,10 +92,16 @@
                                 class="el-menu-vertical-demo"
                                 @open="handleOpen"
                                 @close="handleClose">
+                            <el-submenu  index="1" >
+                                <template slot="title" style="font-size: 20px">
+<!--                                    <i  class=" "></i>-->
+                                    <a style="text-decoration:none;color:#000;" href="maininfo.html" target="right"><span>首页</span></a>
+                                </template>
+                            </el-submenu>
                             <el-submenu v-for="menu in menuList" :index="menu.path" >
-                                <template slot="title" style="font-size: 16px">
+                                <template slot="title" style="font-size: 18px">
                                     <i  :class="menu.icon"></i>
-                                    <span>{{menu.title}}</span>
+                                    <span >{{menu.title}}</span>
                                 </template>
                                 <el-menu-item-group v-for="child in menu.children">
                                     <el-menu-item :index="child.path">
@@ -85,12 +114,9 @@
                 </el-row>
             </el-aside>
             <el-container>
-                <iframe name="right" class="el-main" src="checkgroup.html" width="100%" height="748px"></iframe>
+                <iframe name="right" class="el-main" src="maininfo.html" width="100%" height="908.5px"></iframe>
             </el-container>
         </el-container>
-    <el-container>
-        <el-footer style="height: 120px">Footer</el-footer>
-    </el-container>
     </el-container>
 </div>
 
@@ -98,25 +124,20 @@
         new Vue({
            el : '#app',
           data : {
+              dialogFormVisible: false,
+              ruleForm:{},
+              rules: {//校验规则
+                  username: [{ required: true, message: '不可为空', trigger: 'blur' }],
+                  pass: [{ required: true, message: '不可为空', trigger: 'blur' }],
+                  newPass: [{ required: true, message: '不可为空', trigger: 'blur' }],
+                  confirmPass: [{ required: true, message:'密码不一致', trigger: 'blur' }]
+              },
               menuList : [
-                  {
-                      "path": "1",
-                      "title": "首页",
-                      "icon":"",
-                      "children": []
-                  },
                   {
                       "path": "2",
                       "title": "我要卖货",
                       "icon":"el-icon-goods",
                       "children": [
-                          {
-                              "path": "2.1",
-                              "title": "卖货中心",
-                              "icon":"",
-                              "linkUrl": "",
-                              "children": []
-                          },
                           {
                               "path": "2.2",
                               "title": "发布商品",
@@ -149,6 +170,9 @@
                   },
               ]
           },
+            methods : {
+               exit(){},
+            }
         });
     </script>
 </body>
