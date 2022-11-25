@@ -15,8 +15,6 @@
     <script type="text/javascript" src="../js/jquery.min.js"></script>
     <style>
         .el-header, .el-footer {
-            /*background-color: #B3C0D1;*/
-            /*color: #333;*/
             text-align: left;
 
         }
@@ -29,12 +27,6 @@
             line-height: 200px;
         }
 
-        .el-main {
-            background-color: #E9EEF3;
-            color: #333;
-            text-align: center;
-            line-height: 748px;
-        }
     </style>
 </head>
 <body>
@@ -46,10 +38,24 @@
                 </el-page-header>
             </div>
             </el-col>
-            <el-col :span="2" :offset="18"><div style="line-height: 60px;  height: 60px; "  class="grid-content bg-purple "><img style=" height: 50px;width: 50px; border-radius: 25px; vertical-align: middle" src="../img/bg.jpg">
-            <span>kong</span>
+            <el-col :span="2" :offset="18">
+                <div style="line-height: 60px;  height: 60px; "  class="grid-content bg-purple "><img style=" height: 50px;width: 50px; border-radius: 25px; vertical-align: middle" src="../img/bg.jpg">
+                <span>kong</span>
             </div>
+<!--                <el-dropdown>-->
+<!--      <span class="el-dropdown-link">-->
+<!--        下拉菜单<i class="el-icon-arrow-down el-icon&#45;&#45;right"></i>-->
+<!--      </span>-->
+<!--                    <el-dropdown-menu slot="dropdown">-->
+<!--                        <el-dropdown-item icon="el-icon-plus">黄金糕</el-dropdown-item>-->
+<!--                        <el-dropdown-item icon="el-icon-circle-plus">狮子头</el-dropdown-item>-->
+<!--                        <el-dropdown-item icon="el-icon-circle-plus-outline">螺蛳粉</el-dropdown-item>-->
+<!--                        <el-dropdown-item icon="el-icon-check">双皮奶</el-dropdown-item>-->
+<!--                        <el-dropdown-item icon="el-icon-circle-check">蚵仔煎</el-dropdown-item>-->
+<!--                    </el-dropdown-menu>-->
+<!--                </el-dropdown>-->
             </el-col>
+
         </el-header>
         <el-container>
             <el-aside width="220px">
@@ -63,10 +69,6 @@
                                 class="el-menu-vertical-demo"
                                 @open="handleOpen"
                                 @close="handleClose">
-<!--                            <el-menu-item v-for="menu in menuList" :index="menu.path">-->
-<!--                                <i  class="fa" :class="menu.icon"></i>-->
-<!--                                <span slot="title" style="font-size: 20px">{{menu.title}}</span>-->
-<!--                            </el-menu-item>-->
                             <el-submenu v-for="menu in menuList" :index="menu.path" >
                                 <template slot="title" style="font-size: 16px">
                                     <i  :class="menu.icon"></i>
@@ -76,27 +78,13 @@
                                     <el-menu-item :index="child.path">
                                         <a :href="child.linkUrl" target="right">{{child.title}}</a>
                                         </el-menu-item>
-<!--                                    <el-menu-item index="2-2">发布商品</el-menu-item>-->
-<!--                                    <el-menu-item index="2-3">成为卖家</el-menu-item>-->
                                 </el-menu-item-group>
                             </el-submenu>
-
-<!--                            <el-menu-item index="3" >-->
-<!--                                <i class="el-icon-document"></i>-->
-<!--                                <span slot="title">论坛广场</span>-->
-<!--                            </el-menu-item>-->
-<!--                            <el-menu-item index="4">-->
-<!--                                <i class="el-icon-phone-outline"></i>-->
-<!--                                <span slot="title">联系我们</span>-->
-<!--                            </el-menu-item>-->
                         </el-menu>
                     </el-col>
                 </el-row>
             </el-aside>
             <el-container>
-<!--                <el-main>Main-->
-
-<!--                </el-main>-->
                 <iframe name="right" class="el-main" src="checkgroup.html" width="100%" height="748px"></iframe>
             </el-container>
         </el-container>
@@ -121,7 +109,6 @@
                       "path": "2",
                       "title": "我要卖货",
                       "icon":"el-icon-goods",
-                      "linkUrl": "",
                       "children": [
                           {
                               "path": "2.1",
@@ -134,14 +121,14 @@
                               "path": "2.2",
                               "title": "发布商品",
                               "icon":"",
-                              "linkUrl": "",
+                              "linkUrl": "upload.html",
                               "children": []
                           },
                           {
                               "path": "2.3",
                               "title": "成为卖家",
                               "icon":"",
-                              "linkUrl": "",
+                              "linkUrl": "javascript:void(0)",
                               "children": []
                           },
                       ]
@@ -150,13 +137,13 @@
                       "path": "3",
                       "title": "论坛广场",
                       "icon":"el-icon-document",
-                      "linkUrl": "",
+                      "linkUrl": "javascript:void(0)",
                       "children": []
                   },
                   {
                       "path": "4",
                       "title": "联系我们",
-                      "linkUrl": "",
+                      "linkUrl": "javascript:void(0)",
                       "icon":"el-icon-phone-outline",
                       "children": []
                   },
