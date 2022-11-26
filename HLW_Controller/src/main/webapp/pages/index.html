@@ -18,41 +18,23 @@
         <script src="../plugins/elementui/index.js"></script>
         <script src="../js/axios-0.18.0.js"></script>
     </head>
-<!--    <style>-->
-<!--        .text {-->
-<!--            font-size: 14px;-->
-<!--        }-->
-
-<!--        .item {-->
-<!--            margin-bottom: 18px;-->
-<!--        }-->
-
-<!--        .clearfix:before,-->
-<!--        .clearfix:after {-->
-<!--            display: table;-->
-<!--            content: "";-->
-<!--        }-->
-<!--        .clearfix:after {-->
-<!--            clear: both-->
-<!--        }-->
-
-<!--        .box-card {-->
-<!--            width: 480px;-->
-<!--        }-->
-<!--    </style>-->
     <body >
         <div id="app">
 
-            <div class="update-password" >
+            <div class="checkout" >
                 <el-dialog   title="购买信息" :visible.sync="dialogFormVisible" width="30%" class="el-dialog--center">
                     <el-card class="box-card">
                         <div slot="header" style="text-align: center">
-                            <span>卡片名称</span>
+                            <span>商品名称</span>
                         </div>
-                        <div style="margin-bottom: 20px; height: 40px">
+                        <div>
+                            <el-col :span="4"><span style="line-height: 40px">商品价格:</span></el-col>
+                            <el-col :span="20"><span style="line-height: 40px">{{price}}</span><span style="line-height: 40px">￥</span></el-col>
+                        </div>
+                        <div style="margin-bottom: 20px; height: 40px;">
                             <el-col :span="4"><span style="line-height: 40px">收货地址:</span></el-col>
                             <template>
-                            <el-select v-model="value" placeholder="请选择">
+                            <el-select v-model="value" placeholder="请选择收货地址">
                                 <el-option
                                         v-for="item in options"
                                         :key="item.value"
@@ -62,24 +44,34 @@
                             </el-select>
                         </template>
                         </div>
+                        <el-col>
                         <div style="margin-bottom: 15px; margin-top: 10px">
                             <el-col :span="4"><span style="line-height: 40px">电话号码:</span></el-col>
-                            <el-col :span="11"><el-input v-model="telephonenumber" placeholder="请输入内容"></el-input></el-col>
+                            <el-col :span="20"><el-input v-model="telephonenumber" placeholder="请输入电话号码"></el-input></el-col>
                         </div>
-                        <div style="margin-bottom: 20px">
-                            <el-col :span="6" ><span style="line-height: 40px">数量:</span></el-col>
-                            <el-col :span="15" >
+                        </el-col>
+                        <el-col style="margin-bottom: 10px; margin-top: 10px">
+                            <el-col :span="4" ><span style="line-height: 40px">购买数量:</span></el-col>
+                            <el-col :span="15">
                                 <template>
                                     <el-input-number v-model="num" @change="handleChange" :min="1" :max="10" label="描述文字"></el-input-number>
                                 </template>
                             </el-col>
-                        </div>
-<!--                        <div v-for="o in 4" :key="o" style="margin-bottom: 20px">-->
-<!--                            {{'列表内容 ' + o }}-->
-<!--                        </div>-->
+                        </el-col>
+                        <el-col style="margin-bottom: 10px; margin-top: 10px">
+                            <el-col :span="4"><span>购买运费险:</span></el-col>
+                        <el-col offset="1" :span="16">
+                            <el-switch
+                                    v-model="value1"
+                                    active-text="运费险">
+                            </el-switch>
+                        </el-col>
+                        </el-col>
+                        <el-col>
+                            <el-col offset="9"><h3>总金额:<span style="margin-left: 20px" >999</span></h3></el-col>
+                        </el-col>
                     </el-card>
-                    <div style="text-align: center; margin-top: 20px"><el-button type="button" class="btn-primary">确认购买</el-button></div>
-
+                    <div style="text-align: center; margin-top: 20px"><el-button type="primary" round class="btn-primary">确认购买</el-button></div>
                 </el-dialog>
             </div>
 
@@ -93,6 +85,9 @@
             el: '#app',
             data: {
                 dialogFormVisible: true,
+                num: 1,
+                price:999,
+                value1: true,
                         options: [{
                             value: '选项1',
                             label: '黄金糕'

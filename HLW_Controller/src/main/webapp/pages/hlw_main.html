@@ -85,19 +85,19 @@
                 <el-row class="tac">
                     <el-col :span="24">
                         <h5 style="height: 30px; ">
-                            <li class="el-icon-menu "  style="font-size: 30px"></li>
+                            <li class="el-icon-menu "  style="font-size: 35px"></li>
                         </h5>
                         <el-menu
                                 default-active="1"
                                 class="el-menu-vertical-demo"
                                 @open="handleOpen"
                                 @close="handleClose">
-                            <el-submenu  index="1" >
-                                <template slot="title" style="font-size: 20px">
+                            <el-menu-item  index="1"  style="font-size: 21px;text-align: center">
+                                <template slot="title" >
 <!--                                    <i  class=" "></i>-->
                                     <a style="text-decoration:none;color:#000;" href="hlw_show.html" target="right"><span>首页</span></a>
                                 </template>
-                            </el-submenu>
+                            </el-menu-item>
                             <el-submenu v-for="menu in menuList" :index="menu.path" >
                                 <template slot="title" style="font-size: 18px">
                                     <i  :class="menu.icon"></i>
