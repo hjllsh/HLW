@@ -15,11 +15,12 @@
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 </head>
 <body>
-<div >
-    <img src="/HLW_Controller/src/main/webapp/img/us.png" width="100%">
-</div>
-<div id="btn">
-    <el-row :gutter="3">
+
+<div id="app">
+    <el-col>
+        <img src="/HLW_Controller/src/main/webapp/img/us.png" width="100%">
+    </el-col>
+
         <el-col :offset="6" :span="12" >
             <p style="font-size: xx-large" >服务</p>
             <img src="/HLW_Controller/src/main/webapp/img/hezuo1.png" style="cursor:pointer"
@@ -29,8 +30,7 @@
             <img src="/HLW_Controller/src/main/webapp/img/zixun.png" style="cursor:pointer"
                  onclick='window.alert("请发送邮件至邮箱:111111111@163.com")' hspace="100px">
         </el-col>
-    </el-row>
-</div>
+<!--    </el-row>-->
 <!--<div id="txt">
     <el-row :gutter="3">
         <el-col :offset="8" :span="12" >
@@ -40,8 +40,8 @@
         </el-col>
     </el-row>
 </div>-->
-<div id = "information">
-    <el-row :gutter="20">
+
+<!--    <el-row :gutter="20">-->
         <el-col offset="6" :span="12">
             <p style="font-size: xx-large">猜你想问</p>
             <el-collapse v-model="activeNames" @change="handleChange">
@@ -63,11 +63,10 @@
                 </el-collapse-item>
             </el-collapse>
         </el-col>
-    </el-row>
 </div>
 <script>
     var vue = new Vue({
-        el : '#information',
+        el : '#app',
         data() {
             return {
                 activeNames: ['']
@@ -78,13 +77,7 @@
                 console.log(val);
             }
         }
-    })
-    var vue1 = new Vue({
-        el : '#btn',
-    })
-    var vue2 = new Vue({
-        el : '#txt',
-    })
+    });
 </script>
 </body>
 </html>

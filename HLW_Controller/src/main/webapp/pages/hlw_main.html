@@ -48,7 +48,7 @@
                       </div>
                      </span>
                     <el-dropdown-menu slot="dropdown">
-                        <el-dropdown-item><a style="text-decoration:none;color:#000;" href="mytrade.html"  target="right">个人中心</a></el-dropdown-item>
+                        <a style="text-decoration:none;color:#000;" href="mytrade.html"  target="right"><el-dropdown-item>个人中心</el-dropdown-item></a>
                         <el-dropdown-item  @click.native="dialogFormVisible = true">修改密码</el-dropdown-item>
                         <el-dropdown-item icon="el-icon-circle-plus>" divided @click.native="exit">退出</el-dropdown-item>
                     </el-dropdown-menu>
@@ -105,7 +105,7 @@
                                 </template>
                                 <el-menu-item-group v-for="child in menu.children">
                                     <el-menu-item :index="child.path">
-                                        <a :href="child.linkUrl" target="right">{{child.title}}</a>
+                                        <a :href="child.linkUrl" style="text-decoration:none;color:#000;" target="right">{{child.title}}</a>
                                         </el-menu-item>
                                 </el-menu-item-group>
                             </el-submenu>
@@ -139,34 +139,32 @@
                       "icon":"el-icon-goods",
                       "children": [
                           {
-                              "path": "2.2",
+                              "path": "2.1",
                               "title": "发布商品",
                               "icon":"",
                               "linkUrl": "upload.html",
-                              "children": []
                           },
                           {
-                              "path": "2.3",
+                              "path": "2.2",
                               "title": "成为卖家",
                               "icon":"",
                               "linkUrl": "javascript:void(0)",
-                              "children": []
                           },
                       ]
                   },
                   {
                       "path": "3",
-                      "title": "论坛广场",
-                      "icon":"el-icon-document",
-                      "linkUrl": "javascript:void(0)",
-                      "children": []
-                  },
-                  {
-                      "path": "4",
                       "title": "联系我们",
                       "linkUrl": "javascript:void(0)",
                       "icon":"el-icon-phone-outline",
-                      "children": []
+                      "children": [{
+                          "path": "3.1",
+                          "title": "联系我们",
+                          "icon":"",
+                          "linkUrl": "hlw_tellus.html",
+                      },
+
+                      ]
                   },
               ]
           },

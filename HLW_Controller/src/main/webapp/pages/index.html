@@ -20,7 +20,6 @@
     </head>
     <body >
         <div id="app">
-
             <div class="checkout" >
                 <el-dialog   title="购买信息" :visible.sync="dialogFormVisible" width="30%" class="el-dialog--center">
                     <el-card class="box-card">
@@ -63,20 +62,18 @@
                         <el-col offset="1" :span="16">
                             <el-switch
                                     v-model="value1"
-                                    active-text="运费险">
+                                    active-text="运费险"
+                                    @change="addTransport">
                             </el-switch>
                         </el-col>
                         </el-col>
                         <el-col>
-                            <el-col offset="9"><h3>总金额:<span style="margin-left: 20px" >999</span></h3></el-col>
+                            <el-col offset="9"><h3>总金额:<span style="margin-left: 15px" >{{num*price+transportFare}}</span>￥</h3></el-col>
                         </el-col>
                     </el-card>
                     <div style="text-align: center; margin-top: 20px"><el-button type="primary" round class="btn-primary">确认购买</el-button></div>
                 </el-dialog>
             </div>
-
-
-
         </div>
     </body>
 
@@ -87,7 +84,9 @@
                 dialogFormVisible: true,
                 num: 1,
                 price:999,
-                value1: true,
+                transportFare:0,
+                telephonenumber:'',
+                value1: false,
                         options: [{
                             value: '选项1',
                             label: '黄金糕'
@@ -105,6 +104,16 @@
                             label: '北京烤鸭'
                         }],
                 input: '',
+            },
+            methods : {
+                addTransport(value1){
+                    // alert(value1);
+                    if (value1){
+                        this.transportFare=2.5;
+                    } else {
+                        this.transportFare=0;
+                    }
+                }
             }
         });
     </script>

@@ -113,6 +113,14 @@
     </body>
 
     <script>
+        var info=window.location.search;
+        var id = "";
+        var arr = info.split(/[?,=,&]/);
+        for(var i=0; i < arr.length; i++){
+            if (arr[i] == "goodsId"){
+                id = arr[++i];
+            }
+        }
         var vue = new Vue({
             el: '#app',
             data:{
