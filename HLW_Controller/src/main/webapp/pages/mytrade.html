@@ -25,44 +25,6 @@
                 <template>
                     <el-tabs v-model="activeName" type="card" @tab-click="handleClick">
                         <el-tab-pane label="个人信息" class="el-icon-user" name="first">
-<!--                            <el-table-->
-<!--                                    :data="tableData"-->
-<!--                                    style="width: 100%">-->
-<!--                                <el-table-column-->
-<!--                                        prop="username"-->
-<!--                                        label="用户名"-->
-<!--                                        width="180">-->
-<!--                                </el-table-column>-->
-<!--                                <el-table-column-->
-<!--                                        prop="sex"-->
-<!--                                        label="性别"-->
-<!--                                        width="180">-->
-<!--                                </el-table-column>-->
-<!--                                <el-table-column-->
-<!--                                        prop="address"-->
-<!--                                        label="地址"-->
-<!--                                        width="180">-->
-<!--                                </el-table-column>-->
-<!--                            </el-table>-->
-<!--                            <el-table-->
-<!--                                    :data="tableData"-->
-<!--                                    style="width: 100%">-->
-<!--                                <el-table-column-->
-<!--                                        prop="phone"-->
-<!--                                        label="电话"-->
-<!--                                        width="180">-->
-<!--                                </el-table-column>-->
-<!--                                <el-table-column-->
-<!--                                        prop="birthday"-->
-<!--                                        label="生日"-->
-<!--                                        width="180">-->
-<!--                                </el-table-column>-->
-<!--                                <el-table-column-->
-<!--                                        prop="biography"-->
-<!--                                        width="180"-->
-<!--                                        label="个人简介">-->
-<!--                                </el-table-column>-->
-<!--                            </el-table>-->
                             <el-col :span="24" style="margin-bottom: 10px;margin-top: 10px">
                             <el-col :span="3"  style="font-size: 16px;text-align: right;line-height: 32px" >
                                 <span>用户名:</span>
@@ -135,6 +97,11 @@
                                             width="180">
                                     </el-table-column>
                                     <el-table-column
+                                            prop="number"
+                                            label="数量"
+                                            width="180">
+                                    </el-table-column>
+                                    <el-table-column
                                             prop="price"
                                             label="价格"
                                             width="180">
@@ -154,15 +121,14 @@
                                         </template>
                                     </el-table-column>
                                 </el-table>
-                                <div class="block">
-                                    <span class="demonstration">完整功能</span>
+                                <div class="block" style="margin-top: 20px">
+<!--                                    <span class="demonstration">完整功能</span>-->
                                     <el-pagination
                                             @size-change="handleSizeChange"
                                             @current-change="handleCurrentChange"
-                                            :current-page="currentPage4"
-                                            :page-sizes="[5, 10, 15, 20]"
+                                            :current-page="currentPage1"
                                             :page-size="5"
-                                            layout="total, sizes, prev, pager, next, jumper"
+                                            layout="total, prev, pager, next, jumper"
                                             :total="40">
                                     </el-pagination>
                                 </div>
@@ -175,27 +141,46 @@
                                         style="width: 100%">
                                     <el-table-column
                                             label="时间"
-                                            prop="date">
+                                            prop="date"
+                                            width="120">
                                     </el-table-column>
                                     <el-table-column
                                             label="订单号"
-                                            prop="orderNo">
+                                            prop="orderNo"
+                                            width="180">
                                     </el-table-column>
                                     <el-table-column
                                             label="商品名称"
-                                            prop="name">
+                                            prop="name"
+                                            width="150">
                                     </el-table-column>
                                     <el-table-column
-                                            label="地址"
-                                            prop="address">
+                                            prop="type"
+                                            label="商品类型"
+                                            width="120">
                                     </el-table-column>
                                     <el-table-column
-                                            align="right">
+                                            prop="number"
+                                            label="数量"
+                                            width="120">
+                                    </el-table-column>
+                                    <el-table-column
+                                            prop="price"
+                                            label="价格"
+                                            width="120">
+                                    </el-table-column>
+                                    <el-table-column
+                                            label="发货地址"
+                                            prop="address"
+                                            width="180">
+                                    </el-table-column>
+                                    <el-table-column align="right">
                                         <template slot="header" slot-scope="scope">
                                             <el-input
                                                     v-model="search"
-                                                    size="mini"
-                                                    placeholder="输入关键字搜索"/>
+                                                    placeholder="输入关键字搜索">
+                                                <i slot="prefix" class="el-input__icon el-icon-search"></i>
+                                            </el-input>
                                         </template>
                                         <template slot-scope="scope">
                                             <el-button
@@ -204,11 +189,73 @@
                                                     @click="handleDelete(scope.$index, scope.row)">删除订单</el-button>
                                         </template>
                                     </el-table-column>
+<!--                                    <template slot="footer" slot-scope="scope">-->
+<!--                                        <el-input-->
+<!--                                                v-model="search"-->
+<!--                                                size="small"-->
+<!--                                                placeholder="输入关键字搜索"/>-->
+<!--                                    </template>-->
                                 </el-table>
                             </template>
 
                         </el-tab-pane>
                         <el-tab-pane label="我卖出的" name="fourth">
+                            <template>
+                                <el-table
+                                        :data="tableData2"
+                                        style="width: 100%"
+                                        max-height="400">
+                                    <el-table-column
+                                            fixed
+                                            prop="date"
+                                            label="日期"
+                                            width="150">
+                                    </el-table-column>
+                                    <el-table-column
+                                            prop="buyer"
+                                            label="买家"
+                                            width="120">
+                                    </el-table-column>
+                                    <el-table-column
+                                            prop="name"
+                                            label="商品名称"
+                                            width="120">
+                                    </el-table-column>
+                                    <el-table-column
+                                            prop="number"
+                                            label="数量"
+                                            width="120">
+                                    </el-table-column>
+                                    <el-table-column
+                                            prop="price"
+                                            label="价格"
+                                            width="120">
+                                    </el-table-column>
+                                    <el-table-column
+                                            prop="address"
+                                            label="买家地址"
+                                            width="300">
+                                    </el-table-column>
+                                    <el-table-column
+                                            prop="zip"
+                                            label="邮编"
+                                            width="120">
+                                    </el-table-column>
+                                    <el-table-column
+                                            fixed="right"
+                                            label=""
+                                            width="100">
+                                        <template slot-scope="scope">
+                                            <el-button
+                                                    @click.native.prevent="deleteRow(scope.$index, tableData)"
+                                                    type="text"
+                                                    size="small">
+                                                删除订单
+                                            </el-button>
+                                        </template>
+                                    </el-table-column>
+                                </el-table>
+                            </template>
 
                         </el-tab-pane>
                     </el-tabs>
@@ -248,65 +295,63 @@
             el: '#app',
             data() {
                 return {
-                    currentPage1: 5,
-                    currentPage2: 5,
-                    currentPage3: 5,
-                    currentPage4: 4,
-                    activeName: 'third',
-                    // tableData: [{
-                    //     username: '王小虎',
-                    //     sex: '男',
-                    //     address: '上海市普陀区金沙江路 1518 弄',
-                    //     phone:'17878208683',
-                    //     birthday:'2016-05-02',
-                    //     biography:'我是孔维666666666666666666'
-                    // }]
+                    currentPage1: 1,
+                    activeName: 'first',
+                    search: '',
                     tableData: [{
                         date: '2016-05-02',
                         name: '王小虎',
                         type:'游戏',
+                        number:'1',
                         price:'100',
                         state:'已交易'
                     }, {
                         date: '2016-05-02',
                         name: '王小虎',
                         type:'游戏',
+                        number:'1',
+                        price:'100',
+                        state:'已交易'
+                    },{
+                        date: '2016-05-02',
+                        name: '王小虎',
+                        type:'游戏',
+                        number:'1',
                         price:'100',
                         state:'已交易'
                     }, {
                         date: '2016-05-02',
                         name: '王小虎',
                         type:'游戏',
+                        number:'1',
                         price:'100',
                         state:'已交易'
-                    }, {
+                    },{
                         date: '2016-05-02',
                         name: '王小虎',
                         type:'游戏',
+                        number:'1',
                         price:'100',
                         state:'已交易'
-                    }, {
+                    },{
                         date: '2016-05-02',
                         name: '王小虎',
                         type:'游戏',
+                        number:'1',
                         price:'100',
                         state:'已交易'
-                    }, {
+                    },{
                         date: '2016-05-02',
                         name: '王小虎',
                         type:'游戏',
+                        number:'1',
                         price:'100',
                         state:'已交易'
-                    }, {
+                    },{
                         date: '2016-05-02',
                         name: '王小虎',
                         type:'游戏',
-                        price:'100',
-                        state:'已交易'
-                    }, {
-                        date: '2016-05-02',
-                        name: '王小虎',
-                        type:'游戏',
+                        number:'1',
                         price:'100',
                         state:'已交易'
                     }],
@@ -331,7 +376,63 @@
                         name: '王小虎',
                         address: '上海市普陀区金沙江路 1516 弄'
                     }],
-                    search: ''
+                    tableData2: [{
+                        date: '2016-05-03',
+                        buyer:'蓝屏',
+                        name: '王小虎',
+                        province: '上海',
+                        city: '普陀区',
+                        address: '上海市普陀区金沙江路 1518 弄',
+                        zip: 200333
+                    }, {
+                        date: '2016-05-02',
+                        buyer:'孔维',
+                        name: '王小虎',
+                        province: '上海',
+                        city: '普陀区',
+                        address: '上海市普陀区金沙江路 1518 弄',
+                        zip: 200333
+                    }, {
+                        date: '2016-05-04',
+                        buyer:'lanping',
+                        name: '王小虎',
+                        province: '上海',
+                        city: '普陀区',
+                        address: '上海市普陀区金沙江路 1518 弄',
+                        zip: 200333
+                    }, {
+                        date: '2016-05-01',
+                        buyer:'孔维',
+                        name: '王小虎',
+                        province: '上海',
+                        city: '普陀区',
+                        address: '上海市普陀区金沙江路 1518 弄',
+                        zip: 200333
+                    }, {
+                        date: '2016-05-08',
+                        buyer:'孔维',
+                        name: '王小虎',
+                        province: '上海',
+                        city: '普陀区',
+                        address: '上海市普陀区金沙江路 1518 弄',
+                        zip: 200333
+                    }, {
+                        date: '2016-05-06',
+                        buyer:'孔维',
+                        name: '王小虎',
+                        province: '上海',
+                        city: '普陀区',
+                        address: '上海市普陀区金沙江路 1518 弄',
+                        zip: 200333
+                    }, {
+                        date: '2016-05-07',
+                        buyer:'孔维',
+                        name: '王小虎',
+                        province: '上海',
+                        city: '普陀区',
+                        address: '上海市普陀区金沙江路 1518 弄',
+                        zip: 200333
+                    }]
                 };
             },
             methods: {
