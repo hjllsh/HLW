@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>注册</title>
+    <link rel="stylesheet" href="../css/login.css"/>
+    <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/4.7.0/css/font-awesome.css">
+</head>
+<style>
+/*    body{
+        background:url('../img/photo4.jpg');
+        background-size:100% auto;
+    }*/
+    #login-box{
+        width:20%;
+        height:auto;
+        margin:0 auto ;
+        margin-top:13%;
+        text-align:center;
+        background:#00000060;
+        padding:20px 50px;
+    }
+    #login-box h1{
+        color:#fff;
+    }
+    #login-box .form .item{
+        margin-top:15px;
+    }
+    #login-box .form .item i{
+        font-size:18px;
+        color:#fff;
+    }
+    #login-box .form .item input{
+        width:280px;
+        font-size:18px;
+        border:0;
+        border-bottom:2px solid #fff;
+        padding:5px 10px;
+        background:#ffffff00;
+        color:#fff;
+    }
+    #login-box 	button{
+        margin-top:20px;
+        width:100px;
+        height:30px;
+        font-size:20px;
+        font-weight:700;
+        cursor:pointer;
+        color:#fff;
+        background-image: linear-gradient(to right, #74ebd5 0%, #9face6 100%);
+        border:0;
+        border-radius:15px;
+    }
+    #login-box 	a{
+        font-size:10px;
+        color:#fff;
+        cursor:pointer;
+        text-align:right;
+        text-decoration: none;
+    }
+    input::-webkit-input-placeholder {
+        color: #bdbdbd;
+    }
+</style>
+<body background="../img/photo4.jpg">
+<div id="login-box">
+    <h1 align="center">注册账号</h1>
+    <div class="form">
+        <form action="" id="lg-form" method="post">
+            <div class="item">
+                <i class="fa fa-github-alt" style="font-size:24px"></i>
+                <input type="text" id="Username" placeholder="Username">
+            </div>
+            <div class="item">
+                <i class="fa fa-search" style="font-size:24px"></i>
+                <input type="password" id="Password" placeholder="Password">
+            </div>
+            <div class="item">
+                <i class="fa fa-search" style="font-size:24px"></i>
+                <input type="password" id="ConfirmPass" placeholder="ConfirmPass">
+            </div>
+            <div class="item">
+                <i class="fa fa-envelope" style="font-size:24px"></i>
+                <input type="text" id="Email" placeholder="Email">
+            </div>
+            <div class="item">
+                <i title="验证码" class="fa fa-key" style="font-size:24px"></i>
+                <input style="width: 130px" type="text" id="Key" placeholder="Key">
+                <button style="width: 150px" onclick="javascript:history.back()" >获取验证码</button>
+            </div>
+            <!--<input style="margin-top:20px;width:100px;height:30px;font-size:20px;font-weight:700;cursor:pointer;
+                color:#fff;background-image: linear-gradient(to right, #74ebd5 0%, #9face6 100%);border:0;border-radius:15px"
+                   type="submit" value="提交">-->
+            <button type="submit" >提交</button>
+            <button onclick="javascript:history.back()" >返回</button>
+        </form>
+    </div>
+</div>
+<script>
+    var lgform=document.getElementById("lg-form");
+    var Username=document.getElementById("Username")
+    var Password=document.getElementById("Password");
+    var ConfirmPass=document.getElementById("ConfirmPass");
+    var Email = document.getElementById("Email");
+    var Key = document.getElementById("Key")
+    lgform.onsubmit=function(){
+        if(Username.value==="" || Username.value===null){
+            alert("账号不能为空");
+            return false;
+        }
+        else if(Password.value==="" || Password.value===null){
+            alert("密码不能为空,请输入");
+            return false;
+        }else if(ConfirmPass.value==="" || ConfirmPass.value===null){
+            alert("确认密码不能为空,请输入");
+            return false;
+        }else if(Password.value!==ConfirmPass.value){
+            alert("两次密码不一样,请重新输入");
+            Password.value="";
+            ConfirmPass.value="";
+            return false;
+        }else if(Email.value==="" || Email.value===null){
+            alert("邮箱不能为空,请输入");
+            return false;
+        }else if(Key.value==="" || Key.value===null){
+            alert("验证码不能为空,请输入");
+            return false;
+        } else{
+            return true;
+        }
+    }
+</script>
+</body>
+</html>
