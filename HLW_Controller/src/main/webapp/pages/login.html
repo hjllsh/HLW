@@ -3,18 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <title>登录</title>
-     <link rel="stylesheet" href="../css/login.css"/>
-<!--    <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/4.7.0/css/font-awesome.css">-->
-    <!-- 引入样式 -->
-    <link rel="stylesheet" href="../plugins/elementui/index.css">
-    <link rel="stylesheet" href="../plugins/font-awesome/css/font-awesome.min.css">
-    <link rel="stylesheet" href="../css/style.css">
-    <!-- 引入组件库 -->
-    <script type="text/javascript" src="../js/jquery.min.js"></script>
-    <script src="../js/vue.js"></script>
-    <script src="../plugins/elementui/index.js"></script>
-    <script src="../js/axios-0.18.0.js"></script>
-    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <link rel="stylesheet" href="../css/login.css"/>
+    <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/4.7.0/css/font-awesome.css">
+    <script src="../js/jquery.min.js"></script>
 </head>
 <style>
     #login-box{
@@ -80,24 +71,30 @@
                 <i class="fa fa-search" style="font-size:30px"></i>
                 <input type="password" placeholder="Password">
             </div>
-            <div class="item" style="width: 100px">
-                <input type="text" placeholder="输入验证码" style="width: 90px;margin-left: 115px">
-                 <button type="submit" >登 录</button><br>
-                <div style="margin-top: 10px">
-                <span style="margin-right: 30px"><a href="hlw_enroll.html">注册账号</a></span>
-                <span><a href="hlw_findPass.html">找回密码</a></span>
-                </div>
+            <div class="item">
+                <span style="display: inline-block;width: 110px;margin-left: 80px">
+                    <input type="text" placeholder="输入验证码" style="width: 100px" onblur="checkUserCode">
+                </span>
+                <span style="display: inline-block;width: 200px;">
+                <img src="checkCode" style="width: 140px;height: 70px" onclick="changeOne(this)">
+                </span>
             </div>
+            <button type="submit" >登 录</button><br>
+            <br>
+            <a href="hlw_enroll.html" style="margin-right: 30px">注册账号</a>
+            <a href="hlw_findPass.html">找回密码</a>
         </form>
     </div>
 </div>
 </body>
 <script>
-     new Vue({
-       el : "#app",
-       data : {
-
-       } ,
-    });
+        function checkUserCode() {
+            $.get("/checkUserCode", "", function (res) {
+                alert(res);
+            });
+        }
+    function changeOne(img){
+        img.src="/pages/checkCode?"+new Date();
+    }
 </script>
 </html>
