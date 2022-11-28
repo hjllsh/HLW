@@ -15,7 +15,7 @@
     <el-row :gutter="20">
         <el-col :span="6">
             <div class="grid-content bg-purple">
-                <div style="height: 1000px; margin-left: 90px">
+                <div style="height: 1200px; margin-left: 80px">
                     <el-steps direction="vertical">
                         <div style="margin: 20px;">
                             <h2>成为卖家流程</h2>
@@ -32,18 +32,16 @@
             <div class="grid-content bg-purple">
                 <el-radio-group v-model="labelPosition" size="medium">
                 </el-radio-group>
-                <div style="margin: 20px;">
                     <h2>填写身份基本信息</h2>
-                </div>
                 <el-form :label-position="labelPosition" label-width="100px" :model="ruleForm" :rules="rules" ref="ruleForm">
                     <el-form-item label="姓名" prop="name">
-                        <el-input v-model="ruleForm.name" placeholder="请输入姓名"></el-input>
+                        <el-input v-model="ruleForm.name" suffix-icon="el-icon-edit" placeholder="请输入姓名"></el-input>
                     </el-form-item>
                     <el-form-item label="性别" prop="sex">
                         <template>
-                            <el-select v-model="value" placeholder="请选择">
+                            <el-select v-model="ruleForm.sex" placeholder="请选择">
                                 <el-option
-                                        v-for="item in options1"
+                                        v-for="item in sex"
                                         :key="item.value"
                                         :label="item.label"
                                         :value="item.value">
@@ -51,25 +49,40 @@
                             </el-select>
                         </template>
                     </el-form-item>
-                    <el-form-item label="国籍/地区" prop="nation">
-                        <el-input v-model="ruleForm.nationality" placeholder="请输入国籍/地区"></el-input>
+                    <el-form-item label="国籍/地区" prop="nationality">
+                        <template>
+                            <el-select v-model="ruleForm.nationality" placeholder="请选择">
+                                <el-option
+                                        v-for="item in nationality"
+                                        :key="item.value"
+                                        :label="item.label"
+                                        :value="item.value">
+                                </el-option>
+                            </el-select>
+                        </template>
+<!--                        <el-input v-model="ruleForm.nation" placeholder="请输入国籍/地区"></el-input>-->
                     </el-form-item>
                     <el-form-item label="证件类型" prop="type">
-                        <el-input v-model="ruleForm.type" placeholder="请输入证件类型"></el-input>
+                        <el-input v-model="ruleForm.type" suffix-icon="el-icon-tickets" placeholder="请输入证件类型"></el-input>
                     </el-form-item>
                     <el-form-item label="证件号" prop="IDNumber">
-                        <el-input v-model="ruleForm.IDNumber" placeholder="请输入证件号"></el-input>
+                        <el-input v-model="ruleForm.IDNumber" suffix-icon="el-icon-edit" placeholder="请输入证件号"></el-input>
                     </el-form-item>
                     <el-form-item label="证件有效期" required>
                         <el-form-item prop="date">
                             <el-date-picker type="date" placeholder="选择有效期" v-model="ruleForm.date" style="width: 100%;"></el-date-picker>
                         </el-form-item>
                     </el-form-item>
+
+                    <el-form-item label="商店名" prop="StoreName">
+                        <el-input v-model="ruleForm.StoreName" suffix-icon="el-icon-edit" placeholder="请输入商店名"></el-input>
+                    </el-form-item>
+
                     <el-form-item label="职业类别" prop="occupation">
                         <template>
-                            <el-select v-model="value" placeholder="请选择">
+                            <el-select v-model="ruleForm.occupation" placeholder="请选择">
                                 <el-option
-                                        v-for="item in options"
+                                        v-for="item in occupation"
                                         :key="item.value"
                                         :label="item.label"
                                         :value="item.value">
@@ -77,25 +90,26 @@
                             </el-select>
                         </template>
                     </el-form-item>
-                    <el-form-item label="现居住地址" prop="address">
-                        <el-input v-model="ruleForm.address" placeholder="请输入现居住地址"></el-input>
+
+                    <el-form-item label="邮箱" prop="email">
+                        <el-input v-model="ruleForm.email" suffix-icon="el-icon-message" placeholder="请输入邮箱"></el-input>
+                    </el-form-item>
+
+                    <el-form-item label="商家地址" prop="address">
+                        <el-input v-model="ruleForm.address" suffix-icon="el-icon-edit-outline" placeholder="请输入商家地址"></el-input>
                     </el-form-item>
 
                     <el-form-item style="text-align: center">
-                        <el-button type="primary" @click="submitForm('ruleForm')">立即创建</el-button>
+                        <el-button type="primary" @click="submitForm('ruleForm')">成为商家</el-button>
                         <el-button @click="resetForm('ruleForm')">重置</el-button>
                     </el-form-item>
                 </el-form>
             </div>
         </el-col>
 
-        <el-col :span="7" :offset="1">
+        <el-col :span="6" :offset="2">
             <div class="grid-content bg-purple">
-<!--                <el-steps>-->
-<!--                    <el-step title="步骤 1" icon="el-icon-edit" description="这是一段很长很长很长的描述性文字"></el-step>-->
-<!--                    <el-step title="步骤 2" icon="el-icon-upload" description="这是一段很长很长很长的描述性文字"></el-step>-->
-<!--                </el-steps>-->
-                <div style="margin: 20px;">
+                <div style="margin-top: 40px;">
                     <h2>上传证件照片</h2>
                 </div>
                 <el-upload
@@ -169,7 +183,7 @@
             el: '#app',
             data() {
                 return {
-                    options: [{
+                    occupation: [{
                         value: '选项1',
                         label: '学生'
                     }, {
@@ -186,7 +200,7 @@
                         label: '不便分类的其他从业人员'
                     }],
 
-                    options1: [{
+                    sex: [{
                         value: '选项1',
                         label: '男'
                     }, {
@@ -194,6 +208,19 @@
                         label: '女'
                     }],
 
+                    nationality: [{
+                        value: '选项1',
+                        label: '中国大陆'
+                    }, {
+                        value: '选项2',
+                        label: '中国香港'
+                    }, {
+                        value: '选项3',
+                        label: '中国澳门'
+                    }, {
+                        value: '选项4',
+                        label: '中国台湾'
+                    }],
                     labelPosition: 'top',
                     value:'',
                     dialogImageUrl: '',
@@ -206,7 +233,9 @@
                         type: '',
                         IDNumber:'',
                         date:'',
+                        StoreName:'',
                         occupation: '',
+                        email:'',
                         address: ''
                     },
                     rules: {
@@ -216,8 +245,8 @@
                         sex: [
                             { required: true, message: '请选择性别', trigger: 'blur' }
                         ],
-                        nation: [
-                            {  required: true, message: '请输入国籍/地区', trigger: 'blur' }
+                        nationality: [
+                            {  required: true, message: '请选择国籍/地区', trigger: 'blur' }
                         ],
                         type: [
                             { required: true, message: '请输入证件类型', trigger: 'blur' }
@@ -228,11 +257,18 @@
                         date: [
                             { type: 'date', required: true, message: '请选择日期', trigger: 'change' }
                         ],
+                        StoreName: [
+                            { required: true, message: '请输入商店名', trigger: 'blur' }
+                        ],
                         occupation: [
-                            { required: true, message: '请输入职业类别', trigger: 'blur' }
+                            { required: true, message: '请选择职业类别', trigger: 'blur' }
+                        ],
+                        email: [
+                            { required: true, message: '请输入邮箱地址', trigger: 'blur' },
+                            { type: 'email', message: '请输入正确的邮箱地址', trigger: 'blur' }
                         ],
                         address: [
-                            { required: true, message: '请输入现居住地址', trigger: 'blur' }
+                            { required: true, message: '请输入商家地址', trigger: 'blur' }
                             ]
                     }
                 };
@@ -249,7 +285,7 @@
                     });
                 },
                 resetForm(formName) {
-                    this.$refs[formName].resetFields();
+                    this.$refs[formName].resetFields()
                 },
                 handleRemove(file) {
                     console.log(file);

@@ -68,6 +68,14 @@
                             </el-col>
                             <el-col :span="24" style="margin-bottom: 10px;margin-top: 10px">
                                 <el-col :span="3"  style="font-size: 16px;text-align: right;line-height: 32px" >
+                                    <span>邮箱:</span>
+                                </el-col>
+                                <el-col :span="6">
+                                    <el-input size="small" type="text" value="43856724372@qq.com" disabled/>
+                                </el-col>
+                            </el-col>
+                            <el-col :span="24" style="margin-bottom: 10px;margin-top: 10px">
+                                <el-col :span="3"  style="font-size: 16px;text-align: right;line-height: 32px" >
                                     <span>个人简介:</span>
                                 </el-col>
                                 <el-col :span="14">
@@ -84,45 +92,44 @@
                                     <el-table-column
                                             prop="date"
                                             label="日期"
-                                            width="180">
+                                            width="150">
                                     </el-table-column>
                                     <el-table-column
                                             prop="name"
                                             label="商品名称"
-                                            width="180">
+                                            width="150">
                                     </el-table-column>
                                     <el-table-column
                                             prop="type"
                                             label="商品类型"
-                                            width="180">
+                                            width="150">
                                     </el-table-column>
                                     <el-table-column
                                             prop="number"
                                             label="数量"
-                                            width="180">
+                                            width="100">
                                     </el-table-column>
                                     <el-table-column
                                             prop="price"
                                             label="价格"
-                                            width="180">
+                                            width="100">
                                     </el-table-column>
                                     <el-table-column
                                             prop="state"
                                             label="交易状态"
-                                            width="180">
+                                            width="150">
                                     </el-table-column>
                                     <el-table-column
                                             prop="operation"
                                             label=""
-                                            width="180">
+                                            width="150">
                                         <template slot-scope="scope">
-                                            <el-button @click="handleClick(scope.row)" type="text" >删除</el-button>
+                                            <el-button @click="handleClick(scope.row)" type="text" >下架</el-button>
                                             <el-button type="text">修改</el-button>
                                         </template>
                                     </el-table-column>
                                 </el-table>
                                 <div class="block" style="margin-top: 20px">
-<!--                                    <span class="demonstration">完整功能</span>-->
                                     <el-pagination
                                             @size-change="handleSizeChange"
                                             @current-change="handleCurrentChange"
@@ -172,9 +179,9 @@
                                     <el-table-column
                                             label="发货地址"
                                             prop="address"
-                                            width="180">
+                                            width="200">
                                     </el-table-column>
-                                    <el-table-column align="right">
+                                    <el-table-column align="center">
                                         <template slot="header" slot-scope="scope">
                                             <el-input
                                                     v-model="search"
@@ -303,133 +310,145 @@
                         name: '王小虎',
                         type:'游戏',
                         number:'1',
-                        price:'100',
+                        price:'100'+'￥',
                         state:'已交易'
                     }, {
                         date: '2016-05-02',
                         name: '王小虎',
                         type:'游戏',
                         number:'1',
-                        price:'100',
+                        price:'100'+'￥',
                         state:'已交易'
                     },{
                         date: '2016-05-02',
                         name: '王小虎',
                         type:'游戏',
                         number:'1',
-                        price:'100',
+                        price:'100'+'￥',
                         state:'已交易'
                     }, {
                         date: '2016-05-02',
                         name: '王小虎',
                         type:'游戏',
                         number:'1',
-                        price:'100',
+                        price:'100'+'￥',
                         state:'已交易'
                     },{
                         date: '2016-05-02',
                         name: '王小虎',
                         type:'游戏',
                         number:'1',
-                        price:'100',
+                        price:'100'+'￥',
                         state:'已交易'
                     },{
                         date: '2016-05-02',
                         name: '王小虎',
                         type:'游戏',
                         number:'1',
-                        price:'100',
+                        price:'100'+'￥',
                         state:'已交易'
                     },{
                         date: '2016-05-02',
                         name: '王小虎',
                         type:'游戏',
                         number:'1',
-                        price:'100',
+                        price:'100'+'￥',
                         state:'已交易'
                     },{
                         date: '2016-05-02',
                         name: '王小虎',
                         type:'游戏',
                         number:'1',
-                        price:'100',
+                        price:'100'+'￥',
                         state:'已交易'
                     }],
                     tableData1: [{
                         date: '2016-05-02',
                         orderNo:'463874621487325',
                         name: '王小虎',
+                        type:'游戏',
+                        number:'1',
+                        price:'100'+'￥',
                         address: '上海市普陀区金沙江路 1518 弄'
                     }, {
                         date: '2016-05-04',
                         orderNo:'463874621487325',
                         name: '王小虎',
+                        type:'游戏',
+                        number:'1',
+                        price:'100'+'￥',
                         address: '上海市普陀区金沙江路 1517 弄'
                     }, {
                         date: '2016-05-01',
                         orderNo:'463874621487325',
                         name: '王小虎',
+                        type:'游戏',
+                        number:'1',
+                        price:'100'+'￥',
                         address: '上海市普陀区金沙江路 1519 弄'
                     }, {
                         date: '2016-05-03',
                         orderNo:'463874621487325',
                         name: '王小虎',
+                        type:'游戏',
+                        number:'1',
+                        price:'100'+'￥',
                         address: '上海市普陀区金沙江路 1516 弄'
                     }],
                     tableData2: [{
                         date: '2016-05-03',
                         buyer:'蓝屏',
                         name: '王小虎',
-                        province: '上海',
-                        city: '普陀区',
+                        number:'1',
+                        price:'100'+'￥',
                         address: '上海市普陀区金沙江路 1518 弄',
                         zip: 200333
                     }, {
                         date: '2016-05-02',
                         buyer:'孔维',
                         name: '王小虎',
-                        province: '上海',
-                        city: '普陀区',
+                        number:'1',
+                        price:'100'+'￥',
                         address: '上海市普陀区金沙江路 1518 弄',
                         zip: 200333
                     }, {
                         date: '2016-05-04',
                         buyer:'lanping',
                         name: '王小虎',
-                        province: '上海',
-                        city: '普陀区',
+                        number:'1',
+                        price:'100'+'￥',
                         address: '上海市普陀区金沙江路 1518 弄',
                         zip: 200333
                     }, {
                         date: '2016-05-01',
                         buyer:'孔维',
                         name: '王小虎',
-                        province: '上海',
-                        city: '普陀区',
+                        number:'1',
+                        price:'100'+'￥',
                         address: '上海市普陀区金沙江路 1518 弄',
                         zip: 200333
                     }, {
                         date: '2016-05-08',
                         buyer:'孔维',
                         name: '王小虎',
-                        province: '上海',
-                        city: '普陀区',
+                        number:'1',
+                        price:'100'+'￥',
                         address: '上海市普陀区金沙江路 1518 弄',
                         zip: 200333
                     }, {
                         date: '2016-05-06',
                         buyer:'孔维',
                         name: '王小虎',
-                        province: '上海',
-                        city: '普陀区',
+                        number:'1',
+                        price:'100'+'￥',
                         address: '上海市普陀区金沙江路 1518 弄',
                         zip: 200333
                     }, {
                         date: '2016-05-07',
                         buyer:'孔维',
                         name: '王小虎',
-                        province: '上海',
-                        city: '普陀区',
+                        number:'1',
+                        price:'100'+'￥',
                         address: '上海市普陀区金沙江路 1518 弄',
                         zip: 200333
                     }]
