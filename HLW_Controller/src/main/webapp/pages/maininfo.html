@@ -57,7 +57,7 @@
                 </el-col>
                 <el-col offset="10" :span="4" >
                     <el-row>
-                        <el-button type="primary" round  style="height: 60px; width: 120px; font-size: 25px;margin-bottom: 20px">购买</el-button>
+                        <el-button type="primary" round  style="height: 60px; width: 120px; font-size: 25px;margin-bottom: 20px" @click="buyWay">购买</el-button>
                     </el-row>
                 </el-col>
             </el-row>
@@ -74,40 +74,59 @@
             </el-col>
 
 <!--            购买弹窗-->
-<!--            <div class="update-password" >-->
-<!--                <el-dialog   title="修改密码" :visible.sync="dialogFormVisible" width="26%" class="el-dialog&#45;&#45;center">-->
-<!--                    <el-card class="box-card">-->
-<!--                        <div slot="header" class="clearfix">-->
-<!--                            <span>卡片名称</span>-->
-<!--                            <el-button style="float: right; padding: 3px 0" type="text">操作按钮</el-button>-->
-<!--                        </div>-->
-<!--                        <div v-for="o in 4" :key="o" class="text item">-->
-<!--                            {{'列表内容 ' + o }}-->
-<!--                        </div>-->
-<!--                    </el-card>-->
-<!--                    <style>-->
-<!--                        .text {-->
-<!--                            font-size: 14px;-->
-<!--                        }-->
-
-<!--                        .item {-->
-<!--                            margin-bottom: 18px;-->
-<!--                        }-->
-
-<!--                        .clearfix:before,-->
-<!--                        .clearfix:after {-->
-<!--                            display: table;-->
-<!--                            content: "";-->
-<!--                        }-->
-<!--                        .clearfix:after {-->
-<!--                            clear: both-->
-<!--                        }-->
-
-<!--                        .box-card {-->
-<!--                            width: 200px;-->
-<!--                        }-->
-<!--                    </style>-->
-<!--                </el-dialog>-->
+            <div class="checkout" >
+                <el-dialog   title="购买信息" :visible.sync="dialogFormVisible" width="30%" class="el-dialog--center">
+                    <el-card class="box-card">
+                        <div slot="header" style="text-align: center">
+                            <span>{{order.goodsName}}</span>
+                        </div>
+                        <div>
+                            <el-col :span="4"><span style="line-height: 40px">商品价格:</span></el-col>
+                            <el-col :span="20"><span style="line-height: 40px">{{order.goodsPrice}}</span><span style="line-height: 40px">￥</span></el-col>
+                        </div>
+                        <div style="margin-bottom: 20px; height: 40px;">
+                            <el-col :span="4"><span style="line-height: 40px">收货地址:</span></el-col>
+                            <template>
+                                <el-select v-model="value" placeholder="请选择收货地址">
+                                    <el-option
+                                            v-for="item in options"
+                                            :key="item.value"
+                                            :label="item.label"
+                                            :value="item.value">
+                                    </el-option>
+                                </el-select>
+                            </template>
+                        </div>
+                        <el-col>
+                            <div style="margin-bottom: 15px; margin-top: 10px">
+                                <el-col :span="4"><span style="line-height: 40px">电话号码:</span></el-col>
+                                <el-col :span="20"><el-input v-model="telephonenumber" placeholder="请输入电话号码"></el-input></el-col>
+                            </div>
+                        </el-col>
+                        <el-col style="margin-bottom: 10px; margin-top: 10px">
+                            <el-col :span="4" ><span style="line-height: 40px">购买数量:</span></el-col>
+                            <el-col :span="15">
+                                <template>
+                                    <el-input-number v-model="num" @change="handleChange(order.goodsPrice)" :min="1" :max="10" label="描述文字"></el-input-number>
+                                </template>
+                            </el-col>
+                        </el-col>
+                        <el-col style="margin-bottom: 10px; margin-top: 10px">
+                            <el-col :span="5"><span>购买运费险:</span></el-col>
+                            <el-col :span="16">
+                                <el-switch
+                                        v-model="isTransport"
+                                        active-text="运费险"
+                                        @change="addTransport(order.goodsPrice)">
+                                </el-switch>
+                            </el-col>
+                        </el-col>
+                        <el-col>
+                            <el-col offset="9"><h3>总金额:<span style="margin-left: 15px" v-model="totalPrice">{{totalPrice}}</span>￥</h3></el-col>
+                        </el-col>
+                    </el-card>
+                    <div style="text-align: center; margin-top: 20px"><el-button type="primary" round class="btn-primary" @click="confirmBuy">确认购买</el-button></div>
+                </el-dialog>
             </div>
         </div>
     </body>
@@ -124,6 +143,20 @@
         var vue = new Vue({
             el: '#app',
             data:{
+                dialogFormVisible:false,
+                num : 1,
+                telephonenumber : "",
+                transportFare:0,
+                totalPrice : 0,
+                isTransport : false,
+                order:{
+                    "goodsId": id,
+                    "goodsPrice" : "100",
+                    "telephonenumber" : "",
+                    // "myLocation" : "",
+                    "totalPrice" : "",
+                    "isTransport":"",
+                },
                 infoData:{
                     "name":"迷你电脑",
                     "type":"电脑",
@@ -133,6 +166,35 @@
                     "description":"据场景可给予用户操作建议或安全提示，但不能代替用户进行决策,用户可以自由的进行操作，包括撤销、回退和终止当前操作等"
                 },
             },
+            methods :{
+                buyWay(goodsId,goodsName,goodsPrice){
+                    this.dialogFormVisible = true;
+                    this.order.goodsPrice=goodsPrice;
+                    this.order.goodsName=goodsName;
+                    // this.order.goodsId=goodsId;
+                    this.totalPrice = this.num * goodsPrice + this.transportFare;
+                    this.order.totalPrice = this.totalPrice
+                },
+                confirmBuy(){
+                    alert(this.order.goodsId);
+                    alert(this.order.goodsName);
+                    alert(this.order.totalPrice);
+                    this.order.telephonenumber=this.telephonenumber;
+                    alert(this.order.telephonenumber);
+                    this.order.isTransport=this.isTransport;
+                    alert(this.order.isTransport);
+                    alert(a);
+                },
+                addTransport(goodsPrice){
+                    if (this.isTransport) {
+                        this.transportFare = 2.5;
+                    } else {
+                        this.transportFare = 0;
+                    }
+                    this.totalPrice = this.num * goodsPrice + this.transportFare;
+                    this.order.totalPrice = this.totalPrice
+                },
+            }
         });
     </script>
 </html>

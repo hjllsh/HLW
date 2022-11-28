@@ -5,14 +5,18 @@
     <title>成为卖家</title>
     <!-- 引入样式 -->
     <link rel="stylesheet" href="../plugins/elementui/index.css">
+    <link rel="stylesheet" href="../plugins/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../css/style.css">
     <!-- 引入组件库 -->
+    <script type="text/javascript" src="../js/jquery.min.js"></script>
     <script src="../js/vue.js"></script>
     <script src="../plugins/elementui/index.js"></script>
+    <script src="../js/axios-0.18.0.js"></script>
 </head>
 <body>
 <h1 align="center">成为卖家</h1>
 <div id="app">
-    <el-row :gutter="20">
+
         <el-col :span="6">
             <div class="grid-content bg-purple">
                 <div style="height: 1200px; margin-left: 80px">
@@ -120,27 +124,23 @@
                     <div slot="file" slot-scope="{file}">
                         <img
                                 class="el-upload-list__item-thumbnail"
-                                :src="file.url" alt=""
-                        >
+                                :src="file.url" alt="">
                         <span class="el-upload-list__item-actions">
         <span
                 class="el-upload-list__item-preview"
-                @click="handlePictureCardPreview(file)"
-        >
+                @click="handlePictureCardPreview(file)">
           <i class="el-icon-zoom-in"></i>
         </span>
         <span
                 v-if="!disabled"
                 class="el-upload-list__item-delete"
-                @click="handleDownload(file)"
-        >
+                @click="handleDownload(file)">
           <i class="el-icon-download"></i>
         </span>
         <span
                 v-if="!disabled"
                 class="el-upload-list__item-delete"
-                @click="handleRemove(file)"
-        >
+                @click="handleRemove(file)">
           <i class="el-icon-delete"></i>
         </span>
       </span>
@@ -151,7 +151,6 @@
                 </el-dialog>
             </div>
         </el-col>
-    </el-row>
     <style>
         .el-row {
             margin-bottom: 20px;
