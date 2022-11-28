@@ -27,12 +27,46 @@
 </style>
 <body>
 <div id="app">
-    <el-col :span="16" offset="4">
+    <el-col><h1 align="center">填写商品信息</h1></el-col>
+    <el-col :span="7">
+        <el-card class="box-card" style="margin-top: 60px">
+            <div slot="header" style="text-align: center;">
+                <span>卖家须知</span>
+            </div>
+            <el-col style="margin-bottom: 20px">
+                1
+            </el-col>
+            <el-col style="margin-bottom: 20px">
+                2
+            </el-col>
+            <el-col style="margin-bottom: 20px">
+                3
+            </el-col>
+            <el-col style="margin-bottom: 20px">
+                4
+            </el-col>
+        </el-card>
+        <el-card class="box-card" style="margin-top: 50px">
+            <div slot="header" style="text-align: center;">
+                <span>注意事项</span>
+            </div>
+            <el-col style="margin-bottom: 20px">
+                1
+            </el-col>
+            <el-col style="margin-bottom: 20px">
+                2
+            </el-col>
+            <el-col style="margin-bottom: 20px">
+                3
+            </el-col>
+            <el-col style="margin-bottom: 20px">
+                4
+            </el-col>
+        </el-card>
 
-
+    </el-col>
+    <el-col :span="16" offset="1">
             <div class="grid-content bg-purple">
-                <h1 align="center">填写商品信息</h1>
-
                 <el-col :span="21" offset="3" style="margin-bottom: 20px">
                     <div class="grid-content bg-purple">
                         <p>上传商品照片</p>

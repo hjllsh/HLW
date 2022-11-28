@@ -3,8 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <title>登录</title>
-<!  <link rel="stylesheet" href="../css/login.css"/>
-    <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/4.7.0/css/font-awesome.css">
+     <link rel="stylesheet" href="../css/login.css"/>
+<!--    <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/4.7.0/css/font-awesome.css">-->
+    <!-- 引入样式 -->
+    <link rel="stylesheet" href="../plugins/elementui/index.css">
+    <link rel="stylesheet" href="../plugins/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <!-- 引入组件库 -->
+    <script type="text/javascript" src="../js/jquery.min.js"></script>
+    <script src="../js/vue.js"></script>
+    <script src="../plugins/elementui/index.js"></script>
+    <script src="../js/axios-0.18.0.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 </head>
 <style>
     #login-box{
@@ -70,12 +80,24 @@
                 <i class="fa fa-search" style="font-size:30px"></i>
                 <input type="password" placeholder="Password">
             </div>
-            <button type="submit" >登 录</button><br>
-            <br>
-                <a href="hlw_enroll.html">注册账号</a>
-                <a href="hlw_findPass.html">找回密码</a>
+            <div class="item" style="width: 100px">
+                <input type="text" placeholder="输入验证码" style="width: 90px;margin-left: 115px">
+                 <button type="submit" >登 录</button><br>
+                <div style="margin-top: 10px">
+                <span style="margin-right: 30px"><a href="hlw_enroll.html">注册账号</a></span>
+                <span><a href="hlw_findPass.html">找回密码</a></span>
+                </div>
+            </div>
         </form>
     </div>
 </div>
 </body>
+<script>
+     new Vue({
+       el : "#app",
+       data : {
+
+       } ,
+    });
+</script>
 </html>

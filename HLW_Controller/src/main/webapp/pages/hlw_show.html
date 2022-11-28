@@ -16,11 +16,19 @@
 </head>
 <body>
 <div id = "app">
+    <el-col>
+        <el-col :span="4">
+        <el-input v-model="searchData" placeholder="请输入内容"></el-input>
+        </el-col>
+        <el-col :span="18" style="margin-left: 10px;margin-bottom: 10px">
+            <el-button icon="el-icon-search" circle @click="mySearch"></el-button>
+        </el-col>
+    </el-col>
     <el-col  style="box-shadow: 2px 2px 12px 0 rgba(0, 0, 0, 0.1)" v-for="showData in showDataes">
     <el-col :span="7" >
         <el-col :span="11">
             <div>
-                <img src="../img/user1-128x128.jpg" width="200" height="200px">
+                <img src="../img/user1-128x128.jpg" width="200" height="188px">
             </div>
         </el-col>
         <el-col :span="10" >
@@ -208,6 +216,7 @@
             transportFare:0,
             totalPrice : 0,
             isTransport : false,
+            searchData : '',
             options: [{
                 value: '选项1',
                 label: '黄金糕'
@@ -262,6 +271,9 @@
                     this.order.isTransport=this.isTransport;
                     alert(this.order.isTransport);
                     alert(a);
+                },
+                mySearch(){
+
                 },
             }
     });

@@ -13,11 +13,23 @@
 <h1 align="center">个人中心</h1>
 <div id="app">
 
-    <el-row :gutter="20">
         <el-col :span="6">
-            <div class="grid-content bg-purple">
-             放置头像
+            <div class="grid-content bg-purple" >
+            <img :src="myHeadshot" style="width: 300px;height: 300px;background-color: #0abdfe;border-radius: 150px;margin-bottom: 15px">
             </div>
+            <el-col offset="6">
+<!--                action访问后端控制器-->
+                <el-upload
+                        class="upload-demo"
+                        action="/user"
+                        :on-success="uploadSuccess"
+                        :before-upload="check"
+                        :show-file-list="false"
+                        :limit="1"
+                        :on-exceed="handleExceed">
+                    <el-button size="middle" type="primary">更换头像</el-button>
+                </el-upload>
+            </el-col>
         </el-col>
 
         <el-col :span="18">
@@ -262,7 +274,6 @@
                 </template>
             </div>
         </el-col>
-    </el-row>
 
     <style>
         .el-row {
@@ -293,8 +304,9 @@
     <script>
         new Vue({
             el: '#app',
-            data() {
-                return {
+
+            data : {
+                    myHeadshot : "../img/user7-128x128.jpg",
                     currentPage1: 1,
                     activeName: 'first',
                     search: '',
@@ -432,8 +444,15 @@
                         city: '普陀区',
                         address: '上海市普陀区金沙江路 1518 弄',
                         zip: 200333
-                    }]
-                };
+                    }],
+                // fileList: [{
+                //     name: 'food.jpeg',
+                //     url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'},
+                //     {
+                //     name: 'food2.jpeg',
+                //     url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'}
+                // ],
+
             },
             methods: {
                 handleClick(tab, event) {
@@ -450,6 +469,26 @@
                 },
                 handleDelete(index, row) {
                     console.log(index, row);
+                },
+                uploadSuccess(response, file, fileList){
+                    // 文件
+                    alert(file);
+                    // 后端响应的数据
+                    alert(response);
+                    // 文件列表
+                    alert(fileList);
+                },
+                handleRemove(file, fileList) {
+                    console.log(file, fileList);
+                },
+                handlePreview(file) {
+                    console.log(file);
+                },
+                beforeRemove(file, fileList) {
+                    return this.$confirm(`确定移除 ${ file.name }？`);
+                },
+                check(file){
+                console.log(file);
                 }
             }
         });

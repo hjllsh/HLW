@@ -33,13 +33,22 @@
 <div id="app">
     <el-container>
         <el-header style="height: 60px;">
+
 <!--            logo-->
             <el-col :span="3"><div style="line-height: 60px;"  class="grid-content bg-purple">
-                <el-page-header  content="详情页面">详情页面
-                </el-page-header>
+                    <a href="hlw_show.html" style="text-decoration:none;color:#000;" target="right">
+                <el-col :span="6" offset="6">
+                    <span style="line-height: 60px;font-size: 25px;color: #0abdfe">HLW</span>
+                </el-col>
+                    <el-col :span="6">
+                        <span>
+                            <img src="../img/hlw_logo.png" style="height: 60px">
+                        </span>
+                    </el-col>
+                    </a>
             </div>
             </el-col>
-<!--            user-->
+<!--            用户      -->
             <el-col :span="2" :offset="19">
                 <el-dropdown>
                         <span class="el-dropdown-link">
