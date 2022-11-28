@@ -9,7 +9,7 @@ a {
 }
 /* new style */
 .skin-purple .main-sidebar {
-	background: #fff;
+	/*background: #fff;*/
 }
 .skin-purple .main-header .logo:hover {
 	background: #0abdfe;
