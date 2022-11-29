@@ -6,7 +6,7 @@
     <!-- 引入样式 -->
     <link rel="stylesheet" href="../plugins/elementui/index.css">
     <link rel="stylesheet" href="../plugins/font-awesome/css/font-awesome.min.css">
-    <!--    <link rel="stylesheet" href="../css/style.css">-->
+<!--    <link rel="stylesheet" href="../css/style.css">-->
     <!-- 引入组件库 -->
     <script type="text/javascript" src="../js/jquery.min.js"></script>
     <script src="../js/vue.js"></script>
@@ -16,111 +16,111 @@
 <body>
 <h1 align="center">成为卖家</h1>
 <div id="app">
-    <!--认证流程-->
-    <el-col :span="6">
-        <div class="grid-content bg-purple">
-            <div style="height: 700px; margin-left: 80px">
-                <el-steps direction="vertical">
-                    <h2>成为卖家流程</h2>
-                    <el-step title="第一步：填写身份基本信息" icon="el-icon-edit" description="填写身份基本信息和上传证件照片"></el-step>
-                    <el-step title="第二步：系统审核" icon="el-icon-upload" description="等待系统审核"></el-step>
-                    <el-step title="第三步：系统审核通过" icon="el-icon-success" description="认证成功,成为卖家"></el-step>
-                </el-steps>
+<!--认证流程-->
+        <el-col :span="6">
+            <div class="grid-content bg-purple">
+                <div style="height: 700px; margin-left: 80px">
+                    <el-steps direction="vertical">
+                            <h2>成为卖家流程</h2>
+                        <el-step title="第一步：填写身份基本信息" icon="el-icon-edit" description="填写身份基本信息和上传证件照片"></el-step>
+                        <el-step title="第二步：系统审核" icon="el-icon-upload" description="等待系统审核"></el-step>
+                        <el-step title="第三步：系统审核通过" icon="el-icon-success" description="认证成功,成为卖家"></el-step>
+                    </el-steps>
+                </div>
             </div>
-        </div>
-    </el-col>
-    <!--填写身份基本信息-->
-    <el-col :span="10" :offset="1">
-        <div class="grid-content bg-purple">
-            <el-radio-group v-model="labelPosition" size="medium">
-            </el-radio-group>
-            <h2>填写身份基本信息</h2>
-            <el-form :label-position="labelPosition" label-width="100px" :model="ruleForm" :rules="rules" ref="ruleForm">
-                <el-form-item label="商店名" prop="StoreName">
-                    <el-input v-model="ruleForm.StoreName" suffix-icon="el-icon-edit" placeholder="请输入商店名"></el-input>
-                </el-form-item>
+        </el-col>
+<!--填写身份基本信息-->
+        <el-col :span="10" :offset="1">
+            <div class="grid-content bg-purple">
+                <el-radio-group v-model="labelPosition" size="medium">
+                </el-radio-group>
+                    <h2>填写身份基本信息</h2>
+                <el-form :label-position="labelPosition" label-width="100px" :model="ruleForm" :rules="rules" ref="ruleForm">
+                    <el-form-item label="商店名" prop="StoreName">
+                        <el-input v-model="ruleForm.StoreName" suffix-icon="el-icon-edit" placeholder="请输入商店名"></el-input>
+                    </el-form-item>
 
-                <el-form-item label="国籍/地区" prop="nationality">
-                    <template>
-                        <el-select v-model="ruleForm.nationality" placeholder="请选择">
-                            <el-option
-                                    v-for="item in nationalities"
-                                    :key="item.value"
-                                    :label="item.label"
-                                    :value="item.value">
-                            </el-option>
-                        </el-select>
-                    </template>
-                    <!--                        <el-input v-model="ruleForm.nation" placeholder="请输入国籍/地区"></el-input>-->
-                </el-form-item>
-                <!--                    <el-form-item label="证件类型" prop="type">-->
-                <!--                        <el-input v-model="ruleForm.type" suffix-icon="el-icon-tickets" placeholder="请输入证件类型"></el-input>-->
-                <!--                    </el-form-item>-->
+                    <el-form-item label="国籍/地区" prop="nationality">
+                        <template>
+                            <el-select v-model="ruleForm.nationality" placeholder="请选择">
+                                <el-option
+                                        v-for="item in nationalities"
+                                        :key="item.value"
+                                        :label="item.label"
+                                        :value="item.value">
+                                </el-option>
+                            </el-select>
+                        </template>
+<!--                        <el-input v-model="ruleForm.nation" placeholder="请输入国籍/地区"></el-input>-->
+                    </el-form-item>
+<!--                    <el-form-item label="证件类型" prop="type">-->
+<!--                        <el-input v-model="ruleForm.type" suffix-icon="el-icon-tickets" placeholder="请输入证件类型"></el-input>-->
+<!--                    </el-form-item>-->
 
-                <el-form-item label="证件类型" prop="type">
-                    <template>
-                        <el-select v-model="ruleForm.type" placeholder="请选择">
-                            <el-option
-                                    v-for="item in types"
-                                    :key="item.value"
-                                    :label="item.label"
-                                    :value="item.value">
-                            </el-option>
-                        </el-select>
-                    </template>
-                </el-form-item>
+                    <el-form-item label="证件类型" prop="type">
+                        <template>
+                            <el-select v-model="ruleForm.type" placeholder="请选择">
+                                <el-option
+                                        v-for="item in types"
+                                        :key="item.value"
+                                        :label="item.label"
+                                        :value="item.value">
+                                </el-option>
+                            </el-select>
+                        </template>
+                    </el-form-item>
 
-                <el-form-item label="证件号" prop="IDNumber">
-                    <el-input v-model="ruleForm.IDNumber" suffix-icon="el-icon-edit" placeholder="请输入证件号"></el-input>
-                </el-form-item>
-                <!--                    <el-form-item label="证件有效期" required>-->
-                <!--                        <el-form-item prop="date">-->
-                <!--                            <el-date-picker type="date" placeholder="选择有效期" v-model="ruleForm.date" style="width: 100%;"></el-date-picker>-->
-                <!--                        </el-form-item>-->
-                <!--                    </el-form-item>-->
+                    <el-form-item label="证件号" prop="IDNumber">
+                        <el-input v-model="ruleForm.IDNumber" suffix-icon="el-icon-edit" placeholder="请输入证件号"></el-input>
+                    </el-form-item>
+<!--                    <el-form-item label="证件有效期" required>-->
+<!--                        <el-form-item prop="date">-->
+<!--                            <el-date-picker type="date" placeholder="选择有效期" v-model="ruleForm.date" style="width: 100%;"></el-date-picker>-->
+<!--                        </el-form-item>-->
+<!--                    </el-form-item>-->
 
-                <el-form-item label="职业类别" prop="occupation">
-                    <template>
-                        <el-select v-model="ruleForm.occupation" placeholder="请选择">
-                            <el-option
-                                    v-for="item in occupations"
-                                    :key="item.value"
-                                    :label="item.label"
-                                    :value="item.value">
-                            </el-option>
-                        </el-select>
-                    </template>
-                </el-form-item>
+                    <el-form-item label="职业类别" prop="occupation">
+                        <template>
+                            <el-select v-model="ruleForm.occupation" placeholder="请选择">
+                                <el-option
+                                        v-for="item in occupations"
+                                        :key="item.value"
+                                        :label="item.label"
+                                        :value="item.value">
+                                </el-option>
+                            </el-select>
+                        </template>
+                    </el-form-item>
 
-                <el-form-item label="联系方式" prop="phone">
-                    <el-input v-model="ruleForm.phone" suffix-icon="el-icon-phone-outline" placeholder="请输入联系方式"></el-input>
-                </el-form-item>
+                    <el-form-item label="联系方式" prop="phone">
+                        <el-input v-model="ruleForm.phone" suffix-icon="el-icon-phone-outline" placeholder="请输入联系方式"></el-input>
+                    </el-form-item>
 
-                <el-form-item label="商家地址" prop="address">
-                    <el-input v-model="ruleForm.address" suffix-icon="el-icon-edit-outline" placeholder="请输入商家地址"></el-input>
-                </el-form-item>
+                    <el-form-item label="商家地址" prop="address">
+                        <el-input v-model="ruleForm.address" suffix-icon="el-icon-edit-outline" placeholder="请输入商家地址"></el-input>
+                    </el-form-item>
 
-                <el-form-item style="text-align: center">
-                    <el-button type="primary" @click="submitForm('ruleForm')">成为商家</el-button>
-                    <el-button @click="resetForm('ruleForm')">重置</el-button>
-                </el-form-item>
-            </el-form>
-        </div>
-    </el-col>
-    <!--上传证件照-->
-    <el-col :span="4" :offset="3">
-        <div class="grid-content bg-purple">
-            <h2>上传证件照片</h2>
-            <el-upload
-                    action="#"
-                    list-type="picture-card"
-                    :auto-upload="false">
-                <i slot="default" class="el-icon-plus"></i>
-                <div slot="file" slot-scope="{file}">
-                    <img
-                            class="el-upload-list__item-thumbnail"
-                            :src="file.url" alt="">
-                    <span class="el-upload-list__item-actions">
+                    <el-form-item style="text-align: center">
+                        <el-button type="primary" @click="submitForm('ruleForm')">成为商家</el-button>
+                        <el-button @click="resetForm('ruleForm')">重置</el-button>
+                    </el-form-item>
+                </el-form>
+            </div>
+        </el-col>
+<!--上传证件照-->
+        <el-col :span="4" :offset="3">
+            <div class="grid-content bg-purple">
+                    <h2>上传证件照片</h2>
+                <el-upload
+                        action="#"
+                        list-type="picture-card"
+                        :auto-upload="false">
+                    <i slot="default" class="el-icon-plus"></i>
+                    <div slot="file" slot-scope="{file}">
+                        <img
+                                class="el-upload-list__item-thumbnail"
+                                :src="file.url" alt="">
+                        <span class="el-upload-list__item-actions">
         <span
                 class="el-upload-list__item-preview"
                 @click="handlePictureCardPreview(file)">
@@ -139,13 +139,13 @@
           <i class="el-icon-delete"></i>
         </span>
       </span>
-                </div>
-            </el-upload>
-            <el-dialog :visible.sync="dialogVisible">
-                <img width="100%" :src="dialogImageUrl" alt="">
-            </el-dialog>
-        </div>
-    </el-col>
+                    </div>
+                </el-upload>
+                <el-dialog :visible.sync="dialogVisible">
+                    <img width="100%" :src="dialogImageUrl" alt="">
+                </el-dialog>
+            </div>
+        </el-col>
     <style>
         .el-row {
             margin-bottom: 20px;
@@ -268,7 +268,7 @@
                         ],
                         address: [
                             { required: true, message: '请输入商家地址', trigger: 'blur' }
-                        ]
+                            ]
                     }
                 };
             },

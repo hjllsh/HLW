@@ -4,118 +4,149 @@
         <!-- 页面meta -->
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>葫芦娃</title>
+        <title>账户充值</title>
         <meta name="description" content="葫芦娃">
         <meta name="keywords" content="葫芦娃">
         <meta content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" name="viewport">
         <!-- 引入样式 -->
         <link rel="stylesheet" href="../plugins/elementui/index.css">
         <link rel="stylesheet" href="../plugins/font-awesome/css/font-awesome.min.css">
-        <link rel="stylesheet" href="../css/style.css">
+<!--        <link rel="stylesheet" href="../css/style.css">-->
         <!-- 引入组件库 -->
         <script type="text/javascript" src="../js/jquery.min.js"></script>
         <script src="../js/vue.js"></script>
         <script src="../plugins/elementui/index.js"></script>
         <script src="../js/axios-0.18.0.js"></script>
     </head>
+        <style>
+            .el-carousel__item h3 {
+                color: #475669;
+                font-size: 14px;
+                opacity: 0.75;
+                line-height: 200px;
+                margin: 0;
+            }
+
+            .el-carousel__item:nth-child(2n) {
+                background-color: #99a9bf;
+            }
+
+            .el-carousel__item:nth-child(2n+1) {
+                background-color: #d3dce6;
+            }
+            #app{
+                text-align: center;
+            }
+            #app #charge-box{
+                width:45%;
+                height:auto;
+                margin:0 auto ;
+                text-align:left;
+                padding:20px 50px;
+            }
+            .text {
+                font-size: 14px;
+            }
+
+            .item {
+                margin-bottom: 18px;
+                text-align: center;
+            }
+
+            .clearfix:before,
+            .clearfix:after {
+                display: table;
+                content: "";
+            }
+            .clearfix:after {
+                clear: both
+            }
+
+            .box-card {
+                width: 100%;
+                height: auto;
+            }
+            .btn span{
+                width: 50%;
+            }
+        </style>
     <body >
         <div id="app">
-            1111111111
-<!--            <div class="checkout" >-->
-<!--                <el-dialog   title="购买信息" :visible.sync="dialogFormVisible" width="30%" class="el-dialog&#45;&#45;center">-->
-<!--                    <el-card class="box-card">-->
-<!--                        <div slot="header" style="text-align: center">-->
-<!--                            <span>商品名称</span>-->
-<!--                        </div>-->
-<!--                        <div>-->
-<!--                            <el-col :span="4"><span style="line-height: 40px">商品价格:</span></el-col>-->
-<!--                            <el-col :span="20"><span style="line-height: 40px">{{price}}</span><span style="line-height: 40px">￥</span></el-col>-->
-<!--                        </div>-->
-<!--                        <div style="margin-bottom: 20px; height: 40px;">-->
-<!--                            <el-col :span="4"><span style="line-height: 40px">收货地址:</span></el-col>-->
-<!--                            <template>-->
-<!--                            <el-select v-model="value" placeholder="请选择收货地址">-->
-<!--                                <el-option-->
-<!--                                        v-for="item in options"-->
-<!--                                        :key="item.value"-->
-<!--                                        :label="item.label"-->
-<!--                                        :value="item.value">-->
-<!--                                </el-option>-->
-<!--                            </el-select>-->
-<!--                        </template>-->
-<!--                        </div>-->
-<!--                        <el-col>-->
-<!--                        <div style="margin-bottom: 15px; margin-top: 10px">-->
-<!--                            <el-col :span="4"><span style="line-height: 40px">电话号码:</span></el-col>-->
-<!--                            <el-col :span="20"><el-input v-model="telephonenumber" placeholder="请输入电话号码"></el-input></el-col>-->
-<!--                        </div>-->
-<!--                        </el-col>-->
-<!--                        <el-col style="margin-bottom: 10px; margin-top: 10px">-->
-<!--                            <el-col :span="4" ><span style="line-height: 40px">购买数量:</span></el-col>-->
-<!--                            <el-col :span="15">-->
-<!--                                <template>-->
-<!--                                    <el-input-number v-model="num" @change="handleChange" :min="1" :max="10" label="描述文字"></el-input-number>-->
-<!--                                </template>-->
-<!--                            </el-col>-->
-<!--                        </el-col>-->
-<!--                        <el-col style="margin-bottom: 10px; margin-top: 10px">-->
-<!--                            <el-col :span="4"><span>购买运费险:</span></el-col>-->
-<!--                        <el-col offset="1" :span="16">-->
-<!--                            <el-switch-->
-<!--                                    v-model="value1"-->
-<!--                                    active-text="运费险"-->
-<!--                                    @change="addTransport">-->
-<!--                            </el-switch>-->
-<!--                        </el-col>-->
-<!--                        </el-col>-->
-<!--                        <el-col>-->
-<!--                            <el-col offset="9"><h3>总金额:<span style="margin-left: 15px" >{{num*price+transportFare}}</span>￥</h3></el-col>-->
-<!--                        </el-col>-->
-<!--                    </el-card>-->
-<!--                    <div style="text-align: center; margin-top: 20px"><el-button type="primary" round class="btn-primary">确认购买</el-button></div>-->
-<!--                </el-dialog>-->
-<!--            </div>-->
+            <!--图片-->
+            <el-carousel :interval="4000" type="card" height="200px">
+                <el-carousel-item v-for="item in 6" :key="item">
+                    <h3 class="medium">{{ item }}</h3>
+                </el-carousel-item>
+            </el-carousel>
+            <!--充值框-->
+            <div id="charge-box">
+                <el-card class="box-card">
+                    <div slot="header" class="clearfix">
+                        <span style="font-size: 30px">充值金额</span>
+                        <el-button style="float: right; padding: 3px 0" type="text" @click="jump">常见问题</el-button>
+                    </div>
+                    <div  class="text-item" >
+                        <el-button type="primary" round  style="height: 60px; width: 23%; font-size: 25px;margin-bottom: 20px;margin-left: 10px" @click="getManny(6)">6￥</el-button>
+                        <el-button type="primary" round  style="height: 60px; width: 23%; font-size: 25px;margin-bottom: 20px" @click="getManny(18)">18￥</el-button>
+                        <el-button type="primary" round  style="height: 60px; width: 23%; font-size: 25px;margin-bottom: 20px" @click="getManny(68)">68￥</el-button>
+                        <el-button type="primary" round  style="height: 60px; width: 23%; font-size: 25px;margin-bottom: 20px" @click="getManny(233)">233￥</el-button>
+                        <el-button type="primary" round  style="height: 60px; width: 23%; font-size: 25px;margin-bottom: 20px" @click="getManny(233)">233￥</el-button>
+                        <el-button type="primary" round  style="height: 60px; width: 23%; font-size: 25px;margin-bottom: 20px" @click="getManny(998)">998￥</el-button>
+                        <el-button type="primary" round  style="height: 60px; width: 23%; font-size: 25px;margin-bottom: 20px" @click="getManny(2333)">2333￥</el-button>
+                        <el-button type="primary" round  style="height: 60px; width: 23%; font-size: 25px;margin-bottom: 20px" @click="getManny(9998)">9998￥</el-button>
+                        <i style="font-size: 25px">设置充值金额</i>
+                        <el-input placeholder="自定义金额" style="height: auto ; width: 40%;font-size: 20px" v-model="manny"></el-input>
+                        <el-button type="primary" round style="height: 40px; width: 14%; font-size: 20px;margin-bottom: 15px" @click.native="dialogFormVisible = true">充值</el-button>
+                    </div>
+                </el-card>
+            </div>
+            <!--底部图片-->
+            <img src="../img/jiashao.png">
+            <div class="recharge" >
+                <el-dialog   title="充值" :visible.sync="dialogFormVisible" width="26%" class="el-dialog--center">
+                    <el-form :model="ruleForm" status-icon :rules="rules" ref="ruleForm" label-width="100px"  class="demo-ruleForm">
+                        <el-form-item label="账号" prop="username">
+                            <el-input type="text" v-model="ruleForm.username" disabled="disabled"></el-input>
+                        </el-form-item>
+                        <el-form-item label="充值金额" prop="manny">
+                            <el-input type="text" v-model="manny" ></el-input>
+                        </el-form-item>
+                        <el-form-item>
+                            <el-button type="primary" @click="submitForm('ruleForm')">提交</el-button>
+                            <el-button @click="dialogFormVisible = false">取消</el-button>
+                        </el-form-item>
+                    </el-form>
+                </el-dialog>
+            </div>
         </div>
-    </body>
-
     <script>
         var vue = new Vue({
             el: '#app',
             data: {
-            //     dialogFormVisible: true,
-            //     num: 1,
-            //     price:999,
-            //     transportFare:0,
-            //     telephonenumber:'',
-            //     value1: false,
-            //             options: [{
-            //                 value: '选项1',
-            //                 label: '黄金糕'
-            //             }, {
-            //                 value: '选项2',
-            //                 label: '双皮奶'
-            //             }, {
-            //                 value: '选项3',
-            //                 label: '蚵仔煎'
-            //             }, {
-            //                 value: '选项4',
-            //                 label: '龙须面'
-            //             }, {
-            //                 value: '选项5',
-            //                 label: '北京烤鸭'
-            //             }],
-            //     input: '',
-            // },
-            // methods : {
-            //     addTransport(value1){
-            //         // alert(value1);
-            //         if (value1){
-            //             this.transportFare=2.5;
-            //         } else {
-            //             this.transportFare=0;
-            //         }
-            //     }
+                manny:"",
+                dialogFormVisible: false,
+                ruleForm:{},
+                rules: {//校验规则
+                    username: [{required: true, message: '不可为空', trigger: 'blur'}],
+                    manny: [{required: true, message: '不可为空', trigger: 'blur'}],
+                }
+            },
+/*            data(){
+                return{
+                }
+            },*/
+            methods: {
+                jump(){
+                    window.location.href = 'hlw_tellus.html'
+                },
+                getManny(num){
+                    this.manny=num;
+                    this.dialogFormVisible = true;
+
+                },
+                exit(){},
             }
         });
     </script>
+    </body>
 </html>
