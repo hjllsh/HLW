@@ -30,6 +30,20 @@ public class CheckCodeController {
             e.printStackTrace();
         }
     }
+    @RequestMapping(value = "/pages/checkCode",method = RequestMethod.GET)
+    public void getCheckCodeFirst(HttpServletRequest request,HttpServletResponse response){
+        HttpSession session = request.getSession();
+        //定义图形验证码的长和宽
+        LineCaptcha lineCaptcha = CaptchaUtil.createLineCaptcha(140, 70);
+
+        //图形验证码写出，可以写出到文件，也可以写出到流
+        try {
+            lineCaptcha.write(response.getOutputStream());
+            session.setAttribute("code",lineCaptcha.getCode());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
     @RequestMapping(value = "/checkUserCode",method = RequestMethod.GET)
     @ResponseBody
