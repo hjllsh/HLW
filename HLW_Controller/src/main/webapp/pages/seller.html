@@ -234,8 +234,8 @@
                         date:'',
                         StoreName:'',
                         occupation: '',
-                        email:'',
-                        address: ''
+                        address: '',
+                        email:''
                     },
                     rules: {
                         name: [
@@ -264,7 +264,7 @@
                         ],
                         email: [
                             { required: true, message: '请输入邮箱地址', trigger: 'blur' },
-                            { type: 'email', message: '请输入正确的邮箱地址', trigger: 'blur' }
+                            { type: 'com.hlw.utils.email', message: '请输入正确的邮箱地址', trigger: 'blur' }
                         ],
                         address: [
                             { required: true, message: '请输入商家地址', trigger: 'blur' }

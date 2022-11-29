@@ -16,7 +16,7 @@ import java.io.IOException;
 
 @Controller
 public class CheckCodeController {
-    @RequestMapping(value = "/pages/checkCode",method = RequestMethod.GET)
+    @RequestMapping(value = "/checkCode",method = RequestMethod.GET)
     public void getCheckCode(HttpServletRequest request,HttpServletResponse response){
         HttpSession session = request.getSession();
         //定义图形验证码的长和宽
@@ -30,7 +30,8 @@ public class CheckCodeController {
             e.printStackTrace();
         }
     }
-    @RequestMapping(value = "/pages/checkUserCode",method = RequestMethod.GET)
+
+    @RequestMapping(value = "/checkUserCode",method = RequestMethod.GET)
     @ResponseBody
     public String getUserCheckCode(HttpServletRequest request,HttpServletResponse response){
         HttpSession session = request.getSession();

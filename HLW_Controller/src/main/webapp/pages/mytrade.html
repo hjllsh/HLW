@@ -13,6 +13,11 @@
     <script src="../plugins/elementui/index.js"></script>
     <script src="../js/axios-0.18.0.js"></script>
 </head>
+<style>
+    .el-textarea__inner {
+        line-height: 4;
+    }
+</style>
 <body>
 <h1 align="center">个人中心</h1>
 <div id="app">
@@ -33,6 +38,14 @@
                         :on-exceed="handleExceed">
                     <el-button size="middle" type="primary">更换头像</el-button>
                 </el-upload>
+            </el-col>
+            <el-col style="margin-top: 20px">
+                <el-col :span="10" offset="4">
+                    <el-card shadow="hover">
+                        我的账户余额:<el-input v-model="account" style="margin-top: 10px" disabled=""></el-input>
+                        <el-col :span="6" offset="12"><el-button type="primary" class="btn" style="margin-top: 10px;margin-bottom: 10px">充值</el-button></el-col>
+                    </el-card>
+                </el-col>
             </el-col>
         </el-col>
 
@@ -95,7 +108,7 @@
                                     <span>个人简介:</span>
                                 </el-col>
                                 <el-col :span="14">
-                                    <el-input  type="textarea" placeholder="请输入内容"   maxlength="30" show-word-limit disabled></el-input>
+                                    <el-input  type="textarea" placeholder="请输入内容"   maxlength="30" show-word-limit disabled=""></el-input>
                                 </el-col>
                             </el-col>
                         </el-tab-pane>
@@ -315,8 +328,8 @@
     <script>
         new Vue({
             el: '#app',
-
             data : {
+                    account : '100.0',
                     myHeadshot : "../img/user7-128x128.jpg",
                     currentPage1: 1,
                     activeName: 'first',
