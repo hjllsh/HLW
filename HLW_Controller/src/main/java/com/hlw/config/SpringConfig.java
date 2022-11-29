@@ -7,7 +7,7 @@ import org.springframework.context.annotation.PropertySource;
 
 @Configuration
 @ComponentScan({"com.hlw.service","com.hlw.dao"})
-@PropertySource("classpath:druid.properties")
-@Import({MybatisConfig.class,JdbcConfig.class})
+//@PropertySource("druid.propertise")
+//@Import({})
 public class SpringConfig {
 }
