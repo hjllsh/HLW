@@ -6,7 +6,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupp
 
 @Configuration
 public class SpringMvcSupport extends WebMvcConfigurationSupport {
-    @Override
+    @Override//资源管理器
     protected void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/pages/**").addResourceLocations("/pages/");
         registry.addResourceHandler("/css/**").addResourceLocations("/css/");

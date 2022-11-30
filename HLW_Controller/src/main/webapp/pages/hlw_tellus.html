@@ -12,36 +12,25 @@
     <script src="../js/vue.js"></script>
     <script src="../plugins/elementui/index.js"></script>
     <script src="../js/axios-0.18.0.js"></script>
-    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 </head>
 <body>
 
 <div id="app">
     <el-col>
-        <img src="/HLW_Controller/src/main/webapp/img/us.png" width="100%">
+        <img src="../img/us.png" width="100%">
     </el-col>
 
         <el-col :offset="6" :span="12" >
             <p style="font-size: xx-large" >服务</p>
-            <img src="/HLW_Controller/src/main/webapp/img/hezuo1.png" style="cursor:pointer"
+            <img src="../img/hezuo1.png" style="cursor:pointer"
                  onclick='window.alert("请发送邮件至邮箱:111111111@163.com")' hspace="100px">
-            <img src="/HLW_Controller/src/main/webapp/img/wenti.png" style="cursor:pointer"
+            <img src="../img/wenti.png" style="cursor:pointer"
                  onclick='window.alert("请发送邮件至邮箱:111111111@163.com")' >
-            <img src="/HLW_Controller/src/main/webapp/img/zixun.png" style="cursor:pointer"
+            <img src="../img/zixun.png" style="cursor:pointer"
                  onclick='window.alert("请发送邮件至邮箱:111111111@163.com")' hspace="100px">
         </el-col>
-<!--    </el-row>-->
-<!--<div id="txt">
-    <el-row :gutter="3">
-        <el-col :offset="8" :span="12" >
-            <el-link  style=" cursor:pointer" onclick='window.alert("请发送邮件至邮箱:111111111@163.com")'>商务合作</el-link>
-            <el-link  style=" cursor:pointer" onclick='window.alert("请发送邮件至邮箱:111111111@163.com")'>问题反馈</el-link>
-            <el-link  style=" cursor:pointer" onclick='window.alert("请发送邮件至邮箱:111111111@163.com")'>咨询客服</el-link>
-        </el-col>
-    </el-row>
-</div>-->
 
-<!--    <el-row :gutter="20">-->
+
         <el-col offset="6" :span="12">
             <p style="font-size: xx-large">猜你想问</p>
             <el-collapse v-model="activeNames" @change="handleChange">

@@ -29,19 +29,22 @@
             text-align: center;
             line-height: 200px;
         }
+        .el-main{
+            padding-top: 10px;
+        }
 
     </style>
 </head>
 <body>
 <div id="app">
-    <el-container>
-        <el-header style="height: 60px;">
+    <el-container >
+        <el-header style="height: 60px;background-image: url(../img/header.png)">
 
 <!--            logo-->
-            <el-col :span="3"><div style="line-height: 60px;"  class="grid-content bg-purple">
+            <el-col :span="3" offset="11"><div style="line-height: 60px;"  class="grid-content bg-purple">
                     <a href="hlw_show.html" style="text-decoration:none;color:#000;" target="right">
-                <el-col :span="6" offset="6">
-                    <span style="line-height: 60px;font-size: 25px;color: #0abdfe">HLW</span>
+                <el-col :span="8" offset="6">
+                    <span style="line-height: 60px;font-size: 30px;color: #0abdfe">HLW</span>
                 </el-col>
                     <el-col :span="6">
                         <span>
@@ -52,7 +55,7 @@
             </div>
             </el-col>
 <!--            用户      -->
-            <el-col :span="2" :offset="19">
+            <el-col :span="2" :offset="8">
                 <el-dropdown>
                         <span class="el-dropdown-link">
                           <div style="line-height: 60px;  height: 60px; "  class="grid-content bg-purple "><img style=" height: 50px;width: 50px; border-radius: 25px; vertical-align: middle" src="../img/bg.jpg">
