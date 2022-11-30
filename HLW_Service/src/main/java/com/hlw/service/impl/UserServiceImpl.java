@@ -1,5 +1,6 @@
 package com.hlw.service.impl;
 
+import com.hlw.domain.User;
 import com.hlw.service.UserService;
 import com.hlw.dao.UserDao;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,5 +13,9 @@ public class UserServiceImpl implements UserService {
     public void findUserById(Integer id) {
         userDao.findUserById(id);
         System.out.println("user service ..."+id);
+    }
+
+    public void newUser(User user) {
+        userDao.newUser(user);
     }
 }
