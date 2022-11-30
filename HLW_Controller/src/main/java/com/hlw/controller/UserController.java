@@ -1,6 +1,7 @@
 package com.hlw.controller;
 
 import com.hlw.domain.User;
+import com.hlw.constant.Result;
 import com.hlw.service.UserService;
 import com.hlw.utils.Email;
 import com.hlw.utils.UuId;
@@ -23,7 +24,7 @@ public class UserController {
         return "hello user";
     }
     @PostMapping
-    public String upload(Object o){
+    public Result upload(Object o){
         System.out.println(o);
         return "123";
     }
@@ -45,5 +46,6 @@ public class UserController {
         System.out.println(user);
         userService.newUser(user);
         return "123";
+        return new Result(false,"");
     }
 }
