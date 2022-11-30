@@ -1,9 +1,9 @@
 package com.hlw.constant;
 
 public class MessageConstant {
-    public static final String SELLER_CERTIFICATION_SUCCESS="商家认证成！功";
-    public static final String SELLER_CERTIFICATION_FAIL="商家认证失败！";
-    public static final String LOGIN_SUCCESS="登录成功！";
+    public static final String SELLER_CERTIFICATION_SUCCESS="商家认证成功!";
+    public static final String SELLER_CERTIFICATION_FAIL="商家认证失败!";
+    public static final String LOGIN_SUCCESS="登录成功!";
     public static final String LOGIN_FAIL="登录失败！";
     public static final String ENROLL_SUCCESS="注册成功！";
     public static final String ENROLL_FAIL="注册失败！";

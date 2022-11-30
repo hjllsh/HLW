@@ -168,7 +168,13 @@
         btn.style.color="rgba(239, 239, 239, 0.3)";
         id = setInterval(countTime,1000);
         $.get("/user/getEmailCheckCode",{email : email.value},function (res){
-           code = res;
+            alert(res);
+            alert(res.data.flag);
+            alert(res.data.message);
+           if (res.data.flag){
+               code=res.data.data;
+               alert(res.data.message);
+           }
         });
     };
     function countTime(){
