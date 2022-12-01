@@ -112,7 +112,7 @@
                             <el-input type="text" v-model="manny" ></el-input>
                         </el-form-item>
                         <el-form-item>
-                            <el-button type="primary" @click="submitForm('ruleForm')">提交</el-button>
+                            <el-button type="primary" @click="postAxios()">提交</el-button>
                             <el-button @click="dialogFormVisible = false">取消</el-button>
                         </el-form-item>
                     </el-form>
@@ -120,6 +120,7 @@
             </div>
         </div>
     <script>
+
         var vue = new Vue({
             el: '#app',
             data: {
@@ -129,12 +130,11 @@
                 rules: {//校验规则
                     username: [{required: true, message: '不可为空', trigger: 'blur'}],
                     manny: [{required: true, message: '不可为空', trigger: 'blur'}],
-                }
+                },
             },
-/*            data(){
-                return{
-                }
-            },*/
+            created(){
+                this.test()
+            },
             methods: {
                 jump(){
                     window.location.href = 'hlw_tellus.html'
@@ -143,6 +143,17 @@
                     this.manny=num;
                     this.dialogFormVisible = true;
 
+                },
+                test(){
+                    axios.get("/user").then((res)=>{
+                        alert(res)
+                    })
+                },
+                postAxios(){
+                    var testdata=this.manny
+                    axios.post("/user",testdata).then((res)=>{
+                        alert(testdata)
+                    });
                 },
                 exit(){},
             }
