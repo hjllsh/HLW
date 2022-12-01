@@ -6,7 +6,6 @@
     <!-- 引入样式 -->
     <link rel="stylesheet" href="../plugins/elementui/index.css">
     <link rel="stylesheet" href="../plugins/font-awesome/css/font-awesome.min.css">
-<!--    <link rel="stylesheet" href="../css/style.css">-->
     <!-- 引入组件库 -->
     <script type="text/javascript" src="../js/jquery.min.js"></script>
     <script src="../js/vue.js"></script>
@@ -14,12 +13,12 @@
     <script src="../js/axios-0.18.0.js"></script>
 </head>
 <body>
-<h1 align="center">成为卖家</h1>
+<h1 align="center">卖家认证</h1>
 <div id="app">
 <!--认证流程-->
         <el-col :span="6">
             <div class="grid-content bg-purple">
-                <div style="height: 700px; margin-left: 80px">
+                <div style="height: 600px; margin-left: 80px">
                     <el-steps direction="vertical">
                             <h2>成为卖家流程</h2>
                         <el-step title="第一步：填写身份基本信息" icon="el-icon-edit" description="填写身份基本信息和上传证件照片"></el-step>
@@ -51,13 +50,9 @@
                                 </el-option>
                             </el-select>
                         </template>
-<!--                        <el-input v-model="ruleForm.nation" placeholder="请输入国籍/地区"></el-input>-->
                     </el-form-item>
-<!--                    <el-form-item label="证件类型" prop="type">-->
-<!--                        <el-input v-model="ruleForm.type" suffix-icon="el-icon-tickets" placeholder="请输入证件类型"></el-input>-->
-<!--                    </el-form-item>-->
 
-                    <el-form-item label="证件类型" prop="type">
+                    <el-form-item label="商品类型" prop="type">
                         <template>
                             <el-select v-model="ruleForm.type" placeholder="请选择">
                                 <el-option
@@ -70,30 +65,8 @@
                         </template>
                     </el-form-item>
 
-                    <el-form-item label="证件号" prop="IDNumber">
-                        <el-input v-model="ruleForm.IDNumber" suffix-icon="el-icon-edit" placeholder="请输入证件号"></el-input>
-                    </el-form-item>
-<!--                    <el-form-item label="证件有效期" required>-->
-<!--                        <el-form-item prop="date">-->
-<!--                            <el-date-picker type="date" placeholder="选择有效期" v-model="ruleForm.date" style="width: 100%;"></el-date-picker>-->
-<!--                        </el-form-item>-->
-<!--                    </el-form-item>-->
-
-                    <el-form-item label="职业类别" prop="occupation">
-                        <template>
-                            <el-select v-model="ruleForm.occupation" placeholder="请选择">
-                                <el-option
-                                        v-for="item in occupations"
-                                        :key="item.value"
-                                        :label="item.label"
-                                        :value="item.value">
-                                </el-option>
-                            </el-select>
-                        </template>
-                    </el-form-item>
-
-                    <el-form-item label="联系方式" prop="phone">
-                        <el-input v-model="ruleForm.phone" suffix-icon="el-icon-phone-outline" placeholder="请输入联系方式"></el-input>
+                    <el-form-item label="身份证号" prop="IDNumber">
+                        <el-input v-model="ruleForm.IDNumber" suffix-icon="el-icon-edit" placeholder="请输入身份证号"></el-input>
                     </el-form-item>
 
                     <el-form-item label="商家地址" prop="address">
@@ -177,35 +150,18 @@
             el: '#app',
             data() {
                 return {
-                    occupations: [{
-                        value: '选项1',
-                        label: '学生'
-                    }, {
-                        value: '选项2',
-                        label: '军人'
-                    }, {
-                        value: '选项3',
-                        label: '退休/无业'
-                    }, {
-                        value: '选项4',
-                        label: '生产制造及有关人员'
-                    }, {
-                        value: '选项5',
-                        label: '不便分类的其他从业人员'
-                    }],
-
                     types: [{
-                        value: '选项1',
-                        label: '居民身份证'
+                        value: '游戏',
+                        label: '游戏'
                     }, {
-                        value: '选项2',
-                        label: '士官证'
+                        value: '家具',
+                        label: '家具'
                     },{
-                        value: '选项3',
-                        label: '学生证'
+                        value: '日常用品',
+                        label: '日常用品'
                     }, {
-                        value: '选项4',
-                        label: '港澳通行证'
+                        value: '电子产品',
+                        label: '电子产品'
                     }],
 
                     nationalities: [{
@@ -227,44 +183,24 @@
                     dialogVisible: false,
                     disabled: false,
                     ruleForm: {
-                        name: '',
-                        // sex: '',
                         nationality: '',
                         type: '',
                         IDNumber:'',
-                        // date:'',
                         StoreName:'',
-                        occupation: '',
-                        phone:'',
-                        address: '',
+                        address: ''
                     },
                     rules: {
-                        // name: [
-                        //     { required: true, message: '请输入姓名', trigger: 'blur' }
-                        // ],
-                        // sex: [
-                        //     { required: true, message: '请选择性别', trigger: 'blur' }
-                        // ],
                         nationality: [
                             {  required: true, message: '请选择国籍/地区', trigger: 'blur' }
                         ],
                         type: [
-                            { required: true, message: '请输入证件类型', trigger: 'blur' }
+                            { required: true, message: '请输入商品类型', trigger: 'blur' }
                         ],
                         IDNumber: [
-                            {required: true, message:'请输入证件号', trigger: 'blur' }
+                            {required: true, message:'请输入身份证号', trigger: 'blur' }
                         ],
-                        // date: [
-                        //     { type: 'date', required: true, message: '请选择日期', trigger: 'change' }
-                        // ],
                         StoreName: [
                             { required: true, message: '请输入商店名', trigger: 'blur' }
-                        ],
-                        occupation: [
-                            { required: true, message: '请选择职业类别', trigger: 'blur' }
-                        ],
-                        phone: [
-                            { required: true, message: '请输入联系方式', trigger: 'blur' }
                         ],
                         address: [
                             { required: true, message: '请输入商家地址', trigger: 'blur' }
@@ -277,6 +213,10 @@
                     this.$refs[formName].validate((valid) => {
                         if (valid) {
                             alert('submit!');
+                            console.log(this.ruleForm)
+                            axios.post("/seller",this.ruleForm).then((res)=>{
+
+                            });
                         } else {
                             console.log('error submit!!');
                             return false;

@@ -1,9 +1,10 @@
 package com.hlw.dao;
 
+import com.hlw.domain.User;
+
 public interface UserDao {
     void findUserById(Integer id);
 
-    Float findAccountById(String id);
+    void newUser(User user);
 
-    int UpdateAccoumtByid(String id, Float newAccount);
 }
