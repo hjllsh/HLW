@@ -1,6 +1,8 @@
 package com.hlw.constant;
 
-public class Result {
+import java.io.Serializable;
+
+public class Result implements Serializable {
     private boolean flag;
     private Object data;
     private String message;

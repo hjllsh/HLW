@@ -5,6 +5,7 @@ import com.hlw.domain.User;
 import com.hlw.constant.Result;
 import com.hlw.service.UserService;
 import com.hlw.utils.Email;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpSession;
@@ -40,8 +41,16 @@ public class UserController {
     @RequestMapping("/register")
     public Result register(HttpSession session, User user){
         session.removeAttribute("emailCode");
-        System.out.println(user);
+        System.out.println(user.getUserId());
         userService.newUser(user);
         return new Result(false,"123");
+    }
+
+    @RequestMapping("/recharge")
+    public Result recharge(HttpSession session, Float money){
+        String userId = (String)session.getAttribute("userid");
+        userId = "123123";
+        userService.doRecharge(money,userId);
+        return new Result(true, MessageConstant.RECHARGE_SUCCESS);
     }
 }
