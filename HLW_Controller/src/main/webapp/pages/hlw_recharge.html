@@ -86,16 +86,16 @@
                         <el-button style="float: right; padding: 3px 0" type="text" @click="jump">常见问题</el-button>
                     </div>
                     <div  class="text-item" >
-                        <el-button type="primary" round  style="height: 60px; width: 23%; font-size: 25px;margin-bottom: 20px;margin-left: 10px" @click="getManny(6)">6￥</el-button>
-                        <el-button type="primary" round  style="height: 60px; width: 23%; font-size: 25px;margin-bottom: 20px" @click="getManny(18)">18￥</el-button>
-                        <el-button type="primary" round  style="height: 60px; width: 23%; font-size: 25px;margin-bottom: 20px" @click="getManny(68)">68￥</el-button>
-                        <el-button type="primary" round  style="height: 60px; width: 23%; font-size: 25px;margin-bottom: 20px" @click="getManny(233)">233￥</el-button>
-                        <el-button type="primary" round  style="height: 60px; width: 23%; font-size: 25px;margin-bottom: 20px" @click="getManny(233)">233￥</el-button>
-                        <el-button type="primary" round  style="height: 60px; width: 23%; font-size: 25px;margin-bottom: 20px" @click="getManny(998)">998￥</el-button>
-                        <el-button type="primary" round  style="height: 60px; width: 23%; font-size: 25px;margin-bottom: 20px" @click="getManny(2333)">2333￥</el-button>
-                        <el-button type="primary" round  style="height: 60px; width: 23%; font-size: 25px;margin-bottom: 20px" @click="getManny(9998)">9998￥</el-button>
+                        <el-button type="primary" round  style="height: 60px; width: 23%; font-size: 25px;margin-bottom: 20px;margin-left: 10px" @click="getMoney(6)">6￥</el-button>
+                        <el-button type="primary" round  style="height: 60px; width: 23%; font-size: 25px;margin-bottom: 20px" @click="getMoney(18)">18￥</el-button>
+                        <el-button type="primary" round  style="height: 60px; width: 23%; font-size: 25px;margin-bottom: 20px" @click="getMoney(68)">68￥</el-button>
+                        <el-button type="primary" round  style="height: 60px; width: 23%; font-size: 25px;margin-bottom: 20px" @click="getMoney(233)">233￥</el-button>
+                        <el-button type="primary" round  style="height: 60px; width: 23%; font-size: 25px;margin-bottom: 20px" @click="getMoney(233)">233￥</el-button>
+                        <el-button type="primary" round  style="height: 60px; width: 23%; font-size: 25px;margin-bottom: 20px" @click="getMoney(998)">998￥</el-button>
+                        <el-button type="primary" round  style="height: 60px; width: 23%; font-size: 25px;margin-bottom: 20px" @click="getMoney(2333)">2333￥</el-button>
+                        <el-button type="primary" round  style="height: 60px; width: 23%; font-size: 25px;margin-bottom: 20px" @click="getMoney(9998)">9998￥</el-button>
                         <i style="font-size: 25px">设置充值金额</i>
-                        <el-input placeholder="自定义金额" style="height: auto ; width: 40%;font-size: 20px" v-model="manny"></el-input>
+                        <el-input placeholder="自定义金额" style="height: auto ; width: 40%;font-size: 20px" v-model="money"></el-input>
                         <el-button type="primary" round style="height: 40px; width: 14%; font-size: 20px;margin-bottom: 15px" @click.native="dialogFormVisible = true">充值</el-button>
                     </div>
                 </el-card>
@@ -104,15 +104,15 @@
             <img src="../img/jiashao.png">
             <div class="recharge" >
                 <el-dialog   title="充值" :visible.sync="dialogFormVisible" width="26%" class="el-dialog--center">
-                    <el-form :model="ruleForm" status-icon :rules="rules" ref="ruleForm" label-width="100px"  class="demo-ruleForm">
-                        <el-form-item label="账号" prop="username">
-                            <el-input type="text" v-model="ruleForm.username" disabled="disabled"></el-input>
+                    <el-form :model="ruleForm" status-icon :rules="rules" ref="ruleForm" label-width="100px"  class="demo-ruleForm" >
+                        <el-form-item label="账号" prop="userid">
+                            <el-input type="text" v-model="userid" disabled="disabled"></el-input>
                         </el-form-item>
-                        <el-form-item label="充值金额" prop="manny">
-                            <el-input type="text" v-model="manny" ></el-input>
+                        <el-form-item label="充值金额" prop="money" >
+                            <el-input type="text" v-model="money" ></el-input>
                         </el-form-item>
                         <el-form-item>
-                            <el-button type="primary" @click="submitForm('ruleForm')">提交</el-button>
+                            <el-button type="primary" @click="postAxios()" >提交</el-button>
                             <el-button @click="dialogFormVisible = false">取消</el-button>
                         </el-form-item>
                     </el-form>
@@ -120,30 +120,60 @@
             </div>
         </div>
     <script>
+
         var vue = new Vue({
             el: '#app',
             data: {
-                manny:"",
+                userid:"123",
+                money:"",
                 dialogFormVisible: false,
                 ruleForm:{},
                 rules: {//校验规则
-                    username: [{required: true, message: '不可为空', trigger: 'blur'}],
-                    manny: [{required: true, message: '不可为空', trigger: 'blur'}],
-                }
+                    userid: [{required: true, message: '不可为空', trigger: 'blur'}],
+                    money: [
+                            { required: true, message: '年龄不能为空'},
+                            { type: 'number', message: '年龄必须为数字值'}
+                            ],
+                },
             },
-/*            data(){
-                return{
-                }
-            },*/
+            created(){
+                this.test()
+            },
             methods: {
                 jump(){
                     window.location.href = 'hlw_tellus.html'
                 },
-                getManny(num){
-                    this.manny=num;
+                getMoney(num){
+                    this.money=num;
                     this.dialogFormVisible = true;
 
                 },
+                test(){
+                    axios.get('/user').then((res)=>{
+                        alert(res)
+                    })
+                },
+                postAxios(){
+/*                    if(this.changeInput()) {*/
+                        axios.get('/user/recharge?money=' + this.money, {}).then((res) => {
+                            console.log(res)
+                        });
+                        this.money = "";
+                        this.dialogFormVisible = false;
+                    },
+/*               },
+                changeInput() {
+                    var pattern = /^[1-9][0-9]*$/ // 正整数的正则表达式
+                    // 不符合正整数时
+                    if (!pattern.test(this.money)) {
+                        // input 框绑定的内容为空
+                        this.money = ''
+                        return false;
+                    }
+                    else{
+                        return true;
+                    }
+                },*/
                 exit(){},
             }
         });

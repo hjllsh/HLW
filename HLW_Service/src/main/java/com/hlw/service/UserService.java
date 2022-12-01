@@ -9,4 +9,5 @@ public interface UserService {
 
     void newUser(User user);
 
+    void doRecharge(Float manny, String userid);
 }
