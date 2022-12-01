@@ -10,13 +10,13 @@ public class personalCenter {
     private String birthday;
     private String personalDesc;
     private String email;
-    private String headShot;
+    private String headshot;
     private Float account;
 
     public personalCenter() {
     }
 
-    public personalCenter(String userName, String sex, String location, String phoneNumber, String birthday, String personalDesc, String email, String headShot, Float account) {
+    public personalCenter(String userName, String sex, String location, String phoneNumber, String birthday, String personalDesc, String email, String headshot, Float account) {
         this.userName = userName;
         this.sex = sex;
         this.location = location;
@@ -24,7 +24,7 @@ public class personalCenter {
         this.birthday = birthday;
         this.personalDesc = personalDesc;
         this.email = email;
-        this.headShot = headShot;
+        this.headshot = headshot;
         this.account = account;
     }
 
@@ -38,22 +38,9 @@ public class personalCenter {
                 ", birthday='" + birthday + '\'' +
                 ", personalDesc='" + personalDesc + '\'' +
                 ", email='" + email + '\'' +
-                ", headShot='" + headShot + '\'' +
+                ", headshot='" + headshot + '\'' +
                 ", account=" + account +
                 '}';
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        personalCenter that = (personalCenter) o;
-        return Objects.equals(userName, that.userName) && Objects.equals(sex, that.sex) && Objects.equals(location, that.location) && Objects.equals(phoneNumber, that.phoneNumber) && Objects.equals(birthday, that.birthday) && Objects.equals(personalDesc, that.personalDesc) && Objects.equals(email, that.email) && Objects.equals(headShot, that.headShot) && Objects.equals(account, that.account);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(userName, sex, location, phoneNumber, birthday, personalDesc, email, headShot, account);
     }
 
     public String getUserName() {
@@ -112,12 +99,12 @@ public class personalCenter {
         this.email = email;
     }
 
-    public String getHeadShot() {
-        return headShot;
+    public String getHeadshot() {
+        return headshot;
     }
 
-    public void setHeadShot(String headShot) {
-        this.headShot = headShot;
+    public void setHeadshot(String headshot) {
+        this.headshot = headshot;
     }
 
     public Float getAccount() {
