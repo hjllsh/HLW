@@ -3,20 +3,18 @@ package com.hlw.controller;
 import cn.hutool.captcha.CaptchaUtil;
 import cn.hutool.captcha.LineCaptcha;
 import cn.hutool.core.lang.Console;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import com.hlw.constant.MessageConstant;
+import com.hlw.constant.Result;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
-@Controller
+@RestController
 public class CheckCodeController {
-    @RequestMapping(value = "/checkCode",method = RequestMethod.GET)
+    @RequestMapping("/checkCode")
     public void getCheckCode(HttpServletRequest request,HttpServletResponse response){
         HttpSession session = request.getSession();
         //定义图形验证码的长和宽
@@ -26,6 +24,7 @@ public class CheckCodeController {
         try {
             lineCaptcha.write(response.getOutputStream());
             session.setAttribute("code",lineCaptcha.getCode());
+            System.out.println(lineCaptcha.getCode());
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -40,17 +39,20 @@ public class CheckCodeController {
         try {
             lineCaptcha.write(response.getOutputStream());
             session.setAttribute("code",lineCaptcha.getCode());
+            System.out.println(lineCaptcha.getCode());
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    @RequestMapping(value = "/checkUserCode",method = RequestMethod.GET)
-    @ResponseBody
-    public String getUserCheckCode(HttpServletRequest request,HttpServletResponse response){
-        HttpSession session = request.getSession();
-        String code =(String) session.getAttribute("code");
-        session.removeAttribute("code");
-        return code;
+    @RequestMapping( "/checkUserCode")
+    public Result checkUserCode(HttpSession session, String checkCode){
+        String code = (String)session.getAttribute("code");
+        System.out.println(checkCode);
+        if (checkCode.equals(code)){
+            return new Result(true,MessageConstant.VALIDATECODE_SUCCESS);
+        } else {
+            return new Result(false, MessageConstant.VALIDATECODE_FAIL);
+        }
     }
 }

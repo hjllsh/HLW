@@ -5,6 +5,8 @@ public class MessageConstant {
     public static final String SELLER_CERTIFICATION_FAIL="商家认证失败!";
     public static final String LOGIN_SUCCESS="登录成功!";
     public static final String LOGIN_FAIL="登录失败！";
+    public static final String SEND_EMAIL_SUCCESS="邮箱发送成功!";
+    public static final String SEND_EMAIL_FAIL="邮箱发送失败！";
     public static final String ENROLL_SUCCESS="注册成功！";
     public static final String ENROLL_FAIL="注册失败！";
     public static final String RELEASE_PRODUCT_SUCCESS="发布商品成功！";
@@ -29,5 +31,6 @@ public class MessageConstant {
     public static final String CHANGE_AVATAR_FAIL="更换头像失败！";
     public static final String SEND_VALIDATECODE_FAIL = "验证码发送失败";
     public static final String SEND_VALIDATECODE_SUCCESS = "验证码发送成功";
-
+    public static final String VALIDATECODE_FAIL = "验证码不一致";
+    public static final String VALIDATECODE_SUCCESS = "验证成功";
 }

@@ -9,13 +9,13 @@ import org.springframework.transaction.PlatformTransactionManager;
 import javax.sql.DataSource;
 
 public class JdbcConfig {
-    @Value("${driverClassName}")
+    @Value("${jdbc.driver}")
     private String driver;
-    @Value("${url}")
+    @Value("${jdbc.url}")
     private String url;
-    @Value("${username}")
+    @Value("${jdbc.username}")
     private String username;
-    @Value("${password}")
+    @Value("${jdbc.password}")
     private String password;
 
     @Bean//配置数据源对象

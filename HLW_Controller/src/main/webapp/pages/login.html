@@ -62,24 +62,24 @@
 <div id="login-box">
     <h1 align="center">Login</h1>
     <div class="form">
-        <form action="" method="post">
+        <form action="" method="post" onsubmit="return false">
             <div class="item">
                 <i class="fa fa-github-alt" style="font-size:30px"></i>
-                <input type="text" placeholder="Username">
+                <input type="text" id="userId" placeholder="Username">
             </div>
             <div class="item">
                 <i class="fa fa-search" style="font-size:30px"></i>
-                <input type="password" placeholder="Password">
+                <input type="password" id="password" user placeholder="Password">
             </div>
             <div class="item">
                 <span style="display: inline-block;width: 110px;margin-left: 80px">
-                    <input type="text" placeholder="输入验证码" style="width: 100px" onblur="checkUserCode">
+                    <input type="text"  id="checkCode" placeholder="输入验证码" style="width: 100px" onblur="checkUserCode()">
                 </span>
                 <span style="display: inline-block;width: 200px;">
                 <img src="checkCode" style="width: 140px;height: 70px" onclick="changeOne(this)">
                 </span>
             </div>
-            <button type="submit" >登 录</button><br>
+            <button type="submit"  onclick="submitData()">登 录</button><br>
             <br>
             <a href="hlw_enroll.html" style="margin-right: 30px">注册账号</a>
             <a href="hlw_findPass.html">找回密码</a>
@@ -88,13 +88,33 @@
 </div>
 </body>
 <script>
+
         function checkUserCode() {
-            $.get("/checkUserCode", "", function (res) {
-                alert(res);
+            var userId = $("#userId").val();
+            var password = $("#password").val();
+            var checkCode = $("#checkCode").val();
+            $.get("/checkUserCode", {checkCode : checkCode}, function (res) {
+                // alert(checkCode);
+                if (res.flag){
+                    $.get("/user/login",{userId:userId,password:password},function (res){
+                        if (res.flag){
+                            alert(res.message);
+                            window.location.href = "http://localhost:81/pages/hlw_main.html";
+                        } else {
+                            alert(res.message);
+                        }
+                    });
+                }else{
+                    alert(res.message);
+                }
             });
-        }
+        };
     function changeOne(img){
         img.src="/checkCode?"+new Date();
-    }
+    };
+
+    function submitData(){
+
+    };
 </script>
 </html>

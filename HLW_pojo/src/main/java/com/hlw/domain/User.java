@@ -1,63 +1,51 @@
 package com.hlw.domain;
 
-import java.util.*;
+
 
 public class User {
     private String userName;
-    private String passWord;
+    private String password;
     private String userId;
     private String email;
-    private String headShot;
+    private String headshot;
 
     public User() {
+
     }
 
-    public User(String userName, String passWord, String userId, String email, String headShot) {
+    public User(String userName, String password, String userId, String email, String headshot) {
         this.userName = userName;
-        this.passWord = passWord;
+        this.password = password;
         this.userId = userId;
         this.email = email;
-        this.headShot = headShot;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        User user = (User) o;
-        return Objects.equals(userName, user.userName) && Objects.equals(passWord, user.passWord) && Objects.equals(userId, user.userId) && Objects.equals(email, user.email) && Objects.equals(headShot, user.headShot);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(userName, passWord, userId, email, headShot);
+        this.headshot = headshot;
     }
 
     @Override
     public String toString() {
         return "User{" +
                 "userName='" + userName + '\'' +
-                ", passWord='" + passWord + '\'' +
+                ", password='" + password + '\'' +
                 ", userId='" + userId + '\'' +
                 ", email='" + email + '\'' +
-                ", headShot='" + headShot + '\'' +
+                ", headshot='" + headshot + '\'' +
                 '}';
     }
 
-    public String getuserName() {
+    public String getUserName() {
         return userName;
     }
 
-    public void setuserName(String userName) {
+    public void setUserName(String userName) {
         this.userName = userName;
     }
 
-    public String getPassWord() {
-        return passWord;
+    public String getPassword() {
+        return password;
     }
 
-    public void setPassWord(String passWord) {
-        this.passWord = passWord;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String getUserId() {
@@ -76,11 +64,11 @@ public class User {
         this.email = email;
     }
 
-    public String getHeadShot() {
-        return headShot;
+    public String getHeadshot() {
+        return headshot;
     }
 
-    public void setHeadShot(String headShot) {
-        this.headShot = headShot;
+    public void setHeadshot(String headshot) {
+        this.headshot = headshot;
     }
 }

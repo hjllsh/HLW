@@ -7,9 +7,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 //public class SpringMvcInterceptor implements HandlerInterceptor {
-////    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-////
-////    }
+//    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+//
+//    }
 //
 //    public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
 //

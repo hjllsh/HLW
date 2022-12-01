@@ -8,10 +8,10 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class UserServiceImpl implements UserService {
-    UserDao userDao;
-    public void findUserById(Integer id) {
-        userDao.findUserById(id);
-        System.out.println("user service ..."+id);
+    @Autowired
+    private UserDao userDao;
+    public User findUserById(String userId) {
+        return userDao.findUserById(userId);
     }
 
     public void newUser(User user) {
