@@ -253,9 +253,19 @@
                 submitForm(formName) {
                     this.$refs[formName].validate((valid) => {
                         if (valid) {
-                            alert('submit!');
-                        } else {
-                            console.log('error submit!!');
+                            axios.post("/upload/release",this.ruleForm).then((res)=>{
+                                if (res.data.flag){//执行成功
+                                    //弹出提示信息
+                                    this.$message({
+                                        message:res.data.message,
+                                        type:'success'
+                                    });
+                                }else{//执行失败
+                                    this.$message.error(this.data.message);
+                                }
+                            })
+                        } else {//校验不通过
+                            this.$message.error("请正确填写商品信息！")
                             return false;
                         }
                     });
