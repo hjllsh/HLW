@@ -18,6 +18,9 @@
         update t_personalCenter set account=#{newAccount} where user_id = #{userId};
     </update>
 
+    <update id="updatePass" parameterType="map">
+        update t_user set password=#{newPass} where user_id = #{userId};
+    </update>
     <!--    &lt;!&ndash;        新增&ndash;&gt;-->
 <!--    <insert id="add" parameterType="com.hlw.pojo.CheckGroup">-->
 <!--        <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">-->

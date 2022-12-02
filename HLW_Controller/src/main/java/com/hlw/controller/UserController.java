@@ -48,9 +48,27 @@ public class UserController {
 
     @RequestMapping("/recharge")
     public Result recharge(HttpSession session, Float money){
-        String userId = (String)session.getAttribute("userid");
+        String userId = (String)session.getAttribute("userId");
         userId = "123123";
-        userService.doRecharge(money,userId);
+        try {
+            userService.doRecharge(money,userId);
+        }catch (Exception e){
+            e.printStackTrace();
+            return new Result(false,MessageConstant.RECHARGE_FAIL);
+        }
         return new Result(true, MessageConstant.RECHARGE_SUCCESS);
+    }
+
+    @RequestMapping("/modifyPass")
+    public Result modifyPass(HttpSession session, String newPass){
+        String userId = (String)session.getAttribute("userId");
+        userId = "123123";
+        try {
+            userService.doModifyPass(newPass, userId);
+        }catch (Exception e){
+            e.printStackTrace();
+            return new Result(false,MessageConstant.CHANGE_PASSWORD_FAIL);
+        }
+        return new Result(true,MessageConstant.CHANGE_PASSWORD_SUCCESS);
     }
 }

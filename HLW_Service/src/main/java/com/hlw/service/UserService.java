@@ -8,4 +8,6 @@ public interface UserService {
     void newUser(User user);
 
     void doRecharge(Float manny, String userid);
+
+    void doModifyPass(String newPass, String userId);
 }
