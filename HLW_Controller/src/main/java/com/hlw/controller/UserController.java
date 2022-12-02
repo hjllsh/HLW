@@ -38,6 +38,7 @@ public class UserController {
         System.out.println(user);
         session.removeAttribute("emailCode");
         String substring = UuId.getUuId().substring(0, 15);
+
         user.setUserName(substring);
         user.setHeadshot("default.jpg");
         System.out.println(user);
@@ -57,7 +58,7 @@ public class UserController {
         session.setAttribute("userId",loginUser.getUserId());
             return new Result(true,MessageConstant.LOGIN_SUCCESS);
         } else {
-            return new Result(false,MessageConstant.LOGIN_SUCCESS);
+            return new Result(false,MessageConstant.LOGIN_FAIL);
         }
     }
 
