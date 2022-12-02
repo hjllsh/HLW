@@ -95,7 +95,7 @@
                         <el-button type="primary" round  style="height: 60px; width: 23%; font-size: 25px;margin-bottom: 20px" @click="getMoney(2333)">2333￥</el-button>
                         <el-button type="primary" round  style="height: 60px; width: 23%; font-size: 25px;margin-bottom: 20px" @click="getMoney(9998)">9998￥</el-button>
                         <i style="font-size: 25px">设置充值金额</i>
-                        <el-input placeholder="自定义金额" style="height: auto ; width: 40%;font-size: 20px" v-model="money"></el-input>
+                        <el-input placeholder="自定义金额" style="height: auto ; width: 40%;font-size: 20px" v-model.number="ruleForm.money"></el-input>
                         <el-button type="primary" round style="height: 40px; width: 14%; font-size: 20px;margin-bottom: 15px" @click.native="dialogFormVisible = true">充值</el-button>
                     </div>
                 </el-card>
@@ -105,15 +105,15 @@
             <div class="recharge" >
                 <el-dialog   title="充值" :visible.sync="dialogFormVisible" width="26%" class="el-dialog--center">
                     <el-form :model="ruleForm" status-icon :rules="rules" ref="ruleForm" label-width="100px"  class="demo-ruleForm" >
-                        <el-form-item label="账号" prop="userid">
-                            <el-input type="text" v-model="userid" disabled="disabled"></el-input>
+                        <el-form-item label="账号" prop="userId">
+                            <el-input type="text" v-model="ruleForm.userId" disabled="disabled"></el-input>
                         </el-form-item>
                         <el-form-item label="充值金额" prop="money" >
-                            <el-input type="text" v-model="money" ></el-input>
+                            <el-input type="text" v-model.number="ruleForm.money" ></el-input>
                         </el-form-item>
                         <el-form-item>
-                            <el-button type="primary" @click="postAxios()" >提交</el-button>
-                            <el-button @click="dialogFormVisible = false">取消</el-button>
+                            <el-button type="primary" @click="submitForm('ruleForm')" >提交</el-button>
+                            <el-button @click="dialogFormVisible = false;ruleForm.money=''">取消</el-button>
                         </el-form-item>
                     </el-form>
                 </el-dialog>
@@ -124,56 +124,70 @@
         var vue = new Vue({
             el: '#app',
             data: {
-                userid:"123",
-                money:"",
                 dialogFormVisible: false,
-                ruleForm:{},
+                ruleForm:{
+                    userId:"123",
+                    money:"",
+                },
                 rules: {//校验规则
-                    userid: [{required: true, message: '不可为空', trigger: 'blur'}],
+                    userId: [{required: true, message: '不可为空'}],
                     money: [
-                            { required: true, message: '年龄不能为空'},
-                            { type: 'number', message: '年龄必须为数字值'}
-                            ],
+                        { required: true, message: '请输入', trigger: 'blur' },
+                        {
+                            type: 'number',
+                            message: '请输入正整数',
+                            trigger: 'blur',
+                            transform(value) {
+                                if(value !== null && value !== '') {
+                                    if (String(value).trim() === '' || Number(value) <= 0) {
+                                        return false
+                                    }else if (String(value).indexOf('.') !== -1 || String(value).indexOf('-') !== - 1) {
+                                        return false
+                                    }else{
+                                        return Number(value)
+                                    }
+                                }else {
+                                    return null
+                                }
+                            }
+                        }
+                    ],
                 },
             },
-            created(){
-                this.test()
-            },
+/*            created(){
+                this.getUserId()
+            },*/
             methods: {
                 jump(){
                     window.location.href = 'hlw_tellus.html'
                 },
                 getMoney(num){
-                    this.money=num;
+                    this.ruleForm.money=num;
                     this.dialogFormVisible = true;
-
                 },
-                test(){
+/*                getUserId(){
                     axios.get('/user').then((res)=>{
                         alert(res)
                     })
-                },
-                postAxios(){
-/*                    if(this.changeInput()) {*/
-                        axios.get('/user/recharge?money=' + this.money, {}).then((res) => {
-                            console.log(res)
-                        });
-                        this.money = "";
-                        this.dialogFormVisible = false;
-                    },
-/*               },
-                changeInput() {
-                    var pattern = /^[1-9][0-9]*$/ // 正整数的正则表达式
-                    // 不符合正整数时
-                    if (!pattern.test(this.money)) {
-                        // input 框绑定的内容为空
-                        this.money = ''
-                        return false;
-                    }
-                    else{
-                        return true;
-                    }
                 },*/
+                postAxios(){
+                        axios.get('/user/recharge?money=' + this.ruleForm.money, {}).then((res) => {
+                            this.$message({
+                                message:res.data.message,
+                                type:'success'
+                            });
+                        });
+                        this.dialogFormVisible = false;
+                },
+                submitForm(formName) {
+                    this.$refs[formName].validate((valid) => {  //开启校验
+                        if (valid) {   // 如果校验通过，请求接口，允许提交表单
+                            this.postAxios();
+                        } else {   //校验不通过
+                            return false;
+                        }
+                    });
+                },
                 exit(){},
             }
         });

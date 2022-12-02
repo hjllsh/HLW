@@ -34,6 +34,12 @@ public class UserServiceImpl implements UserService {
         map.put("newAccount",newAccount);
         userDao.updateAccount(map);
     }
+    public void doModifyPass(String newPass, String userId){
+        Map<String,Object> map = new HashMap<String, Object>();
+        map.put("userId",userId);
+        map.put("newPass",newPass);
+        userDao.updatePass(map);
+    }
 
     public boolean findPass(String userId, String password) {
         boolean flag = true;

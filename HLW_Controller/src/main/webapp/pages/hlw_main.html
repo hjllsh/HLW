@@ -72,8 +72,8 @@
             <div class="update-password" >
                 <el-dialog   title="修改密码" :visible.sync="dialogFormVisible" width="26%" class="el-dialog--center">
                     <el-form :model="ruleForm" status-icon :rules="rules" ref="ruleForm" label-width="100px"  class="demo-ruleForm">
-                        <el-form-item label="账号" prop="username">
-                            <el-input type="text" v-model="ruleForm.username" ></el-input>
+                        <el-form-item label="账号" prop="userId">
+                            <el-input type="text" v-model="ruleForm.userId" disabled="disabled"></el-input>
                         </el-form-item>
                         <el-form-item label="当前密码" prop="pass">
                             <el-input type="password" v-model="ruleForm.pass" ></el-input>
@@ -86,7 +86,7 @@
                         </el-form-item>
                         <el-form-item>
                             <el-button type="primary" @click="submitForm('ruleForm')">提交</el-button>
-                            <el-button @click="dialogFormVisible = false">取消</el-button>
+                            <el-button @click="dialogFormVisible = false; ruleForm.pass=''; ruleForm.newPass=''; ruleForm.confirmPass='';">取消</el-button>
                         </el-form-item>
                     </el-form>
                 </el-dialog>
@@ -133,25 +133,44 @@
         </el-container>
     </el-container>
 </div>
-<script src="../js/vue.js"></script>
-<script src="../plugins/elementui/index.js"></script>
-<script type="text/javascript" src="../js/jquery.min.js"></script>
+
     <script>
         new Vue({
            el : '#app',
           data : {
               headshot: '',
               dialogFormVisible: false,
-              username:'',
-              pass:'',
-        newPass:'',
-        confirmPass:'',
-              ruleForm:{},
+              ruleForm:{
+                  userId:'123',
+                  pass:'',
+                  newPass:'',
+                  confirmPass:'',
+              },
               rules: {//校验规则
-                  username: [{ required: true, message: '不可为空', trigger: 'blur' }],
-                  pass: [{ required: true, message: '不可为空', trigger: 'blur' }],
-                  newPass: [{ required: true, message: '不可为空', trigger: 'blur' }],
-                  confirmPass: [{ required: true, message:'密码不一致', trigger: 'blur' }]
+                  userId: [{ required: true, message: '不可为空', trigger: 'blur' }],
+                  pass: [
+                      { required: true, message: '不可为空', trigger: 'blur' },
+                      {min: 6, max: 16, message: '请输入3到16位的密码', trigger: 'blur'}
+                  ],
+                  newPass: [
+                      { required: true, message: '不可为空', trigger: 'blur' },
+                      {min: 6, max: 16, message: '请输入3到16位的密码', trigger: 'blur'}
+                  ],
+                  confirmPass: [
+                      { required: true, message: '不可为空', trigger: 'blur' },
+                      {min: 6, max: 16, message: '请输入3到16位的密码', trigger: 'blur'},
+                      {
+                          message: '两次密码不一致',
+                          trigger: 'blur',
+                          transform(value) {
+                              if(value !== this.ruleForm.newPass){
+                                  callback(new Error('两次输入密码不一致!'));
+                              }else {
+                                  return String(value)
+                              }
+                          }
+                      }
+                  ]
               },
               menuList : [
                   {
@@ -201,6 +220,24 @@
               });
             },
             methods : {
+                postNewPass(){
+                    axios.get('/user/modifyPass?newPass=' + this.ruleForm.newPass, {}).then((res) => {
+                        this.$message({
+                            message:res.data.message,
+                            type:'success'
+                        });
+                    });
+                    this.dialogFormVisible = false;
+                },
+                submitForm(formName) {
+                    this.$refs[formName].validate((valid) => {  //开启校验
+                        if (valid) {   // 如果校验通过，请求接口，允许提交表单
+                            this.postNewPass();
+                        } else {   //校验不通过
+                            return false;
+                        }
+                    });
+                },
                exit(){
                    alert("1");
                    axios.get("/user").then((res)=>{

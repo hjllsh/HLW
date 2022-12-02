@@ -21,8 +21,7 @@ public class SellerController {
     //提交表单
     @RequestMapping("/submit")
     public Result submit(@RequestBody Store store,HttpSession session){
-        String userid = (String)session.getAttribute("userid");
-        userid="123";
+        String userid = (String)session.getAttribute("userId");
         store.setUserId(userid);
         try {
             sellerService.sellerAdd(store);
