@@ -41,7 +41,7 @@ public class UserController {
         String substring = UuId.getUuId().substring(0, 15);
         user.setAccount(0.0F);
         user.setUserName(substring);
-        user.setHeadshot("default.jpg");
+        user.setHeadshot("http://rm9hwdyan.hn-bkt.clouddn.com/610984CD01335934A904CD531CCBB579.jpg");
         System.out.println(user);
         userService.newUser(user);
         return new Result(true,MessageConstant.ENROLL_SUCCESS);
@@ -54,13 +54,14 @@ public class UserController {
         info.put("userId",loginUser.getUserId());
         info.put("password",loginUser.getPassword());
         User user = userService.findUserById(info);
+        session.setAttribute("user",user);
         System.out.println(user);
         String password = user.getPassword();
         if (user != null) {
         session.setAttribute("userId",loginUser.getUserId());
             return new Result(true,MessageConstant.LOGIN_SUCCESS);
         } else {
-            return new Result(false,MessageConstant.LOGIN_SUCCESS);
+            return new Result(false,MessageConstant.LOGIN_FAIL);
         }
     }
 //    找回密码发送邮箱
@@ -94,4 +95,10 @@ public class UserController {
         }
     }
 
+    @RequestMapping("/showHeadshot")
+    public Result showHeadshot(HttpSession session) {
+        User user = (User)session.getAttribute("user");
+        String headshot = user.getHeadshot();
+        return new Result(true,headshot,"头像查询成功");
+    }
 }

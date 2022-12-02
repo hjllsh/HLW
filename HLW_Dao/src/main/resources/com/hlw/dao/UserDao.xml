@@ -9,7 +9,7 @@
         <result property="password" column="password"></result>
         <result property="email" column="email"></result>
         <result property="headshot" column="headshot"></result>
-        <result property="account" column="user_id"></result>
+        <result property="account" column="account"></result>
     </resultMap>
         <insert id="newUser" parameterType="com.hlw.domain.User">
             insert into t_user(user_name, user_id, password, email, headshot, account)

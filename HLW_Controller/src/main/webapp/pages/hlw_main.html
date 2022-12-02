@@ -57,7 +57,7 @@
             <el-col :span="2" :offset="8">
                 <el-dropdown>
                         <span class="el-dropdown-link">
-                          <div style="line-height: 60px;  height: 60px; "  class="grid-content bg-purple "><img style=" height: 50px;width: 50px; border-radius: 25px; vertical-align: middle" src="../img/bg.jpg">
+                          <div style="line-height: 60px;  height: 60px; "  class="grid-content bg-purple "><img style=" height: 50px;width: 50px; border-radius: 25px; vertical-align: middle" :src="headshot">
                           <span>kong</span>
                       </div>
                      </span>
@@ -133,12 +133,19 @@
         </el-container>
     </el-container>
 </div>
-
+<script src="../js/vue.js"></script>
+<script src="../plugins/elementui/index.js"></script>
+<script type="text/javascript" src="../js/jquery.min.js"></script>
     <script>
         new Vue({
            el : '#app',
           data : {
+              headshot: '',
               dialogFormVisible: false,
+              username:'',
+              pass:'',
+        newPass:'',
+        confirmPass:'',
               ruleForm:{},
               rules: {//校验规则
                   username: [{ required: true, message: '不可为空', trigger: 'blur' }],
@@ -187,6 +194,12 @@
                   },
               ]
           },
+            created(){
+               alert(1);
+              axios.get("/user/showHeadshot").then((res)=>{
+                  this.headshot = res.data.data;
+              });
+            },
             methods : {
                exit(){
                    alert("1");
@@ -194,6 +207,7 @@
                       alert(res);
                    });
                },
+
             }
         });
     </script>

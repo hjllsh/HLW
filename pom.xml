@@ -25,6 +25,7 @@
         <durid.version>1.1.16</durid.version>
         <qiniu.version>7.2.0</qiniu.version>
         <hutool.version>5.8.10</hutool.version>
+        <commons-fileupload.verson></commons-fileupload.verson>
     </properties>
 
     <dependencyManagement>
