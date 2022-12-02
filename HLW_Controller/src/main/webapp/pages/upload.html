@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>上传信息</title>
+    <title>发布商品</title>
     <!-- 引入样式 -->
     <link rel="stylesheet" href="../plugins/elementui/index.css">
     <link rel="stylesheet" href="../plugins/font-awesome/css/font-awesome.min.css">
@@ -114,14 +114,14 @@
 
                 <el-col :span="20" offset="1">
                 <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm" >
-                    <el-form-item label="商品名称" prop="name">
-                        <el-input v-model="ruleForm.name" placeholder="请输入商品名称"></el-input>
+                    <el-form-item label="商品名称" prop="goodsName">
+                        <el-input v-model="ruleForm.goodsName" placeholder="请输入商品名称"></el-input>
                     </el-form-item>
                     <el-col>
 <!--                        <el-col :span="20">-->
-                        <el-form-item label="商品类型" prop="region">
+                        <el-form-item label="商品类型" prop="goodsType">
                             <template>
-                                <el-select v-model="ruleForm.region" placeholder="请选择">
+                                <el-select v-model="ruleForm.goodsType" placeholder="请选择">
                                     <el-option
                                             v-for="item in options"
                                             :key="item.value"
@@ -136,43 +136,37 @@
                 <el-col>
                     <el-form-item label="发布时间" required>
                         <el-col :span="10" >
-                            <el-form-item prop="date1">
-                                <el-date-picker type="date" placeholder="选择日期" v-model="ruleForm.date1" style="width: 100%;"></el-date-picker>
-                            </el-form-item>
-                        </el-col>
-                        <el-col class="line" :span="2"></el-col>
-                        <el-col :span="10" offset="1">
-                            <el-form-item prop="date2">
-                                <el-time-picker placeholder="选择时间" v-model="ruleForm.date2" style="width: 100%;"></el-time-picker>
+                            <el-form-item prop="releaseTime">
+                                <el-date-picker type="date" placeholder="选择日期" v-model="ruleForm.releaseTime" style="width: 100%;"></el-date-picker>
                             </el-form-item>
                         </el-col>
                     </el-form-item>
                 </el-col>
                     <el-col :span="10">
                     <el-form-item label="商品价格" prop="price">
-                        <el-input v-model="ruleForm.price" placeholder="请输入价格"></el-input>
+                        <el-input v-model.number="ruleForm.price" placeholder="请输入价格"></el-input>
                     </el-form-item>
                     </el-col>
                     <el-col :span="10">
-                        <el-form-item label="商品数量" prop="number">
-                            <el-input v-model="ruleForm.number" placeholder="请输入数量"></el-input>
+                        <el-form-item label="商品数量" prop="goodsNum">
+                            <el-input v-model.number="ruleForm.goodsNum" placeholder="请输入数量"></el-input>
                         </el-form-item>
                     </el-col>
                     <el-col >
-                    <el-form-item label="联系方式" prop="phone">
-                        <el-input v-model="ruleForm.phone" placeholder="请输入联系方式"></el-input>
+                    <el-form-item label="联系方式" prop="phoneNumber">
+                        <el-input v-model="ruleForm.phoneNumber" placeholder="请输入联系方式"></el-input>
                     </el-form-item>
 
-                    <el-form-item label="发货地址" prop="address">
-                        <el-input v-model="ruleForm.address" placeholder="请输入发货地址"></el-input>
+                    <el-form-item label="发货地址" prop="location">
+                        <el-input v-model="ruleForm.location" placeholder="请输入发货地址"></el-input>
                     </el-form-item>
 
-                    <el-form-item label="商品描述" prop="desc">
+                    <el-form-item label="商品描述" prop="goodsDsec">
                         <el-input
                                 type="textarea"
                                 :autosize="{ minRows: 2, maxRows: 4}"
                                 placeholder="请输入商品详细信息"
-                                v-model="ruleForm.desc">
+                                v-model="ruleForm.goodsDsec">
                         </el-input>
                     </el-form-item>
 
@@ -192,71 +186,65 @@
             el:'#app',
             data:{
                 options: [{
-                    value: '选项1',
-                    label: '黄金糕'
+                    value: '游戏',
+                    label: '游戏'
                 }, {
-                    value: '选项2',
-                    label: '双皮奶'
+                    value: '家具',
+                    label: '家具'
+                },{
+                    value: '日常用品',
+                    label: '日常用品'
                 }, {
-                    value: '选项3',
-                    label: '蚵仔煎'
+                    value: '电子产品',
+                    label: '电子产品'
                 }, {
-                    value: '选项4',
-                    label: '龙须面'
+                    value: '护肤产品',
+                    label: '护肤产品'
                 }, {
-                    value: '选项5',
-                    label: '北京烤鸭'
+                    value: '手办',
+                    label: '手办'
                 }],
                 value:'',
                     dialogImageUrl: '',
                     dialogVisible: false,
                     disabled: false,
                     ruleForm: {
-                        name: '',
-                        region: '',
-                        date1: '',
-                        date2: '',
-                        // type: [],
+                        goodsName: '',
+                        goodsType: '',
+                        releaseTime: '',
                         price:'',
-                        number:'',
-                        phone:'',
-                        address: '',
-                        desc: ''
+                        goodsNum:'',
+                        phoneNumber:'',
+                        location: '',
+                        goodsDsec: ''
                     },
                     rules: {
-                        name: [
+                        goodsName: [
                             { required: true, message: '请输入商品名称', trigger: 'blur' },
                             { min: 1, max: 20, message: '长度在 1 到 20 个字符', trigger: 'blur' }
                         ],
-                        region: [
+                        goodsType: [
                             { required: true, message: '请输入商品类型', trigger: 'blur' }
                         ],
-                        date1: [
+                        releaseTime: [
                             { type: 'date', required: true, message: '请选择日期', trigger: 'change' }
                         ],
-                        date2: [
-                            { type: 'date', required: true, message: '请选择时间', trigger: 'change' }
-                        ],
-                        // type: [
-                        //     { type: 'array', required: true, message: '请至少选择一个活动性质', trigger: 'change' }
-                        // ],
-
                         price: [
-                            { required: true, message: '请输入价格', trigger: 'blur' },
+                            { required: true, message: '请输入价格'},
                             { type: 'number', message: '价格必须为数字'}
                         ],
-                        number: [
-                            { required: true, message: '请输入数量', trigger: 'blur' },
+                        goodsNum: [
+                            { required: true, message: '请输入数量' },
                             { type: 'number', message: '数量必须为数字'}
                         ],
-                        phone: [
+                        phoneNumber: [
                             { required: true, message: '请输入联系方式', trigger: 'blur' }
                         ],
-                        address: [
+                        location: [
                             { required: true, message: '请输入发货地址', trigger: 'blur' },
                             { min: 1, max: 50, message: '长度在 1 到 50 个字符', trigger: 'blur' }
                         ],
-                        desc: [
+                        goodsDsec: [
                             { required: true, message: '请填写商品信息', trigger: 'blur' }
                         ]
                     }
