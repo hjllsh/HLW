@@ -2,12 +2,13 @@ package com.hlw.service;
 
 import com.hlw.domain.User;
 
+import java.util.Map;
 
 
 public interface UserService {
-    User findUserById(String userId);
+    public User findUserById(Map info);
 
-    void newUser(User user);
+    public void newUser(User user);
 
-    void doRecharge(Float manny, String userid);
+    public void doRecharge(Float manny, String userid);
 }

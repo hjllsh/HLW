@@ -10,7 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class SellerServiceImpl implements SellerService {
     @Autowired
-    SellerDao sellerDao;
+    private SellerDao sellerDao;
     public void sellerAdd(Store store) {
         sellerDao.sellerAdd(store);
     }

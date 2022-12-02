@@ -3,14 +3,21 @@
         PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace = "com.hlw.dao.UserDao">
+    <resultMap id="t_user" type="com.hlw.domain.User">
+        <result property="userName" column="user_name"></result>
+        <result property="userId" column="user_id"></result>
+        <result property="password" column="password"></result>
+        <result property="email" column="email"></result>
+        <result property="headshot" column="headshot"></result>
+        <result property="account" column="user_id"></result>
+    </resultMap>
         <insert id="newUser" parameterType="com.hlw.domain.User">
-            insert into t_user(user_name, user_id, password, headshot, email)
-            values(#{userName}, #{userId}, #{password}, #{email}, #{headshot})
+            insert into t_user(user_name, user_id, password, email, headshot, account)
+            values(#{userName}, #{userId}, #{password}, #{email}, #{headshot},#{account})
         </insert>
-    <select id="findUserById" parameterType="string" resultType="com.hlw.domain.User">
-        select * from t_user where user_id = #{userId}
+    <select id="findUserById" parameterType="map" resultType="com.hlw.domain.User" resultMap="t_user">
+        select * from t_user where user_id = #{userId} and password =#{password}
     </select>
-<!--    &lt;!&ndash;        新增&ndash;&gt;-->
 
 
     <select id="findAccountById" resultType="Float">

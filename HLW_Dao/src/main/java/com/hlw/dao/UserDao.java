@@ -6,11 +6,11 @@ import java.util.HashMap;
 import java.util.Map;
 
 public interface UserDao {
-    User findUserById(String userId);
+    public User findUserById(Map info);
 
-    void newUser(User user);
+    public void newUser(User user);
 
-    Float findAccountById(String userid);
+    public Float findAccountById(String userid);
 
-    void updateAccount(Map map);
+    public void updateAccount(Map map);
 }

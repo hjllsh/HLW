@@ -8,21 +8,18 @@ import com.hlw.service.UserService;
 import com.hlw.utils.Email;
 import com.hlw.utils.UuId;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpSession;
+import java.util.HashMap;
+import java.util.Map;
 
-
-@RestController
+@Controller
+@ResponseBody
 @RequestMapping("/user")
 public class UserController {
     @Autowired
     private UserService userService;
-
-    @PostMapping
-    public Result upload(Object o){
-        System.out.println(o);
-        return new Result(false,"123");
-    }
 
     @RequestMapping("/getEmailCheckCode")
     public Result getCheckCode(HttpSession session,String email){
@@ -50,16 +47,18 @@ public class UserController {
     @RequestMapping("/login")
     public Result login(HttpSession session, LoginUser loginUser){
         session.removeAttribute("code");
-        System.out.println(loginUser);
-        User user = userService.findUserById(loginUser.getUserId());
+        Map<String, String> info = new HashMap<String, String>();
+        info.put("userId",loginUser.getUserId());
+        info.put("password",loginUser.getPassword());
+        User user = userService.findUserById(info);
         System.out.println(user);
         String password = user.getPassword();
-        if (password != null && password.equals(loginUser.getPassword())) {
+        if (user != null) {
+        session.setAttribute("userId",loginUser.getUserId());
             return new Result(true,MessageConstant.LOGIN_SUCCESS);
         } else {
             return new Result(false,MessageConstant.LOGIN_SUCCESS);
         }
-//        session.setAttribute("userId",loginUser.getUserId());
     }
 
 }

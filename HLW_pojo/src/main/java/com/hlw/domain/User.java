@@ -8,17 +8,18 @@ public class User {
     private String userId;
     private String email;
     private String headshot;
-
+    private String account;
     public User() {
 
     }
 
-    public User(String userName, String password, String userId, String email, String headshot) {
+    public User(String userName, String password, String userId, String email, String headshot, String account) {
         this.userName = userName;
         this.password = password;
         this.userId = userId;
         this.email = email;
         this.headshot = headshot;
+        this.account = account;
     }
 
     @Override
@@ -29,6 +30,7 @@ public class User {
                 ", userId='" + userId + '\'' +
                 ", email='" + email + '\'' +
                 ", headshot='" + headshot + '\'' +
+                ", account='" + account + '\'' +
                 '}';
     }
 
@@ -70,5 +72,13 @@ public class User {
 
     public void setHeadshot(String headshot) {
         this.headshot = headshot;
+    }
+
+    public String getAccount() {
+        return account;
+    }
+
+    public void setAccount(String account) {
+        this.account = account;
     }
 }

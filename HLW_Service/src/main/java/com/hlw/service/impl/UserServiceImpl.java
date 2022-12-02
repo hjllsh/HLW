@@ -13,8 +13,13 @@ import java.util.Map;
 public class UserServiceImpl implements UserService {
     @Autowired
     private UserDao userDao;
-    public User findUserById(String userId) {
-        return userDao.findUserById(userId);
+    public User findUserById(Map info) {
+        try {
+            return userDao.findUserById(info);
+        }catch (Exception e){
+            e.printStackTrace();
+            return null;
+        }
     }
 
     public void newUser(User user) {
