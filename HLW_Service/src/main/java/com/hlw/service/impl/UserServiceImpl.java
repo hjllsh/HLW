@@ -34,4 +34,19 @@ public class UserServiceImpl implements UserService {
         map.put("newAccount",newAccount);
         userDao.updateAccount(map);
     }
+
+    public boolean findPass(String userId, String password) {
+        boolean flag = true;
+        try {
+            HashMap<String,String> info = new HashMap<String, String>();
+            info.put("userId",userId);
+            info.put("password",password);
+            userDao.findPass(info);
+        }catch (Exception e){
+            e.printStackTrace();
+            flag = false;
+            return flag;
+        }
+        return flag;
+    }
 }

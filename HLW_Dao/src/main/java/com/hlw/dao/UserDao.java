@@ -13,4 +13,6 @@ public interface UserDao {
     public Float findAccountById(String userid);
 
     public void updateAccount(Map map);
+
+    void findPass(Map info);
 }

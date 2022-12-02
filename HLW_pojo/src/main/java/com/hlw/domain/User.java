@@ -8,18 +8,9 @@ public class User {
     private String userId;
     private String email;
     private String headshot;
-    private String account;
+    private Float account;
     public User() {
 
-    }
-
-    public User(String userName, String password, String userId, String email, String headshot, String account) {
-        this.userName = userName;
-        this.password = password;
-        this.userId = userId;
-        this.email = email;
-        this.headshot = headshot;
-        this.account = account;
     }
 
     @Override
@@ -30,8 +21,17 @@ public class User {
                 ", userId='" + userId + '\'' +
                 ", email='" + email + '\'' +
                 ", headshot='" + headshot + '\'' +
-                ", account='" + account + '\'' +
+                ", account=" + account +
                 '}';
+    }
+
+    public User(String userName, String password, String userId, String email, String headshot, Float account) {
+        this.userName = userName;
+        this.password = password;
+        this.userId = userId;
+        this.email = email;
+        this.headshot = headshot;
+        this.account = account;
     }
 
     public String getUserName() {
@@ -74,11 +74,11 @@ public class User {
         this.headshot = headshot;
     }
 
-    public String getAccount() {
+    public Float getAccount() {
         return account;
     }
 
-    public void setAccount(String account) {
+    public void setAccount(Float account) {
         this.account = account;
     }
 }

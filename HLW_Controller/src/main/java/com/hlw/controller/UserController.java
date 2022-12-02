@@ -20,7 +20,7 @@ import java.util.Map;
 public class UserController {
     @Autowired
     private UserService userService;
-
+//    注册获取邮箱验证码
     @RequestMapping("/getEmailCheckCode")
     public Result getCheckCode(HttpSession session,String email){
         String emailCode = Email.getEmailCheckCode();
@@ -33,17 +33,20 @@ public class UserController {
         }
         return new Result(true, emailCode, MessageConstant.SEND_EMAIL_SUCCESS);
     }
+//    注册账户
     @RequestMapping("/register")
     public Result register(HttpSession session, User user){
         System.out.println(user);
         session.removeAttribute("emailCode");
         String substring = UuId.getUuId().substring(0, 15);
+        user.setAccount(0.0F);
         user.setUserName(substring);
         user.setHeadshot("default.jpg");
         System.out.println(user);
         userService.newUser(user);
         return new Result(true,MessageConstant.ENROLL_SUCCESS);
     }
+//    登录功能
     @RequestMapping("/login")
     public Result login(HttpSession session, LoginUser loginUser){
         session.removeAttribute("code");
@@ -58,6 +61,36 @@ public class UserController {
             return new Result(true,MessageConstant.LOGIN_SUCCESS);
         } else {
             return new Result(false,MessageConstant.LOGIN_SUCCESS);
+        }
+    }
+//    找回密码发送邮箱
+    @RequestMapping("/getEmail")
+    public Result getEmail(User user){
+        System.out.println(user);
+        HashMap<String, String> info = new HashMap<String, String>();
+        info.put("userId",user.getUserId());
+        info.put("password",null);
+        User realUser = userService.findUserById(info);
+        System.out.println(realUser);
+        if (realUser == null){
+            return new Result(false,"用户名不存在");
+        }
+        if (user.getEmail().equals(user.getEmail())){
+            String emailCode = Email.getEmailCheckCode();
+            Email.sendEmail(realUser.getEmail(),"找回密码","<div>hlw交易平台找回密码的验证码为："+ emailCode +"(5分钟内有效)</div>",true);
+                return new Result(true, emailCode, MessageConstant.SEND_EMAIL_SUCCESS);
+            }else {
+                return new Result(false,MessageConstant.SEND_EMAIL_FAIL);
+            }
+    }
+//    找回密码的修改密码
+    @RequestMapping("/findPass")
+    public Result findPass(User user){
+        boolean flag = userService.findPass(user.getUserId(), user.getPassword());
+        if (flag){
+            return new Result(flag,MessageConstant.CHANGE_PASSWORD_SUCCESS);
+        }else {
+            return new Result(flag,MessageConstant.CHANGE_PASSWORD_FAIL);
         }
     }
 
