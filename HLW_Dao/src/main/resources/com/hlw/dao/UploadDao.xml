@@ -2,39 +2,25 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace = "com.hlw.dao.UserDao">
-    <resultMap id="t_user" type="com.hlw.domain.User">
-        <result property="userName" column="user_name"></result>
-        <result property="userId" column="user_id"></result>
-        <result property="password" column="password"></result>
-        <result property="email" column="email"></result>
-        <result property="headshot" column="headshot"></result>
-        <result property="account" column="account"></result>
-    </resultMap>
-        <insert id="newUser" parameterType="com.hlw.domain.User">
-            insert into t_user(user_name, user_id, password, email, headshot, account)
-            values(#{userName}, #{userId}, #{password}, #{email}, #{headshot},#{account})
+<mapper namespace = "com.hlw.dao.UploadDao">
+        <resultMap id="goods" type="com.hlw.domain.Goods">
+            <id column="goods_id" property="goodsId"></id>
+            <result column="goods_name" property="goodsName"></result>
+            <result column="location" property="location"></result>
+            <result column="phone_number" property="phoneNumber"></result>
+            <result column="goods_num" property="goodsNum"></result>
+            <result column="release_time" property="releaseTime"></result>
+            <result column="goods_type" property="goodsType"></result>
+            <result column="user_id" property="userId"></result>
+            <result column="goods_id" property="goodsId"></result>
+
+        </resultMap>
+        <insert id="releaseGoods" parameterType="com.hlw.domain.Goods" >
+            insert into t_goods(goods_name,goods_type,release_time,price,goods_num,phone_number,location,goods_dsec,goods_id,user_id)
+            values(#{goodsName}, #{goodsType},#{releaseTime}, #{price}, #{goodsNum}, #{phoneNumber},#{location},#{goodsDsec},#{goodsId},#{userId})
         </insert>
-    <select id="findUserById" parameterType="map" resultType="com.hlw.domain.User" resultMap="t_user">
-        select * from t_user where user_id = #{userId}
-        <if test="password != null">
-        and password = #{password}
-        </if>
-    </select>
-
-
-    <select id="findAccountById" resultType="Float">
-        select account from t_personalCenter where user_id = #{userId};
-    </select>
-
-    <update id="findPass" parameterType="map" >
-        update t_user set password = #{password} where  user_id = #{userId};
-    </update>
-    <update id="updateAccount" parameterType="map">
-        update t_personalCenter set account=#{newAccount} where user_id = #{userId};
-    </update>
-
-    <!--    &lt;!&ndash;        新增&ndash;&gt;-->
+<!--    <select id="findUserById"></select>-->
+<!--    &lt;!&ndash;        新增&ndash;&gt;-->
 <!--    <insert id="add" parameterType="com.hlw.pojo.CheckGroup">-->
 <!--        <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">-->
 <!--            SELECT LAST_INSERT_ID()-->
