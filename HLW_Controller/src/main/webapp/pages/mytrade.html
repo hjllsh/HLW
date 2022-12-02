@@ -66,7 +66,7 @@
                                 <span>用户名:</span>
                             </el-col>
                             <el-col :span="6">
-                                <el-input size="small" type="text" value="11111" disabled/>
+                                <el-input size="small" type="text" value="11111" :disabled="userDisabled"></el-input>
                             </el-col>
                             </el-col>
 
@@ -75,7 +75,7 @@
                                     <span>性别:</span>
                                 </el-col>
                                 <el-col :span="6">
-                                    <el-input size="small" type="text" value="11111" disabled/>
+                                    <el-input size="small" type="text" value="11111" :disabled="userDisabled"></el-input>
                                 </el-col>
                             </el-col>
                             <el-col :span="24" style="margin-bottom: 10px;margin-top: 10px">
@@ -83,7 +83,7 @@
                                     <span>地址:</span>
                                 </el-col>
                                 <el-col :span="6">
-                                    <el-input size="small" type="text" value="男" disabled/>
+                                    <el-input size="small" type="text" value="男" :disabled="userDisabled"></el-input>
                                 </el-col>
                             </el-col>
                             <el-col :span="24" style="margin-bottom: 10px;margin-top: 10px">
@@ -91,7 +91,7 @@
                                     <span>电话:</span>
                                 </el-col>
                                 <el-col :span="6">
-                                    <el-input size="small" type="text" value="男" disabled/>
+                                    <el-input size="small" type="text" value="男" :disabled="userDisabled"></el-input>
                                 </el-col>
                             </el-col>
                             <el-col :span="24" style="margin-bottom: 10px;margin-top: 10px">
@@ -99,7 +99,7 @@
                                     <span>生日:</span>
                                 </el-col>
                                 <el-col :span="6">
-                                    <el-input size="small" type="text" value="2001-11-11" disabled/>
+                                    <el-input size="small" type="text" value="2001-11-11" :disabled="userDisabled"></el-input>
                                 </el-col>
                             </el-col>
                             <el-col :span="24" style="margin-bottom: 10px;margin-top: 10px">
@@ -107,7 +107,7 @@
                                     <span>邮箱:</span>
                                 </el-col>
                                 <el-col :span="6">
-                                    <el-input size="small" type="text" value="43856724372@qq.com" disabled/>
+                                    <el-input size="small" type="text" value="43856724372@qq.com" :disabled="userDisabled"></el-input>
                                 </el-col>
                             </el-col>
                             <el-col :span="24" style="margin-bottom: 10px;margin-top: 10px">
@@ -115,7 +115,10 @@
                                     <span>个人简介:</span>
                                 </el-col>
                                 <el-col :span="14">
-                                    <el-input  type="textarea" placeholder="请输入内容"   maxlength="30" show-word-limit disabled></el-input>
+                                    <el-input  type="textarea" placeholder="请输入内容"   maxlength="30" show-word-limit :disabled="userDisabled"></el-input>
+                                </el-col>
+                                <el-col>
+                                    <el-button @click="userDisabled = false">编辑</el-button>
                                 </el-col>
                             </el-col>
                         </el-tab-pane>
@@ -335,15 +338,15 @@
     </style>
 
     <script>
-        new Vue({
+       var vue = new Vue({
             el: '#app',
-
             data : {
                     account : '100.0',
                     myHeadshot : "../img/user7-128x128.jpg",
                     currentPage1: 1,
                     activeName: 'first',
                     search: '',
+                    userDisabled: true,
                     tableData: [{
                         date: '2016-05-02',
                         name: '王小虎',

@@ -11,7 +11,10 @@ public interface UserService {
 
     public void newUser(User user);
 
-    public void doRecharge(Float manny, String userid);
+    void doRecharge(Float manny, String userid);
+
+    void doModifyPass(String newPass, String userId);
+    void doRecharge(Float manny, String userid);
 
     boolean findPass(String userId, String password);
 }

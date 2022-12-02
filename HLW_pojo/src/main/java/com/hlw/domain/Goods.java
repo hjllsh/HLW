@@ -11,13 +11,13 @@ public class Goods {
     private String phoneNumber;
     private String location;
     private String goodsDsec;
-    private int goodsId;
+    private String goodsId;
     private String userId;
 
     public Goods() {
     }
 
-    public Goods(String goodsName, String goodsType, String releaseTime, Float price, int goodsNum, String phoneNumber, String location, String goodsDsec, int goodsId, String userId) {
+    public Goods(String goodsName, String goodsType, String releaseTime, Float price, int goodsNum, String phoneNumber, String location, String goodsDsec, String goodsId, String userId) {
         this.goodsName = goodsName;
         this.goodsType = goodsType;
         this.releaseTime = releaseTime;
@@ -123,11 +123,11 @@ public class Goods {
         this.goodsDsec = goodsDsec;
     }
 
-    public int getGoodsId() {
+    public String getGoodsId() {
         return goodsId;
     }
 
-    public void setGoodsId(int goodsId) {
+    public void setGoodsId(String goodsId) {
         this.goodsId = goodsId;
     }
 
