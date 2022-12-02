@@ -60,7 +60,7 @@ public class UserController {
         session.setAttribute("userId",loginUser.getUserId());
             return new Result(true,MessageConstant.LOGIN_SUCCESS);
         } else {
-            return new Result(false,MessageConstant.LOGIN_SUCCESS);
+            return new Result(false,MessageConstant.LOGIN_FAIL);
         }
     }
 //    找回密码发送邮箱
