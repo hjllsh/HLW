@@ -1,6 +1,7 @@
 package com.hlw.domain;
 
 import java.util.List;
+import java.util.Objects;
 
 
 public class GoodsImg {
@@ -13,17 +14,18 @@ public class GoodsImg {
 
     @Override
     public String toString() {
-        return "goodsImg{" +
+        return "GoodsImg{" +
                 "userId='" + userId + '\'' +
                 ", goodsId=" + goodsId +
                 ", img=" + img +
                 '}';
     }
 
-    public goodsImg(String userId, int goodsId, List<String> img) {
+    public GoodsImg(String userId, int goodsId, List<String> img) {
         this.userId = userId;
         this.goodsId = goodsId;
         this.img = img;
+    }
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

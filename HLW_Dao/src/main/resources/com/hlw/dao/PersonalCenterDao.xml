@@ -2,23 +2,27 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace = "com.hlw.dao.MytradeDao">
+<mapper namespace = "com.hlw.dao.PersonalCenterDao">
     <resultMap id="PersonalCenter" type="com.hlw.domain.PersonalCenter">
-        <result column="user_name"></result>
-        <result column="sex"></result>
-        <result column="location"></result>
-        <result column="phoneNumber"></result>
-        <result column="birthday"></result>
-        <result column="personalDesc"></result>
-        <result column="email"></result>
-        <result column="headshot"></result>
-        <result column="account"></result>
-        <result column="userId"></result>
+        <result column="user_name" property="userName"></result>
+        <result column="sex" property="sex"></result>
+        <result column="location" property="location"></result>
+        <result column="phone_number" property="phoneNumber"></result>
+        <result column="birthday" property="birthday"></result>
+        <result column="personal_desc" property="personalDesc"></result>
+        <result column="email" property="email"></result>
+        <result column="headshot" property="headshot"></result>
+        <result column="account" property="account"></result>
+        <result column="user_id" property="userId"></result>
     </resultMap>
 
-    <select id="findMytradeByUserId" parameterType="string" resultMap="PersonalCenter">
-
+    <select id="findMyPersonalByUserId" parameterType="string" resultMap="PersonalCenter" resultType="com.hlw.domain.PersonalCenter">
+        select * from t_personalcenter where user_id = #{userId}
     </select>
+    <insert id="initMyPersonalCenter" parameterType="com.hlw.domain.PersonalCenter" >
+        insert into t_personalcenter(user_name,sex,location,phone_number,birthday,personal_desc,email,headshot,account,user_id)
+        values #{userName} ,#{sex},#{location},#{phoneNumber},#{birthday},#{personalDesc},#{email},#{headshot},#{account},#{userId}
+    </insert>
     <!--    &lt;!&ndash;        新增&ndash;&gt;-->
 <!--    <insert id="add" parameterType="com.hlw.pojo.CheckGroup">-->
 <!--        <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">-->

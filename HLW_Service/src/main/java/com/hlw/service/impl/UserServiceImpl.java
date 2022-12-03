@@ -14,6 +14,7 @@ import java.util.Map;
 public class UserServiceImpl implements UserService {
     @Autowired
     private UserDao userDao;
+
     public User findUserById(Map info) {
         try {
             return userDao.findUserById(info);
@@ -57,7 +58,7 @@ public class UserServiceImpl implements UserService {
         return flag;
     }
 
-    public boolean doUpdatePersonalCenter(PersonalCenter personalCenter){
+    public boolean doUpdatePersonalCenter( PersonalCenter personalCenter){
         boolean flag = true;
         try {
             userDao.updatePersonalCenter(personalCenter);

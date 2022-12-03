@@ -17,7 +17,6 @@ public interface UserDao {
 
     void updatePass(Map map);
 
-
     void findPass(Map info);
 
     void updatePersonalCenter(PersonalCenter personalCenter);

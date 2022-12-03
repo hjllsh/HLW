@@ -5,6 +5,7 @@ import com.hlw.constant.MessageConstant;
 import com.hlw.domain.PersonalCenter;
 import com.hlw.domain.User;
 import com.hlw.constant.Result;
+import com.hlw.service.MyPersonalCenterService;
 import com.hlw.service.UserService;
 import com.hlw.utils.Email;
 import com.hlw.utils.UuId;
@@ -12,9 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -24,6 +23,8 @@ import java.util.Map;
 public class UserController {
     @Autowired
     private UserService userService;
+    @Autowired
+    private MyPersonalCenterService myPersonalCenterService;
 
     //    注册获取邮箱验证码
     @RequestMapping("/getEmailCheckCode")
@@ -45,11 +46,15 @@ public class UserController {
         System.out.println(user);
         session.removeAttribute("emailCode");
         String substring = UuId.getUuId().substring(0, 15);
+        //账户初始化值
         user.setAccount(0.0F);
+        //默认名称
         user.setUserName(substring);
+        //默认头像
         user.setHeadshot("http://rm9hwdyan.hn-bkt.clouddn.com/610984CD01335934A904CD531CCBB579.jpg");
         System.out.println(user);
         userService.newUser(user);
+        myPersonalCenterService.initMyPersonalCenter(user);
         return new Result(true, MessageConstant.ENROLL_SUCCESS);
     }
 
@@ -101,7 +106,7 @@ public class UserController {
                 return new Result(flag, MessageConstant.CHANGE_PASSWORD_FAIL);
             }
         }
-
+//    头像查询
         @RequestMapping("/showHeadshot")
         public Result showHeadshot (HttpSession session){
             User user = (User) session.getAttribute("user");
@@ -148,14 +153,16 @@ public class UserController {
             String password = user.getPassword();
             return password;
         }
-//        获取个人中心信息
+//        更新个人中心信息
         @RequestMapping("/updatePersonalCenter")
-        public Result c(HttpSession session, PersonalCenter personalCenter, HttpServletRequest request) throws UnsupportedEncodingException {
-            request.setCharacterEncoding("UTF-8");
+        public Result updatePersonalCenter(HttpSession session,@RequestBody PersonalCenter personalCenter) {
             String userId = (String) session.getAttribute("userId");
             personalCenter.setUserId(userId);
-            System.out.println(personalCenter);
-            boolean flag = userService.doUpdatePersonalCenter(personalCenter);
-            return new Result(true, MessageConstant.MODIFY_SUCCESS);
+            if (personalCenter != null) {
+                boolean flag = userService.doUpdatePersonalCenter(personalCenter);
+                return new Result(true, MessageConstant.MODIFY_SUCCESS);
+            } else {
+                return new Result(false, MessageConstant.MODIFY_FAIL);
+            }
         }
 }
