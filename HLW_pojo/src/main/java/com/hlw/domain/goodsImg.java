@@ -1,16 +1,17 @@
 package com.hlw.domain;
 
+import java.util.List;
 import java.util.Objects;
 
 public class goodsImg {
     private String userId;
-    private int goodsId;
-    private String img;
+    private String goodsId;
+    private List<String> img;
 
     public goodsImg() {
     }
 
-    public goodsImg(String userId, int goodsId, String img) {
+    public goodsImg(String userId, String goodsId, List<String> img) {
         this.userId = userId;
         this.goodsId = goodsId;
         this.img = img;
@@ -20,8 +21,8 @@ public class goodsImg {
     public String toString() {
         return "goodsImg{" +
                 "userId='" + userId + '\'' +
-                ", goodsId=" + goodsId +
-                ", img='" + img + '\'' +
+                ", goodsId='" + goodsId + '\'' +
+                ", img=" + img +
                 '}';
     }
 
@@ -30,7 +31,7 @@ public class goodsImg {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         goodsImg goodsImg = (goodsImg) o;
-        return goodsId == goodsImg.goodsId && Objects.equals(userId, goodsImg.userId) && Objects.equals(img, goodsImg.img);
+        return Objects.equals(userId, goodsImg.userId) && Objects.equals(goodsId, goodsImg.goodsId) && Objects.equals(img, goodsImg.img);
     }
 
     @Override
@@ -46,19 +47,19 @@ public class goodsImg {
         this.userId = userId;
     }
 
-    public int getGoodsId() {
+    public String getGoodsId() {
         return goodsId;
     }
 
-    public void setGoodsId(int goodsId) {
+    public void setGoodsId(String goodsId) {
         this.goodsId = goodsId;
     }
 
-    public String getImg() {
+    public List<String> getImg() {
         return img;
     }
 
-    public void setImg(String img) {
+    public void setImg(List<String> img) {
         this.img = img;
     }
 }

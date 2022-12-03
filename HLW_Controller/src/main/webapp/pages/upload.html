@@ -37,16 +37,16 @@
                 <span>卖家须知</span>
             </div>
             <el-col style="margin-bottom: 20px">
-                1
+                1 商家需作出真实、完整、全面、准确的商品描述
             </el-col>
             <el-col style="margin-bottom: 20px">
-                2
+                2 相关展示图片应当画面清晰，容易辨识
             </el-col>
             <el-col style="margin-bottom: 20px">
-                3
+                3 禁止在商品描述信息及实物包裹中发布第三方信息
             </el-col>
             <el-col style="margin-bottom: 20px">
-                4
+                4 禁止发布含有虚假宣传的内容
             </el-col>
         </el-card>
         <el-card class="box-card" style="margin-top: 50px">
@@ -54,16 +54,16 @@
                 <span>注意事项</span>
             </div>
             <el-col style="margin-bottom: 20px">
-                1
+                1 根据商品实际属性，填写正确的商品类目。
             </el-col>
             <el-col style="margin-bottom: 20px">
-                2
+                2 需正确设置商品价格，不得随意调整商品价格
             </el-col>
             <el-col style="margin-bottom: 20px">
-                3
+                3 谨慎发布商品，不得发布测试商品
             </el-col>
             <el-col style="margin-bottom: 20px">
-                4
+                4 需如实描述商品的实际功效，不得含有虚假、夸大的内容
             </el-col>
         </el-card>
 
@@ -75,7 +75,7 @@
                         <p>上传商品照片</p>
                         <el-col :span="24">
                             <el-upload
-                                    action="#"
+                                    action="/uploadImages"
                                     list-type="picture-card"
                                     :auto-upload="false">
                                 <i slot="default" class="el-icon-plus" ></i>
@@ -84,17 +84,6 @@
                                             class="el-upload-list__item-thumbnail"
                                             :src="file.url" alt="">
                                     <span class="el-upload-list__item-actions">
-                    <span
-                        class="el-upload-list__item-preview"
-                        @click="handlePictureCardPreview(file)">
-          <i class="el-icon-zoom-in"></i>
-        </span>
-        <span
-                v-if="!disabled"
-                class="el-upload-list__item-delete"
-                @click="handleDownload(file)">
-          <i class="el-icon-download"></i>
-        </span>
         <span
                 v-if="!disabled"
                 class="el-upload-list__item-delete"
@@ -102,9 +91,9 @@
           <i class="el-icon-delete"></i>
         </span>
       </span>
-                                </div>
-                            </el-upload>
-                        </el-col>
+         </div>
+      </el-upload>
+      </el-col>
 
                         <el-dialog :visible.sync="dialogVisible">
                             <img width="100%" :src="dialogImageUrl" alt="">
@@ -274,6 +263,7 @@
                     this.$refs[formName].resetFields();
                 },
                 handleRemove(file) {
+                    alert(file);
                     console.log(file);
                 },
                 handlePictureCardPreview(file) {
