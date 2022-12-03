@@ -134,17 +134,17 @@
 </div>
 
     <script>
-        new Vue({
+        var vue =new Vue({
            el : '#app',
-          data : {
-              dialogFormVisible: false,
-              ruleForm:{
-                  userId:'123',
+            data : {
+                dialogFormVisible: false,
+                ruleForm:{
+                  userId:'',
                   pass:'',
                   newPass:'',
                   confirmPass:'',
-              },
-              rules: {//校验规则
+                },
+                rules: {//校验规则
                   userId: [{ required: true, message: '不可为空', trigger: 'blur' }],
                   pass: [
                       { required: true, message: '不可为空', trigger: 'blur' },
@@ -158,19 +158,24 @@
                       { required: true, message: '不可为空', trigger: 'blur' },
                       {min: 6, max: 16, message: '请输入3到16位的密码', trigger: 'blur'},
                       {
+                          required: true,
                           message: '两次密码不一致',
                           trigger: 'blur',
-                          transform(value) {
-                              if(value !== this.ruleForm.newPass){
-                                  callback(new Error('两次输入密码不一致!'));
+                          transform(value){
+                              if(value !== null && value !== '') {
+                                  if(value !== vue.ruleForm.newPass){
+                                      return false
+                                  }else {
+                                      return value
+                                  }
                               }else {
-                                  return String(value)
+                                  return null
                               }
                           }
                       }
-                  ]
-              },
-              menuList : [
+                  ],
+                },
+                menuList : [
                   {
                       "path": "2",
                       "title": "我要卖货",
@@ -209,9 +214,18 @@
 
                       ]
                   },
-              ]
-          },
+                ]
+            },
+            created(){
+                this.getUserId()
+            },
             methods : {
+                getUserId(){
+                    axios.get('/user/getUserId',{}).then((res)=>{
+                        alert(res.data)
+                        this.ruleForm.userId=res.data
+                    })
+                },
                 postNewPass(){
                     axios.get('/user/modifyPass?newPass=' + this.ruleForm.newPass, {}).then((res) => {
                         this.$message({

@@ -126,7 +126,7 @@
             data: {
                 dialogFormVisible: false,
                 ruleForm:{
-                    userId:"123",
+                    userId:"",
                     money:"",
                 },
                 rules: {//校验规则
@@ -154,22 +154,22 @@
                     ],
                 },
             },
-/*            created(){
+           created(){
                 this.getUserId()
-            },*/
+           },
             methods: {
-                jump(){
+               jump(){
                     window.location.href = 'hlw_tellus.html'
                 },
                 getMoney(num){
                     this.ruleForm.money=num;
                     this.dialogFormVisible = true;
                 },
-/*                getUserId(){
-                    axios.get('/user').then((res)=>{
-                        alert(res)
+                getUserId(){
+                    axios.get('/user/getUserId',{}).then((res)=>{
+                        this.ruleForm.userId=res.data
                     })
-                },*/
+                },
                 postAxios(){
                         axios.get('/user/recharge?money=' + this.ruleForm.money, {}).then((res) => {
                             this.$message({
