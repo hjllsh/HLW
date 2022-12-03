@@ -1,16 +1,18 @@
 package com.hlw.domain;
 
+import java.util.List;
 import java.util.Objects;
 
 public class GoodsImg {
     private String userId;
-    private int goodsId;
-    private String img;
+    private String goodsId;
+    private List<String> img;
 
     public GoodsImg() {
     }
 
-    public GoodsImg(String userId, int goodsId, String img) {
+
+    public GoodsImg(String userId, String goodsId, List<String> img) {
         this.userId = userId;
         this.goodsId = goodsId;
         this.img = img;
@@ -20,8 +22,8 @@ public class GoodsImg {
     public String toString() {
         return "goodsImg{" +
                 "userId='" + userId + '\'' +
-                ", goodsId=" + goodsId +
-                ", img='" + img + '\'' +
+                ", goodsId='" + goodsId + '\'' +
+                ", img=" + img +
                 '}';
     }
 
@@ -46,19 +48,19 @@ public class GoodsImg {
         this.userId = userId;
     }
 
-    public int getGoodsId() {
+    public String getGoodsId() {
         return goodsId;
     }
 
-    public void setGoodsId(int goodsId) {
+    public void setGoodsId(String goodsId) {
         this.goodsId = goodsId;
     }
 
-    public String getImg() {
+    public List<String> getImg() {
         return img;
     }
 
-    public void setImg(String img) {
+    public void setImg(List<String> img) {
         this.img = img;
     }
 }
