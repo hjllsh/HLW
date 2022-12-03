@@ -37,6 +37,12 @@
     <update id="updatePass" parameterType="map">
         update t_user set password=#{newPass} where user_id = #{userId};
     </update>
+    <update id="updatePersonalCenter">
+        update t_personalCenter
+        set user_name=#{userName}, sex=#{sex}, location=#{location}, phone_number=#{phoneNumber},
+            birthday=#{birthday}, personal_Desc=#{personalDesc}, email=#{email}
+        where user_id = #{userId};
+    </update>
 
 
     <!--    &lt;!&ndash;        新增&ndash;&gt;-->

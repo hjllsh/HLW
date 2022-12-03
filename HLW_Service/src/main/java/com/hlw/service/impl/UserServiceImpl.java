@@ -60,7 +60,7 @@ public class UserServiceImpl implements UserService {
     public boolean doUpdatePersonalCenter(PersonalCenter personalCenter){
         boolean flag = true;
         try {
-            userDao.updatePersonalCenter(updatePersonalCenter);
+            userDao.updatePersonalCenter(personalCenter);
         }catch (Exception e){
             e.printStackTrace();
             flag = false;
