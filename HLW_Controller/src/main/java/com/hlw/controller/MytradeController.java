@@ -2,6 +2,7 @@ package com.hlw.controller;
 
 import com.hlw.constant.MessageConstant;
 import com.hlw.constant.Result;
+import com.hlw.service.MytradeService;
 import com.hlw.utils.QiniuUtils;
 import com.hlw.utils.UuId;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,6 +18,8 @@ import java.lang.management.MemoryManagerMXBean;
 @RestController
 @RequestMapping("/mytrade")
 public class MytradeController {
+
+    private MytradeService mytradeService;
     @RequestMapping("/changeHeadshot")
     public Result changeHeadshot(HttpSession session, @RequestParam("headshot")MultipartFile file){
 //        获取原始文件名

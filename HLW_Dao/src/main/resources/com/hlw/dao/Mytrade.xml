@@ -2,43 +2,23 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace = "com.hlw.dao.UserDao">
-    <resultMap id="t_user" type="com.hlw.domain.User">
-        <result property="userName" column="user_name"></result>
-        <result property="userId" column="user_id"></result>
-        <result property="password" column="password"></result>
-        <result property="email" column="email"></result>
-        <result property="headshot" column="headshot"></result>
-        <result property="account" column="account"></result>
+<mapper namespace = "com.hlw.dao.MytradeDao">
+    <resultMap id="PersonalCenter" type="com.hlw.domain.PersonalCenter">
+        <result column="user_name"></result>
+        <result column="sex"></result>
+        <result column="location"></result>
+        <result column="phoneNumber"></result>
+        <result column="birthday"></result>
+        <result column="personalDesc"></result>
+        <result column="email"></result>
+        <result column="headshot"></result>
+        <result column="account"></result>
+        <result column="userId"></result>
     </resultMap>
-        <insert id="newUser" parameterType="com.hlw.domain.User">
-            insert into t_user(user_name, user_id, password, email, headshot, account)
-            values(#{userName}, #{userId}, #{password}, #{email}, #{headshot},#{account})
-        </insert>
-    <select id="findUserById" parameterType="map" resultType="com.hlw.domain.User" resultMap="t_user">
-        select * from t_user where user_id = #{userId}
-        <if test="password != null">
-        and password = #{password}
-        </if>
+
+    <select id="findMytradeByUserId" parameterType="string" resultMap="PersonalCenter">
+
     </select>
-
-
-    <select id="findAccountById" resultType="Float">
-        select account from t_personalCenter where user_id = #{userId};
-    </select>
-
-    <update id="findPass" parameterType="map" >
-        update t_user set password = #{password} where  user_id = #{userId};
-    </update>
-    <update id="updateAccount" parameterType="map">
-        update t_personalCenter set account=#{newAccount} where user_id = #{userId};
-    </update>
-
-    <update id="updatePass" parameterType="map">
-        update t_user set password=#{newPass} where user_id = #{userId};
-    </update>
-
-
     <!--    &lt;!&ndash;        新增&ndash;&gt;-->
 <!--    <insert id="add" parameterType="com.hlw.pojo.CheckGroup">-->
 <!--        <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">-->

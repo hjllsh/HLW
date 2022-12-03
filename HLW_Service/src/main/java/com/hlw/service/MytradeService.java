@@ -1,2 +1,7 @@
-package com.hlw.service;public interface MytradeService {
+package com.hlw.service;
+
+import com.hlw.domain.PersonalCenter;
+
+public interface MytradeService {
+    PersonalCenter findMytradeByUserId(String userId);
 }
