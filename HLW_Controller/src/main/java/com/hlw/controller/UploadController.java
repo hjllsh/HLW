@@ -4,6 +4,7 @@ import com.hlw.constant.MessageConstant;
 import com.hlw.constant.Result;
 import com.hlw.domain.Goods;
 import com.hlw.service.UploadService;
+import com.hlw.utils.UuId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,8 +21,7 @@ public class UploadController {
     public Result release(@RequestBody Goods goods, HttpSession session){
         String userId= (String) session.getAttribute("userId");
         goods.setUserId(userId);
-        String goodsId= (String) session.getAttribute("goodsId");
-        goodsId="123456";
+        String goodsId = UuId.getUuId().substring(0, 19);
         goods.setGoodsId(goodsId);
         try {
             uploadService.releaseGoods(goods);

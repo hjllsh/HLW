@@ -15,7 +15,7 @@ public interface UserDao {
     void updateAccount(Map map);
 
     void updatePass(Map map);
-    public void updateAccount(Map map);
+
 
     void findPass(Map info);
 }

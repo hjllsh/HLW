@@ -29,19 +29,18 @@
 
         <el-col :span="6">
             <div class="grid-content bg-purple" >
-            <img :src="myHeadshot" style="width: 300px;height: 300px;background-color: #0abdfe;border-radius: 150px;margin-bottom: 15px">
+            <img :src="headshot" style="width: 300px;height: 300px;background-color: #0abdfe;border-radius: 150px;margin-bottom: 15px">
             </div>
             <el-col offset="6">
 <!--                action访问后端控制器-->
 <!--                更换头像-->
                 <el-upload
                         class="upload-demo"
-                        action="/user"
+                        action="/mytrade/changeHeadshot"
                         :on-success="uploadSuccess"
-                        :before-upload="check"
+                        :before-upload="beforeUpload"
                         :show-file-list="false"
-                        :limit="1"
-                        :on-exceed="handleExceed">
+                        name="headshot">
                     <el-button size="middle" type="primary">更换头像</el-button>
                 </el-upload>
             </el-col>
@@ -342,7 +341,7 @@
             el: '#app',
             data : {
                     account : '100.0',
-                    myHeadshot : "../img/user7-128x128.jpg",
+                    headshot : '',
                     currentPage1: 1,
                     activeName: 'first',
                     search: '',
@@ -494,15 +493,11 @@
                         address: '上海市普陀区金沙江路 1518 弄',
                         insurance: '已购买'
                     }],
-                // fileList: [{
-                //     name: 'food.jpeg',
-                //     url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'},
-                //     {
-                //     name: 'food2.jpeg',
-                //     url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'}
-                // ],
 
             },
+           created(){
+
+           },
             methods: {
                 handleClick(tab, event) {
                     console.log(tab, event);
@@ -519,30 +514,38 @@
                 handleDelete(index, row) {
                     console.log(index, row);
                 },
-                uploadSuccess(response, file, fileList){
-                    // 文件
-                    alert(file);
-                    // 后端响应的数据
-                    alert(response);
-                    // 文件列表
-                    alert(fileList);
+                // handleRemove(file, fileList) {
+                //     console.log(file, fileList);
+                // },
+                // handlePreview(file) {
+                //     console.log(file);
+                // },
+                // beforeRemove(file, fileList) {
+                //     return this.$confirm(`确定移除 ${ file.name }？`);
+                // },
+                // check(file){
+                // console.log(file);
+                // },
+                // 上传成功的钩子函数,response为服务端返回的值,file为当前上传的文件封装成的js对象
+                uploadSuccess(response, file){
+                    this.myHeadshot = "http://rm9hwdyan.hn-bkt.clouddn.com/"+response.data;
+                    this.$message.success(response.message);
                 },
-                handleRemove(file, fileList) {
-                    console.log(file, fileList);
+                // 上传前校验的钩子函数
+                beforeUpload(file){
+                    const isJPG = file.type === 'image/jpeg';
+                    const isLt2M = file.size /1024 /1024 < 2;
+                    if (!isJPG) {
+                        this.$message.error("上传图片只能是JPG格式！");
+                    }
+                    if (!isLt2M) {
+                        this.$message.error("上图片大小不能大于2MB");
+                    }
+                    return isJPG && isLt2M;
                 },
-                handlePreview(file) {
-                    console.log(file);
-                },
-                beforeRemove(file, fileList) {
-                    return this.$confirm(`确定移除 ${ file.name }？`);
-                },
-                check(file){
-                console.log(file);
-                }
             }
         });
     </script>
-
 </div>
 </body>
 </html>

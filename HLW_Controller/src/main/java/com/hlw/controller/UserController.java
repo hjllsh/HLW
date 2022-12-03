@@ -52,7 +52,6 @@ public class UserController {
     @RequestMapping("/recharge")
     public Result recharge(HttpSession session, Float money) {
         String userId = (String) session.getAttribute("userId");
-        userId = "123123";
         try {
             userService.doRecharge(money, userId);
         } catch (Exception e) {
@@ -70,8 +69,8 @@ public class UserController {
             info.put("password", loginUser.getPassword());
             User user = userService.findUserById(info);
             session.setAttribute("user", user);
-            System.out.println(user);
-            String password = user.getPassword();
+//            System.out.println(user);
+//            String password = user.getPassword();
             if (user != null) {
                 session.setAttribute("userId", loginUser.getUserId());
                 return new Result(true, MessageConstant.LOGIN_SUCCESS);
@@ -119,7 +118,6 @@ public class UserController {
         @RequestMapping("/modifyPass")
         public Result modifyPass (HttpSession session, String newPass){
             String userId = (String) session.getAttribute("userId");
-            userId = "123123";
             try {
                 userService.doModifyPass(newPass, userId);
             } catch (Exception e) {
