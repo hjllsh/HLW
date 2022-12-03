@@ -49,7 +49,7 @@
                 <el-col :span="10" offset="4">
                     <el-card shadow="hover">
                         我的账户余额:<el-input v-model="userForm.account" style="margin-top: 10px" disabled=""></el-input>
-                        <el-col :span="6" offset="12"><el-button type="primary" class="btn" style="margin-top: 10px;margin-bottom: 10px">充值</el-button></el-col>
+                        <el-col :span="6" offset="12"><el-button type="primary" class="btn" style="margin-top: 10px;margin-bottom: 10px" @click="jumpToRecharge()">充值</el-button></el-col>
                     </el-card>
                 </el-col>
             </el-col>
@@ -74,8 +74,12 @@
                                 <el-col :span="3"  style="font-size: 16px;text-align: right;line-height: 32px" >
                                     <span>性别:</span>
                                 </el-col>
-                                <el-col :span="6">
-                                    <el-input size="small" type="text" v-model="userForm.sex" :disabled="userDisabled"></el-input>
+                                <el-col :span="3" style="font-size: 16px;text-align: right;line-height: 32px">
+                                    <el-radio-group :disabled="userDisabled" v-model="userForm.sex" >
+                                        <el-radio label="男"></el-radio>
+                                        <el-radio label="女"></el-radio>
+                                    </el-radio-group>
+                                    <!--<el-input size="small" type="text" v-model="userForm.sex" :disabled="userDisabled"></el-input>-->
                                 </el-col>
                             </el-col>
                             <el-col :span="24" style="margin-bottom: 10px;margin-top: 10px">
@@ -118,8 +122,8 @@
                                     <el-input  type="textarea" placeholder="请输入内容"  v-model="userForm.personalDesc" maxlength="30" show-word-limit :disabled="userDisabled"></el-input>
                                 </el-col>
                                 <el-col>
-                                    <el-button type="primary" @click="userDisabled = false" style="margin-top: 10px;margin-bottom: 10px">编辑</el-button>
-                                    <el-button type="primary" @click="updatePersonalCenter()" style="margin-top: 10px;margin-bottom: 10px">保存</el-button>
+                                    <el-button type="primary" @click="userDisabled = false" style="margin-top: 10px;margin-bottom: 10px" >编辑</el-button>
+                                    <el-button type="primary" @click="updatePersonalCenter()" style="margin-top: 10px;margin-bottom: 10px" :disabled="userDisabled">保存</el-button>
                                 </el-col>
                             </el-col>
                         </el-tab-pane>
@@ -516,7 +520,7 @@
             methods: {
                 updatePersonalCenter(){
                     this.userDisabled = true
-                    axios.get('/user/updatePersonalCenter?',{
+                    axios.get('/function/updatePersonalCenter',{
                         params :{
                             userName : this.userForm.userName,
                             sex : this.userForm.sex,
@@ -534,6 +538,9 @@
                             type: 'success'
                         })
                     })
+                },
+                jumpToRecharge(){
+                    window.location.href = 'hlw_recharge.html'
                 },
                 handleClick(tab, event) {
                     console.log(tab, event);

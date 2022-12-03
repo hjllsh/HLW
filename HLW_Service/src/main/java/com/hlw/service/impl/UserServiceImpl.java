@@ -27,20 +27,6 @@ public class UserServiceImpl implements UserService {
         userDao.newUser(user);
     }
 
-    public void doRecharge(Float money, String userId) {
-        Float oldMoney = userDao.findAccountById(userId);
-        Float newAccount = oldMoney + money;
-        Map<String,Object> map = new HashMap<String, Object>();
-        map.put("userId",userId);
-        map.put("newAccount",newAccount);
-        userDao.updateAccount(map);
-    }
-    public void doModifyPass(String newPass, String userId){
-        Map<String,Object> map = new HashMap<String, Object>();
-        map.put("userId",userId);
-        map.put("newPass",newPass);
-        userDao.updatePass(map);
-    }
 
     public boolean findPass(String userId, String password) {
         boolean flag = true;
@@ -49,18 +35,6 @@ public class UserServiceImpl implements UserService {
             info.put("userId",userId);
             info.put("password",password);
             userDao.findPass(info);
-        }catch (Exception e){
-            e.printStackTrace();
-            flag = false;
-            return flag;
-        }
-        return flag;
-    }
-
-    public boolean doUpdatePersonalCenter(PersonalCenter personalCenter){
-        boolean flag = true;
-        try {
-            userDao.updatePersonalCenter(personalCenter);
         }catch (Exception e){
             e.printStackTrace();
             flag = false;

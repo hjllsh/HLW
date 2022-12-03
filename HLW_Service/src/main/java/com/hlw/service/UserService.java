@@ -12,12 +12,7 @@ public interface UserService {
 
     public void newUser(User user);
 
-    void doRecharge(Float manny, String userid);
-
-    void doModifyPass(String newPass, String userId);
-
-
     boolean findPass(String userId, String password);
 
-    boolean doUpdatePersonalCenter(PersonalCenter personalCenter);
+
 }

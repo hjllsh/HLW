@@ -243,17 +243,17 @@
             },
             methods : {
                 getUserId(){
-                    axios.get('/user/getUserId',{}).then((res)=>{
+                    axios.get('/function/getUserId',{}).then((res)=>{
                         this.ruleForm.userId=res.data
                     })
                 },
                 getPassword(){
-                    axios.get('/user/getPassword',{}).then((res)=>{
+                    axios.get('/function/getPassword',{}).then((res)=>{
                         this.ruleForm.realPass=res.data
                     })
                 },
                 postNewPass(){
-                    axios.get('/user/modifyPass?newPass=' + this.ruleForm.newPass, {}).then((res) => {
+                    axios.get('/function/modifyPass?newPass=' + this.ruleForm.newPass, {}).then((res) => {
                         this.$message({
                             message:res.data.message,
                             type:'success'
