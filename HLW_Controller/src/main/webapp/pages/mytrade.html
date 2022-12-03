@@ -529,7 +529,10 @@
                             account : this.userForm.account,
                         }
                         }).then((res)=>{
-                        alert(res.data)
+                        this.$message({
+                            message: res.data.message,
+                            type: 'success'
+                        })
                     })
                 },
                 handleClick(tab, event) {
