@@ -128,7 +128,7 @@
                         </el-col>
                     </el-col>
                     <el-col>
-                        <el-col offset="9"><h3>总金额:<span style="margin-left: 15px" v-model="totalPrice">{{totalPrice}}</span>￥</h3></el-col>
+                        <el-col offset="9"><h3>总金额:<span style="margin-left: 15px" >{{totalPrice}}</span>￥</h3></el-col>
                     </el-col>
                 </el-card>
                 <div style="text-align: center; margin-top: 20px"><el-button type="primary" round class="btn-primary" @click="confirmBuy">确认购买</el-button></div>
@@ -149,8 +149,6 @@
     </el-col>
 
 </div>
-
-
 <script type="text/javascript">
     var vue = new Vue({
         el: '#app',
@@ -211,11 +209,12 @@
             currentPage: 5,
             dialogFormVisible:false,
             num : 1,
-            telephonenumber : "",
+            telephonenumber : '',
             transportFare:0,
             totalPrice : 0,
             isTransport : false,
             searchData : '',
+            value: 0,
             options: [{
                 value: '选项1',
                 label: '黄金糕'
@@ -233,6 +232,7 @@
                 label: '北京烤鸭'
             }],
             input: '',
+            searchData:''
         },
             methods: {
                 handleChange(goodsPrice){
@@ -272,7 +272,7 @@
                     alert(a);
                 },
                 mySearch(){
-
+                    console.log(1);
                 },
             }
     });
