@@ -2,15 +2,15 @@ package com.hlw.domain;
 
 import java.util.Objects;
 
-public class goodsImg {
+public class GoodsImg {
     private String userId;
     private int goodsId;
     private String img;
 
-    public goodsImg() {
+    public GoodsImg() {
     }
 
-    public goodsImg(String userId, int goodsId, String img) {
+    public GoodsImg(String userId, int goodsId, String img) {
         this.userId = userId;
         this.goodsId = goodsId;
         this.img = img;
@@ -29,7 +29,7 @@ public class goodsImg {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        goodsImg goodsImg = (goodsImg) o;
+        GoodsImg goodsImg = (GoodsImg) o;
         return goodsId == goodsImg.goodsId && Objects.equals(userId, goodsImg.userId) && Objects.equals(img, goodsImg.img);
     }
 

@@ -1,8 +1,6 @@
 package com.hlw.domain;
 
-import java.util.Objects;
-
-public class personalCenter {
+public class PersonalCenter {
     private String userName;
     private String sex;
     private String location;
@@ -13,10 +11,10 @@ public class personalCenter {
     private String headshot;
     private Float account;
 
-    public personalCenter() {
+    public PersonalCenter() {
     }
 
-    public personalCenter(String userName, String sex, String location, String phoneNumber, String birthday, String personalDesc, String email, String headshot, Float account) {
+    public PersonalCenter(String userName, String sex, String location, String phoneNumber, String birthday, String personalDesc, String email, String headshot, Float account) {
         this.userName = userName;
         this.sex = sex;
         this.location = location;
