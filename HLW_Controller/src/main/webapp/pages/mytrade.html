@@ -29,7 +29,7 @@
 
         <el-col :span="6">
             <div class="grid-content bg-purple" >
-            <img :src="myHeadshot" style="width: 300px;height: 300px;background-color: #0abdfe;border-radius: 150px;margin-bottom: 15px">
+            <img :src="userForm.headshot" style="width: 300px;height: 300px;background-color: #0abdfe;border-radius: 150px;margin-bottom: 15px">
             </div>
             <el-col offset="6">
 <!--                action访问后端控制器-->
@@ -48,7 +48,7 @@
             <el-col style="margin-top: 20px">
                 <el-col :span="10" offset="4">
                     <el-card shadow="hover">
-                        我的账户余额:<el-input v-model="account" style="margin-top: 10px" disabled=""></el-input>
+                        我的账户余额:<el-input v-model="userForm.account" style="margin-top: 10px" disabled=""></el-input>
                         <el-col :span="6" offset="12"><el-button type="primary" class="btn" style="margin-top: 10px;margin-bottom: 10px">充值</el-button></el-col>
                     </el-card>
                 </el-col>
@@ -66,7 +66,7 @@
                                 <span>用户名:</span>
                             </el-col>
                             <el-col :span="6">
-                                <el-input size="small" type="text" value="11111" :disabled="userDisabled"></el-input>
+                                <el-input size="small" type="text" v-model="userForm.userName" :disabled="userDisabled"></el-input>
                             </el-col>
                             </el-col>
 
@@ -75,7 +75,7 @@
                                     <span>性别:</span>
                                 </el-col>
                                 <el-col :span="6">
-                                    <el-input size="small" type="text" value="11111" :disabled="userDisabled"></el-input>
+                                    <el-input size="small" type="text" v-model="userForm.sex" :disabled="userDisabled"></el-input>
                                 </el-col>
                             </el-col>
                             <el-col :span="24" style="margin-bottom: 10px;margin-top: 10px">
@@ -83,7 +83,7 @@
                                     <span>地址:</span>
                                 </el-col>
                                 <el-col :span="6">
-                                    <el-input size="small" type="text" value="男" :disabled="userDisabled"></el-input>
+                                    <el-input size="small" type="text" v-model="userForm.location" :disabled="userDisabled"></el-input>
                                 </el-col>
                             </el-col>
                             <el-col :span="24" style="margin-bottom: 10px;margin-top: 10px">
@@ -91,7 +91,7 @@
                                     <span>电话:</span>
                                 </el-col>
                                 <el-col :span="6">
-                                    <el-input size="small" type="text" value="男" :disabled="userDisabled"></el-input>
+                                    <el-input size="small" type="text" v-model="userForm.phoneNumber" :disabled="userDisabled"></el-input>
                                 </el-col>
                             </el-col>
                             <el-col :span="24" style="margin-bottom: 10px;margin-top: 10px">
@@ -99,7 +99,7 @@
                                     <span>生日:</span>
                                 </el-col>
                                 <el-col :span="6">
-                                    <el-input size="small" type="text" value="2001-11-11" :disabled="userDisabled"></el-input>
+                                    <el-input size="small" type="text" v-model="userForm.birthday" :disabled="userDisabled"></el-input>
                                 </el-col>
                             </el-col>
                             <el-col :span="24" style="margin-bottom: 10px;margin-top: 10px">
@@ -107,7 +107,7 @@
                                     <span>邮箱:</span>
                                 </el-col>
                                 <el-col :span="6">
-                                    <el-input size="small" type="text" value="43856724372@qq.com" :disabled="userDisabled"></el-input>
+                                    <el-input size="small" type="text" v-model="userForm.email" :disabled="userDisabled"></el-input>
                                 </el-col>
                             </el-col>
                             <el-col :span="24" style="margin-bottom: 10px;margin-top: 10px">
@@ -115,10 +115,10 @@
                                     <span>个人简介:</span>
                                 </el-col>
                                 <el-col :span="14">
-                                    <el-input  type="textarea" placeholder="请输入内容"   maxlength="30" show-word-limit :disabled="userDisabled"></el-input>
+                                    <el-input  type="textarea" placeholder="请输入内容"  v-model="userForm.personalDesc" maxlength="30" show-word-limit :disabled="userDisabled"></el-input>
                                 </el-col>
                                 <el-col>
-                                    <el-button @click="userDisabled = false">编辑</el-button>
+                                    <el-button type="primary" @click="userDisabled = false" style="margin-top: 10px;margin-bottom: 10px">编辑</el-button>
                                 </el-col>
                             </el-col>
                         </el-tab-pane>
@@ -341,12 +341,22 @@
        var vue = new Vue({
             el: '#app',
             data : {
-                    account : '100.0',
-                    myHeadshot : "../img/user7-128x128.jpg",
                     currentPage1: 1,
                     activeName: 'first',
                     search: '',
                     userDisabled: true,
+                    userForm: {
+                        userName : "",
+                        sex : "",
+                        location : "",
+                        phoneNumber : "",
+                        birthday : "",
+                        personalDesc : "",
+                        email : "",
+                        headshot : "",
+                        account : "",
+                        userId : "",
+                    },
                     tableData: [{
                         date: '2016-05-02',
                         name: '王小虎',
@@ -503,7 +513,20 @@
                 // ],
 
             },
+           created(){
+               this.getUserId()
+           },
             methods: {
+                getPersonalCenter(){
+                    axios.get('/user/getPersonalCenter'+this.userForm.userId,{}).then((res)=>{
+                        this.ruleForm=res.data
+                    })
+                },
+                getUserId(){
+                    axios.get('/user/getUserId',{}).then((res)=>{
+                        this.userForm.userId=res.data
+                    })
+                },
                 handleClick(tab, event) {
                     console.log(tab, event);
                 },
