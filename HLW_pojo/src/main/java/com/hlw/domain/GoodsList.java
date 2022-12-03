@@ -2,7 +2,7 @@ package com.hlw.domain;
 
 import java.util.Objects;
 
-public class goodsList {
+public class GoodsList {
     private String goodsName;
     private String goodsType;
     private String releaseTime;
@@ -11,10 +11,10 @@ public class goodsList {
     private String location;
     private String goodsId;
 
-    public goodsList() {
+    public GoodsList() {
     }
 
-    public goodsList(String goodsName, String goodsType, String releaseTime, Float price, String storeName, String location, String goodsId) {
+    public GoodsList(String goodsName, String goodsType, String releaseTime, Float price, String storeName, String location, String goodsId) {
         this.goodsName = goodsName;
         this.goodsType = goodsType;
         this.releaseTime = releaseTime;
@@ -41,7 +41,7 @@ public class goodsList {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        goodsList goodsList = (goodsList) o;
+        GoodsList goodsList = (GoodsList) o;
         return Objects.equals(goodsName, goodsList.goodsName) && Objects.equals(goodsType, goodsList.goodsType) && Objects.equals(releaseTime, goodsList.releaseTime) && Objects.equals(price, goodsList.price) && Objects.equals(storeName, goodsList.storeName) && Objects.equals(location, goodsList.location) && Objects.equals(goodsId, goodsList.goodsId);
     }
 

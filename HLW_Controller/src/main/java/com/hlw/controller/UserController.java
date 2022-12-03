@@ -2,6 +2,7 @@ package com.hlw.controller;
 
 import com.hlw.constant.LoginUser;
 import com.hlw.constant.MessageConstant;
+import com.hlw.domain.PersonalCenter;
 import com.hlw.domain.User;
 import com.hlw.constant.Result;
 import com.hlw.service.UserService;
@@ -49,17 +50,6 @@ public class UserController {
         return new Result(true, MessageConstant.ENROLL_SUCCESS);
     }
 
-    @RequestMapping("/recharge")
-    public Result recharge(HttpSession session, Float money) {
-        String userId = (String) session.getAttribute("userId");
-        try {
-            userService.doRecharge(money, userId);
-        } catch (Exception e) {
-            e.printStackTrace();
-            return new Result(false, MessageConstant.RECHARGE_FAIL);
-        }
-        return new Result(true, MessageConstant.RECHARGE_SUCCESS);
-    }
 //    登录功能
         @RequestMapping("/login")
         public Result login (HttpSession session, LoginUser loginUser){
@@ -115,9 +105,25 @@ public class UserController {
             String headshot = user.getHeadshot();
             return new Result(true, headshot, "头像查询成功");
         }
+//     充值
+        @RequestMapping("/recharge")
+        public Result recharge(HttpSession session, Float money) {
+            String userId = (String) session.getAttribute("userId");
+            try {
+                userService.doRecharge(money, userId);
+            } catch (Exception e) {
+                e.printStackTrace();
+                return new Result(false, MessageConstant.RECHARGE_FAIL);
+            }
+            return new Result(true, MessageConstant.RECHARGE_SUCCESS);
+        }
+//     修改密码
         @RequestMapping("/modifyPass")
         public Result modifyPass (HttpSession session, String newPass){
             String userId = (String) session.getAttribute("userId");
+            User user = (User) session.getAttribute("user");
+            user.setPassword(newPass);
+            session.setAttribute("user",user);
             try {
                 userService.doModifyPass(newPass, userId);
             } catch (Exception e) {
@@ -126,5 +132,25 @@ public class UserController {
             }
             return new Result(true, MessageConstant.CHANGE_PASSWORD_SUCCESS);
         }
-
-    }
+//        获取账号
+        @RequestMapping("/getUserId")
+        public String getUserId(HttpSession session){
+            String userId = (String) session.getAttribute("userId");
+            return userId;
+        }
+//        获取密码
+        @RequestMapping("/getPassword")
+        public String getPassword(HttpSession session){
+            User user = (User) session.getAttribute("user");
+            String password = user.getPassword();
+            return password;
+        }
+//        获取个人中心信息
+        @RequestMapping("/updatePersonalCenter")
+        public Result c(HttpSession session, PersonalCenter personalCenter){
+            String userId = (String) session.getAttribute("userId");
+            personalCenter.setUserId(userId);
+            userService.doUpdatePersonalCenter(personalCenter);
+            return new Result(true, MessageConstant.MODIFY_SUCCESS);
+        }
+}

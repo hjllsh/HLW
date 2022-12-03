@@ -3,12 +3,12 @@ package com.hlw.domain;
 import java.util.List;
 
 
-public class goodsImg {
+public class GoodsImg {
     private String userId;
     private int goodsId;
     private List<String> img;
 
-    public goodsImg() {
+    public GoodsImg() {
     }
 
     @Override
@@ -24,6 +24,17 @@ public class goodsImg {
         this.userId = userId;
         this.goodsId = goodsId;
         this.img = img;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        GoodsImg goodsImg = (GoodsImg) o;
+        return goodsId == goodsImg.goodsId && Objects.equals(userId, goodsImg.userId) && Objects.equals(img, goodsImg.img);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(userId, goodsId, img);
     }
 
     public String getUserId() {
