@@ -1,5 +1,6 @@
 package com.hlw.service.impl;
 
+import com.hlw.domain.PersonalCenter;
 import com.hlw.domain.User;
 import com.hlw.service.UserService;
 import com.hlw.dao.UserDao;
@@ -48,6 +49,18 @@ public class UserServiceImpl implements UserService {
             info.put("userId",userId);
             info.put("password",password);
             userDao.findPass(info);
+        }catch (Exception e){
+            e.printStackTrace();
+            flag = false;
+            return flag;
+        }
+        return flag;
+    }
+
+    public boolean doUpdatePersonalCenter(PersonalCenter personalCenter){
+        boolean flag = true;
+        try {
+            userDao.updatePersonalCenter(updatePersonalCenter);
         }catch (Exception e){
             e.printStackTrace();
             flag = false;

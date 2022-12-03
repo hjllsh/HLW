@@ -1,5 +1,6 @@
 package com.hlw.dao;
 
+import com.hlw.domain.PersonalCenter;
 import com.hlw.domain.User;
 
 import java.util.HashMap;
@@ -17,4 +18,6 @@ public interface UserDao {
     void updatePass(Map map);
 
     void findPass(Map info);
+
+    void updatePersonalCenter(PersonalCenter personalCenter);
 }

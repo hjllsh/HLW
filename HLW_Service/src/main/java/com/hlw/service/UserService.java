@@ -1,5 +1,6 @@
 package com.hlw.service;
 
+import com.hlw.domain.PersonalCenter;
 import com.hlw.domain.User;
 
 import java.util.HashMap;
@@ -17,4 +18,6 @@ public interface UserService {
 
 
     boolean findPass(String userId, String password);
+
+    boolean doUpdatePersonalCenter(PersonalCenter personalCenter);
 }

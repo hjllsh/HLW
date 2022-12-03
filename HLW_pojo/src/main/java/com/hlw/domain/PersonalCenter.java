@@ -1,5 +1,7 @@
 package com.hlw.domain;
 
+import java.util.Objects;
+
 public class PersonalCenter {
     private String userName;
     private String sex;
@@ -10,11 +12,12 @@ public class PersonalCenter {
     private String email;
     private String headshot;
     private Float account;
+    private String userId;
 
     public PersonalCenter() {
     }
 
-    public PersonalCenter(String userName, String sex, String location, String phoneNumber, String birthday, String personalDesc, String email, String headshot, Float account) {
+    public PersonalCenter(String userName, String sex, String location, String phoneNumber, String birthday, String personalDesc, String email, String headshot, Float account, String userId) {
         this.userName = userName;
         this.sex = sex;
         this.location = location;
@@ -24,11 +27,12 @@ public class PersonalCenter {
         this.email = email;
         this.headshot = headshot;
         this.account = account;
+        this.userId = userId;
     }
 
     @Override
     public String toString() {
-        return "personalCenter{" +
+        return "PersonalCenter{" +
                 "userName='" + userName + '\'' +
                 ", sex='" + sex + '\'' +
                 ", location='" + location + '\'' +
@@ -38,7 +42,21 @@ public class PersonalCenter {
                 ", email='" + email + '\'' +
                 ", headshot='" + headshot + '\'' +
                 ", account=" + account +
+                ", userId='" + userId + '\'' +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        PersonalCenter that = (PersonalCenter) o;
+        return Objects.equals(userName, that.userName) && Objects.equals(sex, that.sex) && Objects.equals(location, that.location) && Objects.equals(phoneNumber, that.phoneNumber) && Objects.equals(birthday, that.birthday) && Objects.equals(personalDesc, that.personalDesc) && Objects.equals(email, that.email) && Objects.equals(headshot, that.headshot) && Objects.equals(account, that.account) && Objects.equals(userId, that.userId);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(userName, sex, location, phoneNumber, birthday, personalDesc, email, headshot, account, userId);
     }
 
     public String getUserName() {
@@ -111,5 +129,13 @@ public class PersonalCenter {
 
     public void setAccount(Float account) {
         this.account = account;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 }
