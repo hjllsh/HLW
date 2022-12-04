@@ -7,4 +7,8 @@ public interface MyPersonalCenterService {
     PersonalCenter findMyPersonalByUserId(String userId);
 
     void initMyPersonalCenter(User user);
+
+    void updateMyHeadshot(PersonalCenter personalCenter);
+
+
 }

@@ -25,4 +25,8 @@ public class MyPersonalCenterServiceImpl implements MyPersonalCenterService {
         personalCenter.setPersonalDesc("这个人很懒，什么都没留下...");
         this.personalCenterDao.initMyPersonalCenter(personalCenter);
     }
+
+    public void updateMyHeadshot(PersonalCenter personalCenter) {
+        personalCenterDao.updateMyHeadshot(personalCenter);
+    }
 }

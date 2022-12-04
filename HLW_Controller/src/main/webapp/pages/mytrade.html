@@ -184,7 +184,7 @@
                         <el-tab-pane label="我买到的" name="third">
                             <template>
                                 <el-table
-                                        :data="tableData1.filter(data => !search || data.name.toLowerCase().includes(search.toLowerCase()))"
+                                        :data="tableData1"
                                         style="width: 100%">
                                     <el-table-column
                                             label="时间"
@@ -324,7 +324,6 @@
                     tableData: [{date: '2016-05-02', name: '王小虎', type:'游戏', number:'1', price:'100'+'￥', state:'已交易'}, {date: '2016-05-02', name: '王小虎', type:'游戏', number:'1', price:'100'+'￥', state:'已交易'},{date: '2016-05-02', name: '王小虎', type:'游戏', number:'1', price:'100'+'￥', state:'已交易'}, {date: '2016-05-02', name: '王小虎', type:'游戏', number:'1', price:'100'+'￥', state:'已交易'},{date: '2016-05-02', name: '王小虎', type:'游戏', number:'1', price:'100'+'￥', state:'已交易'},{date: '2016-05-02',name: '王小虎', type:'游戏', number:'1', price:'100'+'￥', state:'已交易'},{date: '2016-05-02', name: '王小虎', type:'游戏', number:'1', price:'100'+'￥', state:'已交易'},{date: '2016-05-02', name: '王小虎', type:'游戏', number:'1', price:'100'+'￥', state:'已交易'}],
                     tableData1: [{date: '2016-05-02', orderNo:'463874621487325', name: '王小虎', type:'游戏', number:'1', price:'100'+'￥', address: '上海市普陀区金沙江路 1518 弄'}, {date: '2016-05-04', orderNo:'463874621487325', name: '王小虎', type:'游戏', number:'1', price:'100'+'￥', address: '上海市普陀区金沙江路 1517 弄'}, {date: '2016-05-01', orderNo:'463874621487325', name: '王小虎', type:'游戏', number:'1', price:'100'+'￥', address: '上海市普陀区金沙江路 1519 弄'}, {date: '2016-05-03', orderNo:'463874621487325', name: '王小虎', type:'游戏', number:'1', price:'100'+'￥', address: '上海市普陀区金沙江路 1516 弄'}],
                     tableData2: [{date: '2016-05-03', buyer:'蓝屏', name: '王小虎', number:'1', price:'100'+'￥', address: '上海市普陀区金沙江路 1518 弄', insurance: '已购买'}, {date: '2016-05-02', buyer:'孔维', name: '王小虎', number:'1', price:'100'+'￥', address: '上海市普陀区金沙江路 1518 弄', insurance: '已购买'}, {date: '2016-05-04', buyer:'lanping', name: '王小虎', number:'1', price:'100'+'￥', address: '上海市普陀区金沙江路 1518 弄', insurance: '已购买'}, {date: '2016-05-01', buyer:'孔维', name: '王小虎', number:'1', price:'100'+'￥', address: '上海市普陀区金沙江路 1518 弄', insurance: '已购买'}, {date: '2016-05-08', buyer:'孔维', name: '王小虎', number:'1', price:'100'+'￥', address: '上海市普陀区金沙江路 1518 弄', insurance: '已购买'}, {date: '2016-05-06', buyer:'孔维', name: '王小虎', number:'1', price:'100'+'￥', address: '上海市普陀区金沙江路 1518 弄', insurance: '已购买'}, {date: '2016-05-07', buyer:'孔维', name: '王小虎', number:'1', price:'100'+'￥', address: '上海市普陀区金沙江路 1518 弄', insurance: '已购买'}],
-
             },
            created(){
                 this.getMytradeInfo();
@@ -350,6 +349,7 @@
                             message: res.data.message,
                             type: 'success'
                         });
+                        parent.location.reload();
                     });
                 },
                 jumpToRecharge(){
@@ -378,10 +378,11 @@
 
                 // 上传成功的钩子函数,response为服务端返回的值,file为当前上传的文件封装成的js对象
                 uploadSuccess(response, file){
-                    alert(response.data);
-                    this.userForm.headshot = "http://rm9hwdyan.hn-bkt.clouddn.com/"+response.data;
+                    // alert(response.data);
+                    this.userForm.headshot="http://rm9hwdyan.hn-bkt.clouddn.com/"+response.data;
                     this.$message.success(response.message);
-                    // window.location.reload();
+                    // 刷新页面
+                    parent.location.reload();
                 },
                 // 上传前校验的钩子函数
                 beforeUpload(file){
