@@ -184,7 +184,7 @@
                         <el-tab-pane label="我买到的" name="third">
                             <template>
                                 <el-table
-                                        :data="tableData1.filter(data => !search || data.name.toLowerCase().includes(search.toLowerCase()))"
+                                        :data="tableData1"
                                         style="width: 100%">
                                     <el-table-column
                                             label="时间"

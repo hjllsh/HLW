@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/mytrade")
 public class MytradeController {
     @RequestMapping("/order")
-    public Result order(MyOrders orders){
+    public Result order(MyOrders myOrders){
         return null;
     }
 }
