@@ -269,7 +269,6 @@
                                     </el-table-column>
                                 </el-table>
                             </template>
-
                         </el-tab-pane>
                     </el-tabs>
                 </template>
@@ -329,9 +328,6 @@
            created(){
                 this.getMytradeInfo();
            },
-           mounted() {
-               this.fetchdata()
-           },
             methods: {
                 getMytradeInfo(){
                     axios.get("/myPersional/getMyPersionalCenterInfo").then((res)=>{
@@ -355,9 +351,14 @@
                 jumpToRecharge(){
                     window.location.href = 'hlw_recharge.html'
                 },
-                fetchdata(){
-                    axios.get("/mytrade/order",).then((res)=>{
-                        this.tableData1 = res.data;
+                //我买到的
+                getOrderList(){
+                    axios.post("/mytrade/orders").then((res)=>{
+                        if (res.data.flag){
+                            this.tableData1 = res.data.data;
+                        } else {
+                            this.$message.error(res.data.message);
+                        }
                     })
                 },
                 handleClick(tab, event) {

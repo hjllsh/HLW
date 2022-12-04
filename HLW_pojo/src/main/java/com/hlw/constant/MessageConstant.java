@@ -31,6 +31,8 @@ public class MessageConstant {
     public static final String CHANGE_AVATAR_FAIL="更换头像失败！";
     public static final String SEND_VALIDATECODE_FAIL = "验证码发送失败";
     public static final String SEND_VALIDATECODE_SUCCESS = "验证码发送成功";
+    public static final String CHECK_FAIL = "查看失败";
+    public static final String CHECK_SUCCESS = "查看成功";
     public static final String VALIDATECODE_FAIL = "验证码不一致";
     public static final String VALIDATECODE_SUCCESS = "验证成功";
 }
