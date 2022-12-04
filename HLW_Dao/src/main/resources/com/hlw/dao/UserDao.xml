@@ -47,7 +47,9 @@
             birthday=#{birthday}, personal_Desc=#{personalDesc}, email=#{email}
         where user_id = #{userId};
     </update>
-
+    <update id="updateHeadshot" parameterType="com.hlw.domain.User">
+        update t_user set headshot = #{headshot} where user_id = #{userId}
+    </update>
 
     <!--    &lt;!&ndash;        新增&ndash;&gt;-->
 <!--    <insert id="add" parameterType="com.hlw.pojo.CheckGroup">-->

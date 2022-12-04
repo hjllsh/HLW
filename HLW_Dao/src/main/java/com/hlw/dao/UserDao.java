@@ -22,4 +22,6 @@ public interface UserDao {
     void findPass(Map info);
 
     void updatePersonalCenter(PersonalCenter personalCenter);
+
+    void updateHeadshot(User user);
 }

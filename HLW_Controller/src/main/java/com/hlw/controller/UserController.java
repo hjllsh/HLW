@@ -16,7 +16,9 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Controller
@@ -47,7 +49,7 @@ public class UserController {
     public Result register(HttpSession session, User user) {
         System.out.println(user);
         session.removeAttribute("emailCode");
-        String substring = UuId.getUuId().substring(0, 15);
+        String substring = UuId.getUuId().substring(6, 14);
         //账户初始化值
         user.setAccount(0.0F);
         //默认名称
@@ -113,7 +115,11 @@ public class UserController {
         public Result showHeadshot (HttpSession session){
             User user = (User) session.getAttribute("user");
             String headshot = user.getHeadshot();
-            return new Result(true, headshot, "头像查询成功");
+            String userName = user.getUserName();
+            List<String> list = new ArrayList<String>();
+            list.add(headshot);
+            list.add(userName);
+            return new Result(true, list, "头像查询成功");
         }
 //     充值
         @RequestMapping("/recharge")

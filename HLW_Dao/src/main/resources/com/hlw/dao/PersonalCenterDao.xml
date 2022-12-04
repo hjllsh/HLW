@@ -21,8 +21,12 @@
     </select>
     <insert id="initMyPersonalCenter" parameterType="com.hlw.domain.PersonalCenter" >
         insert into t_personalcenter(user_name,sex,location,phone_number,birthday,personal_desc,email,headshot,account,user_id)
-        values #{userName} ,#{sex},#{location},#{phoneNumber},#{birthday},#{personalDesc},#{email},#{headshot},#{account},#{userId}
+        values (#{userName} ,#{sex},#{location},#{phoneNumber},#{birthday},#{personalDesc},#{email},#{headshot},#{account},#{userId})
     </insert>
+
+    <update id="updateMyHeadshot" parameterType="com.hlw.domain.PersonalCenter">
+        update t_personalcenter set headshot = #{headshot} where user_id = #{userId}
+    </update>
     <!--    &lt;!&ndash;        新增&ndash;&gt;-->
 <!--    <insert id="add" parameterType="com.hlw.pojo.CheckGroup">-->
 <!--        <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">-->
