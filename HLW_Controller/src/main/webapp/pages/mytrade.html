@@ -185,7 +185,7 @@
                         <el-tab-pane label="我买到的" name="third">
                             <template>
                                 <el-table
-                                        :data="tableData1.filter(data => !search || data.name.toLowerCase().includes(search.toLowerCase()))"
+                                        :data="tableData1"
                                         style="width: 100%">
                                     <el-table-column
                                             label="时间"
@@ -268,19 +268,6 @@
                                             label="运费险"
                                             width="130">
                                     </el-table-column>
-<!--                                    <el-table-column-->
-<!--                                            fixed="right"-->
-<!--                                            label=""-->
-<!--                                            width="100">-->
-<!--                                        <template slot-scope="scope">-->
-<!--                                            <el-button-->
-<!--                                                    @click.native.prevent="deleteRow(scope.$index, tableData)"-->
-<!--                                                    type="text"-->
-<!--                                                    size="small">-->
-<!--                                                删除订单-->
-<!--                                            </el-button>-->
-<!--                                        </template>-->
-<!--                                    </el-table-column>-->
                                 </el-table>
                             </template>
 
