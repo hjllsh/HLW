@@ -128,7 +128,7 @@
                 </el-row>
             </el-aside>
             <el-container>
-                <iframe name="right" class="el-main" src="hlw_show.html" width="100%" height="908.5px"></iframe>
+                <iframe name="right" class="el-main" src="mytrade.html" width="100%" height="908.5px"></iframe>
             </el-container>
         </el-container>
     </el-container>
@@ -236,9 +236,9 @@
             created(){
                 this.getUserId()
                 this.getPassword()
-               alert(1);
+               // alert(1);
               axios.get("/user/showHeadshot").then((res)=>{
-                  this.headshot = res.data.data;
+                  this.headshot = "http://rm9hwdyan.hn-bkt.clouddn.com/"+res.data.data;
               });
             },
             methods : {

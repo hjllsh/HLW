@@ -35,7 +35,7 @@
 <!--                更换头像-->
                 <el-upload
                         class="upload-demo"
-                        action="/myPersional/getMyPersionalCenterInfo"
+                        action="/myPersional/changeHeadshot"
                         :on-success="uploadSuccess"
                         :before-upload="beforeUpload"
                         :show-file-list="false"
@@ -367,8 +367,9 @@
 
                 // 上传成功的钩子函数,response为服务端返回的值,file为当前上传的文件封装成的js对象
                 uploadSuccess(response, file){
-                    this.myHeadshot = "http://rm9hwdyan.hn-bkt.clouddn.com/"+response.data;
+                    this.userForm.headshot = "http://rm9hwdyan.hn-bkt.clouddn.com/"+response.data;
                     this.$message.success(response.message);
+                    // window.location.reload();
                 },
                 // 上传前校验的钩子函数
                 beforeUpload(file){
