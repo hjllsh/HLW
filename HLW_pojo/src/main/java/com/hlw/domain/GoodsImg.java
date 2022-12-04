@@ -20,10 +20,10 @@ public class GoodsImg {
 
     @Override
     public String toString() {
-        return "goodsImg{" +
+        return "GoodsImg{" +
                 "userId='" + userId + '\'' +
-                ", goodsId='" + goodsId + '\'' +
-                ", img=" + img +
+                ", goodsId=" + goodsId +
+                ", img='" + img + '\'' +
                 '}';
     }
 

@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace = "com.hlw.dao.PersonalCenterDao">
+    <resultMap id="PersonalCenter" type="com.hlw.domain.PersonalCenter">
+        <result column="user_name" property="userName"></result>
+        <result column="sex" property="sex"></result>
+        <result column="location" property="location"></result>
+        <result column="phone_number" property="phoneNumber"></result>
+        <result column="birthday" property="birthday"></result>
+        <result column="personal_desc" property="personalDesc"></result>
+        <result column="email" property="email"></result>
+        <result column="headshot" property="headshot"></result>
+        <result column="account" property="account"></result>
+        <result column="user_id" property="userId"></result>
+    </resultMap>
+
+    <select id="findMyPersonalByUserId" parameterType="string" resultMap="PersonalCenter" resultType="com.hlw.domain.PersonalCenter">
+        select * from t_personalcenter where user_id = #{userId}
+    </select>
+    <insert id="initMyPersonalCenter" parameterType="com.hlw.domain.PersonalCenter" >
+        insert into t_personalcenter(user_name,sex,location,phone_number,birthday,personal_desc,email,headshot,account,user_id)
+        values #{userName} ,#{sex},#{location},#{phoneNumber},#{birthday},#{personalDesc},#{email},#{headshot},#{account},#{userId}
+    </insert>
+    <!--    &lt;!&ndash;        新增&ndash;&gt;-->
+<!--    <insert id="add" parameterType="com.hlw.pojo.CheckGroup">-->
+<!--        <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">-->
+<!--            SELECT LAST_INSERT_ID()-->
+<!--        </selectKey>-->
+<!--        insert into t_checkgroup(code, name, sex, helpCode, remark, attention)-->
+<!--        values-->
+<!--        (#{code},#{name},#{sex},#{helpCode},#{remark},#{attention})-->
+<!--    </insert>-->
+<!--    &lt;!&ndash;        设置检查组和检查项的关联关系&ndash;&gt;-->
+<!--    <insert id="setCheckGroupAndCheckItem" parameterType="hashmap">-->
+<!--        insert into t_checkgroup_checkitem(checkgroup_id, checkitem_id)-->
+<!--        values-->
+<!--            (#{checkgroup_id},#{checkitem_id})-->
+<!--    </insert>-->
+<!--    <select id="selectByCondition" parameterType="string" resultType="com.hlw.pojo.CheckGroup">-->
+<!--        select * from t_checkgroup-->
+<!--        <if test="value !=null and value.length > 0">-->
+<!--            where code = #{value} or name = #{value} or helpCode = #{value}-->
+<!--        </if>-->
+<!--    </select>-->
+
+<!--    <select id="findById" parameterType="int" resultType="com.hlw.pojo.CheckGroup">-->
+<!--        select * from t_checkgroup where id = #{id}-->
+<!--    </select>-->
+
+<!--    <delete id="deleteAssociation" parameterType="int" >-->
+<!--        delete from t_checkgroup_checkitem where checkgroup_id = #{id}-->
+<!--    </delete>-->
+
+<!--    <update id="edit" parameterType="com.hlw.pojo.CheckGroup">-->
+<!--        update t_checkgroup-->
+<!--        <set>-->
+<!--            <if test="name != null">-->
+<!--                name = #{name},-->
+<!--            </if>-->
+<!--            <if test="sex != null">-->
+<!--                sex = #{sex},-->
+<!--            </if>-->
+<!--            <if test="code != null">-->
+<!--                code = #{code},-->
+<!--            </if>-->
+<!--            <if test="helpCode != null">-->
+<!--                helpCode = #{helpCode},-->
+<!--            </if>-->
+<!--            <if test="attention != null">-->
+<!--                attention = #{attention},-->
+<!--            </if>-->
+<!--            <if test="remark != null">-->
+<!--                remark = #{remark},-->
+<!--            </if>-->
+<!--        </set>-->
+<!--        where id = #{id}-->
+<!--    </update>-->
+
+<!--    <select id="findCheckItemIdsByCheckGroupId" parameterType="int" resultType="int">-->
+<!--        select checkitem_id from t_checkgroup_checkitem where checkgroup_id = #{id}-->
+<!--    </select>-->
+
+<!--    <delete id="delete" parameterType="int" >-->
+<!--        delete from t_checkgroup where id = #{groupId}-->
+<!--    </delete>-->
+</mapper>
