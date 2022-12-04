@@ -83,7 +83,7 @@
                 <el-card class="box-card">
                     <div slot="header" class="clearfix">
                         <span style="font-size: 30px">充值金额</span>
-                        <el-button style="float: right; padding: 3px 0" type="text" @click="jump">常见问题</el-button>
+                        <el-button style="float: right; padding: 3px 0" type="text" @click="jump()">常见问题</el-button>
                     </div>
                     <div  class="text-item" >
                         <el-button type="primary" round  style="height: 60px; width: 23%; font-size: 25px;margin-bottom: 20px;margin-left: 10px" @click="getMoney(6)">6￥</el-button>
@@ -166,12 +166,12 @@
                     this.dialogFormVisible = true;
                 },
                 getUserId(){
-                    axios.get('/user/getUserId',{}).then((res)=>{
+                    axios.get('/function/getUserId',{}).then((res)=>{
                         this.ruleForm.userId=res.data
                     })
                 },
                 postAxios(){
-                        axios.get('/user/recharge?money=' + this.ruleForm.money, {}).then((res) => {
+                        axios.get('/function/recharge?money=' + this.ruleForm.money, {}).then((res) => {
                             this.$message({
                                 message:res.data.message,
                                 type:'success'

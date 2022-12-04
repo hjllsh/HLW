@@ -21,7 +21,8 @@ public class UploadController {
     public Result release(@RequestBody Goods goods, HttpSession session){
         String userId= (String) session.getAttribute("userId");
         goods.setUserId(userId);
-        String goodsId = UuId.getUuId().substring(0, 19);
+        String goodsId= UuId.getUuId().substring(0,19);
+        session.setAttribute("goodsId",goodsId);
         goods.setGoodsId(goodsId);
         try {
             uploadService.releaseGoods(goods);
@@ -32,4 +33,11 @@ public class UploadController {
         }
         return new Result(true, MessageConstant.RELEASE_PRODUCT_SUCCESS);
     }
+    @RequestMapping("/uploadImages")
+    public Result uploadImages(@RequestBody Goods goods, HttpSession session){
+        session.getAttribute("goodsId");
+        session.getAttribute("userId");
+       return new Result(true, MessageConstant.RELEASE_PRODUCT_SUCCESS);
+    }
+
 }

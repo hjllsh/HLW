@@ -32,6 +32,7 @@
             <img :src="userForm.headshot" style="width: 300px;height: 300px;background-color: #0abdfe;border-radius: 150px;margin-bottom: 15px">
             </div>
             <el-col offset="6">
+<!--                action访问后端控制器-->
 <!--                更换头像-->
                 <el-upload
                         class="upload-demo"
@@ -43,11 +44,12 @@
                     <el-button size="middle" type="primary">更换头像</el-button>
                 </el-upload>
             </el-col>
+<!--            账户余额-->
             <el-col style="margin-top: 20px">
                 <el-col :span="10" offset="4">
                     <el-card shadow="hover">
                         我的账户余额:<el-input v-model="userForm.account" style="margin-top: 10px" disabled=""></el-input>
-                        <el-col :span="6" offset="12"><el-button type="primary" class="btn" style="margin-top: 10px;margin-bottom: 10px">充值</el-button></el-col>
+                        <el-col :span="6" offset="12"><el-button type="primary" class="btn" style="margin-top: 10px;margin-bottom: 10px" @click="jumpToRecharge()">充值</el-button></el-col>
                     </el-card>
                 </el-col>
             </el-col>
@@ -72,8 +74,12 @@
                                 <el-col :span="3"  style="font-size: 16px;text-align: right;line-height: 32px" >
                                     <span>性别:</span>
                                 </el-col>
-                                <el-col :span="6">
-                                    <el-input size="small" type="text" v-model="userForm.sex" :disabled="userDisabled"></el-input>
+                                <el-col :span="3" style="font-size: 16px;text-align: right;line-height: 32px">
+                                    <el-radio-group :disabled="userDisabled" v-model="userForm.sex" >
+                                        <el-radio label="男"></el-radio>
+                                        <el-radio label="女"></el-radio>
+                                    </el-radio-group>
+                                    <!--<el-input size="small" type="text" v-model="userForm.sex" :disabled="userDisabled"></el-input>-->
                                 </el-col>
                             </el-col>
                             <el-col :span="24" style="margin-bottom: 10px;margin-top: 10px">
@@ -116,8 +122,8 @@
                                     <el-input  type="textarea" placeholder="请输入内容"  v-model="userForm.personalDesc" maxlength="30" show-word-limit :disabled="userDisabled"></el-input>
                                 </el-col>
                                 <el-col>
-                                    <el-button type="primary" @click="userDisabled = false" style="margin-top: 10px;margin-bottom: 10px">编辑</el-button>
-                                    <el-button type="primary" @click="updatePersonalCenter()" style="margin-top: 10px;margin-bottom: 10px">保存</el-button>
+                                    <el-button type="primary" @click="userDisabled = false" style="margin-top: 10px;margin-bottom: 10px" >编辑</el-button>
+                                    <el-button type="primary" @click="updatePersonalCenter()" style="margin-top: 10px;margin-bottom: 10px" :disabled="userDisabled">保存</el-button>
                                 </el-col>
                             </el-col>
                         </el-tab-pane>
@@ -153,11 +159,6 @@
                                             label="价格"
                                             width="180">
                                     </el-table-column>
-<!--                                    <el-table-column-->
-<!--                                            prop="state"-->
-<!--                                            label="交易状态"-->
-<!--                                            width="150">-->
-<!--                                    </el-table-column>-->
                                     <el-table-column
                                             prop="operation"
                                             label=""
@@ -222,7 +223,6 @@
                                     </el-table-column>
                                 </el-table>
                             </template>
-
                         </el-tab-pane>
 <!--                        我卖出的-->
                         <el-tab-pane label="我卖出的" name="fourth">
@@ -329,6 +329,9 @@
            created(){
                 this.getMytradeInfo();
            },
+           mounted() {
+               this.fetchdata()
+           },
             methods: {
                 getMytradeInfo(){
                     axios.get("/myPersional/getMyPersionalCenterInfo").then((res)=>{
@@ -348,6 +351,14 @@
                             type: 'success'
                         });
                     });
+                },
+                jumpToRecharge(){
+                    window.location.href = 'hlw_recharge.html'
+                },
+                fetchdata(){
+                    axios.get("/mytrade/order",).then((res)=>{
+                        this.tableData1 = res.data;
+                    })
                 },
                 handleClick(tab, event) {
                     console.log(tab, event);

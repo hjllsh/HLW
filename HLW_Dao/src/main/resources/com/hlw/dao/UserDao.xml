@@ -24,14 +24,18 @@
 
 
     <select id="findAccountById" resultType="Float">
-        select account from t_personalCenter where user_id = #{userId};
+        select account from t_user where user_id = #{userId};
     </select>
 
     <update id="findPass" parameterType="map" >
         update t_user set password = #{password} where  user_id = #{userId};
     </update>
-    <update id="updateAccount" parameterType="map">
+    <update id="updatePersonalCenterAccount" parameterType="map">
         update t_personalCenter set account=#{newAccount} where user_id = #{userId};
+    </update>
+
+    <update id="updateUserAccount" parameterType="map">
+        update t_user set account=#{newAccount} where user_id = #{userId};
     </update>
 
     <update id="updatePass" parameterType="map">
