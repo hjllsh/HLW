@@ -378,6 +378,7 @@
 
                 // 上传成功的钩子函数,response为服务端返回的值,file为当前上传的文件封装成的js对象
                 uploadSuccess(response, file){
+                    alert(response.data);
                     this.userForm.headshot = "http://rm9hwdyan.hn-bkt.clouddn.com/"+response.data;
                     this.$message.success(response.message);
                     // window.location.reload();

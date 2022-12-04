@@ -34,7 +34,7 @@ public class UserServiceImpl implements UserService {
         Map<String,Object> map = new HashMap<String, Object>();
         map.put("userId",userId);
         map.put("newAccount",newAccount);
-        userDao.updateAccount(map);
+        userDao.updateUserAccount(map);
     }
     public void doModifyPass(String newPass, String userId){
         Map<String,Object> map = new HashMap<String, Object>();
@@ -69,4 +69,5 @@ public class UserServiceImpl implements UserService {
         }
         return flag;
     }
+
 }

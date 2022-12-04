@@ -36,8 +36,8 @@ public class MyPersonalCenterController {
         user.setHeadshot(fileName);
         session.setAttribute("user",user);
 //        调用userController的方法
-        userController.showHeadshot(session);
-        userController.updatePersonalCenter(session,(PersonalCenter) session.getAttribute("personalCenter"));
+//        userController.showHeadshot(session);
+//        userController.updatePersonalCenter(session,(PersonalCenter) session.getAttribute("personalCenter"));
 
         try {
 //            上传图片
