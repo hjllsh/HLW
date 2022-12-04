@@ -1,6 +1,7 @@
 package com.hlw.service.impl;
 
 import com.hlw.dao.UserDao;
+import com.hlw.domain.Goods;
 import com.hlw.domain.PersonalCenter;
 import com.hlw.service.FunctionService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,5 +39,9 @@ public class FunctionServiceImpImpl implements FunctionService {
         map.put("userId",userId);
         map.put("newPass",newPass);
         userDao.updatePass(map);
+    }
+
+    public Goods getMyGoods(String userId) {
+        return null;
     }
 }

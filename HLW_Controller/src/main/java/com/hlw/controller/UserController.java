@@ -52,18 +52,6 @@ public class UserController {
         userService.newUser(user);
         return new Result(true, MessageConstant.ENROLL_SUCCESS);
     }
-
-    @RequestMapping("/recharge")
-    public Result recharge(HttpSession session, Float money) {
-        String userId = (String) session.getAttribute("userId");
-        try {
-            userService.doRecharge(money, userId);
-        } catch (Exception e) {
-            e.printStackTrace();
-            return new Result(false, MessageConstant.RECHARGE_FAIL);
-        }
-        return new Result(true, MessageConstant.RECHARGE_SUCCESS);
-    }
 //    登录功能
         @RequestMapping("/login")
         public Result login (HttpSession session, LoginUser loginUser){
@@ -118,17 +106,6 @@ public class UserController {
             User user = (User) session.getAttribute("user");
             String headshot = user.getHeadshot();
             return new Result(true, headshot, "头像查询成功");
-        }
-        @RequestMapping("/modifyPass")
-        public Result modifyPass (HttpSession session, String newPass){
-            String userId = (String) session.getAttribute("userId");
-            try {
-                userService.doModifyPass(newPass, userId);
-            } catch (Exception e) {
-                e.printStackTrace();
-                return new Result(false, MessageConstant.CHANGE_PASSWORD_FAIL);
-            }
-            return new Result(true, MessageConstant.CHANGE_PASSWORD_SUCCESS);
         }
 
     }

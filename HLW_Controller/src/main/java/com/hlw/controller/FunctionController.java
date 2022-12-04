@@ -2,6 +2,7 @@ package com.hlw.controller;
 
 import com.hlw.constant.MessageConstant;
 import com.hlw.constant.Result;
+import com.hlw.domain.Goods;
 import com.hlw.domain.PersonalCenter;
 import com.hlw.domain.User;
 import com.hlw.service.FunctionService;
@@ -77,5 +78,19 @@ public class FunctionController {
             return new Result(flag, MessageConstant.MODIFY_FAIL);
         }
         return new Result(flag, MessageConstant.MODIFY_SUCCESS);
+    }
+//    获取我发布的商品
+    @RequestMapping("/getMyGoods")
+    public Result getMyGoods(HttpSession session){
+        String userId = (String) session.getAttribute("userId");
+        boolean flag = true;
+        try {
+            functionService.getMyGoods(userId);
+        } catch (Exception e) {
+            e.printStackTrace();
+            flag = false;
+            return new Result(flag, MessageConstant.INQUIRE_FAIL);
+        }
+        return new Result(flag, MessageConstant.INQUIRE_SUCCESS);
     }
 }

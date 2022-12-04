@@ -123,7 +123,7 @@
                                     <el-input  type="textarea" placeholder="请输入内容"  v-model="userForm.personalDesc" maxlength="30" show-word-limit :disabled="userDisabled"></el-input>
                                 </el-col>
                                 <el-col>
-                                    <el-button type="primary" @click="userDisabled = false" style="margin-top: 10px;margin-bottom: 10px" >编辑</el-button>
+                                    <el-button type="primary" @click.native="userDisabled = false" style="margin-top: 10px;margin-bottom: 10px" >编辑</el-button>
                                     <el-button type="primary" @click="updatePersonalCenter()" style="margin-top: 10px;margin-bottom: 10px" :disabled="userDisabled">保存</el-button>
                                 </el-col>
                             </el-col>
@@ -185,7 +185,7 @@
                         <el-tab-pane label="我买到的" name="third">
                             <template>
                                 <el-table
-                                        :data="tableData1.filter(data => !search || data.name.toLowerCase().includes(search.toLowerCase()))"
+                                        :data="tableData1"
                                         style="width: 100%">
                                     <el-table-column
                                             label="时间"
@@ -339,61 +339,12 @@
                         account : "",
                     },
                     tableData: [{
-                        date: '2016-05-02',
-                        name: '王小虎',
-                        type: '游戏',
-                        number: '1',
-                        price: '100' + '￥',
-                        state: '已交易'
-                    }, {
-                        date: '2016-05-02',
-                        name: '王小虎',
-                        type: '游戏',
-                        number: '1',
-                        price: '100' + '￥',
-                        state: '已交易'
-                    }, {
-                        date: '2016-05-02',
-                        name: '王小虎',
-                        type: '游戏',
-                        number: '1',
-                        price: '100' + '￥',
-                        state: '已交易'
-                    }, {
-                        date: '2016-05-02',
-                        name: '王小虎',
-                        type: '游戏',
-                        number: '1',
-                        price: '100' + '￥',
-                        state: '已交易'
-                    }, {
-                        date: '2016-05-02',
-                        name: '王小虎',
-                        type: '游戏',
-                        number: '1',
-                        price: '100' + '￥',
-                        state: '已交易'
-                    }, {
-                        date: '2016-05-02',
-                        name: '王小虎',
-                        type: '游戏',
-                        number: '1',
-                        price: '100' + '￥',
-                        state: '已交易'
-                    }, {
-                        date: '2016-05-02',
-                        name: '王小虎',
-                        type: '游戏',
-                        number: '1',
-                        price: '100' + '￥',
-                        state: '已交易'
-                    }, {
-                        date: '2016-05-02',
-                        name: '王小虎',
-                        type: '游戏',
-                        number: '1',
-                        price: '100' + '￥',
-                        state: '已交易'
+                        date: "",
+                        name: "",
+                        type: "",
+                        number: "",
+                        price: "" ,
+                        state: ""
                     }],
                      tableData1: [{
                         date: '2016-05-02',
@@ -487,10 +438,18 @@
                     }],
                 }
             },
+           create(){
+                this.getMyGoods()
+           },
            mounted() {
                this.fetchdata()
            },
             methods: {
+                getMyGoods(){
+                    axios.get("/function/getMyGoods",{params: this.tableData}).then((res)=>{
+                        this.tableData = res.data.data
+                    })
+                },
                 updatePersonalCenter(){
                     this.userDisabled = true
                     axios.get('/function/updatePersonalCenter',{
