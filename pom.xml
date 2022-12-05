@@ -161,6 +161,11 @@
             <artifactId>javax.mail</artifactId>
             <version>1.5.3</version>
         </dependency>
+        <dependency>
+            <groupId>com.github.miemiedev</groupId>
+            <artifactId>mybatis-paginator</artifactId>
+            <version>1.2.15</version>
+        </dependency>
     </dependencies>
 
 </project>

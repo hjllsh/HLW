@@ -168,6 +168,10 @@ public class UserController {
             personalCenter.setUserId(userId);
             if (personalCenter != null) {
                 boolean flag = userService.doUpdatePersonalCenter(personalCenter);
+                //更新成功后改变session的值
+                User user = (User)session.getAttribute("user");
+                user.setUserName(personalCenter.getUserName());
+                session.setAttribute("user",user);
                 return new Result(true, MessageConstant.MODIFY_SUCCESS);
             } else {
                 return new Result(false, MessageConstant.MODIFY_FAIL);
