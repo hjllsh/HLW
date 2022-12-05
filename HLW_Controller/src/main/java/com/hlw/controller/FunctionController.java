@@ -2,9 +2,7 @@ package com.hlw.controller;
 
 import com.hlw.constant.MessageConstant;
 import com.hlw.constant.Result;
-import com.hlw.domain.Goods;
-import com.hlw.domain.PersonalCenter;
-import com.hlw.domain.User;
+import com.hlw.domain.*;
 import com.hlw.service.FunctionService;
 import com.hlw.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -109,5 +107,33 @@ public class FunctionController {
             return new Result(flag, MessageConstant.SOLDOUT_FAIL);
         }
         return new Result(flag, MessageConstant.SOLDOUT_SUCCESS);
+    }
+    //    获取我卖的订单
+    @RequestMapping("/getMyTrade")
+    public Result getMyTrade(HttpSession session, Integer pageSize, Integer currentPage){
+        String userId = (String) session.getAttribute("userId");
+        List<MyTrade> list = new ArrayList<MyTrade>();
+        boolean flag = true;
+        try {
+            list = functionService.getMyTrade(userId, pageSize, currentPage);
+        } catch (Exception e) {
+            e.printStackTrace();
+            flag = false;
+            return new Result(flag, MessageConstant.INQUIRE_FAIL);
+        }
+        return new Result(flag, list, MessageConstant.INQUIRE_SUCCESS);
+    }
+//    获取商品信息
+    @RequestMapping("/getMainInfo")
+    public Result getMainInfo(HttpSession session, String goodsId){
+        List<GoodsImg> list = new ArrayList<GoodsImg>();
+        boolean flag = true;
+        try {
+
+        }catch (Exception e){
+            e.printStackTrace();
+            return new Result(flag, MessageConstant.INQUIRE_FAIL);
+        }
+        return new Result(flag, list, MessageConstant.INQUIRE_SUCCESS);
     }
 }

@@ -2,9 +2,9 @@ package com.hlw.service.impl;
 
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
 import com.hlw.dao.UserDao;
 import com.hlw.domain.Goods;
+import com.hlw.domain.MyTrade;
 import com.hlw.domain.PersonalCenter;
 import com.hlw.service.FunctionService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,11 +49,10 @@ public class FunctionServiceImpImpl implements FunctionService {
             Page<Goods> page = userDao.getMyAllGoods(userId);
             System.out.println(page.getTotal());
             System.out.println(page.getResult());
-            List<Goods> list=page.getResult();
+            List<Goods> list = page.getResult();
             for (Goods goods : list) {
                 System.out.println(goods);
             }
-
             return null;
         } catch (Exception e) {
             e.printStackTrace();
@@ -66,6 +65,15 @@ public class FunctionServiceImpImpl implements FunctionService {
             userDao.deleteGoods(goodsId);
         } catch (Exception e) {
             e.printStackTrace();
+        }
+    }
+    public  List<MyTrade> getMyTrade(String userId, Integer pageSize, Integer currentPage){
+        try {
+
+            return userDao.getMyTrade(userId);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
         }
     }
 }

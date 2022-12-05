@@ -2,6 +2,7 @@ package com.hlw.dao;
 
 import com.github.pagehelper.Page;
 import com.hlw.domain.Goods;
+import com.hlw.domain.MyTrade;
 import com.hlw.domain.PersonalCenter;
 import com.hlw.domain.User;
 
@@ -31,4 +32,6 @@ public interface UserDao {
     Page<Goods> getMyAllGoods(String userId);
 
     void deleteGoods(String goodsId);
+
+    List<MyTrade> getMyTrade(String userId);
 }

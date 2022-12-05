@@ -10,11 +10,12 @@ public class MyOrders {
     private Float price;
     private String location;
     private int buyNum;
+    private String userId;
 
     public MyOrders() {
     }
 
-    public MyOrders(String buyTime, String orderId, String goodsName, String goodsType, Float price, String location, int buyNum) {
+    public MyOrders(String buyTime, String orderId, String goodsName, String goodsType, Float price, String location, int buyNum, String userId) {
         this.buyTime = buyTime;
         this.orderId = orderId;
         this.goodsName = goodsName;
@@ -22,11 +23,12 @@ public class MyOrders {
         this.price = price;
         this.location = location;
         this.buyNum = buyNum;
+        this.userId = userId;
     }
 
     @Override
     public String toString() {
-        return "myOrders{" +
+        return "MyOrders{" +
                 "buyTime='" + buyTime + '\'' +
                 ", orderId='" + orderId + '\'' +
                 ", goodsName='" + goodsName + '\'' +
@@ -34,6 +36,7 @@ public class MyOrders {
                 ", price=" + price +
                 ", location='" + location + '\'' +
                 ", buyNum=" + buyNum +
+                ", userId='" + userId + '\'' +
                 '}';
     }
 
@@ -42,12 +45,12 @@ public class MyOrders {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         MyOrders myOrders = (MyOrders) o;
-        return buyNum == myOrders.buyNum && Objects.equals(buyTime, myOrders.buyTime) && Objects.equals(orderId, myOrders.orderId) && Objects.equals(goodsName, myOrders.goodsName) && Objects.equals(goodsType, myOrders.goodsType) && Objects.equals(price, myOrders.price) && Objects.equals(location, myOrders.location);
+        return buyNum == myOrders.buyNum && Objects.equals(buyTime, myOrders.buyTime) && Objects.equals(orderId, myOrders.orderId) && Objects.equals(goodsName, myOrders.goodsName) && Objects.equals(goodsType, myOrders.goodsType) && Objects.equals(price, myOrders.price) && Objects.equals(location, myOrders.location) && Objects.equals(userId, myOrders.userId);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(buyTime, orderId, goodsName, goodsType, price, location, buyNum);
+        return Objects.hash(buyTime, orderId, goodsName, goodsType, price, location, buyNum, userId);
     }
 
     public String getBuyTime() {
@@ -104,5 +107,13 @@ public class MyOrders {
 
     public void setBuyNum(int buyNum) {
         this.buyNum = buyNum;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 }

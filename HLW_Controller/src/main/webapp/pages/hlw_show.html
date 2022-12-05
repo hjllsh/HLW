@@ -73,7 +73,7 @@
         <el-col :span="3">
             <h3 style="text-align: center">是否购买</h3>
             <div style="margin-top: 45px;text-align: center">
-                <a :href="showData.goodsLinkUrl" target="right"><el-button type="primary" round>查看</el-button></a>
+                <el-button type="primary" round @click="">查看</el-button>
                 <el-button type="primary" round @click="buyWay(showData.goodsId,showData.goodsName,showData.goodsPrice)">购买</el-button>
             </div>
         </el-col>
@@ -235,6 +235,15 @@
             searchData:''
         },
             methods: {
+                jump(){
+                    axios.get("/function/getMainInfo?goodsId"+this.goodsId).then((res)=>{
+                        if (res.data.flag){
+
+                        } else {
+                            this.$message.error(res.data.message);
+                        }
+                    });
+                },
                 handleChange(goodsPrice){
                     this.totalPrice = this.num * goodsPrice + this.transportFare;
                 },

@@ -1,10 +1,10 @@
 package com.hlw.service;
 
 import com.hlw.domain.Goods;
+import com.hlw.domain.MyTrade;
 import com.hlw.domain.PersonalCenter;
 
 import java.util.List;
-import java.util.Map;
 
 public interface FunctionService {
 
@@ -17,4 +17,6 @@ public interface FunctionService {
     List<Goods> getMyAllGoods(String userId, Integer pageSize, Integer currentPage);
 
     void deleteGoods(String goodsId);
+
+    List<MyTrade> getMyTrade(String userId, Integer pageSize, Integer currentPage);
 }
