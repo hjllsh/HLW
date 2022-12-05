@@ -135,22 +135,22 @@
                                         border
                                         style="width: 100%;height: 100%">
                                     <el-table-column
-                                            prop="date"
-                                            label="日期"
+                                            prop="releaseTime"
+                                            label="上架日期"
                                             width="180">
                                     </el-table-column>
                                     <el-table-column
-                                            prop="name"
+                                            prop="goodsName"
                                             label="商品名称"
                                             width="180">
                                     </el-table-column>
                                     <el-table-column
-                                            prop="type"
+                                            prop="goodsType"
                                             label="商品类型"
                                             width="180">
                                     </el-table-column>
                                     <el-table-column
-                                            prop="number"
+                                            prop="goodsNum"
                                             label="数量"
                                             width="180">
                                     </el-table-column>
@@ -161,10 +161,10 @@
                                     </el-table-column>
                                     <el-table-column
                                             prop="operation"
-                                            label=""
+                                            label="操作"
                                             width="180">
-                                        <template slot-scope="scope">
-                                            <el-button @click="handleClick(scope.row)" type="primary" round class="btn-primary" > 下架 </el-button>
+                                        <template slot-scope="scope" >
+                                            <el-button @click="downGoods(scope.$index)" type="primary" round class="btn-primary" > 下架 </el-button>
                                         </template>
                                     </el-table-column>
                                 </el-table>
@@ -172,10 +172,10 @@
                                     <el-pagination
                                             @size-change="handleSizeChange"
                                             @current-change="handleCurrentChange"
-                                            :current-page="currentPage1"
-                                            :page-size="5"
+                                            :current-page="currentPage"
+                                            :page-size="pageSize"
                                             layout="total, prev, pager, next, jumper"
-                                            :total="40">
+                                            :total="totalPage">
                                     </el-pagination>
                                 </div>
                             </template>
@@ -184,7 +184,7 @@
                         <el-tab-pane label="我买到的" name="third">
                             <template>
                                 <el-table
-                                        :data="tableData1"
+                                        :data="tableData1.filter(data => !search || data.name.toLowerCase().includes(search.toLowerCase()))"
                                         style="width: 100%">
                                     <el-table-column
                                             label="时间"
@@ -269,6 +269,7 @@
                                     </el-table-column>
                                 </el-table>
                             </template>
+
                         </el-tab-pane>
                     </el-tabs>
                 </template>
@@ -305,7 +306,9 @@
        var vue = new Vue({
             el: '#app',
             data : {
-                    currentPage1: 1,
+                    currentPage: 1,
+                    pageSize: 5,
+                    totalPage: 40,
                     activeName: 'first',
                     search: '',
                     userDisabled: true,
@@ -320,12 +323,30 @@
                         headshot : "",
                         account : "",
                     },
-                    tableData: [{date: '2016-05-02', name: '王小虎', type:'游戏', number:'1', price:'100'+'￥', state:'已交易'}, {date: '2016-05-02', name: '王小虎', type:'游戏', number:'1', price:'100'+'￥', state:'已交易'},{date: '2016-05-02', name: '王小虎', type:'游戏', number:'1', price:'100'+'￥', state:'已交易'}, {date: '2016-05-02', name: '王小虎', type:'游戏', number:'1', price:'100'+'￥', state:'已交易'},{date: '2016-05-02', name: '王小虎', type:'游戏', number:'1', price:'100'+'￥', state:'已交易'},{date: '2016-05-02',name: '王小虎', type:'游戏', number:'1', price:'100'+'￥', state:'已交易'},{date: '2016-05-02', name: '王小虎', type:'游戏', number:'1', price:'100'+'￥', state:'已交易'},{date: '2016-05-02', name: '王小虎', type:'游戏', number:'1', price:'100'+'￥', state:'已交易'}],
+                    tableData: [{
+                        releaseTime : "",
+                        goodsName : "",
+                        goodsType : "",
+                        goodsNum : "",
+                        price : "",
+                        phoneNumber:"",
+                        location:"",
+                        goodsDsec:"",
+                        goodsId:"",
+                        userId:""
+                    }],
                     tableData1: [{date: '2016-05-02', orderNo:'463874621487325', name: '王小虎', type:'游戏', number:'1', price:'100'+'￥', address: '上海市普陀区金沙江路 1518 弄'}, {date: '2016-05-04', orderNo:'463874621487325', name: '王小虎', type:'游戏', number:'1', price:'100'+'￥', address: '上海市普陀区金沙江路 1517 弄'}, {date: '2016-05-01', orderNo:'463874621487325', name: '王小虎', type:'游戏', number:'1', price:'100'+'￥', address: '上海市普陀区金沙江路 1519 弄'}, {date: '2016-05-03', orderNo:'463874621487325', name: '王小虎', type:'游戏', number:'1', price:'100'+'￥', address: '上海市普陀区金沙江路 1516 弄'}],
                     tableData2: [{date: '2016-05-03', buyer:'蓝屏', name: '王小虎', number:'1', price:'100'+'￥', address: '上海市普陀区金沙江路 1518 弄', insurance: '已购买'}, {date: '2016-05-02', buyer:'孔维', name: '王小虎', number:'1', price:'100'+'￥', address: '上海市普陀区金沙江路 1518 弄', insurance: '已购买'}, {date: '2016-05-04', buyer:'lanping', name: '王小虎', number:'1', price:'100'+'￥', address: '上海市普陀区金沙江路 1518 弄', insurance: '已购买'}, {date: '2016-05-01', buyer:'孔维', name: '王小虎', number:'1', price:'100'+'￥', address: '上海市普陀区金沙江路 1518 弄', insurance: '已购买'}, {date: '2016-05-08', buyer:'孔维', name: '王小虎', number:'1', price:'100'+'￥', address: '上海市普陀区金沙江路 1518 弄', insurance: '已购买'}, {date: '2016-05-06', buyer:'孔维', name: '王小虎', number:'1', price:'100'+'￥', address: '上海市普陀区金沙江路 1518 弄', insurance: '已购买'}, {date: '2016-05-07', buyer:'孔维', name: '王小虎', number:'1', price:'100'+'￥', address: '上海市普陀区金沙江路 1518 弄', insurance: '已购买'}],
+
             },
            created(){
                 this.getMytradeInfo();
+           },
+           created(){
+                this.getMyGoods()
+           },
+           mounted() {
+               this.fetchdata()
            },
             methods: {
                 getMytradeInfo(){
@@ -361,14 +382,25 @@
                         }
                     })
                 },
+                downGoods(index){
+                    axios.get("/function/deleteGoods?goodsId="+this.tableData[index].goodsId).then((res)=>{
+                        if (res.data.flag) {
+                            this.$message.success(res.data.message);
+                            location.reload()
+                        }else {
+                            this.$message.error(res.data.message);
+                        }
+                    })
+                },
                 handleClick(tab, event) {
                     console.log(tab, event);
                 },
                 handleSizeChange(val) {
-                    console.log(`每页 ${val} 条`);
+                    // console.log(`每页 ${val} 条`);
                 },
                 handleCurrentChange(val) {
-                    console.log(`当前页: ${val}`);
+                    // console.log(`当前页: ${val}`);
+                    this.currentPage = val;
                 },
                 handleEdit(index, row) {
                     console.log(index, row);
@@ -397,6 +429,15 @@
                     }
                     return isJPG && isLt2M;
                 },
+                handlePreview(file) {
+                    console.log(file);
+                },
+                beforeRemove(file, fileList) {
+                    return this.$confirm(`确定移除 ${ file.name }？`);
+                },
+                check(file){
+                console.log(file);
+                }
             }
         });
     </script>
