@@ -184,7 +184,7 @@
                         <el-tab-pane label="我买到的" name="third">
                             <template>
                                 <el-table
-                                        :data="tableData1"
+                                        :data="tableData1.filter(data => !search || data.name.toLowerCase().includes(search.toLowerCase()))"
                                         style="width: 100%">
                                     <el-table-column
                                             label="时间"
@@ -359,13 +359,6 @@
                        }
                     });
                 },
-                getMyGoods(){
-                    axios.get("/function/getMyAllGoods?pageSize="+this.pageSize+"&currentPage="+this.currentPage).then((res)=>{
-                        if (res.data.flag) {
-                            this.tableData = res.data.data;
-                        }
-                    })
-                },
                 updatePersonalCenter(){
                     this.userDisabled = true;
                     axios.post('/user/updatePersonalCenter',this.userForm).then((res)=>{
@@ -373,14 +366,20 @@
                             message: res.data.message,
                             type: 'success'
                         });
+                        parent.location.reload();
                     });
                 },
                 jumpToRecharge(){
                     window.location.href = 'hlw_recharge.html'
                 },
-                fetchdata(){
-                    axios.get("/mytrade/order",).then((res)=>{
-                        this.tableData1 = res.data;
+                //我买到的
+                getOrderList(){
+                    axios.post("/mytrade/orders").then((res)=>{
+                        if (res.data.flag){
+                            this.tableData1 = res.data.data;
+                        } else {
+                            this.$message.error(res.data.message);
+                        }
                     })
                 },
                 downGoods(index){
@@ -412,10 +411,11 @@
 
                 // 上传成功的钩子函数,response为服务端返回的值,file为当前上传的文件封装成的js对象
                 uploadSuccess(response, file){
-                    alert(response.data);
-                    this.userForm.headshot = "http://rm9hwdyan.hn-bkt.clouddn.com/"+response.data;
+                    // alert(response.data);
+                    this.userForm.headshot="http://rm9hwdyan.hn-bkt.clouddn.com/"+response.data;
                     this.$message.success(response.message);
-                    // window.location.reload();
+                    // 刷新页面
+                    parent.location.reload();
                 },
                 // 上传前校验的钩子函数
                 beforeUpload(file){
@@ -441,7 +441,6 @@
             }
         });
     </script>
-
 </div>
 </body>
 </html>

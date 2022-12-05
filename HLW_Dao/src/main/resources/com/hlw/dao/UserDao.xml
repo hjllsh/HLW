@@ -69,6 +69,10 @@
     <delete id="deleteGoods">
         delete from t_goods where goods_id = #{goodsId}
     </delete>
+    <update id="updateHeadshot" parameterType="com.hlw.domain.User">
+        update t_user set headshot = #{headshot} where user_id = #{userId}
+    </update>
+
     <!--    &lt;!&ndash;        新增&ndash;&gt;-->
 <!--    <insert id="add" parameterType="com.hlw.pojo.CheckGroup">-->
 <!--        <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">-->

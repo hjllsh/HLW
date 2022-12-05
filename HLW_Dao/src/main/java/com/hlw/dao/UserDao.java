@@ -26,6 +26,8 @@ public interface UserDao {
 
     void updatePersonalCenter(PersonalCenter personalCenter);
 
+    void updateHeadshot(User user);
+
     Page<Goods> getMyAllGoods(String userId);
 
     void deleteGoods(String goodsId);

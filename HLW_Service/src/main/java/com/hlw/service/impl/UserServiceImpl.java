@@ -58,6 +58,10 @@ public class UserServiceImpl implements UserService {
         return flag;
     }
 
+    public void updateHeadshot(User user) {
+        userDao.updateHeadshot(user);
+    }
+
     public boolean doUpdatePersonalCenter( PersonalCenter personalCenter){
         boolean flag = true;
         try {
