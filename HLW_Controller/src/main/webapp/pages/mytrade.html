@@ -307,7 +307,7 @@
             el: '#app',
             data : {
                     currentPage: 1,
-                    pageSize: 5,
+                    pageSize: 8,
                     totalPage: 40,
                     activeName: 'first',
                     search: '',
@@ -340,16 +340,11 @@
 
             },
            created(){
-                this.getMytradeInfo();
-           },
-           created(){
-                this.getMyGoods()
-           },
-           mounted() {
-               this.fetchdata()
+                this.getMyPersonalCenterInfo();
+                this.getMyGoods();
            },
             methods: {
-                getMytradeInfo(){
+                getMyPersonalCenterInfo(){
                     axios.get("/myPersional/getMyPersionalCenterInfo").then((res)=>{
                        if (res.data.flag){
                            this.$message.success(res.data.message);
@@ -370,7 +365,7 @@
                     });
                 },
                 jumpToRecharge(){
-                    window.location.href = 'hlw_recharge.html'
+                    window.location.href = 'hlw_recharge.html';
                 },
                 //我买到的
                 getOrderList(){
@@ -386,11 +381,13 @@
                     axios.get("/function/deleteGoods?goodsId="+this.tableData[index].goodsId).then((res)=>{
                         if (res.data.flag) {
                             this.$message.success(res.data.message);
-                            location.reload()
                         }else {
                             this.$message.error(res.data.message);
                         }
-                    })
+                    }).finally(()=>{
+                        this.getMyGoods();
+                    });
+
                 },
                 handleClick(tab, event) {
                     console.log(tab, event);
@@ -401,6 +398,8 @@
                 handleCurrentChange(val) {
                     // console.log(`当前页: ${val}`);
                     this.currentPage = val;
+                    this.pageSize = 8;
+                    this.getMyGoods()
                 },
                 handleEdit(index, row) {
                     console.log(index, row);
@@ -437,7 +436,19 @@
                 },
                 check(file){
                 console.log(file);
-                }
+                },
+                getMyGoods(){
+                    axios.get("/function/getMyAllGoods?pageSize="+this.pageSize+"&currentPage="+this.currentPage).then((res)=>{
+                        if (res.data.flag){
+                            this.tableData = res.data.data;
+                        } else {
+                            this.$message.error(res.data.message);
+                        }
+                    });
+                    axios.get("/function/getMyTotalGoods").then((res)=>{
+                        this.totalPage = res.data.data;
+                    });
+                },
             }
         });
     </script>

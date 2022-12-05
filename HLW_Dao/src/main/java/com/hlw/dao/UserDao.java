@@ -4,8 +4,9 @@ import com.github.pagehelper.Page;
 import com.hlw.domain.Goods;
 import com.hlw.domain.PersonalCenter;
 import com.hlw.domain.User;
+import org.apache.ibatis.annotations.Param;
+import org.springframework.context.annotation.ImportResource;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -28,7 +29,9 @@ public interface UserDao {
 
     void updateHeadshot(User user);
 
-    Page<Goods> getMyAllGoods(String userId);
+    public List<Goods> getMyAllGoods(@Param("size") Integer size, @Param("start") Integer start, @Param("queryString") String queryString);
 
     void deleteGoods(String goodsId);
+
+    Integer getMyTotalGoods(@Param("userId") String userId);
 }

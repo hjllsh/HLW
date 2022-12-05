@@ -17,7 +17,6 @@ public class MyMultipartResolver {
         CommonsMultipartResolver commonsMultipartResolver = new CommonsMultipartResolver();
         commonsMultipartResolver.setMaxUploadSize(1024*1024*2);
         commonsMultipartResolver.setDefaultEncoding("UTF-8");
-//        commonsMultipartResolver.setMaxUploadSize(4096);
         return commonsMultipartResolver;
     }
 
