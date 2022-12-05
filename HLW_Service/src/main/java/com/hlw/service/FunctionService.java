@@ -18,7 +18,9 @@ public interface FunctionService {
     List<Goods> getMyAllGoods(String userId, Integer pageSize, Integer currentPage);
 
     void deleteGoods(String goodsId);
-    List<MyOrders> getAllOrders(String userId);
+    List<MyOrders> getAllOrders(String userId, Integer pageSize, Integer currentPage);
 
     public Integer getMyTotalGoods(String userId);
+
+    Integer getTotalOrders(String userId);
 }

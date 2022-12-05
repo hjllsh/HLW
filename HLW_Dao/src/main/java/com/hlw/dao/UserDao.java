@@ -32,7 +32,9 @@ public interface UserDao {
     public List<Goods> getMyAllGoods(@Param("size") Integer size, @Param("start") Integer start, @Param("queryString") String queryString);
 
     void deleteGoods(String goodsId);
-    List<MyOrders> getAllOrder(String userId);
+    List<MyOrders> getAllOrders(@Param("size") Integer size, @Param("start") Integer start, @Param("queryString") String queryString);
 
     Integer getMyTotalGoods(@Param("userId") String userId);
+
+    Integer getTotalOrders(@Param("userId") String userId);
 }

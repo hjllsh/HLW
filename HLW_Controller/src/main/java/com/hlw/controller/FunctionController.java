@@ -89,7 +89,7 @@ public class FunctionController {
         boolean flag = true;
         try {
             List<Goods> list = functionService.getMyAllGoods(userId, pageSize, currentPage);
-            return new Result(true,list,MessageConstant.INQUIRE_SUCCESS);
+            return new Result(flag,list,MessageConstant.INQUIRE_SUCCESS);
         } catch (Exception e) {
             e.printStackTrace();
             flag = false;
@@ -124,16 +124,26 @@ public class FunctionController {
 
     //我买的
     @RequestMapping("/getAllOrders")
-    public Result getAllOrders(HttpSession session){
+    public Result getAllOrders(HttpSession session, Integer pageSize, Integer currentPage){
         String userId = (String) session.getAttribute("userId");
-        List<MyOrders> list = new ArrayList<MyOrders>();
         try {
-            list=functionService.getAllOrders(userId);
-            for (MyOrders myOrders : list) System.out.println(myOrders);
+            List<MyOrders> list=functionService.getAllOrders(userId, pageSize, currentPage);
+            return new Result(true, list, MessageConstant.INQUIRE_SUCCESS);
         } catch (Exception e) {
             e.printStackTrace();
             return new Result(false, MessageConstant.INQUIRE_FAIL);
         }
-        return new Result(true, list, MessageConstant.INQUIRE_SUCCESS);
+    }
+
+    @RequestMapping("getTotalOrders")
+    public Result getTotalOrders(HttpSession session){
+        String userId = (String) session.getAttribute("userId");
+        try {
+            int total = functionService.getTotalOrders(userId);
+            return new Result(true,total,MessageConstant.INQUIRE_SUCCESS);
+        }catch (Exception e){
+            e.printStackTrace();
+            return new Result(false,0,MessageConstant.INQUIRE_FAIL);
+        }
     }
 }

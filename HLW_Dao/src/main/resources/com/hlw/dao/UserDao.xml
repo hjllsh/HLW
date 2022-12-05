@@ -87,9 +87,14 @@
     <select id="getMyTotalGoods" resultType="int">
         select count(0) from t_goods where user_id = #{userId}
     </select>
-    <select id="getAllOrder" parameterType="string" resultMap="t_myorder" resultType="com.hlw.domain.MyOrders">
-        select buy_time,order_id,goods_name,goods_type,price,location,buy_num
-        from t_myorders where user_id = #{userId};
+    <select id="getAllOrders" resultMap="t_myorder" resultType="com.hlw.domain.MyOrders">
+        select * from t_myorders
+        <if test="queryString != null ">
+            where user_id = #{queryString}
+        </if>
+        limit #{start} , #{size};
     </select>
-
+    <select id="getTotalOrders" resultType="int">
+        select count(0) from t_myorders where user_id = #{userId}
+    </select>
 </mapper>

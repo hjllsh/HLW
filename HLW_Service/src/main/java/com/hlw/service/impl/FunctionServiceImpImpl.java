@@ -48,6 +48,7 @@ public class FunctionServiceImpImpl implements FunctionService {
 
     public List<Goods> getMyAllGoods(String queryString, Integer size, Integer start) {
         try {
+            start=(start-1)*size;
             List<Goods> list = userDao.getMyAllGoods(size,start,queryString);
             System.out.println(list.size());
             for (Goods goods : list) {
@@ -74,7 +75,23 @@ public class FunctionServiceImpImpl implements FunctionService {
         return total;
     }
 
-    public List<MyOrders> getAllOrders(String userId) {
-        return userDao.getAllOrder(userId);
+    public List<MyOrders> getAllOrders(String queryString, Integer size, Integer start) {
+        try {
+            start=(start-1)*size;
+            List<MyOrders> list = userDao.getAllOrders(size,start,queryString);
+            System.out.println(list.size());
+            for (MyOrders myOrders : list) {
+                System.out.println(myOrders);
+            }
+            return list;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ArrayList<MyOrders>();
+        }
+    }
+
+    public Integer getTotalOrders(String userId) {
+        Integer total = userDao.getTotalOrders(userId);
+        return total;
     }
 }
