@@ -1,5 +1,8 @@
 package com.hlw.service.impl;
 
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.hlw.dao.UserDao;
 import com.hlw.domain.Goods;
 import com.hlw.domain.PersonalCenter;
@@ -7,8 +10,7 @@ import com.hlw.service.FunctionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 @Service
 public class FunctionServiceImpImpl implements FunctionService {
@@ -41,7 +43,29 @@ public class FunctionServiceImpImpl implements FunctionService {
         userDao.updatePass(map);
     }
 
-    public Goods getMyGoods(String userId) {
-        return null;
+    public List<Goods> getMyAllGoods(String userId, Integer pageSize, Integer currentPage) {
+        try {
+            PageHelper.startPage(currentPage,3);
+            Page<Goods> page = userDao.getMyAllGoods(userId);
+            System.out.println(page.getTotal());
+            System.out.println(page.getResult());
+            List<Goods> list=page.getResult();
+            for (Goods goods : list) {
+                System.out.println(goods);
+            }
+
+            return null;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public void deleteGoods(String goodsId) {
+        try {
+            userDao.deleteGoods(goodsId);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

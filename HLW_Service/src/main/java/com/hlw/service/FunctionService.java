@@ -3,6 +3,9 @@ package com.hlw.service;
 import com.hlw.domain.Goods;
 import com.hlw.domain.PersonalCenter;
 
+import java.util.List;
+import java.util.Map;
+
 public interface FunctionService {
 
     boolean doUpdatePersonalCenter(PersonalCenter personalCenter);
@@ -11,5 +14,7 @@ public interface FunctionService {
 
     void  doModifyPass(String newPass, String userId);
 
-    Goods getMyGoods(String userId);
+    List<Goods> getMyAllGoods(String userId, Integer pageSize, Integer currentPage);
+
+    void deleteGoods(String goodsId);
 }

@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 @ResponseBody
@@ -80,17 +82,32 @@ public class FunctionController {
         return new Result(flag, MessageConstant.MODIFY_SUCCESS);
     }
 //    获取我发布的商品
-    @RequestMapping("/getMyGoods")
-    public Result getMyGoods(HttpSession session){
+    @RequestMapping("/getMyAllGoods")
+    public Result getMyAllGoods(HttpSession session, Integer pageSize, Integer currentPage){
         String userId = (String) session.getAttribute("userId");
+        List<Goods> list = new ArrayList<Goods>();
         boolean flag = true;
         try {
-            functionService.getMyGoods(userId);
+            list = functionService.getMyAllGoods(userId, pageSize, currentPage);
+            for (Goods goods : list) System.out.println(goods);
         } catch (Exception e) {
             e.printStackTrace();
             flag = false;
             return new Result(flag, MessageConstant.INQUIRE_FAIL);
         }
-        return new Result(flag, MessageConstant.INQUIRE_SUCCESS);
+        return new Result(flag, list, MessageConstant.INQUIRE_SUCCESS);
+    }
+//    下架商品
+    @RequestMapping("/deleteGoods")
+    public Result deleteGoods(HttpSession session, String goodsId){
+        boolean flag = true;
+        try {
+            functionService.deleteGoods(goodsId);
+        } catch (Exception e) {
+            e.printStackTrace();
+            flag = false;
+            return new Result(flag, MessageConstant.SOLDOUT_FAIL);
+        }
+        return new Result(flag, MessageConstant.SOLDOUT_SUCCESS);
     }
 }

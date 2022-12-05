@@ -1,9 +1,12 @@
 package com.hlw.dao;
 
+import com.github.pagehelper.Page;
+import com.hlw.domain.Goods;
 import com.hlw.domain.PersonalCenter;
 import com.hlw.domain.User;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public interface UserDao {
@@ -22,4 +25,8 @@ public interface UserDao {
     void findPass(Map info);
 
     void updatePersonalCenter(PersonalCenter personalCenter);
+
+    Page<Goods> getMyAllGoods(String userId);
+
+    void deleteGoods(String goodsId);
 }
