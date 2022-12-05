@@ -1,7 +1,7 @@
 package com.hlw.dao;
 
-import com.github.pagehelper.Page;
 import com.hlw.domain.Goods;
+import com.hlw.domain.MyOrders;
 import com.hlw.domain.PersonalCenter;
 import com.hlw.domain.User;
 import org.apache.ibatis.annotations.Param;
@@ -32,6 +32,7 @@ public interface UserDao {
     public List<Goods> getMyAllGoods(@Param("size") Integer size, @Param("start") Integer start, @Param("queryString") String queryString);
 
     void deleteGoods(String goodsId);
+    List<MyOrders> getAllOrder(String userId);
 
     Integer getMyTotalGoods(@Param("userId") String userId);
 }

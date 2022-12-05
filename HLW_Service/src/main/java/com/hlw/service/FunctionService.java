@@ -1,6 +1,7 @@
 package com.hlw.service;
 
 import com.hlw.domain.Goods;
+import com.hlw.domain.MyOrders;
 import com.hlw.domain.PersonalCenter;
 
 import java.util.List;
@@ -17,6 +18,7 @@ public interface FunctionService {
     List<Goods> getMyAllGoods(String userId, Integer pageSize, Integer currentPage);
 
     void deleteGoods(String goodsId);
+    List<MyOrders> getAllOrders(String userId);
 
     public Integer getMyTotalGoods(String userId);
 }

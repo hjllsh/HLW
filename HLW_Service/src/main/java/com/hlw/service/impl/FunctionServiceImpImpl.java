@@ -2,13 +2,11 @@ package com.hlw.service.impl;
 
 
 
-import com.github.pagehelper.Page;
-import com.github.pagehelper.PageHelper;
 import com.hlw.dao.UserDao;
 import com.hlw.domain.Goods;
+import com.hlw.domain.MyOrders;
 import com.hlw.domain.PersonalCenter;
 import com.hlw.service.FunctionService;
-import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -74,5 +72,9 @@ public class FunctionServiceImpImpl implements FunctionService {
     public Integer getMyTotalGoods(String userId) {
         Integer total = userDao.getMyTotalGoods(userId);
         return total;
+    }
+
+    public List<MyOrders> getAllOrders(String userId) {
+        return userDao.getAllOrder(userId);
     }
 }

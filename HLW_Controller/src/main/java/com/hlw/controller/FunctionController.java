@@ -3,9 +3,11 @@ package com.hlw.controller;
 import com.hlw.constant.MessageConstant;
 import com.hlw.constant.Result;
 import com.hlw.domain.Goods;
+import com.hlw.domain.MyOrders;
 import com.hlw.domain.PersonalCenter;
 import com.hlw.domain.User;
 import com.hlw.service.FunctionService;
+import com.hlw.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -117,5 +120,20 @@ public class FunctionController {
             e.printStackTrace();
             return new Result(false,0,MessageConstant.INQUIRE_FAIL);
         }
+    }
+
+    //我买的
+    @RequestMapping("/getAllOrders")
+    public Result getAllOrders(HttpSession session){
+        String userId = (String) session.getAttribute("userId");
+        List<MyOrders> list = new ArrayList<MyOrders>();
+        try {
+            list=functionService.getAllOrders(userId);
+            for (MyOrders myOrders : list) System.out.println(myOrders);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new Result(false, MessageConstant.INQUIRE_FAIL);
+        }
+        return new Result(true, list, MessageConstant.INQUIRE_SUCCESS);
     }
 }
