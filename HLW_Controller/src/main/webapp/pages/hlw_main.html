@@ -238,7 +238,7 @@
                 this.getUserId()
                 this.getPassword()
               axios.get("/user/showHeadshot").then((res)=>{
-                  alert(res.data.data);
+                  // alert(res.data.data);
                   this.headshot = res.data.data[0];
                   this.username = res.data.data[1];
               });

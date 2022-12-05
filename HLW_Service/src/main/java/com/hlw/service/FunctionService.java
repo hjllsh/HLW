@@ -5,6 +5,7 @@ import com.hlw.domain.MyTrade;
 import com.hlw.domain.PersonalCenter;
 
 import java.util.List;
+import java.util.Map;
 
 public interface FunctionService {
 
@@ -17,6 +18,8 @@ public interface FunctionService {
     List<Goods> getMyAllGoods(String userId, Integer pageSize, Integer currentPage);
 
     void deleteGoods(String goodsId);
+
+    public Integer getMyTotalGoods(String userId);
 
     List<MyTrade> getMyTrade(String userId, Integer pageSize, Integer currentPage);
 }

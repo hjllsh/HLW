@@ -28,10 +28,10 @@ public class JdbcConfig {
         return dataSource;
     }
 
-//    @Bean//创建事务管理器
-//    public PlatformTransactionManager transactionManager(DataSource dataSource){
-//        DataSourceTransactionManager dataSourceTransactionManager =new DataSourceTransactionManager();
-//        dataSourceTransactionManager.setDataSource(dataSource);
-//        return dataSourceTransactionManager;
-//    }
+    @Bean//创建事务管理器
+    public PlatformTransactionManager transactionManager(DataSource dataSource){
+        DataSourceTransactionManager dataSourceTransactionManager =new DataSourceTransactionManager();
+        dataSourceTransactionManager.setDataSource(dataSource);
+        return dataSourceTransactionManager;
+    }
 }

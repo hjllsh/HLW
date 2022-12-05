@@ -2,20 +2,25 @@ package com.hlw.service.impl;
 
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.hlw.dao.UserDao;
 import com.hlw.domain.Goods;
 import com.hlw.domain.MyTrade;
 import com.hlw.domain.PersonalCenter;
 import com.hlw.service.FunctionService;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.*;
 
 @Service
+@Transactional
 public class FunctionServiceImpImpl implements FunctionService {
     @Autowired
     private UserDao userDao;
+
     public boolean doUpdatePersonalCenter(PersonalCenter personalCenter) {
         boolean flag = true;
         try {
@@ -43,20 +48,18 @@ public class FunctionServiceImpImpl implements FunctionService {
         userDao.updatePass(map);
     }
 
-    public List<Goods> getMyAllGoods(String userId, Integer pageSize, Integer currentPage) {
+    public List<Goods> getMyAllGoods(String queryString, Integer size, Integer start) {
         try {
-            PageHelper.startPage(currentPage,3);
-            Page<Goods> page = userDao.getMyAllGoods(userId);
-            System.out.println(page.getTotal());
-            System.out.println(page.getResult());
-            List<Goods> list = page.getResult();
+            List<Goods> list = userDao.getMyAllGoods(size,start,queryString);
+            System.out.println(list.size());
             for (Goods goods : list) {
                 System.out.println(goods);
             }
-            return null;
+
+            return list;
         } catch (Exception e) {
             e.printStackTrace();
-            return null;
+            return new ArrayList<Goods>();
         }
     }
 
@@ -75,5 +78,10 @@ public class FunctionServiceImpImpl implements FunctionService {
             e.printStackTrace();
             return null;
         }
+    }
+
+    public Integer getMyTotalGoods(String userId) {
+        Integer total = userDao.getMyTotalGoods(userId);
+        return total;
     }
 }

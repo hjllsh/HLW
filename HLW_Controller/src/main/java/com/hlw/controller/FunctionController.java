@@ -4,7 +4,6 @@ import com.hlw.constant.MessageConstant;
 import com.hlw.constant.Result;
 import com.hlw.domain.*;
 import com.hlw.service.FunctionService;
-import com.hlw.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -83,11 +82,10 @@ public class FunctionController {
     @RequestMapping("/getMyAllGoods")
     public Result getMyAllGoods(HttpSession session, Integer pageSize, Integer currentPage){
         String userId = (String) session.getAttribute("userId");
-        List<Goods> list = new ArrayList<Goods>();
         boolean flag = true;
         try {
-            list = functionService.getMyAllGoods(userId, pageSize, currentPage);
-            for (Goods goods : list) System.out.println(goods);
+            List<Goods> list = functionService.getMyAllGoods(userId, pageSize, currentPage);
+            return new Result(true,list,MessageConstant.INQUIRE_SUCCESS);
         } catch (Exception e) {
             e.printStackTrace();
             flag = false;
@@ -107,6 +105,18 @@ public class FunctionController {
             return new Result(flag, MessageConstant.SOLDOUT_FAIL);
         }
         return new Result(flag, MessageConstant.SOLDOUT_SUCCESS);
+    }
+
+    @RequestMapping("/getMyTotalGoods")
+    public Result getMyTotalGoods(HttpSession session){
+        String userId = (String)session.getAttribute("userId");
+        try {
+            int total = functionService.getMyTotalGoods(userId);
+            return new Result(true,total,MessageConstant.INQUIRE_SUCCESS);
+        }catch (Exception e){
+            e.printStackTrace();
+            return new Result(false,0,MessageConstant.INQUIRE_FAIL);
+        }
     }
     //    获取我卖的订单
     @RequestMapping("/getMyTrade")
