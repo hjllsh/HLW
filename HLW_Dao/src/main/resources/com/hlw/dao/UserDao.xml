@@ -23,6 +23,16 @@
         <result property="goodsId" column="goods_id"></result>
         <result property="userId" column="user_id"></result>
     </resultMap>
+    <resultMap id="t_myorder" type="com.hlw.domain.MyOrders">
+        <result property="goodsName" column="goods_name"></result>
+        <result property="goodsType" column="goods_type"></result>
+        <result property="buyTime" column="buy_time"></result>
+        <result property="price" column="price"></result>
+        <result property="buyNum" column="buy_num"></result>
+        <result property="location" column="location"></result>
+        <result property="orderId" column="order_id"></result>
+        <result property="userId" column="user_id"></result>
+    </resultMap>
         <insert id="newUser" parameterType="com.hlw.domain.User">
             insert into t_user(user_name, user_id, password, email, headshot, account)
             values(#{userName}, #{userId}, #{password}, #{email}, #{headshot},#{account})
@@ -72,7 +82,10 @@
     <update id="updateHeadshot" parameterType="com.hlw.domain.User">
         update t_user set headshot = #{headshot} where user_id = #{userId}
     </update>
-
+    <select id="getAllOrder" parameterType="string" resultMap="t_myorder" resultType="com.hlw.domain.MyOrders">
+        select buy_time,order_id,goods_name,goods_type,price,location,buy_num
+        from t_myorders where user_id = #{userId};
+    </select>
     <!--    &lt;!&ndash;        新增&ndash;&gt;-->
 <!--    <insert id="add" parameterType="com.hlw.pojo.CheckGroup">-->
 <!--        <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">-->

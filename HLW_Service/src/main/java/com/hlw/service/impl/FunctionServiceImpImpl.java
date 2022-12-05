@@ -1,10 +1,8 @@
 package com.hlw.service.impl;
 
-import com.github.pagehelper.Page;
-import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
 import com.hlw.dao.UserDao;
 import com.hlw.domain.Goods;
+import com.hlw.domain.MyOrders;
 import com.hlw.domain.PersonalCenter;
 import com.hlw.service.FunctionService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,14 +43,14 @@ public class FunctionServiceImpImpl implements FunctionService {
 
     public List<Goods> getMyAllGoods(String userId, Integer pageSize, Integer currentPage) {
         try {
-            PageHelper.startPage(currentPage,3);
-            Page<Goods> page = userDao.getMyAllGoods(userId);
-            System.out.println(page.getTotal());
-            System.out.println(page.getResult());
-            List<Goods> list=page.getResult();
-            for (Goods goods : list) {
-                System.out.println(goods);
-            }
+//            PageHelper.startPage(currentPage,3);
+//            Page<Goods> page = userDao.getMyAllGoods(userId);
+//            System.out.println(page.getTotal());
+//            System.out.println(page.getResult());
+//            List<Goods> list=page.getResult();
+//            for (Goods goods : list) {
+//                System.out.println(goods);
+//            }
 
             return null;
         } catch (Exception e) {
@@ -67,5 +65,9 @@ public class FunctionServiceImpImpl implements FunctionService {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public List<MyOrders> getAllOrders(String userId) {
+        return userDao.getAllOrder(userId);
     }
 }

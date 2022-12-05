@@ -1,7 +1,8 @@
 package com.hlw.dao;
 
-import com.github.pagehelper.Page;
+//import com.github.pagehelper.Page;
 import com.hlw.domain.Goods;
+import com.hlw.domain.MyOrders;
 import com.hlw.domain.PersonalCenter;
 import com.hlw.domain.User;
 
@@ -28,7 +29,8 @@ public interface UserDao {
 
     void updateHeadshot(User user);
 
-    Page<Goods> getMyAllGoods(String userId);
+//    Page<Goods> getMyAllGoods(String userId);
 
     void deleteGoods(String goodsId);
+    List<MyOrders> getAllOrder(String userId);
 }
