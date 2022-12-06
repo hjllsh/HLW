@@ -1,10 +1,7 @@
 package com.hlw.dao;
 
 import com.github.pagehelper.Page;
-import com.hlw.domain.Goods;
-import com.hlw.domain.MyTrade;
-import com.hlw.domain.PersonalCenter;
-import com.hlw.domain.User;
+import com.hlw.domain.*;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.context.annotation.ImportResource;
 
@@ -34,7 +31,11 @@ public interface UserDao {
 
     void deleteGoods(String goodsId);
 
-    List<MyTrade> getMyTrade(String userId);
+    List<MyTrade> getMyTrade(@Param("size") Integer size, @Param("start") Integer start, @Param("userId") String userId);
 
     Integer getMyTotalGoods(@Param("userId") String userId);
+
+    int getMyTotalTrade(String userId);
+
+    List<GoodsImg> getMainInfo(String goodsId);
 }

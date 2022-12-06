@@ -5,6 +5,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.hlw.dao.UserDao;
 import com.hlw.domain.Goods;
+import com.hlw.domain.GoodsImg;
 import com.hlw.domain.MyTrade;
 import com.hlw.domain.PersonalCenter;
 import com.hlw.service.FunctionService;
@@ -50,12 +51,7 @@ public class FunctionServiceImpImpl implements FunctionService {
 
     public List<Goods> getMyAllGoods(String queryString, Integer size, Integer start) {
         try {
-            List<Goods> list = userDao.getMyAllGoods(size,start,queryString);
-            System.out.println(list.size());
-            for (Goods goods : list) {
-                System.out.println(goods);
-            }
-
+            List<Goods> list = userDao.getMyAllGoods(size,(start-1)*size,queryString);
             return list;
         } catch (Exception e) {
             e.printStackTrace();
@@ -73,7 +69,25 @@ public class FunctionServiceImpImpl implements FunctionService {
     public  List<MyTrade> getMyTrade(String userId, Integer pageSize, Integer currentPage){
         try {
 
-            return userDao.getMyTrade(userId);
+            return userDao.getMyTrade(pageSize, (currentPage-1)*pageSize,userId);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public int getMyTotalTrade(String userId) {
+        try {
+            return userDao.getMyTotalTrade(userId);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return 0;
+        }
+    }
+
+    public List<GoodsImg> getMainInfo(String goodsId) {
+        try {
+            return userDao.getMainInfo(goodsId);
         } catch (Exception e) {
             e.printStackTrace();
             return null;

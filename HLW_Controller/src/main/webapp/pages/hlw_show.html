@@ -73,7 +73,7 @@
         <el-col :span="3">
             <h3 style="text-align: center">是否购买</h3>
             <div style="margin-top: 45px;text-align: center">
-                <el-button type="primary" round @click="">查看</el-button>
+                <el-button type="primary" round @click="jump()">查看</el-button>
                 <el-button type="primary" round @click="buyWay(showData.goodsId,showData.goodsName,showData.goodsPrice)">购买</el-button>
             </div>
         </el-col>
@@ -236,12 +236,8 @@
         },
             methods: {
                 jump(){
-                    axios.get("/function/getMainInfo?goodsId"+this.goodsId).then((res)=>{
-                        if (res.data.flag){
-
-                        } else {
-                            this.$message.error(res.data.message);
-                        }
+                    axios.get("/function/setGoodId?goodsId="+this.goodsId).then((res)=>{
+                            window.location.href = 'maininfo.html'
                     });
                 },
                 handleChange(goodsPrice){

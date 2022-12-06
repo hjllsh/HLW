@@ -230,7 +230,7 @@
                                 <el-table
                                         :data="tableData2"
                                         style="width: 100%"
-                                        max-height="400">
+                                        max-height="500">
                                     <el-table-column
                                             fixed
                                             prop="buyTime"
@@ -263,7 +263,7 @@
                                             width="300">
                                     </el-table-column>
                                     <el-table-column
-                                            prop="insurance"
+                                            prop="transportFare"
                                             label="运费险"
                                             width="130">
                                     </el-table-column>
@@ -369,12 +369,15 @@
            },
             methods: {
                 getMyTrade(){
-                    axios.get("/function/getMyTrade?pageSize="+this.pageSize+"&currentPage="+this.currentPage).then((res)=>{
+                    axios.get("/function/getMyTrade?pageSize="+this.pageSize2+"&currentPage="+this.currentPage2).then((res)=>{
                         if (res.data.flag){
                             this.tableData2 = res.data.data;
                         } else {
                             this.$message.error(res.data.message);
                         }
+                    });
+                    axios.get("/function/getMyTotalTrade").then((res)=>{
+                        this.totalPage2 = res.data.data;
                     });
                 },
              getMyPersonalCenterInfo(){
@@ -440,7 +443,8 @@
                 handleCurrentChange2(val) {
                     // console.log(`当前页: ${val}`);
                     this.currentPage2 = val;
-                    this.getMyGoods();
+                    this.pageSize2 = 8;
+                    this.getMyTrade();
                 },
                 handleEdit(index, row) {
                     console.log(index, row);

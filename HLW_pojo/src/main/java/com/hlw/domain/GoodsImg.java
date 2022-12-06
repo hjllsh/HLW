@@ -6,13 +6,12 @@ import java.util.Objects;
 public class GoodsImg {
     private String userId;
     private String goodsId;
-    private List<String> img;
+    private String img;
 
     public GoodsImg() {
     }
 
-
-    public GoodsImg(String userId, String goodsId, List<String> img) {
+    public GoodsImg(String userId, String goodsId, String img) {
         this.userId = userId;
         this.goodsId = goodsId;
         this.img = img;
@@ -22,7 +21,7 @@ public class GoodsImg {
     public String toString() {
         return "GoodsImg{" +
                 "userId='" + userId + '\'' +
-                ", goodsId=" + goodsId +
+                ", goodsId='" + goodsId + '\'' +
                 ", img='" + img + '\'' +
                 '}';
     }
@@ -32,7 +31,7 @@ public class GoodsImg {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         GoodsImg goodsImg = (GoodsImg) o;
-        return goodsId == goodsImg.goodsId && Objects.equals(userId, goodsImg.userId) && Objects.equals(img, goodsImg.img);
+        return Objects.equals(userId, goodsImg.userId) && Objects.equals(goodsId, goodsImg.goodsId) && Objects.equals(img, goodsImg.img);
     }
 
     @Override
@@ -56,11 +55,11 @@ public class GoodsImg {
         this.goodsId = goodsId;
     }
 
-    public List<String> getImg() {
+    public String getImg() {
         return img;
     }
 
-    public void setImg(List<String> img) {
+    public void setImg(String img) {
         this.img = img;
     }
 }

@@ -1,6 +1,7 @@
 package com.hlw.service;
 
 import com.hlw.domain.Goods;
+import com.hlw.domain.GoodsImg;
 import com.hlw.domain.MyTrade;
 import com.hlw.domain.PersonalCenter;
 
@@ -22,4 +23,8 @@ public interface FunctionService {
     public Integer getMyTotalGoods(String userId);
 
     List<MyTrade> getMyTrade(String userId, Integer pageSize, Integer currentPage);
+
+    int getMyTotalTrade(String userId);
+
+    List<GoodsImg> getMainInfo(String goodsId);
 }

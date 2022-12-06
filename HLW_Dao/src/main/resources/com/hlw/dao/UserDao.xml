@@ -89,11 +89,18 @@
 
     <select id="getMyTrade" resultType="com.hlw.domain.MyTrade" resultMap="t_myTrade">
         select *
-        from t_mytrade where user_id = #{userId};
+        from t_mytrade where user_id = #{userId} limit #{start}, #{size};
     </select>
 
     <select id="getMyTotalGoods" resultType="int">
         select count(0) from t_goods where user_id = #{userId}
     </select>
 
+    <select id="getMyTotalTrade" resultType="int">
+        select count(0) from t_mytrade where user_id = #{userId}
+    </select>
+
+    <select id="getMainInfo" resultType="com.hlw.domain.GoodsImg">
+        select user_id as userId, goods_id as goodsId, img from t_goodsimg where goods_id = #{goodsId};
+    </select>
 </mapper>

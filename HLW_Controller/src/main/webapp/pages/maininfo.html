@@ -27,7 +27,7 @@
                 <el-col>
                 <template>
                     <el-carousel :interval="4000" type="card" height="300px" >
-                        <el-carousel-item  v-for="picture in infoData.pictures" >
+                        <el-carousel-item  v-for="picture in imgData.img" ><!--！！！！！！！！！！！！！！！-->
                             <img :src="picture">
                         </el-carousel-item>
                     </el-carousel>
@@ -160,11 +160,28 @@
                 infoData:{
                     "name":"迷你电脑",
                     "type":"电脑",
-                    "pictures":["../img/photo1.png","../img/photo2.png","../img/photo3.jpg","../img/photo4.jpg"],
+                    // "pictures":["../img/photo1.png","../img/photo2.png","../img/photo3.jpg","../img/photo4.jpg"],
+                    goodsImg : [''],
                     "price":"2000",
                     "location":"广西壮族自治区贵港市港北区",
                     "description":"据场景可给予用户操作建议或安全提示，但不能代替用户进行决策,用户可以自由的进行操作，包括撤销、回退和终止当前操作等"
                 },
+                imgData:[{
+                    userId : "",
+                    goodsId : "",
+                    img : ""
+                }]
+            },
+            created(){//从后端中获取图片信息
+                axios.get("/function/getMainInfo").then((res)=>{
+                    if (res.data.flag){
+                        this.imgData = res.data.data
+                        this.$message.success(res.data.message)
+                        alert(this.imgData[1].img)
+                    } else {
+                        this.$message.error(res.data.message);
+                    }
+                });
             },
             methods :{
                 buyWay(goodsId,goodsName,goodsPrice){

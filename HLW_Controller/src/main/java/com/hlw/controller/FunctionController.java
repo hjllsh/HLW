@@ -91,7 +91,6 @@ public class FunctionController {
             flag = false;
             return new Result(flag, MessageConstant.INQUIRE_FAIL);
         }
-        return new Result(flag, list, MessageConstant.INQUIRE_SUCCESS);
     }
 //    下架商品
     @RequestMapping("/deleteGoods")
@@ -106,7 +105,7 @@ public class FunctionController {
         }
         return new Result(flag, MessageConstant.SOLDOUT_SUCCESS);
     }
-
+//        查询我的所有商品总数
     @RequestMapping("/getMyTotalGoods")
     public Result getMyTotalGoods(HttpSession session){
         String userId = (String)session.getAttribute("userId");
@@ -133,13 +132,35 @@ public class FunctionController {
         }
         return new Result(flag, list, MessageConstant.INQUIRE_SUCCESS);
     }
+//    获得我的所有卖出
+    @RequestMapping("getMyTotalTrade")
+    public Result getMyTotalTrade(HttpSession session){
+        String userId = (String) session.getAttribute("userId");
+        try {
+            int count = functionService.getMyTotalTrade(userId);
+            return new Result(true, count, MessageConstant.INQUIRE_SUCCESS);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new Result(false, MessageConstant.INQUIRE_FAIL);
+        }
+    }
+//    设置查看商品的id
+    @RequestMapping("/setGoodId")
+    public void setGoodId(HttpSession session, String goodsId){
+        goodsId = "1242";
+        session.setAttribute("goodsId",goodsId);
+    }
 //    获取商品信息
     @RequestMapping("/getMainInfo")
-    public Result getMainInfo(HttpSession session, String goodsId){
+    public Result getMainInfo(HttpSession session){
+        String goodsId = (String) session.getAttribute("goodsId");
         List<GoodsImg> list = new ArrayList<GoodsImg>();
         boolean flag = true;
         try {
-
+            list = functionService.getMainInfo(goodsId);
+            for(GoodsImg Goodsimg: list){
+                System.out.println(Goodsimg);
+            }
         }catch (Exception e){
             e.printStackTrace();
             return new Result(flag, MessageConstant.INQUIRE_FAIL);
