@@ -1,9 +1,11 @@
 package com.hlw.controller;
 
+import cn.hutool.core.bean.BeanUtil;
 import com.hlw.constant.MessageConstant;
 import com.hlw.constant.Result;
 import com.hlw.domain.Goods;
 import com.hlw.domain.GoodsImg;
+import com.hlw.domain.GoodsList;
 import com.hlw.service.UploadService;
 import com.hlw.utils.TimeUtils;
 import com.hlw.utils.UuId;
@@ -35,10 +37,19 @@ public class UploadController {
         session.setAttribute("goodsId",goodsId);
         goods.setGoodsId(goodsId);
         ArrayList images = (ArrayList) session.getAttribute("images");
+        String mainImg = (String) images.get(0);
         GoodsImg goodsImg = new GoodsImg(userId,goodsId,images);
+//        GoodsList goodsList = new GoodsList();
+
         try {
             uploadService.releaseGoods(goods);
             uploadService.uploadImages(goodsImg);
+            GoodsList goodsList = BeanUtil.copyProperties(goods, GoodsList.class);
+            goodsList.setGoodsMainImg(mainImg);
+            System.out.println(goodsList);
+            String storeName =  uploadService.findStoreName(userId);
+            goodsList.setStoreName(storeName);
+            uploadService.uploadGoodsList(goodsList);
             System.out.println(goods);
         } catch (Exception e) {
             e.printStackTrace();

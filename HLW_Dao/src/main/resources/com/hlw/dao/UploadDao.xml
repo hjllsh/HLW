@@ -13,8 +13,15 @@
             <result column="goods_type" property="goodsType"></result>
             <result column="user_id" property="userId"></result>
             <result column="goods_id" property="goodsId"></result>
-
         </resultMap>
+    <resultMap id="store" type="com.hlw.domain.Store">
+        <id column="store_name" property="storeName"></id>
+        <result column="user_id" property="userId"></result>
+        <result column="location" property="location"></result>
+        <result column="nationality" property="nationality"></result>
+        <result column="id_cart" property="idCard"></result>
+        <result column="goods_type" property="goodsType"></result>
+    </resultMap>
         <insert id="releaseGoods" parameterType="com.hlw.domain.Goods" >
             insert into t_goods(goods_name,goods_type,release_time,price,goods_num,phone_number,location,goods_dsec,goods_id,user_id)
             values(#{goodsName}, #{goodsType},#{releaseTime}, #{price}, #{goodsNum}, #{phoneNumber},#{location},#{goodsDsec},#{goodsId},#{userId})
@@ -23,5 +30,14 @@
         <insert id="uploadImages">
             insert into t_goodsimg(user_id, goods_id, img)
             values (#{userId}, #{goodsId}, #{image})
+        </insert>
+
+        <select id="findStoreName" parameterType="string" resultType="string">
+            select store_name from t_store where user_id = #{userId};
+        </select>
+
+        <insert id="uploadGoodsList" parameterType="com.hlw.domain.GoodsList" >
+            insert into t_goodslist(goods_name,goods_type,release_time,price,location,store_name,goods_id,goods_mainimg,goods_linkurl)
+            values(#{goodsName},#{goodsType},#{releaseTime},#{price},#{location},#{storeName},#{goodsId},#{goodsMainImg},#{goodsLinkurl})
         </insert>
 </mapper>

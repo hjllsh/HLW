@@ -3,6 +3,7 @@ package com.hlw.service.impl;
 import com.hlw.dao.UploadDao;
 import com.hlw.domain.Goods;
 import com.hlw.domain.GoodsImg;
+import com.hlw.domain.GoodsList;
 import com.hlw.service.UploadService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,5 +23,13 @@ public class UploadServiceImpl implements UploadService {
             System.out.println(image);
             uploadDao.uploadImages(userId,goodsId,image);
         }
+    }
+
+    public String findStoreName(String userId) {
+        return uploadDao.findStoreName(userId);
+    }
+
+    public void uploadGoodsList(GoodsList goodsList) {
+        uploadDao.uploadGoodsList(goodsList);
     }
 }

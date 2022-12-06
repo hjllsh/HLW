@@ -79,14 +79,6 @@ public class MyPersonalCenterController {
         String suffix = originalFileName.substring(originalFileName.lastIndexOf(".") - 1);
 //        设置文件名
         String fileName = UuId.getUuId() + suffix;
-//        User user = (User)session.getAttribute("user");
-//        更新数据session
-//        user.setHeadshot("http://rm9hwdyan.hn-bkt.clouddn.com/"+fileName);
-//        session.setAttribute("user",user);
-//        PersonalCenter personalCenter = (PersonalCenter) session.getAttribute("personalCenter");
-//        personalCenter.setHeadshot("http://rm9hwdyan.hn-bkt.clouddn.com/"+fileName);
-//        myPersonalCenterService.updateMyHeadshot(personalCenter);
-//        userService.updateHeadshot(user);
         try {
 //            上传图片
             QiniuUtils.upload2Qiniu(file.getBytes(),fileName);

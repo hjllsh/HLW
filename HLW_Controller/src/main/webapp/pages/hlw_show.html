@@ -17,7 +17,7 @@
 <div id = "app">
     <el-col>
         <el-col :span="4">
-        <el-input v-model="searchData" placeholder="请输入内容"></el-input>
+        <el-input v-model="pagination.searchData" placeholder="请输入内容"></el-input>
         </el-col>
         <el-col :span="18" style="margin-left: 10px;margin-bottom: 10px">
             <el-button icon="el-icon-search" circle @click="mySearch"></el-button>
@@ -27,28 +27,28 @@
     <el-col :span="7" >
         <el-col :span="11">
             <div>
-                <img src="../img/user1-128x128.jpg" width="200" height="188px">
+                <img :src="showData.goodsMainImg" width="200" height="188px">
             </div>
         </el-col>
         <el-col :span="10" >
             <h3>商品信息</h3>
             <div style="margin-top: 20px"><span>商品名称:</span><span style="margin-left: 10px">{{showData.goodsName}}</span>
             <p><span >商品类型:</span><span style="margin-left: 10px">{{showData.goodsType}}</span></p>
-            <p><span>上市时间:</span><span style="margin-left: 10px">{{showData.goodsTime}}</span></p>
+            <p><span>上市时间:</span><span style="margin-left: 10px">{{showData.releaseTime}}</span></p>
             </div>
         </el-col>
     </el-col>
     <el-col :span="3" >
         <h3>价格</h3>
-        <h1>{{showData.goodsPrice}}<span>￥</span></h1>
+        <h1>{{showData.price}}<span>￥</span></h1>
     </el-col>
     <el-col :span="5">
             <h3>商家信息</h3>
-            <div style="margin-top: 20px"><span>商家名称:</span><span style="margin-left: 10px">{{showData.merchantsName}}</span>
-                <p><span >商家地址:</span><span style="margin-left: 10px">{{showData.merchantsLocation}}</span></p>
+            <div style="margin-top: 20px"><span>商家名称:</span><span style="margin-left: 10px">{{showData.storeName}}</span>
+                <p><span >商家地址:</span><span style="margin-left: 10px">{{showData.location}}</span></p>
                 <el-col :span="5">用户评价:</el-col>
                 <el-rate
-                        v-model="showData.merchantsStar"
+                        v-model="merchantsStar"
                         disabled
                         show-score
                         text-color="#ff9900"
@@ -58,11 +58,11 @@
         </el-col>
         <el-col :span="5">
             <h3>平台保障</h3>
-            <div style="margin-top: 20px"><span>商家名称:</span><span style="margin-left: 10px">{{showData.merchantsName}}</span>
-                <p><span >商家地址:</span><span style="margin-left: 10px">{{showData.merchantsLocation}}</span></p>
+            <div style="margin-top: 20px"><span>商家名称:</span><span style="margin-left: 10px">{{showData.storeName}}</span>
+                <p><span >商家地址:</span><span style="margin-left: 10px">{{showData.location}}</span></p>
                 <el-col :span="5">用户评价:</el-col>
                 <el-rate
-                        v-model="showData.merchantsStar"
+                        v-model="merchantsStar"
                         disabled
                         show-score
                         text-color="#ff9900"
@@ -73,8 +73,8 @@
         <el-col :span="3">
             <h3 style="text-align: center">是否购买</h3>
             <div style="margin-top: 45px;text-align: center">
-                <a :href="showData.goodsLinkUrl" target="right"><el-button type="primary" round>查看</el-button></a>
-                <el-button type="primary" round @click="buyWay(showData.goodsId,showData.goodsName,showData.goodsPrice)">购买</el-button>
+                <a :href="showData.goodsLinkurl" target="right"><el-button type="primary" round>查看</el-button></a>
+                <el-button type="primary" round @click="buyWay(showData.goodsId,showData.goodsName,showData.price)">购买</el-button>
             </div>
         </el-col>
     </el-col>
@@ -88,7 +88,7 @@
                     </div>
                     <div>
                         <el-col :span="4"><span style="line-height: 40px">商品价格:</span></el-col>
-                        <el-col :span="20"><span style="line-height: 40px">{{order.goodsPrice}}</span><span style="line-height: 40px">￥</span></el-col>
+                        <el-col :span="20"><span style="line-height: 40px">{{order.price}}</span><span style="line-height: 40px">￥</span></el-col>
                     </div>
                     <div style="margin-bottom: 20px; height: 40px;">
                         <el-col :span="4"><span style="line-height: 40px">收货地址:</span></el-col>
@@ -113,7 +113,7 @@
                         <el-col :span="4" ><span style="line-height: 40px">购买数量:</span></el-col>
                         <el-col :span="15">
                             <template>
-                                <el-input-number v-model="num" @change="handleChange(order.goodsPrice)" :min="1" :max="10" label="描述文字"></el-input-number>
+                                <el-input-number v-model="num" @change="handleChange(order.price)" :min="1" :max="10" label="描述文字"></el-input-number>
                             </template>
                         </el-col>
                     </el-col>
@@ -123,7 +123,7 @@
                             <el-switch
                                     v-model="isTransport"
                                     active-text="运费险"
-                                    @change="addTransport(order.goodsPrice)">
+                                    @change="addTransport(order.price)">
                             </el-switch>
                         </el-col>
                     </el-col>
@@ -140,63 +140,22 @@
         <el-pagination
                 @size-change="handleSizeChange"
                 @current-change="handleCurrentChange"
-                :current-page.sync="currentPage"
-                :page-size="100"
+                :current-page.sync="pagination.currentPage"
+                :page-size="pagination.pageSize"
                 layout="prev, pager, next, jumper"
-                :total="1000">
+                :total="pagination.total">
         </el-pagination>
     </div>
     </el-col>
-
 </div>
 <script type="text/javascript">
     var vue = new Vue({
         el: '#app',
         data : {
-            showDataes : [{
-                "goodsId" : "123",
-                "goodsName" : "葫芦娃",
-                "goodsPrice":"100",
-                "goodsType" : "家具",
-                "goodsTime" : "2022.11.27",
-                "merchantsName":"葫芦娃家具旗舰店",
-                "merchantsLocation" : "广西贵港市港北区",
-                "merchantsStar" : "4.7",
-                "goodsLinkUrl": "maininfo.html?goodsId=123",//后台处理
-            },
-                {
-                    "goodsId" : "124",
-                    "goodsName" : "葫芦娃",
-                    "goodsPrice":"100",
-                    "goodsType" : "家具",
-                    "goodsTime" : "2022.11.27",
-                    "merchantsName":"葫芦娃家具旗舰店",
-                    "merchantsLocation" : "广西贵港市港北区",
-                    "merchantsStar" : "4.7",
-                    "goodsLinkUrl": "maininfo.html?goodsId=123",
-                },
-                {
-                    "goodsId" : "125",
-                    "goodsName" : "葫芦娃",
-                    "goodsPrice":"100",
-                    "goodsType" : "家具",
-                    "goodsTime" : "2022.11.27",
-                    "merchantsName":"葫芦娃家具旗舰店",
-                    "merchantsLocation" : "广西贵港市港北区",
-                    "merchantsStar" : "4.7",
-                    "goodsLinkUrl": "maininfo.html?goodsId=123",
-                },
-                {
-                    "goodsId" : "126",
-                    "goodsName" : "葫芦娃",
-                    "goodsPrice":"100",
-                    "goodsType" : "家具",
-                    "goodsTime" : "2022.11.27",
-                    "merchantsName":"葫芦娃家具旗舰店",
-                    "merchantsLocation" : "广西贵港市港北区",
-                    "merchantsStar" : "4.7",
-                    "goodsLinkUrl": "maininfo.html?goodsId=123",
-                },],
+            merchantsStar : "4.7",
+            showDataes : [
+
+                ],
             order:{
                 "goodsId":"",
                 "goodsPrice" : "",
@@ -206,14 +165,12 @@
 
                 "isTransport":"",
             },
-            currentPage: 5,
             dialogFormVisible:false,
             num : 1,
             telephonenumber : '',
             transportFare:0,
             totalPrice : 0,
             isTransport : false,
-            searchData : '',
             value: 0,
             options: [{
                 value: '选项1',
@@ -232,9 +189,26 @@
                 label: '北京烤鸭'
             }],
             input: '',
-            searchData:''
+            pagination : {
+                searchData:'',
+                currentPage: 1,
+                pageSize : 4,
+                total: 40
+            },
+        },
+        created(){
+            this.showGoodsList();
         },
             methods: {
+                showGoodsList(){
+                    axios.post("/goods/showGoodsList",this.pagination).then((res)=>{
+                        if (res.data.flag){
+                            this.showDataes = res.data.dataForm;
+                        } else {
+                            this.$message.error("系统忙碌稍后重试");
+                        }
+                    });
+                },
                 handleChange(goodsPrice){
                     this.totalPrice = this.num * goodsPrice + this.transportFare;
                 },
@@ -242,7 +216,8 @@
                     console.log(`每页 ${val} 条`);
                 },
                 handleCurrentChange(val) {
-                    console.log(`当前页: ${val}`);
+                   this.pagination.currentPage = val;
+                   this.showGoodsList;
                 },
                 addTransport(goodsPrice){
                     if (this.isTransport) {
@@ -272,7 +247,7 @@
                     alert(a);
                 },
                 mySearch(){
-                    console.log(1);
+                    this.showGoodsList();
                 },
             }
     });
