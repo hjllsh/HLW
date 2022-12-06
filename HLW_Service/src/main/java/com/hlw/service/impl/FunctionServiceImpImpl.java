@@ -50,12 +50,8 @@ public class FunctionServiceImpImpl implements FunctionService {
 
     public List<Goods> getMyAllGoods(String queryString, Integer size, Integer start) {
         try {
+            start = (start - 1) * size;
             List<Goods> list = userDao.getMyAllGoods(size,start,queryString);
-            System.out.println(list.size());
-            for (Goods goods : list) {
-                System.out.println(goods);
-            }
-
             return list;
         } catch (Exception e) {
             e.printStackTrace();

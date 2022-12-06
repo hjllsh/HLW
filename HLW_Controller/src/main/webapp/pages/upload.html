@@ -75,30 +75,22 @@
                         <p>上传商品照片</p>
                         <el-col :span="24">
                             <el-upload
-                                    action="/uploadImages"
+                                    action="/myPersional/uploadImages"
                                     list-type="picture-card"
-                                    :auto-upload="false">
-                                <i slot="default" class="el-icon-plus" ></i>
-                                <div slot="file" slot-scope="{file}">
-                                        <img
-                                            class="el-upload-list__item-thumbnail"
-                                            :src="file.url" alt="">
-                                    <span class="el-upload-list__item-actions">
-        <span
-                v-if="!disabled"
-                class="el-upload-list__item-delete"
-                @click="handleRemove(file)">
-          <i class="el-icon-delete"></i>
-        </span>
-      </span>
-         </div>
-      </el-upload>
-      </el-col>
+                                    name="headshot"
+                                    :on-preview="handlePictureCardPreview"
+                                    :on-remove="handleRemove">
+                                <i class="el-icon-plus"></i>
+                            </el-upload>
+                            <el-dialog :visible.sync="dialogVisible">
+                                <img width="100%" :src="dialogImageUrl" alt="">
+                            </el-dialog>
 
-                        <el-dialog :visible.sync="dialogVisible">
-                            <img width="100%" :src="dialogImageUrl" alt="">
-                        </el-dialog>
-                    </div>
+            </el-col>
+    <el-dialog :visible.sync="dialogVisible">
+        <img width="100%" :src="dialogImageUrl" alt="">
+    </el-dialog>
+            </div>
                 </el-col>
 
                 <el-col :span="20" offset="1">
@@ -174,6 +166,8 @@
         new Vue({
             el:'#app',
             data:{
+                fileData : '',
+                myUpload : false,
                 options: [{
                     value: '游戏',
                     label: '游戏'
@@ -239,9 +233,17 @@
                     }
             },
             methods: {
+                handleRemove(file, fileList) {
+                    console.log(file, fileList);
+                },
+                handlePictureCardPreview(file) {
+                    this.dialogImageUrl = file.url;
+                    this.dialogVisible = true;
+                },
                 submitForm(formName) {
                     this.$refs[formName].validate((valid) => {
                         if (valid) {
+                            this.myUpload = true;
                             axios.post("/upload/release",this.ruleForm).then((res)=>{
                                 if (res.data.flag){//执行成功
                                     //弹出提示信息
@@ -252,7 +254,11 @@
                                 }else{//执行失败
                                     this.$message.error(this.data.message);
                                 }
-                            })
+                            }).finally(()=>{
+                                // 刷新当前页面
+                                window.reload();
+                               this.resetForm(formName);
+                            });
                         } else {//校验不通过
                             this.$message.error("请正确填写商品信息！")
                             return false;
@@ -263,16 +269,11 @@
                     this.$refs[formName].resetFields();
                 },
                 handleRemove(file) {
+                    alert(1);
                     alert(file);
                     console.log(file);
                 },
-                handlePictureCardPreview(file) {
-                    this.dialogImageUrl = file.url;
-                    this.dialogVisible = true;
-                },
-                handleDownload(file) {
-                    console.log(file);
-                }
+
             }
         });
     </script>

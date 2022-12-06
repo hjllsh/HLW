@@ -3,7 +3,9 @@ package com.hlw.controller;
 import com.hlw.constant.MessageConstant;
 import com.hlw.constant.Result;
 import com.hlw.domain.Goods;
+import com.hlw.domain.GoodsImg;
 import com.hlw.service.UploadService;
+import com.hlw.utils.TimeUtils;
 import com.hlw.utils.UuId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -11,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpSession;
+import java.text.ParseException;
+import java.util.ArrayList;
 
 @RestController
 @RequestMapping("/upload")
@@ -21,11 +25,20 @@ public class UploadController {
     public Result release(@RequestBody Goods goods, HttpSession session){
         String userId= (String) session.getAttribute("userId");
         goods.setUserId(userId);
+        try {
+            goods.setReleaseTime(TimeUtils.changeTime(goods.getReleaseTime().toString()));
+        } catch (ParseException e) {
+            e.printStackTrace();
+            new Result(false,MessageConstant.RELEASE_PRODUCT_FAIL);
+        }
         String goodsId= UuId.getUuId().substring(0,19);
         session.setAttribute("goodsId",goodsId);
         goods.setGoodsId(goodsId);
+        ArrayList images = (ArrayList) session.getAttribute("images");
+        GoodsImg goodsImg = new GoodsImg(userId,goodsId,images);
         try {
             uploadService.releaseGoods(goods);
+            uploadService.uploadImages(goodsImg);
             System.out.println(goods);
         } catch (Exception e) {
             e.printStackTrace();
@@ -33,11 +46,6 @@ public class UploadController {
         }
         return new Result(true, MessageConstant.RELEASE_PRODUCT_SUCCESS);
     }
-    @RequestMapping("/uploadImages")
-    public Result uploadImages(@RequestBody Goods goods, HttpSession session){
-        session.getAttribute("goodsId");
-        session.getAttribute("userId");
-       return new Result(true, MessageConstant.RELEASE_PRODUCT_SUCCESS);
-    }
+
 
 }
