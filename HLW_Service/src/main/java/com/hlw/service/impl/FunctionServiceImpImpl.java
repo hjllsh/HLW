@@ -7,9 +7,9 @@ import com.hlw.dao.UserDao;
 import com.hlw.domain.Goods;
 import com.hlw.domain.GoodsImg;
 import com.hlw.domain.MyTrade;
+import com.hlw.domain.MyOrders;
 import com.hlw.domain.PersonalCenter;
 import com.hlw.service.FunctionService;
-import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -96,6 +96,26 @@ public class FunctionServiceImpImpl implements FunctionService {
 
     public Integer getMyTotalGoods(String userId) {
         Integer total = userDao.getMyTotalGoods(userId);
+        return total;
+    }
+
+    public List<MyOrders> getAllOrders(String queryString, Integer size, Integer start) {
+        try {
+            start=(start-1)*size;
+            List<MyOrders> list = userDao.getAllOrders(size,start,queryString);
+            System.out.println(list.size());
+            for (MyOrders myOrders : list) {
+                System.out.println(myOrders);
+            }
+            return list;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ArrayList<MyOrders>();
+        }
+    }
+
+    public Integer getTotalOrders(String userId) {
+        Integer total = userDao.getTotalOrders(userId);
         return total;
     }
 }

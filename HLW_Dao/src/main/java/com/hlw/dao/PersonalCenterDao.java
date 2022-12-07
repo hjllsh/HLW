@@ -11,5 +11,5 @@ public interface PersonalCenterDao {
     void updateMyHeadshot(PersonalCenter personalCenter);
 
     void initMyPersonalCenter(PersonalCenter personalCenter);
-//    List<MyOrders> getAllOrder(MyOrders myOrders);
+
 }

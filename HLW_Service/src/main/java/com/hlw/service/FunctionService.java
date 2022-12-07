@@ -1,6 +1,7 @@
 package com.hlw.service;
 
 import com.hlw.domain.Goods;
+import com.hlw.domain.MyOrders;
 import com.hlw.domain.GoodsImg;
 import com.hlw.domain.MyTrade;
 import com.hlw.domain.PersonalCenter;
@@ -19,8 +20,11 @@ public interface FunctionService {
     List<Goods> getMyAllGoods(String userId, Integer pageSize, Integer currentPage);
 
     void deleteGoods(String goodsId);
+    List<MyOrders> getAllOrders(String userId, Integer pageSize, Integer currentPage);
 
     public Integer getMyTotalGoods(String userId);
+
+    Integer getTotalOrders(String userId);
 
     List<MyTrade> getMyTrade(String userId, Integer pageSize, Integer currentPage);
 
