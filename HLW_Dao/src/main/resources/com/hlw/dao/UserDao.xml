@@ -77,7 +77,7 @@
         </if>
         limit #{start} , #{size};
     </select>
-<!-- -->
+
     <delete id="deleteGoods">
         delete from t_goods where goods_id = #{goodsId}
     </delete>

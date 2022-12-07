@@ -7,13 +7,18 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-//@Component
+@Component
 public class MyInterceptor implements HandlerInterceptor {
 //    原始方法调用前执行的内容
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         HttpSession session = request.getSession();
         String userId = (String)session.getAttribute("userId");
         if (userId == null) {
+            String uri = request.getRequestURI();
+            System.out.println(request.getContextPath());
+            System.out.println("===============");
+            System.out.println(uri);
+            System.out.println("===============");
             System.out.println(request.getContextPath());
             response.sendRedirect(request.getContextPath()+"/pages/login.html");
             return false;
