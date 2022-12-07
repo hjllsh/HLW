@@ -74,7 +74,7 @@
             <h3 style="text-align: center">是否购买</h3>
             <div style="margin-top: 45px;text-align: center">
                 <a :href="showData.goodsLinkurl" target="right"><el-button type="primary" round>查看</el-button></a>
-                <el-button type="primary" round @click="buyWay(showData.goodsId,showData.goodsName,showData.price)">购买</el-button>
+                <el-button type="primary" round @click="buyWay(showData.goodsId,showData.goodsName,showData.price,showData.goodsType)">购买</el-button>
             </div>
         </el-col>
     </el-col>
@@ -90,19 +90,12 @@
                         <el-col :span="4"><span style="line-height: 40px">商品价格:</span></el-col>
                         <el-col :span="20"><span style="line-height: 40px">{{order.price}}</span><span style="line-height: 40px">￥</span></el-col>
                     </div>
-                    <div style="margin-bottom: 20px; height: 40px;">
-                        <el-col :span="4"><span style="line-height: 40px">收货地址:</span></el-col>
-                        <template>
-                            <el-select v-model="value" placeholder="请选择收货地址">
-                                <el-option
-                                        v-for="item in options"
-                                        :key="item.value"
-                                        :label="item.label"
-                                        :value="item.value">
-                                </el-option>
-                            </el-select>
-                        </template>
-                    </div>
+                    <el-col>
+                        <div style="margin-bottom: 15px; margin-top: 10px">
+                            <el-col :span="4"><span style="line-height: 40px">收货地址:</span></el-col>
+                            <el-col :span="20"><el-input v-model="location" placeholder="请输入地址"></el-input></el-col>
+                        </div>
+                    </el-col>
                     <el-col>
                         <div style="margin-bottom: 15px; margin-top: 10px">
                             <el-col :span="4"><span style="line-height: 40px">电话号码:</span></el-col>
@@ -136,14 +129,14 @@
         </div>
 
 <el-col style="margin-top: 15px">
-        <div class="block">
+        <div class="block" >
         <el-pagination
                 @size-change="handleSizeChange"
                 @current-change="handleCurrentChange"
-                :current-page.sync="pagination.currentPage"
+                :current-page="pagination.currentPage"
                 :page-size="pagination.pageSize"
-                layout="prev, pager, next, jumper"
-                :total="pagination.total">
+                layout="total, prev, pager, next, jumper"
+                :total="pagination.totalPage">
         </el-pagination>
     </div>
     </el-col>
@@ -154,16 +147,16 @@
         data : {
             merchantsStar : "4.7",
             showDataes : [
-
                 ],
             order:{
                 "goodsId":"",
-                "goodsPrice" : "",
-                "telephonenumber" : "",
-                // "myLocation" : "",
+                "price" : "",
+                "goodsType":"",
+                "phonenumber" : "",
+                "location" : "",
                 "totalPrice" : "",
-
                 "isTransport":"",
+                "buyNum" : "",
             },
             dialogFormVisible:false,
             num : 1,
@@ -171,29 +164,14 @@
             transportFare:0,
             totalPrice : 0,
             isTransport : false,
+            location: '',
             value: 0,
-            options: [{
-                value: '选项1',
-                label: '黄金糕'
-            }, {
-                value: '选项2',
-                label: '双皮奶'
-            }, {
-                value: '选项3',
-                label: '蚵仔煎'
-            }, {
-                value: '选项4',
-                label: '龙须面'
-            }, {
-                value: '选项5',
-                label: '北京烤鸭'
-            }],
             input: '',
             pagination : {
                 searchData:'',
                 currentPage: 1,
                 pageSize : 4,
-                total: 40
+                totalPage: 28,
             },
         },
         created(){
@@ -204,6 +182,7 @@
                     axios.post("/goods/showGoodsList",this.pagination).then((res)=>{
                         if (res.data.flag){
                             this.showDataes = res.data.dataForm;
+                            this.pagination.totalPage = parseInt(res.data.total);
                         } else {
                             this.$message.error("系统忙碌稍后重试");
                         }
@@ -222,7 +201,8 @@
                 },
                 handleCurrentChange(val) {
                    this.pagination.currentPage = val;
-                   this.showGoodsList;
+                   this.pagination.pageSize = 4;
+                   this.showGoodsList();
                 },
                 addTransport(goodsPrice){
                     if (this.isTransport) {
@@ -233,23 +213,29 @@
                     this.totalPrice = this.num * goodsPrice + this.transportFare;
                     this.order.totalPrice = this.totalPrice
                 },
-                buyWay(goodsId,goodsName,goodsPrice){
+                buyWay(goodsId,goodsName,goodsPrice,type){
                     this.dialogFormVisible = true;
-                    this.order.goodsPrice=goodsPrice;
+                    this.order.price=goodsPrice;
                     this.order.goodsName=goodsName;
                     this.order.goodsId=goodsId;
+                    this.order.goodsType=type;
                     this.totalPrice = this.num * goodsPrice + this.transportFare;
                     this.order.totalPrice = this.totalPrice
                 },
                 confirmBuy(){
-                  alert(this.order.goodsId);
-                    alert(this.order.goodsName);
-                    alert(this.order.totalPrice);
-                    this.order.telephonenumber=this.telephonenumber;
-                    alert(this.order.telephonenumber);
+                    this.order.phonenumber=this.telephonenumber;
                     this.order.isTransport=this.isTransport;
-                    alert(this.order.isTransport);
-                    alert(a);
+                    this.order.location = this.location;
+                    this.order.buyNum = this.num;
+                    axios.post("/order/buy",this.order).then((res)=>{
+                        if (res.data.flag){
+                            this.dialogFormVisible = true;
+                            this.$message.success(res.data.message);
+                        }else{
+                            this.dialogFormVisible = true;
+                            this.$message.success(res.data.message);
+                        }
+                    });
                 },
                 mySearch(){
                     this.showGoodsList();
