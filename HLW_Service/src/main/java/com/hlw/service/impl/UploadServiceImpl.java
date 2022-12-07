@@ -28,7 +28,6 @@ public class UploadServiceImpl implements UploadService {
     public String findStoreName(String userId) {
         return uploadDao.findStoreName(userId);
     }
-
     public void uploadGoodsList(GoodsList goodsList) {
         uploadDao.uploadGoodsList(goodsList);
     }

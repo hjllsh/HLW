@@ -10,12 +10,17 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupp
 @Configuration
 public class SpringMvcSupport extends WebMvcConfigurationSupport {
 //    @Autowired
-    private MyInterceptor myInterceptor;
-    @Override
-    protected void addInterceptors(InterceptorRegistry registry) {
-//        registry.addInterceptor(myInterceptor).addPathPatterns()
-
-    }
+//    private MyInterceptor myInterceptor;
+//    @Override
+//    protected void addInterceptors(InterceptorRegistry registry) {
+//        registry.addInterceptor(myInterceptor).excludePathPatterns(
+//                "/user/login",
+//                "/user/register",
+//                "/user/findPass",
+//                "/checkCode",
+//                "/pages/checkCode",
+//                "/checkUserCode");
+//    }
 
     @Override//资源管理器
     protected void addResourceHandlers(ResourceHandlerRegistry registry) {
