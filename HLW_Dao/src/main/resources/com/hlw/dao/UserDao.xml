@@ -89,9 +89,16 @@
         </if>
         limit #{start} , #{size};
     </select>
+
+    <select id="getGoodsInfo" resultType="com.hlw.domain.Goods" resultMap="t_goods">
+        select * from t_goods where goods_id = #{goodsId};
+    </select>
 <!-- -->
     <delete id="deleteGoods">
         delete from t_goods where goods_id = #{goodsId}
+    </delete>
+    <delete id="deleteImg">
+        delete from t_goodsImg where goods_id = #{goodsId}
     </delete>
     <update id="updateHeadshot" parameterType="com.hlw.domain.User">
         update t_user set headshot = #{headshot} , user_name = #{userName} where user_id = #{userId}
@@ -120,7 +127,7 @@
         select count(0) from t_mytrade where user_id = #{userId}
     </select>
 
-    <select id="getMainInfo" resultType="com.hlw.domain.GoodsImg">
-        select user_id as userId, goods_id as goodsId, img from t_goodsimg where goods_id = #{goodsId};
+    <select id="getMainInfo" resultType="string">
+        select img from t_goodsimg where goods_id = #{goodsId};
     </select>
 </mapper>

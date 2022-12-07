@@ -6,12 +6,12 @@ import java.util.Objects;
 public class GoodsImg {
     private String userId;
     private String goodsId;
-    private String img;
+    private List<String> img;
 
     public GoodsImg() {
     }
 
-    public GoodsImg(String userId, String goodsId, String img) {
+    public GoodsImg(String userId, String goodsId, List<String> img) {
         this.userId = userId;
         this.goodsId = goodsId;
         this.img = img;
@@ -22,7 +22,7 @@ public class GoodsImg {
         return "GoodsImg{" +
                 "userId='" + userId + '\'' +
                 ", goodsId='" + goodsId + '\'' +
-                ", img='" + img + '\'' +
+                ", img=" + img +
                 '}';
     }
 
@@ -55,11 +55,11 @@ public class GoodsImg {
         this.goodsId = goodsId;
     }
 
-    public String getImg() {
+    public List<String> getImg() {
         return img;
     }
 
-    public void setImg(String img) {
+    public void setImg(List<String> img) {
         this.img = img;
     }
 }

@@ -4,7 +4,6 @@ package com.hlw.service.impl;
 
 import com.hlw.dao.UserDao;
 import com.hlw.domain.Goods;
-import com.hlw.domain.GoodsImg;
 import com.hlw.domain.MyTrade;
 import com.hlw.domain.MyOrders;
 import com.hlw.domain.PersonalCenter;
@@ -60,6 +59,7 @@ public class FunctionServiceImpImpl implements FunctionService {
 
     public void deleteGoods(String goodsId) {
         try {
+            userDao.deleteImg(goodsId);
             userDao.deleteGoods(goodsId);
         } catch (Exception e) {
             e.printStackTrace();
@@ -84,13 +84,19 @@ public class FunctionServiceImpImpl implements FunctionService {
         }
     }
 
-    public List<GoodsImg> getMainInfo(String goodsId) {
+    public List<String> getMainInfo(String goodsId) {
         try {
-            return userDao.getMainInfo(goodsId);
+             List<String> list = new ArrayList<>();
+             list = userDao.getMainInfo(goodsId);
+             return list;
         } catch (Exception e) {
             e.printStackTrace();
             return null;
         }
+    }
+
+    public Goods getGoodsInfo(String goodsId) {
+        return userDao.getGoodsInfo(goodsId);
     }
 
     public Integer getMyTotalGoods(String userId) {

@@ -2,12 +2,10 @@ package com.hlw.service;
 
 import com.hlw.domain.Goods;
 import com.hlw.domain.MyOrders;
-import com.hlw.domain.GoodsImg;
 import com.hlw.domain.MyTrade;
 import com.hlw.domain.PersonalCenter;
 
 import java.util.List;
-import java.util.Map;
 
 public interface FunctionService {
 
@@ -30,5 +28,7 @@ public interface FunctionService {
 
     int getMyTotalTrade(String userId);
 
-    List<GoodsImg> getMainInfo(String goodsId);
+    List<String> getMainInfo(String goodsId);
+
+    Goods getGoodsInfo(String goodsId);
 }

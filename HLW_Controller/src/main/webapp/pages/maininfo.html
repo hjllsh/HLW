@@ -27,7 +27,7 @@
                 <el-col>
                 <template>
                     <el-carousel :interval="4000" type="card" height="300px" >
-                        <el-carousel-item  v-for="picture in imgData.img" ><!--！！！！！！！！！！！！！！！-->
+                        <el-carousel-item  v-for="picture in infoData.pictures" ><!--！！！！！！！！！！！！！！！-->
                             <img :src="picture">
                         </el-carousel-item>
                     </el-carousel>
@@ -49,7 +49,7 @@
 
             <el-row >
                 <el-col offset="9" :span="4" style="height: 60px; font-size: 30px; line-height: 60px; text-align: center">
-                    价格:<span >{{infoData.price}}</span><span>￥</span>
+                    价格:<span >{{goodsInfo.price}}</span><span>￥</span>
                 </el-col>
                 <el-col offset="10" :span="4" >
                     <el-row>
@@ -73,37 +73,28 @@
             <div class="checkout" >
                 <el-dialog   title="购买信息" :visible.sync="dialogFormVisible" width="30%" class="el-dialog--center">
                     <el-card class="box-card">
-                        <div slot="header" style="text-align: center">
+                        <div slot="header" style="text-align: center" >
                             <span>{{order.goodsName}}</span>
                         </div>
                         <div>
                             <el-col :span="4"><span style="line-height: 40px">商品价格:</span></el-col>
-                            <el-col :span="20"><span style="line-height: 40px">{{order.goodsPrice}}</span><span style="line-height: 40px">￥</span></el-col>
+                            <el-col :span="20"><span style="line-height: 40px">{{goodsInfo.price}}</span><span style="line-height: 40px">￥</span></el-col>
                         </div>
-                        <div style="margin-bottom: 20px; height: 40px;">
+                        <div style="margin-bottom: 15px; margin-top: 10px">
                             <el-col :span="4"><span style="line-height: 40px">收货地址:</span></el-col>
-                            <template>
-                                <el-select v-model="value" placeholder="请选择收货地址">
-                                    <el-option
-                                            v-for="item in options"
-                                            :key="item.value"
-                                            :label="item.label"
-                                            :value="item.value">
-                                    </el-option>
-                                </el-select>
-                            </template>
+                            <el-col :span="20"><el-input v-model="order.location" placeholder="请输入收货地址"></el-input></el-col>
                         </div>
                         <el-col>
                             <div style="margin-bottom: 15px; margin-top: 10px">
                                 <el-col :span="4"><span style="line-height: 40px">电话号码:</span></el-col>
-                                <el-col :span="20"><el-input v-model="telephonenumber" placeholder="请输入电话号码"></el-input></el-col>
+                                <el-col :span="20"><el-input v-model="order.phonenumber" placeholder="请输入电话号码"></el-input></el-col>
                             </div>
                         </el-col>
                         <el-col style="margin-bottom: 10px; margin-top: 10px">
                             <el-col :span="4" ><span style="line-height: 40px">购买数量:</span></el-col>
                             <el-col :span="15">
                                 <template>
-                                    <el-input-number v-model="num" @change="handleChange(order.goodsPrice)" :min="1" :max="10" label="描述文字"></el-input-number>
+                                    <el-input-number v-model="order.buyNum" @change="handleChange()" :min="1" :max="10" label="描述文字"></el-input-number>
                                 </template>
                             </el-col>
                         </el-col>
@@ -113,15 +104,15 @@
                                 <el-switch
                                         v-model="isTransport"
                                         active-text="运费险"
-                                        @change="addTransport(order.goodsPrice)">
+                                        @change="addTransport()">
                                 </el-switch>
                             </el-col>
                         </el-col>
                         <el-col>
-                            <el-col offset="9"><h3>总金额:<span style="margin-left: 15px" v-model="totalPrice">{{totalPrice}}</span>￥</h3></el-col>
+                            <el-col offset="9"><h3>总金额:<span style="margin-left: 15px" v-model="order.price">{{order.price}}</span>￥</h3></el-col>
                         </el-col>
                     </el-card>
-                    <div style="text-align: center; margin-top: 20px"><el-button type="primary" round class="btn-primary" @click="confirmBuy">确认购买</el-button></div>
+                    <div style="text-align: center; margin-top: 20px"><el-button type="primary" round class="btn-primary" @click="postOrder">确认购买</el-button></div>
                 </el-dialog>
             </div>
         </div>
@@ -140,55 +131,93 @@
             el: '#app',
             data:{
                 dialogFormVisible:false,
-                num : 1,
-                telephonenumber : "",
                 transportFare:0,
-                totalPrice : 0,
                 isTransport : false,
+                goodsId: id,
                 order:{
-                    "goodsId": id,
-                    "goodsPrice" : "100",
-                    "telephonenumber" : "",
-                    "myLocation" : "",
-                    "totalPrice" : "",
-                    "isTransport":"",
+                    buyTime: "",
+                    orderId:"",
+                    goodsName: "",
+                    goodsType: "",
+                    buyNum : 1,
+                    phonenumber : "",
+                    location : "",
+                    price : "",
+                    userId: "",
                 },
                 infoData:{
-                    "name":"迷你电脑",
-                    "type":"电脑",
-                    // "pictures":["../img/photo1.png","../img/photo2.png","../img/photo3.jpg","../img/photo4.jpg"],
-                    goodsImg : [''],
-                    "price":"2000",
-                    "location":"广西壮族自治区贵港市港北区",
-                    "description":"据场景可给予用户操作建议或安全提示，但不能代替用户进行决策,用户可以自由的进行操作，包括撤销、回退和终止当前操作等"
+                    name:"迷你电脑",
+                    type:"电脑",
+                    pictures:[""],
+                    price:"",
+                    location:"广西壮族自治区贵港市港北区",
+                    description:"据场景可给予用户操作建议或安全提示，但不能代替用户进行决策,用户可以自由的进行操作，包括撤销、回退和终止当前操作等"
                 },
-                imgData:[{
-                    userId : "",
-                    goodsId : "",
-                    img : ""
-                }]
+                goodsInfo:{
+                    goodsName: "",
+                    goodsType: "",
+                    releaseTime: "",
+                    price: "",
+                    phoneNumber: "",
+                    location: "",
+                    goodsDsec: "",
+                    goodsId: "",
+                    userId: ""
+                }
             },
             created(){//从后端中获取图片信息
-                axios.get("/function/getMainInfo").then((res)=>{
-                    if (res.data.flag){
-                        this.imgData = res.data.data
-                        this.$message.success(res.data.message)
-                        alert(this.imgData[1].img)
-                    } else {
-                        this.$message.error(res.data.message);
-                    }
-                });
+                this.getMainInfo()
+                this.getGoodsInfo()
             },
             methods :{
-                buyWay(goodsId,goodsName,goodsPrice){
-                    this.dialogFormVisible = true;
-                    this.order.price=goodsPrice;
-                    this.order.goodsName=goodsName;
-                    // this.order.goodsId=goodsId;
-                    this.totalPrice = this.num * goodsPrice + this.transportFare;
-                    this.order.totalPrice = this.totalPrice
+                postOrder(){
+                    axios.post("/function/showInfo",this.order).then((res)=>{
+                        if (res.data.flag){
+
+                        } else {
+                            this.$message.error(res.data.message);
+                        }
+                    });
                 },
-                confirmBuy(){
+                handleChange(){
+                  this.order.price = this.infoData.price * this.order.buyNum + this.transportFare
+                },
+                getGoodsInfo(){
+                    axios.get("/function/getGoodsInfo?goodsId="+this.goodsId).then((res)=>{
+                        if (res.data.flag){
+                            this.goodsInfo = res.data.data
+                            this.order.price=res.data.data.price
+                            this.order.goodsName=res.data.data.goodsName
+                            this.infoData.price=res.data.data.price
+                            this.$message.success(res.data.message)
+                        } else {
+                            this.$message.error(res.data.message);
+                        }
+                    });
+                },
+                getMainInfo(){
+                    axios.get("/function/getMainInfo?goodsId="+this.goodsId).then((res)=>{
+                        if (res.data.flag){
+                            this.infoData.pictures = res.data.data
+                            this.$message.success(res.data.message)
+                        } else {
+                            this.$message.error(res.data.message);
+                        }
+                    });
+                },
+                buyWay(){
+                    this.dialogFormVisible = true;
+
+                },
+                addTransport(){
+                    if(this.isTransport === false){
+                        this.transportFare = 0;
+                    }else {
+                        this.transportFare = 2.5
+                    }
+                    this.handleChange()
+                }
+/*                confirmBuy(){
                     alert(this.order.goodsId);
                     alert(this.order.goodsName);
                     alert(this.order.totalPrice);
@@ -206,7 +235,7 @@
                     }
                     this.totalPrice = this.num * goodsPrice + this.transportFare;
                     this.order.totalPrice = this.totalPrice
-                },
+                },*/
             }
         });
     </script>

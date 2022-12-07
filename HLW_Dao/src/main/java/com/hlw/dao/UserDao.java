@@ -34,6 +34,9 @@ public interface UserDao {
     public List<Goods> getMyAllGoods(@Param("size") Integer size, @Param("start") Integer start, @Param("queryString") String queryString);
 
     void deleteGoods(String goodsId);
+
+    void deleteImg(String goodsId);
+
     List<MyOrders> getAllOrders(@Param("size") Integer size, @Param("start") Integer start, @Param("queryString") String queryString);
 
     List<MyTrade> getMyTrade(@Param("size") Integer size, @Param("start") Integer start, @Param("userId") String userId);
@@ -42,7 +45,9 @@ public interface UserDao {
 
     int getMyTotalTrade(String userId);
 
-    List<GoodsImg> getMainInfo(String goodsId);
+    List<String> getMainInfo(String goodsId);
 
     Integer getTotalOrders(@Param("userId") String userId);
+
+    Goods getGoodsInfo(String goodsId);
 }
