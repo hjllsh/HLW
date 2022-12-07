@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace = "com.hlw.dao.MyOrderDao">
+      <insert id="addOrder" >
+          insert into t_myorders(buy_time,order_id,goods_name,goods_type,total_price,location,buy_num,user_id,phonenumber,is_transport)
+          values(#{buyTime},#{orderId},#{goodsName},#{goodsType},#{totalPrice},#{location},#{buyNum},#{userId},#{phonenumber},#{isTransport})
+      </insert>
+    <update id="updateUserAccount">
+    update t_user set account = #{account} where user_id = #{userId};
+    </update>
+    <update id="updatePersonalCenterAccount">
+        update t_personalcenter set account = #{account} where user_id = #{userId};
+    </update>
+    <update id="updateGoodsNum">
+        update t_goods set goods_num = #{totalNum} where goods_id = #{goodsId};
+    </update>
+    <select id="getGoodsNum" resultType="int">
+        select goods_num from t_goods where goods_id = #{goodsId}
+    </select>
+</mapper>
