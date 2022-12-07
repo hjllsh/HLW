@@ -11,6 +11,6 @@ import org.springframework.transaction.annotation.Transactional;
 @ComponentScan({"com.hlw.service","com.hlw.dao"})
 @PropertySource("classpath:druid.properties")
 @Import({JdbcConfig.class,MybatisConfig.class})
-@EnableTransactionManagement
+@EnableTransactionManagement//开启事务
 public class SpringConfig {
 }
