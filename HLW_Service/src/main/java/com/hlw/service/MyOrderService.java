@@ -11,4 +11,9 @@ public interface MyOrderService {
     void updateUserAccount(User user);
 
     void updatePersonalCenterAccount(PersonalCenter personalCenter);
+
+    void  updateGoodsNum(String goodsId,int totalNum);
+
+    int getGoodsNum(String goodsId);
+
 }

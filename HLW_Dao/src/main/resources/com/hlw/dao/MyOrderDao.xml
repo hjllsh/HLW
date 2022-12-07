@@ -8,9 +8,15 @@
           values(#{buyTime},#{orderId},#{goodsName},#{goodsType},#{totalPrice},#{location},#{buyNum},#{userId},#{phonenumber},#{isTransport})
       </insert>
     <update id="updateUserAccount">
-    update t_user set account = #{account} where user_id = #{userId}
+    update t_user set account = #{account} where user_id = #{userId};
     </update>
     <update id="updatePersonalCenterAccount">
-        update t_personalcenter set account = #{account} where user_id = #{userId}
+        update t_personalcenter set account = #{account} where user_id = #{userId};
     </update>
+    <update id="updateGoodsNum">
+        update t_goods set goods_num = #{totalNum} where goods_id = #{goodsId};
+    </update>
+    <select id="getGoodsNum" resultType="int">
+        select goods_num from t_goods where goods_id = #{goodsId}
+    </select>
 </mapper>

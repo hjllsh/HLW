@@ -8,7 +8,11 @@ public interface MyOrderDao {
 
     void addOrder(MyOrders order);
 
-    void updateUserAccount(String userId, Float account);
+    void updateUserAccount(@Param("userId") String userId, @Param("account")Float account);
 
-    void updatePersonalCenterAccount(String userId, Float account);
+    void updatePersonalCenterAccount(@Param("userId") String userId, @Param("account") Float account);
+
+    void updateGoodsNum(@Param("goodsId")String goodId, @Param("totalNum") int totalNum);
+
+    int getGoodsNum(@Param("goodsId") String goodsId);
 }

@@ -12,8 +12,22 @@ public class MyOrders {
     private String userId;
     private String isTransport;
     private String phonenumber;
-
+    private String goodsId;
     public MyOrders() {
+    }
+
+    public MyOrders(String buyTime, String orderId, String goodsName, String goodsType, Float totalPrice, String location, int buyNum, String userId, String isTransport, String phonenumber, String goodsId) {
+        this.buyTime = buyTime;
+        this.orderId = orderId;
+        this.goodsName = goodsName;
+        this.goodsType = goodsType;
+        this.totalPrice = totalPrice;
+        this.location = location;
+        this.buyNum = buyNum;
+        this.userId = userId;
+        this.isTransport = isTransport;
+        this.phonenumber = phonenumber;
+        this.goodsId = goodsId;
     }
 
     @Override
@@ -29,6 +43,7 @@ public class MyOrders {
                 ", userId='" + userId + '\'' +
                 ", isTransport='" + isTransport + '\'' +
                 ", phonenumber='" + phonenumber + '\'' +
+                ", goodsId='" + goodsId + '\'' +
                 '}';
     }
 
@@ -112,16 +127,11 @@ public class MyOrders {
         this.phonenumber = phonenumber;
     }
 
-    public MyOrders(String buyTime, String orderId, String goodsName, String goodsType, Float totalPrice, String location, int buyNum, String userId, String isTransport, String phonenumber) {
-        this.buyTime = buyTime;
-        this.orderId = orderId;
-        this.goodsName = goodsName;
-        this.goodsType = goodsType;
-        this.totalPrice = totalPrice;
-        this.location = location;
-        this.buyNum = buyNum;
-        this.userId = userId;
-        this.isTransport = isTransport;
-        this.phonenumber = phonenumber;
+    public String getGoodsId() {
+        return goodsId;
+    }
+
+    public void setGoodsId(String goodsId) {
+        this.goodsId = goodsId;
     }
 }
