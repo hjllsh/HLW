@@ -23,6 +23,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.ArrayList;
 
 @RestController
 @RequestMapping("/myPersional")
@@ -70,5 +71,28 @@ public class MyPersonalCenterController {
         return new Result(true,personalCenter,MessageConstant.INQUIRE_SUCCESS);
     }
 
-
+    @RequestMapping("/uploadImages")
+    public Result uploadImages(HttpServletResponse response,HttpServletRequest request, HttpSession session, @RequestParam("headshot")MultipartFile file){
+//        获取原始文件名
+        String originalFileName = file.getOriginalFilename();
+//        获取文件后缀名
+        String suffix = originalFileName.substring(originalFileName.lastIndexOf(".") - 1);
+//        设置文件名
+        String fileName = UuId.getUuId() + suffix;
+        try {
+//            上传图片
+            QiniuUtils.upload2Qiniu(file.getBytes(),fileName);
+//            上传成功,存入session
+            ArrayList<String> images = (ArrayList) session.getAttribute("images");
+            if (images == null){
+                images = new ArrayList<String>();
+            }
+            images.add("http://rm9hwdyan.hn-bkt.clouddn.com/"+fileName);
+            session.setAttribute("images",images);
+            return new Result(true, fileName, MessageConstant.CHANGE_AVATAR_SUCCESS);
+        } catch (IOException e) {
+            e.printStackTrace();
+            return new Result(false, MessageConstant.CHANGE_AVATAR_FAIL);
+        }
+    }
 }

@@ -1,8 +1,7 @@
 package com.hlw.service.impl;
 
-import com.github.pagehelper.Page;
-import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
+
+
 import com.hlw.dao.UserDao;
 import com.hlw.domain.Goods;
 import com.hlw.domain.GoodsImg;

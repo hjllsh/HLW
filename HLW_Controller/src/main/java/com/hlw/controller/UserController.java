@@ -172,6 +172,7 @@ public class UserController {
                 User user = (User)session.getAttribute("user");
                 user.setUserName(personalCenter.getUserName());
                 session.setAttribute("user",user);
+                userService.updateHeadshot(user);
                 return new Result(true, MessageConstant.MODIFY_SUCCESS);
             } else {
                 return new Result(false, MessageConstant.MODIFY_FAIL);

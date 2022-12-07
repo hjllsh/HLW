@@ -1,6 +1,5 @@
 package com.hlw.domain;
 
-import java.util.Objects;
 
 public class GoodsList {
     private String goodsName;
@@ -10,11 +9,13 @@ public class GoodsList {
     private String storeName;
     private String location;
     private String goodsId;
+    private String goodsLinkurl;
+    private String goodsMainImg;
 
     public GoodsList() {
     }
 
-    public GoodsList(String goodsName, String goodsType, String releaseTime, Float price, String storeName, String location, String goodsId) {
+    public GoodsList(String goodsName, String goodsType, String releaseTime, Float price, String storeName, String location, String goodsId, String goodsLinkurl, String goodsMainImg) {
         this.goodsName = goodsName;
         this.goodsType = goodsType;
         this.releaseTime = releaseTime;
@@ -22,11 +23,13 @@ public class GoodsList {
         this.storeName = storeName;
         this.location = location;
         this.goodsId = goodsId;
+        this.goodsLinkurl = goodsLinkurl;
+        this.goodsMainImg = goodsMainImg;
     }
 
     @Override
     public String toString() {
-        return "goodsList{" +
+        return "GoodsList{" +
                 "goodsName='" + goodsName + '\'' +
                 ", goodsType='" + goodsType + '\'' +
                 ", releaseTime='" + releaseTime + '\'' +
@@ -34,22 +37,10 @@ public class GoodsList {
                 ", storeName='" + storeName + '\'' +
                 ", location='" + location + '\'' +
                 ", goodsId='" + goodsId + '\'' +
+                ", goodsLinkurl='" + goodsLinkurl + '\'' +
+                ", goodsMainImg='" + goodsMainImg + '\'' +
                 '}';
     }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        GoodsList goodsList = (GoodsList) o;
-        return Objects.equals(goodsName, goodsList.goodsName) && Objects.equals(goodsType, goodsList.goodsType) && Objects.equals(releaseTime, goodsList.releaseTime) && Objects.equals(price, goodsList.price) && Objects.equals(storeName, goodsList.storeName) && Objects.equals(location, goodsList.location) && Objects.equals(goodsId, goodsList.goodsId);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(goodsName, goodsType, releaseTime, price, storeName, location, goodsId);
-    }
-
 
     public String getGoodsName() {
         return goodsName;
@@ -105,5 +96,21 @@ public class GoodsList {
 
     public void setGoodsId(String goodsId) {
         this.goodsId = goodsId;
+    }
+
+    public String getGoodsLinkurl() {
+        return goodsLinkurl;
+    }
+
+    public void setGoodsLinkurl(String goodsLinkurl) {
+        this.goodsLinkurl = goodsLinkurl;
+    }
+
+    public String getGoodsMainImg() {
+        return goodsMainImg;
+    }
+
+    public void setGoodsMainImg(String goodsMainImg) {
+        this.goodsMainImg = goodsMainImg;
     }
 }

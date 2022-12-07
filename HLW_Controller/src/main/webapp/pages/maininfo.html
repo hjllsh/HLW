@@ -45,10 +45,6 @@
                 <el-collapse-item title="七天无理由退款" name="4">
                     <div>{{infoData.location}}</div>
                 </el-collapse-item>
-<!--                <el-collapse-item title="商品描述" name="4">-->
-<!--                    <div>用户决策：根据场景可给予用户操作建议或安全提示，但不能代替用户进行决策；</div>-->
-<!--                    <div>结果可控：用户可以自由的进行操作，包括撤销、回退和终止当前操作等。</div>-->
-<!--                </el-collapse-item>-->
             </el-collapse>
 
             <el-row >
@@ -153,7 +149,7 @@
                     "goodsId": id,
                     "goodsPrice" : "100",
                     "telephonenumber" : "",
-                    // "myLocation" : "",
+                    "myLocation" : "",
                     "totalPrice" : "",
                     "isTransport":"",
                 },
@@ -186,7 +182,7 @@
             methods :{
                 buyWay(goodsId,goodsName,goodsPrice){
                     this.dialogFormVisible = true;
-                    this.order.goodsPrice=goodsPrice;
+                    this.order.price=goodsPrice;
                     this.order.goodsName=goodsName;
                     // this.order.goodsId=goodsId;
                     this.totalPrice = this.num * goodsPrice + this.transportFare;

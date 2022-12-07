@@ -94,7 +94,7 @@
         delete from t_goods where goods_id = #{goodsId}
     </delete>
     <update id="updateHeadshot" parameterType="com.hlw.domain.User">
-        update t_user set headshot = #{headshot} where user_id = #{userId}
+        update t_user set headshot = #{headshot} , user_name = #{userName} where user_id = #{userId}
     </update>
 
     <select id="getMyTrade" resultType="com.hlw.domain.MyTrade" resultMap="t_myTrade">
