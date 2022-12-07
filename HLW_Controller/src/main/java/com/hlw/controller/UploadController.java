@@ -46,17 +46,16 @@ public class UploadController {
             uploadService.uploadImages(goodsImg);
             GoodsList goodsList = BeanUtil.copyProperties(goods, GoodsList.class);
             goodsList.setGoodsMainImg(mainImg);
-            System.out.println(goodsList);
             String storeName =  uploadService.findStoreName(userId);
             goodsList.setStoreName(storeName);
             uploadService.uploadGoodsList(goodsList);
             System.out.println(goods);
+            System.out.println(goodsList);
         } catch (Exception e) {
             e.printStackTrace();
             return new Result(false,MessageConstant.RELEASE_PRODUCT_FAIL);
         }
         return new Result(true, MessageConstant.RELEASE_PRODUCT_SUCCESS);
     }
-
 
 }
