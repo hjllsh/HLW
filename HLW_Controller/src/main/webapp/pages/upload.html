@@ -251,6 +251,7 @@
                                         message:res.data.message,
                                         type:'success'
                                     });
+                                    this.resetForm(formName);
                                 }else{//执行失败
                                     this.$message.error(this.data.message);
                                 }

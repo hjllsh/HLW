@@ -27,10 +27,6 @@
     <update id="updateMyHeadshot" parameterType="com.hlw.domain.PersonalCenter">
         update t_personalcenter set headshot = #{headshot} where user_id = #{userId}
     </update>
-    <select id="getAllOrder"  resultType="list">
-        select buy_time,order_id,goods_name,goods_type,price,location,buy_num
-        from t_myorders
-    </select>
     <!--    &lt;!&ndash;        新增&ndash;&gt;-->
 <!--    <insert id="add" parameterType="com.hlw.pojo.CheckGroup">-->
 <!--        <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">-->
