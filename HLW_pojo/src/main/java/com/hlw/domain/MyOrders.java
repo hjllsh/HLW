@@ -7,37 +7,25 @@ public class MyOrders {
     private String orderId;
     private String goodsName;
     private String goodsType;
-    private Float price;
+    private Float totalPrice;
     private String location;
     private int buyNum;
     private String userId;
+    private boolean isTransport;
 
     public MyOrders() {
     }
 
-    public MyOrders(String buyTime, String orderId, String goodsName, String goodsType, Float price, String location, int buyNum, String userId) {
+    public MyOrders(String buyTime, String orderId, String goodsName, String goodsType, Float totalPrice, String location, int buyNum, String userId, boolean isTransport) {
         this.buyTime = buyTime;
         this.orderId = orderId;
         this.goodsName = goodsName;
         this.goodsType = goodsType;
-        this.price = price;
+        this.totalPrice = totalPrice;
         this.location = location;
         this.buyNum = buyNum;
         this.userId = userId;
-    }
-
-    @Override
-    public String toString() {
-        return "MyOrders{" +
-                "buyTime='" + buyTime + '\'' +
-                ", orderId='" + orderId + '\'' +
-                ", goodsName='" + goodsName + '\'' +
-                ", goodsType='" + goodsType + '\'' +
-                ", price=" + price +
-                ", location='" + location + '\'' +
-                ", buyNum=" + buyNum +
-                ", userId='" + userId + '\'' +
-                '}';
+        this.isTransport = isTransport;
     }
 
     @Override
@@ -45,12 +33,12 @@ public class MyOrders {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         MyOrders myOrders = (MyOrders) o;
-        return buyNum == myOrders.buyNum && Objects.equals(buyTime, myOrders.buyTime) && Objects.equals(orderId, myOrders.orderId) && Objects.equals(goodsName, myOrders.goodsName) && Objects.equals(goodsType, myOrders.goodsType) && Objects.equals(price, myOrders.price) && Objects.equals(location, myOrders.location) && Objects.equals(userId, myOrders.userId);
+        return buyNum == myOrders.buyNum && isTransport == myOrders.isTransport && Objects.equals(buyTime, myOrders.buyTime) && Objects.equals(orderId, myOrders.orderId) && Objects.equals(goodsName, myOrders.goodsName) && Objects.equals(goodsType, myOrders.goodsType) && Objects.equals(totalPrice, myOrders.totalPrice) && Objects.equals(location, myOrders.location) && Objects.equals(userId, myOrders.userId);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(buyTime, orderId, goodsName, goodsType, price, location, buyNum, userId);
+        return Objects.hash(buyTime, orderId, goodsName, goodsType, totalPrice, location, buyNum, userId, isTransport);
     }
 
     public String getBuyTime() {
@@ -85,12 +73,12 @@ public class MyOrders {
         this.goodsType = goodsType;
     }
 
-    public Float getPrice() {
-        return price;
+    public Float getTotalPrice() {
+        return totalPrice;
     }
 
-    public void setPrice(Float price) {
-        this.price = price;
+    public void setTotalPrice(Float totalPrice) {
+        this.totalPrice = totalPrice;
     }
 
     public String getLocation() {
@@ -115,5 +103,13 @@ public class MyOrders {
 
     public void setUserId(String userId) {
         this.userId = userId;
+    }
+
+    public boolean isTransport() {
+        return isTransport;
+    }
+
+    public void setTransport(boolean transport) {
+        isTransport = transport;
     }
 }

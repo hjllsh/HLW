@@ -193,17 +193,20 @@
                 searchData:'',
                 currentPage: 1,
                 pageSize : 4,
-                total: 40
+                total: 0,
             },
         },
         created(){
             this.showGoodsList();
+
         },
             methods: {
                 showGoodsList(){
                     axios.post("/goods/showGoodsList",this.pagination).then((res)=>{
                         if (res.data.flag){
                             this.showDataes = res.data.dataForm;
+                            this.pagination.total=parseInt(res.data.total);
+                            // alert(this.pagination.total);
                         } else {
                             this.$message.error("系统忙碌稍后重试");
                         }
@@ -217,7 +220,8 @@
                 },
                 handleCurrentChange(val) {
                    this.pagination.currentPage = val;
-                   this.showGoodsList;
+                   this.pagination.pageSize=4;
+                   this.showGoodsList();
                 },
                 addTransport(goodsPrice){
                     if (this.isTransport) {

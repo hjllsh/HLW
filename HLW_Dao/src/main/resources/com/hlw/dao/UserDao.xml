@@ -27,7 +27,7 @@
         <result property="goodsName" column="goods_name"></result>
         <result property="goodsType" column="goods_type"></result>
         <result property="buyTime" column="buy_time"></result>
-        <result property="price" column="price"></result>
+        <result property="totalPrice" column="total_price"></result>
         <result property="buyNum" column="buy_num"></result>
         <result property="location" column="location"></result>
         <result property="orderId" column="order_id"></result>
@@ -88,7 +88,7 @@
         select count(0) from t_goods where user_id = #{userId}
     </select>
     <select id="getAllOrders" resultMap="t_myorder" resultType="com.hlw.domain.MyOrders">
-        select * from t_myorders
+        select buy_time,order_id,goods_name,goods_type,buy_num,total_price,location from t_myorders
         <if test="queryString != null ">
             where user_id = #{queryString}
         </if>
