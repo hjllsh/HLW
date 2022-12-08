@@ -39,7 +39,7 @@
         <result property="goodsName" column="goods_name"></result>
         <result property="goodsType" column="goods_type"></result>
         <result property="buyTime" column="buy_time"></result>
-        <result property="price" column="price"></result>
+        <result property="totalPrice" column="price"></result>
         <result property="buyNum" column="buy_num"></result>
         <result property="location" column="location"></result>
         <result property="orderId" column="order_id"></result>
@@ -95,13 +95,23 @@
     </select>
 <!-- -->
     <delete id="deleteGoods">
-        delete from t_goods where goods_id = #{goodsId}
+        delete from t_goods where goods_id = #{goodsId};
     </delete>
+
     <delete id="deleteImg">
-        delete from t_goodsImg where goods_id = #{goodsId}
+        delete from t_goodsImg where goods_id = #{goodsId};
     </delete>
+
+    <delete id="deleteGoodsList">
+        delete from  t_goodslist where goods_id = #{goodsId};
+    </delete>
+
     <update id="updateHeadshot" parameterType="com.hlw.domain.User">
         update t_user set headshot = #{headshot} , user_name = #{userName} where user_id = #{userId}
+    </update>
+
+    <update id="updatePartUser">
+        update t_user set headshot = #{headshot} , user_name = #{userName}, email = #{email} where user_id = #{userId}
     </update>
 
     <select id="getMyTrade" resultType="com.hlw.domain.MyTrade" resultMap="t_myTrade">

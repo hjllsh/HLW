@@ -66,6 +66,11 @@ public class UserServiceImpl implements UserService {
         boolean flag = true;
         try {
             userDao.updatePersonalCenter(personalCenter);
+            String userId = personalCenter.getUserId();
+            String email = personalCenter.getEmail();
+            String userName = personalCenter.getUserName();
+            String headshot = personalCenter.getHeadshot();
+            userDao.updatePartUser(email, userName, headshot, userId);
         }catch (Exception e){
             e.printStackTrace();
             flag = false;

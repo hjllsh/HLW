@@ -24,6 +24,11 @@ public class FunctionServiceImpImpl implements FunctionService {
         boolean flag = true;
         try {
             userDao.updatePersonalCenter(personalCenter);
+            String userId = personalCenter.getUserId();
+            String email = personalCenter.getEmail();
+            String userName = personalCenter.getUserName();
+            String headshot = personalCenter.getHeadshot();
+            userDao.updatePartUser(email, userName, headshot, userId);
         } catch (Exception e) {
             e.printStackTrace();
             flag = false;
@@ -61,6 +66,7 @@ public class FunctionServiceImpImpl implements FunctionService {
         try {
             userDao.deleteImg(goodsId);
             userDao.deleteGoods(goodsId);
+            userDao.deleteGoodsList(goodsId);
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -37,6 +37,8 @@ public interface UserDao {
 
     void deleteImg(String goodsId);
 
+    void deleteGoodsList(String goodsId);
+
     List<MyOrders> getAllOrders(@Param("size") Integer size, @Param("start") Integer start, @Param("queryString") String queryString);
 
     List<MyTrade> getMyTrade(@Param("size") Integer size, @Param("start") Integer start, @Param("userId") String userId);
@@ -50,4 +52,6 @@ public interface UserDao {
     Integer getTotalOrders(@Param("userId") String userId);
 
     Goods getGoodsInfo(String goodsId);
+
+    void updatePartUser(@Param("email") String email,@Param("userName") String userName,@Param("headshot") String headshot, @Param("userId") String userId);
 }
