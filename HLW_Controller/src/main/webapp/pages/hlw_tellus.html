@@ -19,15 +19,23 @@
     <el-col>
         <img src="../img/us.png" width="100%">
     </el-col>
+    <el-col offset="6" :span="12"><p style="font-size: xx-large" >服务</p></el-col>
 
-        <el-col :offset="6" :span="12" >
-            <p style="font-size: xx-large" >服务</p>
+        <el-col :offset="6" :span="16" >
+
             <img src="../img/hezuo1.png" style="cursor:pointer"
                  onclick='window.alert("请发送邮件至邮箱:111111111@163.com")' hspace="100px">
             <img src="../img/wenti.png" style="cursor:pointer"
                  onclick='window.alert("请发送邮件至邮箱:111111111@163.com")' >
             <img src="../img/zixun.png" style="cursor:pointer"
                  onclick='window.alert("请发送邮件至邮箱:111111111@163.com")' hspace="100px">
+            <el-col :span="4" style="cursor:pointer">
+                <img src="../img/github.png"  style="width: 100px; height: 100px; margin-top: 23px"
+                     onclick='' hspace="100px" onclick='window.open("https://github.com/hjllsh?tab=repositories")' >
+                <el-col style="font-size: 20px;text-align: center">
+                    <span style="margin-left: 115px" onclick='window.open("https://github.com/hjllsh?tab=repositories")' >github</span>
+                </el-col>
+            </el-col>
         </el-col>
 
 
@@ -64,6 +72,9 @@
         methods: {
             handleChange(val) {
                 console.log(val);
+            },
+            goToGithub(){
+                alert(1);
             }
         }
     });
