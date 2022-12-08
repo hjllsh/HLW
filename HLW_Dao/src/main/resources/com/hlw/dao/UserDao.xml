@@ -24,9 +24,8 @@
         <result property="userId" column="user_id"></result>
     </resultMap>
     <resultMap id="t_myTrade" type="com.hlw.domain.MyTrade">
-        <result property="buyTime" column="buy_time"></result>
         <result property="goodsName" column="goods_name"></result>
-        <result property="buyerLocation" column="buyer_location"></result>
+        <result property="myLocation" column="my_location"></result>
         <result property="phoneNumber" column="phone_number"></result>
         <result property="num" column="num"></result>
         <result property="phoneNumber" column="phone_number"></result>

@@ -174,7 +174,7 @@
                 postOrder(){
                     axios.post("/order/buy",this.order).then((res)=>{
                         if (res.data.flag){
-
+                            this.dialogFormVisible=true;
                         } else {
                             this.$message.error(res.data.message);
                         }

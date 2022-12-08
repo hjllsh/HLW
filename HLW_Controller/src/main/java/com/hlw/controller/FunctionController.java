@@ -169,6 +169,9 @@ public class FunctionController {
         boolean flag = true;
         try {
             list = functionService.getMyTrade(userId, pageSize, currentPage);
+            for (MyTrade myTrade: list){
+                System.out.println(myTrade);
+            }
         } catch (Exception e) {
             e.printStackTrace();
             flag = false;
