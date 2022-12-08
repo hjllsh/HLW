@@ -20,7 +20,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @RestController
-@Transactional
 @RequestMapping("/order")
 public class MyOrderController {
     @Autowired
@@ -52,7 +51,13 @@ public class MyOrderController {
         myOrderService.updatePersonalCenterAccount(personalCenter);
         int oldNum = myOrderService.getGoodsNum(order.getGoodsId());
         int totalNum = oldNum - order.getBuyNum();
-        myOrderService.updateGoodsNum(order.getGoodsId(),totalNum);
+        try{
+            myOrderService.updateGoodsNum(order.getGoodsId(),totalNum);
+        }catch (Exception e){
+            e.printStackTrace();
+            return new Result(false, MessageConstant.PURCHASE_FAIL);
+        }
+
         return new Result(true, MessageConstant.PURCHASE_SUCCESS);
     }
 }

@@ -27,6 +27,9 @@ public class MyOrderServiceImpl implements MyOrderService {
     }
 
     public void updateGoodsNum(String goodId, int totalNum) {
+        if (totalNum<0){
+            throw new RuntimeException("123");
+        }
         myOrderDao.updateGoodsNum(goodId,totalNum);
     }
 
