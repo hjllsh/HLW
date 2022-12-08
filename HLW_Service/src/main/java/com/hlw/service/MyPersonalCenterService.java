@@ -1,16 +1,14 @@
 package com.hlw.service;
 
-import com.hlw.domain.MyOrders;
 import com.hlw.domain.PersonalCenter;
 import com.hlw.domain.User;
+import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
-
+@Transactional
 public interface MyPersonalCenterService {
     PersonalCenter findMyPersonalByUserId(String userId);
 
     void initMyPersonalCenter(User user);
-//    List<MyOrders> getAllOrder(MyOrders myOrders);
 
     void updateMyHeadshot(PersonalCenter personalCenter);
 

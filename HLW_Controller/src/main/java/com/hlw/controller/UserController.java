@@ -14,7 +14,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
-import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -192,4 +191,16 @@ public class UserController {
                 return new Result(false, MessageConstant.MODIFY_FAIL);
             }
         }
+
+        @RequestMapping("/exit")
+        public Result exit(HttpSession session) {
+        try {
+            session.removeAttribute("user");
+            session.removeAttribute("userId");
+        } catch (Exception e){
+            e.printStackTrace();
+            return new Result(false,MessageConstant.EXIT_FAIL);
+        }
+            return new Result(true,MessageConstant.EXIT_SUCCESS);
+    }
 }

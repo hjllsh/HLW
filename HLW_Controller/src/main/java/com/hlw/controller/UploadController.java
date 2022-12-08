@@ -46,6 +46,7 @@ public class UploadController {
             uploadService.uploadImages(goodsImg);
             GoodsList goodsList = BeanUtil.copyProperties(goods, GoodsList.class);
             goodsList.setGoodsMainImg(mainImg);
+            session.removeAttribute("images");
             String storeName =  uploadService.findStoreName(userId);
             goodsList.setStoreName(storeName);
             uploadService.uploadGoodsList(goodsList);
