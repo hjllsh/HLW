@@ -7,11 +7,13 @@ import com.hlw.domain.User;
 import com.hlw.service.MyOrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class MyOrderServiceImpl implements MyOrderService {
     @Autowired
     MyOrderDao myOrderDao;
+
     public void addOrder(MyOrders order) {
         myOrderDao.addOrder(order);
     }
@@ -23,4 +25,13 @@ public class MyOrderServiceImpl implements MyOrderService {
     public void updatePersonalCenterAccount(PersonalCenter personalCenter) {
     myOrderDao.updatePersonalCenterAccount(personalCenter.getUserId(), personalCenter.getAccount());
     }
+
+    public void updateGoodsNum(String goodId, int totalNum) {
+        myOrderDao.updateGoodsNum(goodId,totalNum);
+    }
+
+    public int getGoodsNum(String goodsId) {
+        return myOrderDao.getGoodsNum(goodsId);
+    }
+
 }

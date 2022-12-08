@@ -1,6 +1,5 @@
 package com.hlw.domain;
 
-import java.util.Objects;
 
 public class MyOrders {
     private String buyTime;
@@ -13,11 +12,11 @@ public class MyOrders {
     private String userId;
     private String isTransport;
     private String phonenumber;
-
+    private String goodsId;
     public MyOrders() {
     }
 
-    public MyOrders(String buyTime, String orderId, String goodsName, String goodsType, Float totalPrice, String location, int buyNum, String userId, String isTransport, String phonenumber) {
+    public MyOrders(String buyTime, String orderId, String goodsName, String goodsType, Float totalPrice, String location, int buyNum, String userId, String isTransport, String phonenumber, String goodsId) {
         this.buyTime = buyTime;
         this.orderId = orderId;
         this.goodsName = goodsName;
@@ -28,6 +27,7 @@ public class MyOrders {
         this.userId = userId;
         this.isTransport = isTransport;
         this.phonenumber = phonenumber;
+        this.goodsId = goodsId;
     }
 
     @Override
@@ -43,20 +43,8 @@ public class MyOrders {
                 ", userId='" + userId + '\'' +
                 ", isTransport='" + isTransport + '\'' +
                 ", phonenumber='" + phonenumber + '\'' +
+                ", goodsId='" + goodsId + '\'' +
                 '}';
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        MyOrders myOrders = (MyOrders) o;
-        return buyNum == myOrders.buyNum && Objects.equals(buyTime, myOrders.buyTime) && Objects.equals(orderId, myOrders.orderId) && Objects.equals(goodsName, myOrders.goodsName) && Objects.equals(goodsType, myOrders.goodsType) && Objects.equals(totalPrice, myOrders.totalPrice) && Objects.equals(location, myOrders.location) && Objects.equals(userId, myOrders.userId) && Objects.equals(isTransport, myOrders.isTransport) && Objects.equals(phonenumber, myOrders.phonenumber);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(buyTime, orderId, goodsName, goodsType, totalPrice, location, buyNum, userId, isTransport, phonenumber);
     }
 
     public String getBuyTime() {
@@ -137,5 +125,13 @@ public class MyOrders {
 
     public void setPhonenumber(String phonenumber) {
         this.phonenumber = phonenumber;
+    }
+
+    public String getGoodsId() {
+        return goodsId;
+    }
+
+    public void setGoodsId(String goodsId) {
+        this.goodsId = goodsId;
     }
 }

@@ -39,7 +39,7 @@
         <result property="goodsName" column="goods_name"></result>
         <result property="goodsType" column="goods_type"></result>
         <result property="buyTime" column="buy_time"></result>
-        <result property="totalPrice" column="price"></result>
+        <result property="totalPrice" column="total_price"></result>
         <result property="buyNum" column="buy_num"></result>
         <result property="location" column="location"></result>
         <result property="orderId" column="order_id"></result>

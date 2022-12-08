@@ -9,6 +9,7 @@ import com.hlw.service.MyOrderService;
 import com.hlw.utils.UuId;
 import org.omg.CORBA.ORB;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -19,6 +20,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @RestController
+@Transactional
 @RequestMapping("/order")
 public class MyOrderController {
     @Autowired
@@ -48,6 +50,9 @@ public class MyOrderController {
         personalCenter.setAccount(account - order.getTotalPrice());
         session.setAttribute("personalCenter",personalCenter);
         myOrderService.updatePersonalCenterAccount(personalCenter);
+        int oldNum = myOrderService.getGoodsNum(order.getGoodsId());
+        int totalNum = oldNum - order.getBuyNum();
+        myOrderService.updateGoodsNum(order.getGoodsId(),totalNum);
         return new Result(true, MessageConstant.PURCHASE_SUCCESS);
     }
 }
