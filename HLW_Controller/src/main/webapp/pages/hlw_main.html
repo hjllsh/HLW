@@ -273,9 +273,13 @@
                     });
                 },
                exit(){
-                   alert("1");
-                   axios.get("/user").then((res)=>{
-                      alert(res);
+                   axios.get("/user/exit").then((res)=>{
+                        if (res.data.flag) {
+                            this.$message.success(res.data.message);
+                            window.location.href = "http://localhost:81/pages/login.html";
+                        } else {
+                            this.$message.error(res.data.message);
+                        }
                    });
                },
 
