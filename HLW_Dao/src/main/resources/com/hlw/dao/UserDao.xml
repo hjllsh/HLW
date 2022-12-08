@@ -23,6 +23,17 @@
         <result property="goodsId" column="goods_id"></result>
         <result property="userId" column="user_id"></result>
     </resultMap>
+    <resultMap id="t_myTrade" type="com.hlw.domain.MyTrade">
+        <result property="goodsName" column="goods_name"></result>
+        <result property="myLocation" column="my_location"></result>
+        <result property="phoneNumber" column="phone_number"></result>
+        <result property="num" column="num"></result>
+        <result property="phoneNumber" column="phone_number"></result>
+        <result property="transportFare" column="transport_fare"></result>
+        <result property="total" column="total"></result>
+        <result property="orderId" column="order_id"></result>
+        <result property="userId" column="user_id"></result>
+    </resultMap>
     <resultMap id="t_myorder" type="com.hlw.domain.MyOrders">
         <result property="goodsName" column="goods_name"></result>
         <result property="goodsType" column="goods_type"></result>
@@ -78,12 +89,35 @@
         limit #{start} , #{size};
     </select>
 
+    <select id="getGoodsInfo" resultType="com.hlw.domain.Goods" resultMap="t_goods">
+        select * from t_goods where goods_id = #{goodsId};
+    </select>
+<!-- -->
     <delete id="deleteGoods">
-        delete from t_goods where goods_id = #{goodsId}
+        delete from t_goods where goods_id = #{goodsId};
     </delete>
+
+    <delete id="deleteImg">
+        delete from t_goodsImg where goods_id = #{goodsId};
+    </delete>
+
+    <delete id="deleteGoodsList">
+        delete from  t_goodslist where goods_id = #{goodsId};
+    </delete>
+
     <update id="updateHeadshot" parameterType="com.hlw.domain.User">
         update t_user set headshot = #{headshot} , user_name = #{userName} where user_id = #{userId}
     </update>
+
+    <update id="updatePartUser">
+        update t_user set headshot = #{headshot} , user_name = #{userName}, email = #{email} where user_id = #{userId}
+    </update>
+
+    <select id="getMyTrade" resultType="com.hlw.domain.MyTrade" resultMap="t_myTrade">
+        select *
+        from t_mytrade where user_id = #{userId} limit #{start}, #{size};
+    </select>
+
     <select id="getMyTotalGoods" resultType="int">
         select count(0) from t_goods where user_id = #{userId}
     </select>
@@ -96,5 +130,13 @@
     </select>
     <select id="getTotalOrders" resultType="int">
         select count(0) from t_myorders where user_id = #{userId}
+    </select>
+
+    <select id="getMyTotalTrade" resultType="int">
+        select count(0) from t_mytrade where user_id = #{userId}
+    </select>
+
+    <select id="getMainInfo" resultType="string">
+        select img from t_goodsimg where goods_id = #{goodsId};
     </select>
 </mapper>

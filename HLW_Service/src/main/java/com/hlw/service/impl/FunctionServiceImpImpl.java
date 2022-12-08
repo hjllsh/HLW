@@ -4,6 +4,7 @@ package com.hlw.service.impl;
 
 import com.hlw.dao.UserDao;
 import com.hlw.domain.Goods;
+import com.hlw.domain.MyTrade;
 import com.hlw.domain.MyOrders;
 import com.hlw.domain.PersonalCenter;
 import com.hlw.service.FunctionService;
@@ -23,6 +24,11 @@ public class FunctionServiceImpImpl implements FunctionService {
         boolean flag = true;
         try {
             userDao.updatePersonalCenter(personalCenter);
+            String userId = personalCenter.getUserId();
+            String email = personalCenter.getEmail();
+            String userName = personalCenter.getUserName();
+            String headshot = personalCenter.getHeadshot();
+            userDao.updatePartUser(email, userName, headshot, userId);
         } catch (Exception e) {
             e.printStackTrace();
             flag = false;
@@ -48,8 +54,7 @@ public class FunctionServiceImpImpl implements FunctionService {
 
     public List<Goods> getMyAllGoods(String queryString, Integer size, Integer start) {
         try {
-            start = (start - 1) * size;
-            List<Goods> list = userDao.getMyAllGoods(size,start,queryString);
+            List<Goods> list = userDao.getMyAllGoods(size,(start-1)*size,queryString);
             return list;
         } catch (Exception e) {
             e.printStackTrace();
@@ -59,10 +64,45 @@ public class FunctionServiceImpImpl implements FunctionService {
 
     public void deleteGoods(String goodsId) {
         try {
+            userDao.deleteImg(goodsId);
             userDao.deleteGoods(goodsId);
+            userDao.deleteGoodsList(goodsId);
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+    public  List<MyTrade> getMyTrade(String userId, Integer pageSize, Integer currentPage){
+        try {
+
+            return userDao.getMyTrade(pageSize, (currentPage-1)*pageSize,userId);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public int getMyTotalTrade(String userId) {
+        try {
+            return userDao.getMyTotalTrade(userId);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return 0;
+        }
+    }
+
+    public List<String> getMainInfo(String goodsId) {
+        try {
+             List<String> list = new ArrayList<>();
+             list = userDao.getMainInfo(goodsId);
+             return list;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public Goods getGoodsInfo(String goodsId) {
+        return userDao.getGoodsInfo(goodsId);
     }
 
     public Integer getMyTotalGoods(String userId) {

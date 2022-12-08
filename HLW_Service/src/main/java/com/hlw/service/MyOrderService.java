@@ -7,7 +7,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Transactional
 public interface MyOrderService {
-
     void addOrder(MyOrders order);
 
     void updateUserAccount(User user);
