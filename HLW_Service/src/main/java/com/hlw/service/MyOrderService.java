@@ -17,4 +17,5 @@ public interface MyOrderService {
 
     int getGoodsNum(String goodsId);
 
+    public void  insertMyTrade(MyOrders order);
 }

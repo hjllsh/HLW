@@ -7,6 +7,10 @@
           insert into t_myorders(buy_time,order_id,goods_name,goods_type,total_price,location,buy_num,user_id,phonenumber,is_transport)
           values(#{buyTime},#{orderId},#{goodsName},#{goodsType},#{totalPrice},#{location},#{buyNum},#{userId},#{phonenumber},#{isTransport})
       </insert>
+    <insert id="insertMyTrade" parameterType="com.hlw.domain.MyTrade">
+        insert into t_mytrade(goods_name, my_location, phone_number, num, transport_fare, total, order_id, user_id)
+        value (#{goodsName}, #{myLocation}, #{phoneNumber}, #{num}, #{transportFare}, #{total}, #{orderId}, #{userId});
+    </insert>
     <update id="updateUserAccount">
     update t_user set account = #{account} where user_id = #{userId};
     </update>

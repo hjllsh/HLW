@@ -102,14 +102,14 @@
                             <el-col :span="5"><span>购买运费险:</span></el-col>
                             <el-col :span="16">
                                 <el-switch
-                                        v-model="isTransport"
+                                        v-model="order.isTransport"
                                         active-text="运费险"
                                         @change="addTransport()">
                                 </el-switch>
                             </el-col>
                         </el-col>
                         <el-col>
-                            <el-col offset="9"><h3>总金额:<span style="margin-left: 15px" v-model="order.price">{{order.price}}</span>￥</h3></el-col>
+                            <el-col offset="9"><h3>总金额:<span style="margin-left: 15px" v-model="order.totalPrice">{{order.totalPrice}}</span>￥</h3></el-col>
                         </el-col>
                     </el-card>
                     <div style="text-align: center; margin-top: 20px"><el-button type="primary" round class="btn-primary" @click="postOrder">确认购买</el-button></div>
@@ -132,7 +132,6 @@
             data:{
                 dialogFormVisible:false,
                 transportFare:0,
-                isTransport : false,
                 goodsId: id,
                 order:{
                     buyTime: "",
@@ -142,8 +141,10 @@
                     buyNum : 1,
                     phonenumber : "",
                     location : "",
-                    price : "",
+                    totalPrice : "",
                     userId: "",
+                    goodsId: id,
+                    isTransport:false
                 },
                 infoData:{
                     name:"迷你电脑",
@@ -181,13 +182,13 @@
                     });
                 },
                 handleChange(){
-                  this.order.price = this.infoData.price * this.order.buyNum + this.transportFare
+                  this.order.totalPrice = this.infoData.price * this.order.buyNum + this.transportFare
                 },
                 getGoodsInfo(){
                     axios.get("/function/getGoodsInfo?goodsId="+this.goodsId).then((res)=>{
                         if (res.data.flag){
                             this.goodsInfo = res.data.data
-                            this.order.price=res.data.data.price
+                            this.order.totalPrice=res.data.data.price
                             this.order.goodsName=res.data.data.goodsName
                             this.infoData.price=res.data.data.price
                             this.$message.success(res.data.message)

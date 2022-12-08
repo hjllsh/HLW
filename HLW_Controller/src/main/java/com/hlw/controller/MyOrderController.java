@@ -48,6 +48,7 @@ public class MyOrderController {
         session.setAttribute("personalCenter",personalCenter);
         int oldNum = myOrderService.getGoodsNum(order.getGoodsId());
         int totalNum = oldNum - order.getBuyNum();
+        myOrderService.insertMyTrade(order);
         myOrderService.updateGoodsNum(order.getGoodsId(),totalNum);
         myOrderService.addOrder(order);
         myOrderService.updateUserAccount(user);

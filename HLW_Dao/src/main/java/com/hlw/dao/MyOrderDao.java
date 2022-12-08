@@ -2,6 +2,7 @@ package com.hlw.dao;
 
 import cn.hutool.db.sql.Order;
 import com.hlw.domain.MyOrders;
+import com.hlw.domain.MyTrade;
 import org.apache.ibatis.annotations.Param;
 
 public interface MyOrderDao {
@@ -15,4 +16,6 @@ public interface MyOrderDao {
     void updateGoodsNum(@Param("goodsId")String goodId, @Param("totalNum") int totalNum);
 
     int getGoodsNum(@Param("goodsId") String goodsId);
+
+    void insertMyTrade(MyTrade myTrade);
 }
