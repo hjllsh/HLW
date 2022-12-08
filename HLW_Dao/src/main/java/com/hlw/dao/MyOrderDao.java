@@ -18,4 +18,6 @@ public interface MyOrderDao {
     int getGoodsNum(@Param("goodsId") String goodsId);
 
     void insertMyTrade(MyTrade myTrade);
+
+    String selectSellerId(String goodsId);
 }

@@ -39,9 +39,10 @@ public class MyOrderServiceImpl implements MyOrderService {
     }
 
     public void insertMyTrade(MyOrders order){
+        String sellerId = myOrderDao.selectSellerId(order.getGoodsId());
         MyTrade myTrade = new MyTrade(order.getGoodsName(), order.getLocation(),
                 order.getPhonenumber(), order.getBuyNum(), order.getIsTransport(),
-                order.getTotalPrice(), order.getOrderId(), order.getUserId());
+                order.getTotalPrice(), order.getOrderId(), sellerId);
         if(myTrade.getTransportFare().equals("true")){
             myTrade.setTransportFare("已购买");
         }else if(myTrade.getTransportFare().equals("false")){

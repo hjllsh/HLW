@@ -52,6 +52,7 @@ public class MyOrderController {
         int oldNum = myOrderService.getGoodsNum(order.getGoodsId());
         int totalNum = oldNum - order.getBuyNum();
         String goodsId = order.getGoodsId();
+        myOrderService.insertMyTrade(order);
         if (totalNum == 0) {
             functionService.deleteGoods(goodsId);
         }
@@ -62,7 +63,6 @@ public class MyOrderController {
             return new Result(false, runtimeException.getMessage());
         }
         myOrderService.addOrder(order);
-        myOrderService.insertMyTrade(order);
         myOrderService.updateUserAccount(user);
         myOrderService.updatePersonalCenterAccount(personalCenter);
         return new Result(true, MessageConstant.PURCHASE_SUCCESS);

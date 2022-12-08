@@ -23,4 +23,7 @@
     <select id="getGoodsNum" resultType="int">
         select goods_num from t_goods where goods_id = #{goodsId}
     </select>
+    <select id="selectSellerId" resultType="java.lang.String">
+        select user_id from t_goods where goods_id = #{goodsId};
+    </select>
 </mapper>
