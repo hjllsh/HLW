@@ -273,9 +273,16 @@
                     });
                 },
                exit(){
-                   alert("1");
-                   axios.get("/user").then((res)=>{
-                      alert(res);
+                   axios.get("/user/exit").then((res)=>{
+                       if (res.data.flag){
+                      this.$message({
+                          message:res.data.message,
+                          type: 'success'
+                      });
+                       window.location.href="http://localhost:81/pages/login.html";
+                       } else {
+                           this.$message.error(this.data.message);
+                       }
                    });
                },
 
