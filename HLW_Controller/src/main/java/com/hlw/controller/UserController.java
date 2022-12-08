@@ -78,6 +78,21 @@ public class UserController {
                 return new Result(false, MessageConstant.LOGIN_FAIL);
             }
         }
+
+        //退出系统
+    @RequestMapping("/exit")
+    public Result exit(HttpSession session){
+         try{
+             //销毁session
+             session.removeAttribute("user");
+             session.removeAttribute("userId");
+             session.invalidate();
+             return new Result(true,MessageConstant.EXIT_SUCCESS);
+         }catch (Exception e){
+             return new Result(false,MessageConstant.EXIT_FAIL);
+         }
+
+    }
 //    找回密码发送邮箱
         @RequestMapping("/getEmail")
         public Result getEmail (User user){

@@ -5,6 +5,7 @@ import com.hlw.constant.Result;
 import com.hlw.domain.MyOrders;
 import com.hlw.domain.PersonalCenter;
 import com.hlw.domain.User;
+import com.hlw.service.FunctionService;
 import com.hlw.service.MyOrderService;
 import com.hlw.utils.UuId;
 import org.omg.CORBA.ORB;
@@ -24,6 +25,8 @@ import java.util.Date;
 public class MyOrderController {
     @Autowired
     MyOrderService myOrderService;
+    @Autowired
+    FunctionService functionService;
     //提交表单
     @RequestMapping("/buy")
     public Result buy(@RequestBody MyOrders order, HttpSession session) {
@@ -48,9 +51,18 @@ public class MyOrderController {
         session.setAttribute("personalCenter",personalCenter);
         int oldNum = myOrderService.getGoodsNum(order.getGoodsId());
         int totalNum = oldNum - order.getBuyNum();
-        myOrderService.insertMyTrade(order);
-        myOrderService.updateGoodsNum(order.getGoodsId(),totalNum);
+        String goodsId = order.getGoodsId();
+        if (totalNum == 0) {
+            functionService.deleteGoods(goodsId);
+        }
+        try {
+            myOrderService.updateGoodsNum(goodsId, totalNum);
+        } catch (RuntimeException runtimeException){
+            runtimeException.printStackTrace();
+            return new Result(false, runtimeException.getMessage());
+        }
         myOrderService.addOrder(order);
+        myOrderService.insertMyTrade(order);
         myOrderService.updateUserAccount(user);
         myOrderService.updatePersonalCenterAccount(personalCenter);
         return new Result(true, MessageConstant.PURCHASE_SUCCESS);
