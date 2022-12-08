@@ -76,8 +76,8 @@
                                 </el-col>
                                 <el-col :span="3" style="font-size: 16px;text-align: right;line-height: 32px">
                                     <el-radio-group :disabled="userDisabled" v-model="userForm.sex" >
-                                        <el-radio label="男"></el-radio>
-                                        <el-radio label="女"></el-radio>
+                                        <el-radio label="男" value="男"></el-radio>
+                                        <el-radio label="女" value="女"></el-radio>
                                     </el-radio-group>
                                     <!--<el-input size="small" type="text" v-model="userForm.sex" :disabled="userDisabled"></el-input>-->
                                 </el-col>
@@ -235,7 +235,7 @@
                             </template>
                         </el-tab-pane>
 <!--                        我卖出的-->
-                        <el-tab-pane label="我卖出的" name="fourth">
+                        <el-tab-pane label="我卖出的" name="fourth" >
                             <template>
                                 <el-table
                                         :data="tableData2"
@@ -243,41 +243,51 @@
                                         max-height="500">
                                     <el-table-column
                                             fixed
-                                            prop="date"
+                                            prop="buyTime"
                                             label="日期"
                                             width="160">
                                     </el-table-column>
                                     <el-table-column
-                                            prop="buyer"
-                                            label="买家"
+                                            prop="orderId"
+                                            label="订单号"
                                             width="130">
                                     </el-table-column>
                                     <el-table-column
-                                            prop="name"
+                                            prop="goodsName"
                                             label="商品名称"
                                             width="130">
                                     </el-table-column>
                                     <el-table-column
-                                            prop="number"
+                                            prop="num"
                                             label="数量"
                                             width="130">
                                     </el-table-column>
                                     <el-table-column
-                                            prop="price"
+                                            prop="total"
                                             label="价格"
                                             width="130">
                                     </el-table-column>
                                     <el-table-column
-                                            prop="address"
+                                            prop="buyerLocation"
                                             label="买家地址"
                                             width="300">
                                     </el-table-column>
                                     <el-table-column
-                                            prop="insurance"
+                                            prop="transportFare"
                                             label="运费险"
                                             width="130">
                                     </el-table-column>
                                 </el-table>
+                                <div class="block" style="margin-top: 20px">
+                                    <el-pagination
+                                            @size-change="handleSizeChange2"
+                                            @current-change="handleCurrentChange2"
+                                            :current-page="currentPage2"
+                                            :page-size="pageSize2"
+                                            layout="total, prev, pager, next, jumper"
+                                            :total="totalPage2">
+                                    </el-pagination>
+                                </div>
                             </template>
 
                         </el-tab-pane>
@@ -322,6 +332,9 @@
                     currentPage1: 1,
                     pageSize1: 8,
                     totalPage1: 40,
+                    currentPage2: 1,
+                    pageSize2: 8,
+                    totalPage2: 40,
                     activeName: 'first',
                     userDisabled: true,
                     userForm: {
@@ -356,16 +369,39 @@
                         buyNum:'',
                         location:''
                     }],
-                    tableData2: [{date: '2016-05-03', buyer:'蓝屏', name: '王小虎', number:'1', price:'100'+'￥', address: '上海市普陀区金沙江路 1518 弄', insurance: '已购买'},{date: '2016-05-03', buyer:'蓝屏', name: '王小虎', number:'1', price:'100'+'￥', address: '上海市普陀区金沙江路 1518 弄', insurance: '已购买'},{date: '2016-05-03', buyer:'蓝屏', name: '王小虎', number:'1', price:'100'+'￥', address: '上海市普陀区金沙江路 1518 弄', insurance: '已购买'}, {date: '2016-05-02', buyer:'孔维', name: '王小虎', number:'1', price:'100'+'￥', address: '上海市普陀区金沙江路 1518 弄', insurance: '已购买'}, {date: '2016-05-04', buyer:'lanping', name: '王小虎', number:'1', price:'100'+'￥', address: '上海市普陀区金沙江路 1518 弄', insurance: '已购买'}, {date: '2016-05-01', buyer:'孔维', name: '王小虎', number:'1', price:'100'+'￥', address: '上海市普陀区金沙江路 1518 弄', insurance: '已购买'}, {date: '2016-05-08', buyer:'孔维', name: '王小虎', number:'1', price:'100'+'￥', address: '上海市普陀区金沙江路 1518 弄', insurance: '已购买'}, {date: '2016-05-06', buyer:'孔维', name: '王小虎', number:'1', price:'100'+'￥', address: '上海市普陀区金沙江路 1518 弄', insurance: '已购买'}, {date: '2016-05-07', buyer:'孔维', name: '王小虎', number:'1', price:'100'+'￥', address: '上海市普陀区金沙江路 1518 弄', insurance: '已购买'}],
+                    tableData2: [{
+                        buyTime : "",
+                        goodsName: "",
+                        buyerLocation: "",
+                        phoneNumber: "",
+                        num: "",
+                        transportFare: "",
+                        total: "",
+                        orderId: "",
+                        userId: "",
+                    }],
 
             },
            created(){
                 this.getMyPersonalCenterInfo();
                 this.getMyGoods();
                 this.getOrderList();
+                 this.getMyTrade();
            },
             methods: {
-                getMyPersonalCenterInfo(){
+                getMyTrade(){
+                    axios.get("/function/getMyTrade?pageSize="+this.pageSize2+"&currentPage="+this.currentPage2).then((res)=>{
+                        if (res.data.flag){
+                            this.tableData2 = res.data.data;
+                        } else {
+                            this.$message.error(res.data.message);
+                        }
+                    });
+                    axios.get("/function/getMyTotalTrade").then((res)=>{
+                        this.totalPage2 = res.data.data;
+                    });
+                },
+             getMyPersonalCenterInfo(){
                     axios.get("/myPersional/getMyPersionalCenterInfo").then((res)=>{
                        if (res.data.flag){
                            this.$message.success(res.data.message);
@@ -430,6 +466,15 @@
                     this.currentPage1 = val;
                     this.pageSize1 = 8;
                     this.getOrderList()
+                },
+                handleSizeChange2(val) {
+                    // console.log(`每页 ${val} 条`);
+                },
+                handleCurrentChange2(val) {
+                    // console.log(`当前页: ${val}`);
+                    this.currentPage2 = val;
+                    this.pageSize2 = 8;
+                    this.getMyTrade();
                 },
                 handleEdit(index, row) {
                     console.log(index, row);

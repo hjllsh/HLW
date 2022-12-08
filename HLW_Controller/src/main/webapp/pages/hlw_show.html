@@ -188,6 +188,11 @@
                         }
                     });
                 },
+                jump(){
+                    axios.get("/function/setGoodId?goodsId="+this.goodsId).then((res)=>{
+                            window.location.href = 'maininfo.html'
+                    });
+                },
                 handleChange(goodsPrice){
                     this.totalPrice = this.num * goodsPrice + this.transportFare;
                 },

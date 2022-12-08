@@ -11,7 +11,6 @@ public class GoodsImg {
     public GoodsImg() {
     }
 
-
     public GoodsImg(String userId, String goodsId, List<String> img) {
         this.userId = userId;
         this.goodsId = goodsId;
@@ -22,8 +21,8 @@ public class GoodsImg {
     public String toString() {
         return "GoodsImg{" +
                 "userId='" + userId + '\'' +
-                ", goodsId=" + goodsId +
-                ", img='" + img + '\'' +
+                ", goodsId='" + goodsId + '\'' +
+                ", img=" + img +
                 '}';
     }
 
@@ -32,7 +31,7 @@ public class GoodsImg {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         GoodsImg goodsImg = (GoodsImg) o;
-        return goodsId == goodsImg.goodsId && Objects.equals(userId, goodsImg.userId) && Objects.equals(img, goodsImg.img);
+        return Objects.equals(userId, goodsImg.userId) && Objects.equals(goodsId, goodsImg.goodsId) && Objects.equals(img, goodsImg.img);
     }
 
     @Override

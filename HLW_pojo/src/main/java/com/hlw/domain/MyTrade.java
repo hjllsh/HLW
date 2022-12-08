@@ -35,7 +35,6 @@ public class MyTrade {
                 ", transportFare='" + transportFare + '\'' +
                 ", total=" + total +
                 ", orderId='" + orderId + '\'' +
-                ", userId='" + userId + '\'' +
                 '}';
     }
 

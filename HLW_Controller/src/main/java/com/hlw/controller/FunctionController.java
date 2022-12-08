@@ -1,15 +1,18 @@
 package com.hlw.controller;
 
+import cn.hutool.db.sql.Order;
 import com.hlw.constant.MessageConstant;
 import com.hlw.constant.Result;
 import com.hlw.domain.Goods;
 import com.hlw.domain.MyOrders;
 import com.hlw.domain.PersonalCenter;
 import com.hlw.domain.User;
+import com.hlw.domain.*;
 import com.hlw.service.FunctionService;
 import com.hlw.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -96,6 +99,18 @@ public class FunctionController {
             return new Result(flag, MessageConstant.INQUIRE_FAIL);
         }
     }
+//    获取商品信息
+    @RequestMapping("/getGoodsInfo")
+    public Result getGoodsInfo(HttpSession session, String goodsId){
+        try {
+            System.out.println(goodsId);
+            Goods goods = functionService.getGoodsInfo(goodsId);
+            return new Result(true, goods, MessageConstant.INQUIRE_SUCCESS);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new Result(false, MessageConstant.INQUIRE_FAIL);
+        }
+    }
 //    下架商品
     @RequestMapping("/deleteGoods")
     public Result deleteGoods(HttpSession session, String goodsId){
@@ -109,7 +124,7 @@ public class FunctionController {
         }
         return new Result(flag, MessageConstant.SOLDOUT_SUCCESS);
     }
-
+//        查询我的所有商品总数
     @RequestMapping("/getMyTotalGoods")
     public Result getMyTotalGoods(HttpSession session){
         String userId = (String)session.getAttribute("userId");
@@ -145,5 +160,49 @@ public class FunctionController {
             e.printStackTrace();
             return new Result(false,0,MessageConstant.INQUIRE_FAIL);
         }
+    }
+    //    获取我卖的订单
+    @RequestMapping("/getMyTrade")
+    public Result getMyTrade(HttpSession session, Integer pageSize, Integer currentPage){
+        String userId = (String) session.getAttribute("userId");
+        List<MyTrade> list = new ArrayList<MyTrade>();
+        boolean flag = true;
+        try {
+            list = functionService.getMyTrade(userId, pageSize, currentPage);
+        } catch (Exception e) {
+            e.printStackTrace();
+            flag = false;
+            return new Result(flag, MessageConstant.INQUIRE_FAIL);
+        }
+        return new Result(flag, list, MessageConstant.INQUIRE_SUCCESS);
+    }
+//    获得我的所有卖出
+    @RequestMapping("getMyTotalTrade")
+    public Result getMyTotalTrade(HttpSession session){
+        String userId = (String) session.getAttribute("userId");
+        try {
+            int count = functionService.getMyTotalTrade(userId);
+            return new Result(true, count, MessageConstant.INQUIRE_SUCCESS);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new Result(false, MessageConstant.INQUIRE_FAIL);
+        }
+    }
+//    获取商品信息
+    @RequestMapping("/getMainInfo")
+    public Result getMainInfo(HttpSession session, String goodsId){
+        List<String> list = new ArrayList<String>();
+        boolean flag = true;
+        try {
+            list = functionService.getMainInfo(goodsId);
+        }catch (Exception e){
+            e.printStackTrace();
+            return new Result(flag, MessageConstant.INQUIRE_FAIL);
+        }
+        return new Result(flag, list, MessageConstant.INQUIRE_SUCCESS);
+    }
+    @RequestMapping("showInfo")
+    public void showInfo(HttpSession session,@RequestBody MyOrders myOrders){
+        System.out.println(myOrders);
     }
 }
