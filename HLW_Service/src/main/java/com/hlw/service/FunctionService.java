@@ -4,9 +4,10 @@ import com.hlw.domain.Goods;
 import com.hlw.domain.MyOrders;
 import com.hlw.domain.MyTrade;
 import com.hlw.domain.PersonalCenter;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-
+@Transactional
 public interface FunctionService {
 
     boolean doUpdatePersonalCenter(PersonalCenter personalCenter);

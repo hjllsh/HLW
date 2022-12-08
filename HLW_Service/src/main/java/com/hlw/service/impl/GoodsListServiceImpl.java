@@ -26,7 +26,7 @@ public class GoodsListServiceImpl implements GoodsListService {
         List<GoodsList> realGoodsLists = new ArrayList<GoodsList>();
         //加后缀
         for (GoodsList goodsList : goodsLists) {
-            String goodsLinkurl = "maininfo.html?goodsId="+goodsList.getGoodsId();
+            String goodsLinkurl =  "maininfo.html?goodsId="+goodsList.getGoodsId();
             goodsList.setGoodsLinkurl(goodsLinkurl);
             realGoodsLists.add(goodsList);
         }

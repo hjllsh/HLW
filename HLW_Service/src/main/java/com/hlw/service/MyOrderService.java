@@ -3,8 +3,9 @@ package com.hlw.service;
 import com.hlw.domain.MyOrders;
 import com.hlw.domain.PersonalCenter;
 import com.hlw.domain.User;
+import org.springframework.transaction.annotation.Transactional;
 
-
+@Transactional
 public interface MyOrderService {
     void addOrder(MyOrders order);
 
