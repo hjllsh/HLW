@@ -25,4 +25,5 @@ public class ServletConfig extends AbstractAnnotationConfigDispatcherServletInit
         filter.setEncoding("UTF-8");
         return new Filter[]{filter};
     }
+
 }

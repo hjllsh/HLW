@@ -20,7 +20,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @RestController
-@Transactional
 @RequestMapping("/order")
 public class MyOrderController {
     @Autowired
@@ -37,7 +36,6 @@ public class MyOrderController {
         String str = df.format(date);
         order.setBuyTime(str);
         System.out.println(order);
-        myOrderService.addOrder(order);
         User user = (User)session.getAttribute("user");
         Float account = user.getAccount();
         if (account - order.getTotalPrice() < 0){
@@ -45,14 +43,15 @@ public class MyOrderController {
         }
         user.setAccount(account - order.getTotalPrice());
         session.setAttribute("user",user);
-        myOrderService.updateUserAccount(user);
         PersonalCenter personalCenter = (PersonalCenter)session.getAttribute("personalCenter");
         personalCenter.setAccount(account - order.getTotalPrice());
         session.setAttribute("personalCenter",personalCenter);
-        myOrderService.updatePersonalCenterAccount(personalCenter);
         int oldNum = myOrderService.getGoodsNum(order.getGoodsId());
         int totalNum = oldNum - order.getBuyNum();
         myOrderService.updateGoodsNum(order.getGoodsId(),totalNum);
+        myOrderService.addOrder(order);
+        myOrderService.updateUserAccount(user);
+        myOrderService.updatePersonalCenterAccount(personalCenter);
         return new Result(true, MessageConstant.PURCHASE_SUCCESS);
     }
 }

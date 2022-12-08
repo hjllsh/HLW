@@ -13,6 +13,7 @@ public class MyInterceptor implements HandlerInterceptor {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         HttpSession session = request.getSession();
         String userId = (String)session.getAttribute("userId");
+        response.setContentType("text/html;charset=utf-8");
         if (userId == null) {
             String uri = request.getRequestURI();
             System.out.println(request.getContextPath());
@@ -21,6 +22,7 @@ public class MyInterceptor implements HandlerInterceptor {
             System.out.println("===============");
             System.out.println(request.getContextPath());
             response.sendRedirect(request.getContextPath()+"/pages/login.html");
+//            response.sendRedirect(request.getContextPath()+"www.baidu.com");
             return false;
         } else {
             return true;
