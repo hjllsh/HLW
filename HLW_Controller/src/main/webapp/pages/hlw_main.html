@@ -262,6 +262,10 @@
                         });
                     });
                     this.dialogFormVisible = false;
+                    this.ruleForm.pass = '';
+                    this.ruleForm.realPass= '';
+                    this.ruleForm.newPass='';
+                    this.ruleForm.confirmPass='';
                 },
                 submitForm(formName) {
                     this.$refs[formName].validate((valid) => {  //开启校验

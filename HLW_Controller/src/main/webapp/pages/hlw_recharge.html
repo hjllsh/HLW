@@ -74,8 +74,8 @@
         <div id="app">
             <!--图片-->
             <el-carousel :interval="4000" type="card" height="200px">
-                <el-carousel-item v-for="item in 6" :key="item">
-                    <h3 class="medium">{{ item }}</h3>
+                <el-carousel-item v-for="item in picture" :key="item">
+                    <img :src="item">
                 </el-carousel-item>
             </el-carousel>
             <!--充值框-->
@@ -124,6 +124,13 @@
         var vue = new Vue({
             el: '#app',
             data: {
+                picture : [
+                    "../img/QQ图片20221209112323.jpg",
+                    "../img/QQ图片20221209112357.jpg",
+                    "../img/QQ图片20221209112403.jpg",
+                    "../img/QQ图片20221209112407.jpg",
+                    "../img/QQ图片20221209112416.jpg",
+                ],
                 dialogFormVisible: false,
                 ruleForm:{
                     userId:"",
@@ -178,6 +185,7 @@
                             });
                         });
                         this.dialogFormVisible = false;
+                        this.ruleForm.money = "";
                 },
                 submitForm(formName) {
                     this.$refs[formName].validate((valid) => {  //开启校验

@@ -58,15 +58,15 @@
         </el-col>
         <el-col :span="5">
             <h3>平台保障</h3>
-            <div style="margin-top: 20px"><span>商家名称:</span><span style="margin-left: 10px">{{showData.storeName}}</span>
-                <p><span >商家地址:</span><span style="margin-left: 10px">{{showData.location}}</span></p>
-                <el-col :span="5">用户评价:</el-col>
+            <div style="margin-top: 20px"><span>如假包换，诚信经营</span><span style="margin-left: 10px"></span>
+                <p><span >质量精品，品质一流</span><span style="margin-left: 10px"></span></p>
+                <el-col :span="5">平台信誉:</el-col>
                 <el-rate
-                        v-model="merchantsStar"
+                        v-model="merchantsStar1"
                         disabled
                         show-score
                         text-color="#ff9900"
-                        score-template="{value}">
+                        score-template=5.0>
                 </el-rate>
             </div>
         </el-col>
@@ -146,17 +146,18 @@
         el: '#app',
         data : {
             merchantsStar : "4.7",
+            merchantsStar1 : "5.0",
             showDataes : [
                 ],
             order:{
-                "goodsId":"",
-                "price" : "",
-                "goodsType":"",
-                "phonenumber" : "",
-                "location" : "",
-                "totalPrice" : "",
-                "isTransport":"",
-                "buyNum" : "",
+                goodsId:"",
+                price : "",
+                goodsType:"",
+                phonenumber : "",
+                location: "",
+                totalPrice : "",
+                isTransport:"",
+                buyNum : "",
             },
             dialogFormVisible:false,
             num : 1,
@@ -229,13 +230,24 @@
                     this.order.buyNum = this.num;
                     axios.post("/order/buy",this.order).then((res)=>{
                         if (res.data.flag){
-                            this.dialogFormVisible = true;
                             this.$message.success(res.data.message);
                         }else{
-                            this.dialogFormVisible = true;
-                            this.$message.success(res.data.message);
+                            this.$message.error(res.data.message);
                         }
+                    }).finally(()=>{
+                        this.showGoodsList();
+                        this.dialogFormVisible = false;
+                        this.order.goodsId="";
+                        this.order.price = "";
+                        this.order.goodsType="";
+                        this.order.phonenumber = "";
+                        this.order.location= "";
+                        this.order.totalPrice= "";
+                        this.order.isTransport=false;
+                        this.order.buyNum = "";
                     });
+
+
                 },
                 mySearch(){
                     this.showGoodsList();

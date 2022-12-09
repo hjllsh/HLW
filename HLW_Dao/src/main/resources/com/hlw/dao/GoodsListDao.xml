@@ -18,14 +18,14 @@
        <select id="showGoodsList" resultType="com.hlw.domain.GoodsList" resultMap="goodsList">
            select * from t_goodslist
             <if test="queryString != null and queryString.length > 0">
-                where goods_type = #{queryString}
+                where goods_type = #{queryString} or goods_name like  '%${queryString}%'
             </if>
             limit #{start} , #{size};
        </select>
         <select id="findTotal" resultType="int" >
             select count(0) from t_goodslist
             <if test="queryString != null and queryString.length > 0">
-                where goods_type = #{queryString}
+                where goods_type = #{queryString} or goods_name like  '%${queryString}%'
             </if>
         </select>
 </mapper>

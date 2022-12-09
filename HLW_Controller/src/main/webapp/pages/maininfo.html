@@ -18,6 +18,12 @@
         <script src="../plugins/elementui/index.js"></script>
         <script src="../js/axios-0.18.0.js"></script>
     </head>
+    <style>
+
+      .item .el-collapse-item__header{
+          font-size: large;
+      }
+    </style>
     <body class="hold-transition">
         <div id="app" >
             <el-col :span="20" :offset="2" >
@@ -33,16 +39,16 @@
                     </el-carousel>
                 </template>
             <el-collapse v-model="activeNames" @change="handleChange">
-                <el-collapse-item title="假一赔四" name="1">
+                <el-collapse-item class="item" title="发货地址" name="1">
                     <div>{{infoData.name}}</div>
                 </el-collapse-item>
-                <el-collapse-item title="退货运费险" name="2">
+                <el-collapse-item class="item" title="商品描述" name="2">
                     <div>{{infoData.type}}</div>
                 </el-collapse-item>
-                <el-collapse-item title="极速退款" name="3">
+                <el-collapse-item class="item" title="极速退款" name="3">
                     <div>{{infoData.description}}</div>
                 </el-collapse-item>
-                <el-collapse-item title="七天无理由退款" name="4">
+                <el-collapse-item class="item" title="七天无理由退款" name="4">
                     <div>{{infoData.location}}</div>
                 </el-collapse-item>
             </el-collapse>
@@ -175,7 +181,16 @@
                 postOrder(){
                     axios.post("/order/buy",this.order).then((res)=>{
                         if (res.data.flag){
-                            this.dialogFormVisible=true;
+                            this.dialogFormVisible=false;
+                            this.dialogFormVisible = false;
+                            this.order.goodsId="";
+                            this.order.price = "";
+                            this.order.goodsType="";
+                            this.order.phonenumber = "";
+                            this.order.location= "";
+                            this.order.totalPrice= "";
+                            this.order.isTransport=false;
+                            this.order.buyNum = "";
                         } else {
                             this.$message.error(res.data.message);
                         }
@@ -191,6 +206,8 @@
                             this.order.totalPrice=res.data.data.price
                             this.order.goodsName=res.data.data.goodsName
                             this.infoData.price=res.data.data.price
+                            this.infoData.type=res.data.data.goodsDsec
+                            this.infoData.name=res.data.data.location
                             this.$message.success(res.data.message)
                         } else {
                             this.$message.error(res.data.message);

@@ -117,7 +117,7 @@
     var newSpan = $("#newSpan");
     var code;
     var id;
-    var time = 10;
+    var time = 60;
 
     function submitFormData(){
         // alert(code);
@@ -154,7 +154,7 @@
             }
             //表单校验通过
             $.post("/user/register",formData,function (res){
-                alert(res.flag);
+                // alert(res.flag);
                 if (res.flag){
                     alert(res.message);
                     window.location.href="http://localhost:81/pages/login.html";
@@ -182,7 +182,7 @@
             clearInterval(id);
             recover();
             newSpan.html("");
-            time = 10;
+            time = 60;
         }
     };
     function recover() {
